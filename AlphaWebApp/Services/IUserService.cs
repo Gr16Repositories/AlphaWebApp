@@ -1,4 +1,4 @@
-﻿using AlphaWebApp.Areas.Identity.Data;
+﻿using AlphaWebApp.Models;
 
 namespace AlphaWebApp.Services
 {
