@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlphaWebApp.Models
 {
@@ -20,15 +21,17 @@ namespace AlphaWebApp.Models
         [Required]
         public int Views { get; set; }
         [Required]
-        public  int  Likes { get; set; }
+        public int Likes { get; set; }
         [Required]
-        public string  ImageLink { get; set; }
+        public string ImageLink { get; set; }
 
+        [NotMapped]
         public IFormFile CoverImage { get; set; }
 
-        public Category Category { get; set; }
+        public int CategoryId { get; set; } 
+        public virtual Category Category { get; set; }
 
-        public virtual ICollection<Category> CategorieList { get; set; }
+        //public virtual ICollection<Category> CategorieList { get; set; }
 
     }
 }

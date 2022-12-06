@@ -8,8 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Identity\Data\AlphaWebAppContext.cs" />
-    <Compile Remove="Areas\Identity\Data\User.cs" />
+    <Compile Remove="Areas\**" />
+    <Content Remove="Areas\**" />
+    <EmbeddedResource Remove="Areas\**" />
+    <None Remove="Areas\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,11 +33,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="E:\programering carrer\csharp.net\lexicon\AlphaWebApp\AlphaWebApp\Models\.editorconfig" />
+    <Compile Include="Areas\Identity\Pages\Account\Login.cshtml.cs" />
+    <Compile Include="Areas\Identity\Pages\Account\Logout.cshtml.cs" />
+    <Compile Include="Areas\Identity\Pages\Account\Register.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Identity\Data\" />
+    <None Include="Areas\Identity\Pages\Account\Login.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <None Include="E:\programering carrer\csharp.net\lexicon\AlphaWebApp\AlphaWebApp\Models\.editorconfig" />
   </ItemGroup>
 
 </Project>

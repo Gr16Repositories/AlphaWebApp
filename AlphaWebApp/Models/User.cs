@@ -8,29 +8,32 @@ using System.Xml.Linq;
 using AlphaWebApp.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace AlphaWebApp.Models;
+namespace AlphaWebApp.Models
+{
 
 // Add profile data for application users by adding properties to the User class
-public class User 
-{
-    // ask about if I inhrit a user so do I have to include Id in this situation
-    public int Id { get; set; }
+    public class User : IdentityUser
+    {
+        [PersonalData]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
-    [Required]
-    [Display(Name = "First Name")]
-    public string FirstName { get; set; }
+        [PersonalData]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
-    [Required]
-    [Display(Name = "Last Name")]
-    public string LastName { get; set; }
+        [PersonalData]
+        [Display(Name = "Date Of Birth")]
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
 
-    [Required]
-    [Display(Name = "Date Of Birth")]
+        [PersonalData]
+        [DataType(DataType.Date)]
+        public virtual ICollection<Subscription> SubscriptionsList { get; set; }
 
-    public string DateOfBirth { get; set; }
-
-    
-
-    public virtual ICollection<Subscription> SupscriptionsList { get; set; }
+        public User()
+        {
+            List<Subscription> SupscriptionsList = new List<Subscription>();
+        }
+    }
 }
-
