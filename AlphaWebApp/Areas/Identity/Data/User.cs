@@ -14,9 +14,12 @@ namespace AlphaWebApp.Areas.Identity.Data;
 public class User : IdentityUser
 {
     // ask about if I inhrit a user so do I have to include Id in this situation
-    public int Id { get; set; }
+    public int Id { get; set; }<<<<<<< Padmini/creatinguserthrowservices
+
+
     [Required] 
     [Display(Name = "First Name")]
+
     public string FirstName { get; set; }
 
     [Required]
@@ -28,9 +31,15 @@ public class User : IdentityUser
 
     public string  DateOfBirth { get; set; }
 
+
     // do I have to inculde this line if I have navigation prop, look at the previous example.
     //public List<Supscription> supscriptionsList { get; set; }
 
-    public virtual ICollection<Subscription> SubscriptionsList { get; set;}
+    public string SupscriptionsListName { get; set; }
+    public virtual ICollection<Supscription> SupscriptionsList { get; set;}
+
+
+   
+
 }
 
