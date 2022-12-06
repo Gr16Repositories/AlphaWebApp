@@ -16,6 +16,9 @@
         public  int  Likes { get; set; }
 
         public string  ImageLink { get; set; }
+
+        public IFormFile CoverImage { get; set; }
+
         public Category Category { get; set; }
     }
 }

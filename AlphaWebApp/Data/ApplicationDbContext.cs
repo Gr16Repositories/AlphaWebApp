@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AlphaWebApp.Models;
 
 namespace AlphaWebApp.Data
 {
@@ -9,5 +10,6 @@ namespace AlphaWebApp.Data
             : base(options)
         {
         }
+        public DbSet<AlphaWebApp.Models.Article> Articles { get; set; }
     }
 }
