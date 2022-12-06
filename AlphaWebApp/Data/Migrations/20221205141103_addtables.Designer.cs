@@ -4,6 +4,7 @@ using AlphaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlphaWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221205141103_addtables")]
+    partial class addtables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,12 +103,7 @@ namespace AlphaWebApp.Data.Migrations
                     b.Property<decimal>("Pirce")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Subscriptions");
                 });
@@ -134,31 +132,6 @@ namespace AlphaWebApp.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("SubscriptionTypes");
-                });
-
-            modelBuilder.Entity("AlphaWebApp.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DateOfBirth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.WeatherForecast", b =>
@@ -415,13 +388,6 @@ namespace AlphaWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
-                {
-                    b.HasOne("AlphaWebApp.Models.User", null)
-                        .WithMany("SupscriptionsList")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("AlphaWebApp.Models.SubscriptionType", b =>
                 {
                     b.HasOne("AlphaWebApp.Models.Subscription", "Supscription")
@@ -502,11 +468,6 @@ namespace AlphaWebApp.Data.Migrations
             modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
                 {
                     b.Navigation("SubscriptionType");
-                });
-
-            modelBuilder.Entity("AlphaWebApp.Models.User", b =>
-                {
-                    b.Navigation("SupscriptionsList");
                 });
 #pragma warning restore 612, 618
         }
