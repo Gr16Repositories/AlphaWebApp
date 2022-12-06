@@ -1,23 +1,34 @@
 ﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlphaWebApp.Models
 {
     public class WeatherForecast
     {
         public int Id { get; set; }
-        public string Summary { get; set; }
-        public int  TemperatureC { get; set; }
 
+        [Required]
+        public string Summary { get; set; }
+
+        [Required]
+        public int TemperatureC { get; set; }
+
+        [Required]
         public int TemperatureF { get; set; }
 
-        public int Humidity { get; set; }   
+        [Required]
+        public int Humidity { get; set; }
 
+        [Required]
         public int WindSpeed { get; set; }
 
+        [Required]
         public DateTime Date { get; set; }
 
-        public string  City { get; set; }
+        [Required]
+        public string City { get; set; }
 
-        public string  Description { get; set; }
+        [Required]
+        public string Description { get; set; }
     }
 }

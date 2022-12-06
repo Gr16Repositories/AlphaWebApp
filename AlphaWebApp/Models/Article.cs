@@ -1,21 +1,36 @@
-﻿namespace AlphaWebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AlphaWebApp.Models
 {
     public class Article
     {
+        [Key]
+        [Required]
         public int Id { get; set; }
+        [Required]
         public DateTime DateStamp { get; set; }
+        [Required]
         public string LinkText { get; set; }
-
+        [Required]
         public string Headline { get; set; }
-
+        [Required]
         public string ContentSummary { get; set; }
+        [Required]
         public string Content { get; set; }
+        [Required]
+        public int Views { get; set; }
+        [Required]
+        public int Likes { get; set; }
+        [Required]
+        public string ImageLink { get; set; }
+        
+        [NotMapped]
+        public IFormFile CoverImage { get; set; }
 
-        public string Views { get; set; }
-
-        public  int  Likes { get; set; }
-
-        public string  ImageLink { get; set; }
         public Category Category { get; set; }
+
+        //public virtual ICollection<Category> CategorieList { get; set; }
+
     }
 }
