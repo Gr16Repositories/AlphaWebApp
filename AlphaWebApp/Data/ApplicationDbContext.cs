@@ -9,5 +9,6 @@ namespace AlphaWebApp.Data
             : base(options)
         {
         }
+       
     }
 }

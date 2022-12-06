@@ -17,6 +17,7 @@ builder.Services.AddControllersWithViews();
 
 //Added Services
 builder.Services.AddScoped<IArticleService, ArticleService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 
