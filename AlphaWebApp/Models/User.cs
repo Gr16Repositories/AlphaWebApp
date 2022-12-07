@@ -27,13 +27,9 @@ namespace AlphaWebApp.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        [PersonalData]
-        [DataType(DataType.Date)]
-        public virtual ICollection<Subscription> SubscriptionsList { get; set; }
+        public int SubscriptionId { get; set; }
 
-        public User()
-        {
-            List<Subscription> SupscriptionsList = new List<Subscription>();
-        }
+        public virtual Subscription Subscription { get; set; }
+
     }
 }

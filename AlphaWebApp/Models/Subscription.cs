@@ -21,10 +21,11 @@ namespace AlphaWebApp.Models
         [Required]
         public bool PaymentComplete { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-        public SubscriptionType SubscriptionTypeId { get; set; }
+        
+        public int SubscriptionTypeId { get; set; }
+        public int UserId { get; set; }
 
+        public  virtual User User { get; set; }
         public virtual SubscriptionType SubscriptionType { get; set; }
-        //public  virtual ICollection<User> UsersList { get; set; }
     }
 }

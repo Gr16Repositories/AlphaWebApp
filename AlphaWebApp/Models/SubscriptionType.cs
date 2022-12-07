@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Framework;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 
 namespace AlphaWebApp.Models
@@ -10,15 +8,15 @@ namespace AlphaWebApp.Models
         [Key]
         public int Id { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        [Required]
         public subscriptionTypeName TypeName { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        [Required]
         public string Description { get; set; }
         
         public enum subscriptionTypeName { Free ,Basic ,Standerd ,Premium }
 
-        public int  SupscriptionId { get; set; }
-        public virtual Subscription Supscription { get; set; }
+        
+        public virtual ICollection<Subscription> Supscriptions { get; set; }
     }
 }
