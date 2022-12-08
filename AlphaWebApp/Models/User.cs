@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Identity;
 namespace AlphaWebApp.Models
 {
 
-// Add profile data for application users by adding properties to the User class
     public class User : IdentityUser
     {
         [PersonalData]
@@ -27,9 +26,8 @@ namespace AlphaWebApp.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-        public int SubscriptionId { get; set; }
 
-        public virtual Subscription Subscription { get; set; }
+        public virtual ICollection<Subscription> SubscriptionList { get; set; }
 
     }
 }

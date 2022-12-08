@@ -4,6 +4,7 @@ using AlphaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlphaWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221208063442_fixingaddinguser")]
+    partial class fixingaddinguser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -66,7 +69,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Category", b =>
@@ -82,7 +85,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
@@ -108,16 +111,11 @@ namespace AlphaWebApp.Data.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SubscriptionTypeId");
 
-                    b.HasIndex("UserId1");
-
-                    b.ToTable("Subscriptions", (string)null);
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.SubscriptionType", b =>
@@ -137,7 +135,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubscriptionTypes", (string)null);
+                    b.ToTable("SubscriptionTypes");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.WeatherForecast", b =>
@@ -174,7 +172,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeatherForecasts", (string)null);
+                    b.ToTable("WeatherForecasts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -400,6 +398,13 @@ namespace AlphaWebApp.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("SubscriptionId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("SubscriptionId")
+                        .IsUnique()
+                        .HasFilter("[SubscriptionId] IS NOT NULL");
+
                     b.HasDiscriminator().HasValue("User");
                 });
 
@@ -407,7 +412,9 @@ namespace AlphaWebApp.Data.Migrations
                 {
                     b.HasOne("AlphaWebApp.Models.Category", "Category")
                         .WithMany("Articleslist")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -420,13 +427,7 @@ namespace AlphaWebApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AlphaWebApp.Models.User", "User")
-                        .WithMany("SubscriptionList")
-                        .HasForeignKey("UserId1");
-
                     b.Navigation("SubscriptionType");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -480,19 +481,30 @@ namespace AlphaWebApp.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AlphaWebApp.Models.User", b =>
+                {
+                    b.HasOne("AlphaWebApp.Models.Subscription", "Subscription")
+                        .WithOne("User")
+                        .HasForeignKey("AlphaWebApp.Models.User", "SubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subscription");
+                });
+
             modelBuilder.Entity("AlphaWebApp.Models.Category", b =>
                 {
                     b.Navigation("Articleslist");
                 });
 
+            modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
+                {
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AlphaWebApp.Models.SubscriptionType", b =>
                 {
                     b.Navigation("Supscriptions");
-                });
-
-            modelBuilder.Entity("AlphaWebApp.Models.User", b =>
-                {
-                    b.Navigation("SubscriptionList");
                 });
 #pragma warning restore 612, 618
         }
