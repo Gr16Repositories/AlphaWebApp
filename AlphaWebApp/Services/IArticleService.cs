@@ -1,4 +1,5 @@
 ﻿using AlphaWebApp.Models;
+using AlphaWebApp.Models.ViewModels;
 
 namespace AlphaWebApp.Services
 {
@@ -19,6 +20,9 @@ namespace AlphaWebApp.Services
 
         //Delete Article 
         public void DeleteArticle(int id);
+
+        // Saving article and blob uri in Azure
+        void SaveArticle(AddArticleVM addArticleVM, Uri blobUri);
 
     }
 }

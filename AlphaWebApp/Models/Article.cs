@@ -5,7 +5,7 @@ namespace AlphaWebApp.Models
 {
     public class Article
     {
-        [Key]
+        
         [Required]
         public int Id { get; set; }
         [Required]
@@ -23,15 +23,14 @@ namespace AlphaWebApp.Models
         [Required]
         public int Likes { get; set; }
         [Required]
-        public string ImageLink { get; set; }
+        public Uri ImageLink { get; set; }
 
         [NotMapped]
         public IFormFile CoverImage { get; set; }
 
-        public int CategoryId { get; set; } 
+        //[ForeignKey("Category")]
+        public int? CategoryId { get; set; } 
         public virtual Category Category { get; set; }
-
-        
 
     }
 }

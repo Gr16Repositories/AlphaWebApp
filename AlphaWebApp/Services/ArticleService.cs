@@ -1,14 +1,18 @@
 ﻿using AlphaWebApp.Data;
 using AlphaWebApp.Models;
+using AlphaWebApp.Models.ViewModels;
+using AutoMapper;
 
 namespace AlphaWebApp.Services
 {
     public class ArticleService : IArticleService
     {
         private readonly ApplicationDbContext _db;
-        public ArticleService(ApplicationDbContext db)
+        private readonly IMapper _mapper;
+        public ArticleService(ApplicationDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         public void AddArticle(Article article)
@@ -65,6 +69,19 @@ namespace AlphaWebApp.Services
                 _db.SaveChanges();
             }
 
+        }
+        //adding this from Robert lecture
+        public void SaveArticle(AddArticleVM newArticle, Uri blobUri)
+        {
+            // using add auto mapp to move the properties to dbArticle
+            Article dbArticle = _mapper.Map<Article>(newArticle);
+            dbArticle.Category = _db.Categories.Find(Convert.ToInt32(newArticle.CategoryId));
+            dbArticle.ImageLink = blobUri;
+            dbArticle.DateStamp = DateTime.Now;
+            
+
+            _db.Articles.Add(dbArticle);
+            _db.SaveChanges();
         }
     }
 }
