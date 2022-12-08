@@ -14,7 +14,7 @@ namespace AlphaWebApp.Areas.Identity.Data;
 public class User : IdentityUser
 {
     // ask about if I inhrit a user so do I have to include Id in this situation
-    public int Id { get; set; }<<<<<<< Padmini/creatinguserthrowservices
+    public int Id { get; set; }
 
 
     [Required] 

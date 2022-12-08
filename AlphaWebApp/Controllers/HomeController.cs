@@ -22,12 +22,7 @@ namespace AlphaWebApp.Controllers
         {
             return View();
         }
-        public IActionResult Articles( int id)
-        {
-            //var articles =    _articlesServices.GetArticles(id)
-            
-            return View();
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
