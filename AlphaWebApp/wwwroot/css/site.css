@@ -16,3 +16,30 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*Ali*/
+.bg-success{
+    background:#003366 !important
+}
+
+#header {
+    /*border-top: solid 10px #fa292a;*/
+    border-bottom: solid 10px #fa292a;
+    /*border-left: solid 10px #c20017;*/
+}
+
+.btn {
+    background: #003366 !important
+    /*background: #fa292a !important*/
+}
+
+#logo-img{
+    /*position:absolute;*/
+    height:100px;
+    left:100px;
+    top:200px;
+}
+
+.navbar-brand {
+    font-size: 20px;
+}
