@@ -51,49 +51,7 @@ namespace AlphaWebApp.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-
-        public IActionResult AddArticle()
-        {
-
-            AddArticleVM newArticle = new();
-            // Should change - fetch Categories from db table
-            newArticle.Categories.Add(new SelectListItem { Text = "Sports", Value= "3"});
-            newArticle.Categories.Add(new SelectListItem { Text = "World", Value = "4" });
-            newArticle.Categories.Add(new SelectListItem { Text = "Local", Value = "5" });
-
-            return View(newArticle);
-        }
-
-
-
-        // adding addArticle to database throw services
-        [HttpPost]
-        public IActionResult AddArticle(AddArticleVM newArticle)
-        {
-            string folderPath = "wwwroot/images/articles" + "/" + newArticle.CategoryId;
-            string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            string fileNameWithPath = Path.Combine(path, newArticle.FileName);
-            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-            {
-                newArticle.File.CopyTo(stream);
-            }
-            // now the file is store locally we need to store it on Azure bolb
-
-            string pathFile = newArticle.CategoryId + "/" + newArticle.File.FileName;
-            Uri blobUri = _storageService.uploadBlob(pathFile);
-            _articleService.SaveArticle(newArticle, blobUri);
-
-
-            // Add article to table in ArticleService
-            return RedirectToAction("Index");
-        }
-
+        }  
 
         // when user click supsucription button
         public IActionResult CreateSubscription()

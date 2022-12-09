@@ -13,7 +13,7 @@ namespace AlphaWebApp.Models
         [Required]
         public string LinkText { get; set; }
         [Required]
-        public string Headline { get; set; }
+        public string HeadLine { get; set; }
         [Required]
         public string ContentSummary { get; set; }
         [Required]

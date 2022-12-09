@@ -2,6 +2,7 @@
 using AlphaWebApp.Models;
 using AlphaWebApp.Models.ViewModels;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AlphaWebApp.Services
 {
@@ -15,27 +16,16 @@ namespace AlphaWebApp.Services
             _mapper = mapper;
         }
 
-        public void AddArticle(Article article)
+        public void AddArticle(AddArticleVM newArticle, Uri blobUri)
         {
-            Article art = new Article();
-            art.Id = article.Id;
-            art.DateStamp = article.DateStamp;
-            art.LinkText = article.LinkText;
-            art.Headline = article.Headline;
-            art.ContentSummary = article.ContentSummary;
-            art.Content = article.Content;
-            art.Views = article.Views;
-            art.Likes = article.Likes;
-            art.ImageLink = article.ImageLink;
-            art.Category = article.Category;
-            art.CoverImage = article.CoverImage;
-            art.Category = article.Category;
+            // using add auto mapp to move the properties to dbArticle
+            Article dbArticle = _mapper.Map<Article>(newArticle);
+            dbArticle.Category = _db.Categories.Find(Convert.ToInt32(newArticle.CategoryId));
+            dbArticle.ImageLink = blobUri;
+            dbArticle.DateStamp = DateTime.Now;
 
-            if (art != null)
-            {
-                _db.Articles.Add(art);
-                _db.SaveChanges();
-            }
+            _db.Articles.Add(dbArticle);
+            _db.SaveChanges();
         }
 
         public void DeleteArticle(int id)
@@ -50,8 +40,9 @@ namespace AlphaWebApp.Services
 
         public List<Article> GetAllArticles()
         {
-            List<Article> listOfAllArtiles = _db.Articles.ToList();
-            return listOfAllArtiles;
+            //List<Article> listOfAllArtiles = _db.Articles.ToList();
+            //return listOfAllArtiles;
+            return null;
         }
 
         public Article GetArticleById(int id)
@@ -70,18 +61,10 @@ namespace AlphaWebApp.Services
             }
 
         }
-        //adding this from Robert lecture
-        public void SaveArticle(AddArticleVM newArticle, Uri blobUri)
-        {
-            // using add auto mapp to move the properties to dbArticle
-            Article dbArticle = _mapper.Map<Article>(newArticle);
-            dbArticle.Category = _db.Categories.Find(Convert.ToInt32(newArticle.CategoryId));
-            dbArticle.ImageLink = blobUri;
-            dbArticle.DateStamp = DateTime.Now;
-            
 
-            _db.Articles.Add(dbArticle);
-            _db.SaveChanges();
-        }
+        public List<Category> GetCategories()
+        {
+            return _db.Categories.ToList();
+        }       
     }
 }

@@ -25,8 +25,6 @@ namespace AlphaWebApp.Models
         [Display(Name = "Date Of Birth")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-
-
         public virtual ICollection<Subscription> SubscriptionList { get; set; }
 
     }

@@ -9,6 +9,7 @@ using AlphaWebApp.Data;
 using AlphaWebApp.Models;
 using AlphaWebApp.Services;
 using Microsoft.Extensions.Hosting.Internal;
+using AlphaWebApp.Models.ViewModels;
 
 namespace AlphaWebApp.Controllers
 {
@@ -16,11 +17,15 @@ namespace AlphaWebApp.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
+        private readonly IStorageService _storageService;
 
-        public ArticlesController(ApplicationDbContext db,IArticleService articleService)
+        public ArticlesController(ApplicationDbContext db,
+            IArticleService articleService,
+            IStorageService storageService)
         {
             _db = db;
             _articleService = articleService;
+            _storageService = storageService;
         }
 
         // GET: Articles
@@ -29,6 +34,7 @@ namespace AlphaWebApp.Controllers
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
            return View(listOfArticles);
             //return View();
+
         }
 
         // GET: Articles/Details/5
@@ -52,22 +58,45 @@ namespace AlphaWebApp.Controllers
         // GET: Articles/Create
         public IActionResult Create()
         {
-            return View();
+            AddArticleVM newArticle = new();
+            // Should change - fetch Categories from db table
+            // newArticle.Categories.Add(new SelectListItem {_articleService.GetCategories(), "Value", "Text"});
+            newArticle.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
+            newArticle.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
+            newArticle.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
+            newArticle.Categories.Add(new SelectListItem { Text = "Weather", Value = "4" });
+            newArticle.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
+            newArticle.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
+
+            return View(newArticle);            
         }
 
         // POST: Articles/Create      
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateStamp,LinkText,Headline,ContentSummary,Content,Views,Likes,ImageLink")] Article article)
+        public async Task<IActionResult> Create(AddArticleVM article)
         {
-            if (ModelState.IsValid)
-            {
-               // article.CoverImage = FileUpload(article);
-                await Task.Run(() => _articleService.AddArticle(article));
+            if(ModelState.IsValid)
+            { 
+                string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
+                string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                string fileNameWithPath = Path.Combine(path, article.FileName);
+                using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                {
+                    article.File.CopyTo(stream);
+                }
+                // now the file is store locally we need to store it on Azure bolb
+                string pathFile = article.CategoryId + "/" + article.File.FileName;
+                Uri blobUri = _storageService.uploadBlob(pathFile);
+                await Task.Run(() => _articleService.AddArticle(article, blobUri));
                 return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            return View();
         }
 
         // GET: Articles/Edit/5
@@ -162,15 +191,6 @@ namespace AlphaWebApp.Controllers
         private bool ArticleExists(int id)
         {
           return _db.Articles.Any(e => e.Id == id);
-        }
-        private Article FileUpload(Article article)
-        {
-            string uniqueFileName = null;
-            string uploadFilesFolder = Path.Combine(Directory.GetCurrentDirectory(), "images");
-            uniqueFileName = Guid.NewGuid().ToString() + "_" + article.CoverImage.FileName;
-            string filePath = Path.Combine(uploadFilesFolder, uniqueFileName);
-            article.CoverImage.CopyTo(new FileStream(filePath, FileMode.Create));
-            return article;
-        }
+        } 
     }
 }
