@@ -1,0 +1,98 @@
+﻿@model AlphaWebApp.Models.ViewModels.AddArticleVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Article</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="DateStamp" class="control-label"></label>
+                <input asp-for="DateStamp" class="form-control" />
+                <span asp-validation-for="DateStamp" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="LinkText" class="control-label">Link Text</label>
+                <input asp-for="LinkText" class="form-control" placeholder="Link Text" />
+                <span asp-validation-for="LinkText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeadLine" class="control-label">HeadLine</label>
+                <input asp-for="HeadLine" class="form-control" placeholder="HeadLine"/>
+                <span asp-validation-for="HeadLine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContentSummary" class="control-label">Content Summary</label>
+                <textarea asp-for="ContentSummary" class="form-control" rows="5" placeholder="Content Summary"></textarea>
+                <span asp-validation-for="ContentSummary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label">Content</label>
+                <textarea asp-for="Content" class="form-control" rows="5" placeholder="Article content"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Category Name</label>
+                <select class="form-control" style="width:auto" size="5" asp-for="CategoryId" asp-items="Model.Categories"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+           @* <div class="form-group">
+                <label for="Category">Category</label>
+                <select class="form-control" id="Category">
+                    <option>Select</option>
+                    <option>Local</option>
+                    <option>Sweden</option>
+                    <option>World</option>
+                    <option>Weather</option>
+                    <option>Economy</option>
+                    <option>Sports</option>
+                </select>
+            </div>*@
+           @* <div class="form-group">
+                <label asp-for="File" class="control-label">Movie Image</label>
+                <div class="custom-file">
+                    <input asp-for="File" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile"></label>
+                </div>
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="FileName" class="control-label"></label>
+                <input asp-for="FileName" class="form-control" placeholder="Select Image"/>
+                <input type="button" value="Choose file" class="btn btn-success" onclick="typevaluefunc()" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="File" hidden class="form-control" onchange="givevaluetofilename()" />
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> |
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+     function givevaluetofilename()
+    {
+        var fileName = document.getElementById("File").value;
+        alert(fileName);
+        document.getElementById("FileName").value = fileName.substring(12);
+    }
+    // To click on the hidden button because I cannot reach it
+    function typevaluefunc()
+    {
+        document.getElementById("File").click();
+    }
+</script>
