@@ -40,8 +40,9 @@ namespace AlphaWebApp.Services
 
         public List<Article> GetAllArticles()
         {
-            List<Article> listOfAllArtiles = _db.Articles.ToList();
-            return listOfAllArtiles;
+            //List<Article> listOfAllArtiles = _db.Articles.ToList();
+            //return listOfAllArtiles;
+            return null;
         }
 
         public Article GetArticleById(int id)
