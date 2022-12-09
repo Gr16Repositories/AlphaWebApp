@@ -32,7 +32,9 @@ namespace AlphaWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
-            return View(listOfArticles);           
+           return View(listOfArticles);
+            //return View();
+
         }
 
         // GET: Articles/Details/5
