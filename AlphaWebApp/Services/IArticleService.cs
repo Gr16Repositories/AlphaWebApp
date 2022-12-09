@@ -6,8 +6,8 @@ namespace AlphaWebApp.Services
     public interface IArticleService
     {
 
-        //Add Article
-        public void AddArticle(Article article);
+        //Add Article and save the article images in blob in Azure
+        public void AddArticle(AddArticleVM article, Uri blobUri);
 
         //Update Article
         public void UpdateArticle(int id, Article article);
@@ -21,8 +21,8 @@ namespace AlphaWebApp.Services
         //Delete Article 
         public void DeleteArticle(int id);
 
-        // Saving article and blob uri in Azure
-        void SaveArticle(AddArticleVM addArticleVM, Uri blobUri);
+        //Get Category Details
+        public List<Category> GetCategories();      
 
     }
 }

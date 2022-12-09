@@ -8,6 +8,7 @@ namespace AlphaWebApp.Helpers
     {
         public MappingHelper() 
         {
+            //automap the ArticleVM and article
             // the order important here
             CreateMap<AddArticleVM, Article>();
         }
