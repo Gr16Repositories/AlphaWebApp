@@ -42,16 +42,16 @@ namespace AlphaWebApp.Services
         {
             //List<Article> listOfAllArtiles = _db.Articles.ToList();
             //return listOfAllArtiles;
-            return null;
+            return new List<Article>();
         }
 
-        public Article GetArticleById(int id)
+        public Article GetArticleById(int? id)
         {
             Article specificArticleById = _db.Articles.FirstOrDefault(x => x.Id == id);
             return specificArticleById;
         }
 
-        public void UpdateArticle(int id, Article article)
+        public void UpdateArticle(int? id, Article article)
         {
             Article articleDetails = _db.Articles.Find(id);
             if (articleDetails != null)
