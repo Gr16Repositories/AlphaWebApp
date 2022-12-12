@@ -15,6 +15,7 @@
                 <input asp-for="DateStamp" class="form-control" />
                 <span asp-validation-for="DateStamp" class="text-danger"></span>
             </div>*@
+
             <div class="form-group">
                 <label asp-for="LinkText" class="control-label">Link Text</label>
                 <input asp-for="LinkText" class="form-control" placeholder="Link Text" />
@@ -39,27 +40,7 @@
                 <label asp-for="CategoryId" class="control-label">Category Name</label>
                 <select class="form-control" style="width:auto" size="5" asp-for="CategoryId" asp-items="Model.Categories"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>
-           @* <div class="form-group">
-                <label for="Category">Category</label>
-                <select class="form-control" id="Category">
-                    <option>Select</option>
-                    <option>Local</option>
-                    <option>Sweden</option>
-                    <option>World</option>
-                    <option>Weather</option>
-                    <option>Economy</option>
-                    <option>Sports</option>
-                </select>
-            </div>*@
-           @* <div class="form-group">
-                <label asp-for="File" class="control-label">Movie Image</label>
-                <div class="custom-file">
-                    <input asp-for="File" class="custom-file-input" id="customFile">
-                    <label class="custom-file-label" for="customFile"></label>
-                </div>
-                <span asp-validation-for="File" class="text-danger"></span>
-            </div>*@
+            </div>         
             <div class="form-group">
                 <label asp-for="FileName" class="control-label"></label>
                 <input asp-for="FileName" class="form-control" placeholder="Select Image"/>
@@ -86,8 +67,7 @@
 <script>
      function givevaluetofilename()
     {
-        var fileName = document.getElementById("File").value;
-        alert(fileName);
+        var fileName = document.getElementById("File").value;        
         document.getElementById("FileName").value = fileName.substring(12);
     }
     // To click on the hidden button because I cannot reach it

@@ -37,7 +37,7 @@ namespace AlphaWebApp.Models.ViewModels
         
         public IFormFile File { get; set; }
 
-        [Required]
+        
         public Uri ImageLink { get; set; }
 
         public AddArticleVM()

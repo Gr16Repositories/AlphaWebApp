@@ -1,69 +1,100 @@
-﻿@model AlphaWebApp.Models.Article
+﻿@model AlphaWebApp.Models.ViewModels.EditArticleVM
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Article</h4>
+<h1>Edit Article</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="container">
+    <form asp-action="Edit">
+        <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+            <div class="col-md-6">
+
+                @*<div class="form-group">
                 <label asp-for="DateStamp" class="control-label"></label>
                 <input asp-for="DateStamp" class="form-control" />
                 <span asp-validation-for="DateStamp" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LinkText" class="control-label"></label>
-                <input asp-for="LinkText" class="form-control" />
-                <span asp-validation-for="LinkText" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeadLine" class="control-label"></label>
-                <input asp-for="HeadLine" class="form-control" />
-                <span asp-validation-for="HeadLine" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContentSummary" class="control-label"></label>
-                <input asp-for="ContentSummary" class="form-control" />
-                <span asp-validation-for="ContentSummary" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <input asp-for="Content" class="form-control" />
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                </div>*@
+                <div class="form-group">
+                    <label asp-for="LinkText" class="control-label"></label>
+                    <input asp-for="LinkText" class="form-control" />
+                    <span asp-validation-for="LinkText" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HeadLine" class="control-label"></label>
+                    <input asp-for="HeadLine" class="form-control" />
+                    <span asp-validation-for="HeadLine" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ContentSummary" class="control-label"></label>
+                    <textarea asp-for="ContentSummary" class="form-control" rows="5" placeholder="Content Summary"></textarea>
+                    <span asp-validation-for="ContentSummary" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Content" class="control-label"></label>
+                    <textarea asp-for="Content" class="form-control" rows="5" placeholder="Content"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId" class="control-label">Category Name</label>
+                    <select class="form-control" style="width:auto" size="5" asp-for="CategoryId" asp-items="@Model.Categories"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+                @* <div class="form-group">
                 <label asp-for="Views" class="control-label"></label>
                 <input asp-for="Views" class="form-control" />
                 <span asp-validation-for="Views" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+                </div>
+                <div class="form-group">
                 <label asp-for="Likes" class="control-label"></label>
                 <input asp-for="Likes" class="form-control" />
                 <span asp-validation-for="Likes" class="text-danger"></span>
+                </div>*@
             </div>
-            <div class="form-group">
-                <label asp-for="ImageLink" class="control-label"></label>
-                <input asp-for="ImageLink" class="form-control" />
-                <span asp-validation-for="ImageLink" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <img src="@Model.ExisingImageLink" alt="Image" class="border-3"  style="height:350px;width:350px;"/>                  
+
+                    @*<label asp-for="ImageLink" class="control-label"></label>
+                    <input asp-for="ImageLink" class="form-control" />
+                    <span asp-validation-for="ImageLink" class="text-danger"></span>*@
+                </div>
+                <div class="form-group">
+                    <label asp-for="FileName" class="control-label"></label>
+                    <input asp-for="FileName" class="form-control" placeholder="Select Image" />
+                    <input type="button" value="Choose file" class="btn btn-success" onclick="typevaluefunc()" />
+                    <span asp-validation-for="FileName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="File" hidden class="form-control" onchange="givevaluetofilename()" />
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />|
+            <a asp-action="Index" class="btn btn-primary">Back to List</a>
+        </div>
+    </form>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+    <script>
+        function givevaluetofilename() {
+            var fileName = document.getElementById("File").value;
+            document.getElementById("FileName").value = fileName.substring(12);
+        }
+        // To click on the hidden button because I cannot reach it
+        function typevaluefunc() {
+            document.getElementById("File").click();
+        }
+    </script>
