@@ -4,12 +4,37 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>List of Articles</h1>
+<hr />
 
-<p>
-    <a asp-action="Create">Create New</a>
+<p style="text-align:end">
+    <a asp-action="Create"><i class="bi bi-plus-circle-fill"></i>&nbsp;Create New</a>
 </p>
-<table class="table">
+
+<div class="container-fluid">
+    <div class="row">
+        @foreach(var item in Model)
+        {
+        <div class="col-12 col-md-6 col-md-4">
+                <div class="card" style="width: 100%; height: 100%">
+                    <img src="@item.ImageLink" class="card-img-top" alt="Image" style="padding:1px; object-fit: cover; height: 250px;">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <h5 class="card-title" style="color: #234E70"><b>@item.HeadLine</b></h5>
+                        <p style="color:#7A2048;">
+                            <b>@item.Content <br />
+                        </p>
+                        <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
+
+                    </div>
+                </div>
+        </div>
+        }
+    </div>
+</div>
+
+
+
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -36,7 +61,7 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.)
             </th>*@
-            <th></th>
+   @*         <th></th>
         </tr>
     </thead>
     <tbody>
@@ -56,7 +81,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Content)
-            </td>
+            </td>*@
            @* <td>
                 @Html.DisplayFor(modelItem => item.Views)
             </td>
@@ -66,7 +91,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ImageLink)
             </td>*@
-            <td>
+            @*<td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -74,4 +99,4 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@

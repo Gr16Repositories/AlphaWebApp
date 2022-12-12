@@ -1,4 +1,6 @@
 ﻿using Azure.Storage.Blobs;
+using System.Security.Policy;
+
 namespace AlphaWebApp.Services
 {
     public class StorageService : IStorageService
@@ -23,6 +25,16 @@ namespace AlphaWebApp.Services
             blobClient.Upload(fileNameWithPath, true);
 
             return blobClient.Uri;
+        }
+
+        public Uri GetBlob(string blobName)
+        {
+
+            string containerName = "news-images-sm";
+            //BlobContainerClient containerClient = _blobServices.GetBlobContainerClient(containerName);
+            //BlobClient blobclient = containerClient.GetBlobClient(blobName);
+            //return blobclient.Uri;
+            return null;
         }
     }
 }
