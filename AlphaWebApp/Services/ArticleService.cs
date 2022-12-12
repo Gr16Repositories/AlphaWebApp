@@ -59,12 +59,16 @@ namespace AlphaWebApp.Services
             return specificArticleById;
         }
 
-        public void UpdateArticle(int? id, Article article)
+        public void UpdateArticle(int? id, EditArticleVM article, Uri blobUri)
         {
             Article articleDetails = _db.Articles.Find(id);
+            Article dbArticle = _mapper.Map<Article>(articleDetails);
+            dbArticle.Category = _db.Categories.Find(Convert.ToInt32(article.CategoryId));
+            dbArticle.ImageLink = blobUri;
+            dbArticle.DateStamp = DateTime.Now;
             if (articleDetails != null)
             {
-                _db.Articles.Update(article);
+                _db.Articles.Update(dbArticle);
                 _db.SaveChanges();
             }
 

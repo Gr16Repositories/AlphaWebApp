@@ -10,7 +10,7 @@ namespace AlphaWebApp.Services
         public void AddArticle(AddArticleVM article, Uri blobUri);
 
         //Update Article
-        public void UpdateArticle(int? id, Article article);
+        public void UpdateArticle(int? id, EditArticleVM article, Uri blobUri);
 
         //Get All List of Articles Details
         public List<Article> GetAllArticles();

@@ -10,6 +10,7 @@ using AlphaWebApp.Models;
 using AlphaWebApp.Services;
 using Microsoft.Extensions.Hosting.Internal;
 using AlphaWebApp.Models.ViewModels;
+using AutoMapper;
 
 namespace AlphaWebApp.Controllers
 {
@@ -19,16 +20,18 @@ namespace AlphaWebApp.Controllers
         private readonly IArticleService _articleService;
         private readonly IStorageService _storageService;
         private readonly IConfiguration _configuration;
+        private readonly IMapper _mapper;
 
         public ArticlesController(ApplicationDbContext db,
             IArticleService articleService,
             IStorageService storageService,
-            IConfiguration configuration)
+            IConfiguration configuration,IMapper mapper)
         {
             _db = db;
             _articleService = articleService;
             _storageService = storageService;
             _configuration = configuration;
+            _mapper = mapper;
         }
 
         // GET: Articles
@@ -135,12 +138,36 @@ namespace AlphaWebApp.Controllers
                 return NotFound();
             }
 
-            var article = await Task.Run(() => _articleService.GetArticleById(id));
+
+            EditArticleVM editArticleVM = new();
+            editArticleVM.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
+            editArticleVM.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
+            editArticleVM.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
+            editArticleVM.Categories.Add(new SelectListItem { Text = "Weather", Value = "4" });
+            editArticleVM.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
+            editArticleVM.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
+
+            Article article = await Task.Run(() => _articleService.GetArticleById(id));
+            EditArticleVM editArticle = new EditArticleVM 
+            { 
+                Categories = editArticleVM.Categories.ToList(),
+                CategoryId = article.CategoryId.ToString(),
+                DateStamp = article.DateStamp,
+                LinkText = article.LinkText,
+                HeadLine = article.HeadLine,
+                ContentSummary = article.ContentSummary,
+                Content = article.Content,                
+                ExisingImageLink = article.ImageLink,
+                ImageLink = article.ImageLink
+
+            };
+
             if (article == null)
             {
                 return NotFound();
             }
-            return View(article);
+            //return View(article);
+            return View(editArticle);
         }
 
         // POST: Articles/Edit/5
@@ -148,20 +175,33 @@ namespace AlphaWebApp.Controllers
        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateStamp,LinkText,Headline,ContentSummary,Content,Views,Likes,ImageLink")] Article article)
+        public async Task<IActionResult> Edit(int id, EditArticleVM article)
         {
             if (id != article.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
+                   
                 try
                 {
+                    string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
+                    string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    string fileNameWithPath = Path.Combine(path, article.FileName);
+                    using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+                    {
+                        article.File.CopyTo(stream);
+                        //article.File.CopyTo(stream);
+                    }
+                    // now the file is store locally we need to store it on Azure bolb
+                    string pathFile = article.CategoryId + "/" + article.File.FileName;
+                    Uri blobUri = _storageService.uploadBlob(pathFile);
                     await Task.Run(() =>
                     {
-                        _articleService.UpdateArticle(id, article);
+                        _articleService.UpdateArticle(id, article,blobUri);
                     });
                 }
                 catch (DbUpdateConcurrencyException)
@@ -176,8 +216,8 @@ namespace AlphaWebApp.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return View(article);
+            
+           // return View(article);
         }
 
         // GET: Articles/Delete/5
@@ -220,5 +260,23 @@ namespace AlphaWebApp.Controllers
         {
           return _db.Articles.Any(e => e.Id == id);
         } 
+
+        private string UploadImage(EditArticleVM article)
+        {
+            string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
+            string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string fileNameWithPath = Path.Combine(path, article.FileName);
+            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
+            {
+                article.File.CopyTo(stream);
+            }
+            // now the file is store locally we need to store it on Azure bolb
+            string pathFile = article.CategoryId + "/" + article.File.FileName;
+            return pathFile;
+        }
     }
 }
