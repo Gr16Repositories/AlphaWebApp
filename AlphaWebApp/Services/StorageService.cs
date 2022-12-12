@@ -16,7 +16,7 @@ namespace AlphaWebApp.Services
 
         public Uri uploadBlob(string pathfile)
         {
-            string containerName = "news-images";
+            string containerName = "news-images";// if you want to use a small image on blob so change the name to the folder like "news-images-sm" that exactly the name in storgeacount on azure
             BlobContainerClient containerClient = 
                                 _blobServiceClient.GetBlobContainerClient(containerName);
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/articles");

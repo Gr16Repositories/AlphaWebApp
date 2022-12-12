@@ -7,42 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AlphaWebApp.Data;
 using AlphaWebApp.Models;
+using AlphaWebApp.Services;
 
 namespace AlphaWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICategoryService _categoryService;
+        private readonly ISubscriptionTypeService _subscriptionTypeService;
 
-        public AdminController(ApplicationDbContext context)
+        public AdminController(ICategoryService categoryService , 
+                                ISubscriptionTypeService subscriptionTypeService)
         {
-            _context = context;
+            _categoryService = categoryService;
+            _subscriptionTypeService = subscriptionTypeService;
         }
+
+
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
 
         // GET: Admin
         public async Task<IActionResult> IndexCategory()
         {
-              return View(await _context.Categories.ToListAsync());
+            if(await Task.Run(() => _categoryService.GetAllCategory().ToList().Any()))
+            {
+                return View(await Task.Run(() => _categoryService.GetAllCategory().ToList()));
+            }
+            else
+            {
+                return RedirectToAction("CreateCategory");
+            }
         }
 
-        // GET: Admin/Details/5
-        public async Task<IActionResult> DetailsCategory(int? id)
-        {
-            if (id == null || _context.Categories == null)
-            {
-                return NotFound();
-            }
-
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-
-            return View(category);
-        }
-
+        
         // GET: Admin/Create
         public IActionResult CreateCategory()
         {
@@ -50,43 +51,39 @@ namespace AlphaWebApp.Controllers
         }
 
         // POST: Admin/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateCategory([Bind("Id,name")] Category category)
+        public async Task<IActionResult> CreateCategory(Category category)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await Task.Run(() => _categoryService.AddCategory(category));
+                return RedirectToAction(nameof(IndexCategory));
             }
             return View(category);
         }
+
+
 
         // GET: Admin/Edit/5
         public async Task<IActionResult> EditCategory(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _categoryService.GetAllCategory() == null)
             {
                 return NotFound();
             }
-
-            var category = await _context.Categories.FindAsync(id);
-            if (category == null)
+            var Category = await Task.Run(() => _categoryService.GetCategoryById(id));
+            if (Category == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(Category);
         }
 
-        // POST: Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //// POST: Admin/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditCategory(int id, [Bind("Id,name")] Category category)
+        public async Task<IActionResult> EditCategory(int? id, Category category)
         {
             if (id != category.Id)
             {
@@ -97,8 +94,10 @@ namespace AlphaWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    await Task.Run(() =>
+                    {
+                        _categoryService.UpdateCategory(id, category);
+                    });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,7 +110,7 @@ namespace AlphaWebApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexCategory));
             }
             return View(category);
         }
@@ -119,43 +118,44 @@ namespace AlphaWebApp.Controllers
         // GET: Admin/Delete/5
         public async Task<IActionResult> DeleteCategory(int? id)
         {
-            if (id == null || _context.Categories == null)
+            if (id == null || _categoryService.GetCategoryById(id)== null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            var category = await Task.Run(() => _categoryService.GetCategoryById(id));
             if (category == null)
             {
-                return NotFound();
+                return RedirectToAction("IndexCategory");
             }
-
-            return View(category);
+            else
+            {
+                return View(category);
+            }
         }
 
-        // POST: Admin/Delete/5
-        [HttpPost, ActionName("Delete")]
+        //// POST: Admin/Delete/5
+        [HttpPost, ActionName("DeleteCategory")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmedCategory(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            if (_categoryService.GetCategoryById(id) == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
             }
-            var category = await _context.Categories.FindAsync(id);
+            var category = await Task.Run(() => _categoryService.GetCategoryById(id));
             if (category != null)
+                await Task.Run(() =>
             {
-                _context.Categories.Remove(category);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                _categoryService.DeleteCategory(id);
+            });
+            return RedirectToAction(nameof(IndexCategory));
         }
 
         private bool CategoryExists(int id)
         {
-          return _context.Categories.Any(e => e.Id == id);
+            return  _categoryService.GetAllCategory().Any(e => e.Id == id);
         }
 
 
@@ -164,26 +164,16 @@ namespace AlphaWebApp.Controllers
         // GET: SubscriptionTypes
         public async Task<IActionResult> IndexSubscriptionType()
         {
-            return View(await _context.SubscriptionTypes.ToListAsync());
+            if (_subscriptionTypeService.GetAllSubscriptionType().ToList().Count > 0)
+            {
+                return View(await Task.Run(() => _subscriptionTypeService.GetAllSubscriptionType().ToList()));
+            }
+            else
+            {
+                return RedirectToAction("CreateSubscriptionType");
+            }
         }
 
-        // GET: SubscriptionTypes/Details/5
-        public async Task<IActionResult> DetailsSubscriptionType(int? id)
-        {
-            if (id == null || _context.SubscriptionTypes == null)
-            {
-                return NotFound();
-            }
-
-            var subscriptionType = await _context.SubscriptionTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (subscriptionType == null)
-            {
-                return NotFound();
-            }
-
-            return View(subscriptionType);
-        }
 
         // GET: SubscriptionTypes/Create
         public IActionResult CreateSubscriptionType()
@@ -196,13 +186,12 @@ namespace AlphaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateSubscriptionType([Bind("Id,TypeName,Description")] SubscriptionType subscriptionType)
+        public async Task<IActionResult> CreateSubscriptionType( SubscriptionType subscriptionType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(subscriptionType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await Task.Run(() => _subscriptionTypeService.AddSubscriptionType(subscriptionType));
+                return RedirectToAction(nameof(IndexSubscriptionType));
             }
             return View(subscriptionType);
         }
@@ -210,12 +199,12 @@ namespace AlphaWebApp.Controllers
         // GET: SubscriptionTypes/Edit/5
         public async Task<IActionResult> EditSubscriptionType(int? id)
         {
-            if (id == null || _context.SubscriptionTypes == null)
+            if (id == null || _subscriptionTypeService.GetAllSubscriptionType == null)
             {
                 return NotFound();
             }
 
-            var subscriptionType = await _context.SubscriptionTypes.FindAsync(id);
+            var subscriptionType = await Task.Run(() => _subscriptionTypeService.GetSubscriptionTypeById(id));
             if (subscriptionType == null)
             {
                 return NotFound();
@@ -228,7 +217,7 @@ namespace AlphaWebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSubscriptionType(int id, [Bind("Id,TypeName,Description")] SubscriptionType subscriptionType)
+        public async Task<IActionResult> EditSubscriptionType(int id,  SubscriptionType subscriptionType)
         {
             if (id != subscriptionType.Id)
             {
@@ -239,8 +228,10 @@ namespace AlphaWebApp.Controllers
             {
                 try
                 {
-                    _context.Update(subscriptionType);
-                    await _context.SaveChangesAsync();
+                    await Task.Run(() =>
+                    {
+                        _subscriptionTypeService.UpdateSubscriptionType(id, subscriptionType);
+                    });
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -253,7 +244,7 @@ namespace AlphaWebApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexSubscriptionType));
             }
             return View(subscriptionType);
         }
@@ -261,43 +252,44 @@ namespace AlphaWebApp.Controllers
         // GET: SubscriptionTypes/Delete/5
         public async Task<IActionResult> DeleteSubscriptionType(int? id)
         {
-            if (id == null || _context.SubscriptionTypes == null)
+            if (id == null || _subscriptionTypeService.GetSubscriptionTypeById(id) == null)
             {
                 return NotFound();
             }
 
-            var subscriptionType = await _context.SubscriptionTypes
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var subscriptionType = await Task.Run(() => _subscriptionTypeService.GetSubscriptionTypeById(id));
             if (subscriptionType == null)
             {
-                return NotFound();
+                return RedirectToAction("IndexSubscriptionType");
             }
-
-            return View(subscriptionType);
+            else
+            {
+                return View(subscriptionType);
+            }
         }
 
         // POST: SubscriptionTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteSubscriptionType")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmedSubscriptionType(int id)
         {
-            if (_context.SubscriptionTypes == null)
+            if (_subscriptionTypeService.GetSubscriptionTypeById(id) == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.SubscriptionTypes'  is null.");
             }
-            var subscriptionType = await _context.SubscriptionTypes.FindAsync(id);
+            var subscriptionType = await Task.Run(() => _subscriptionTypeService.GetSubscriptionTypeById(id));
             if (subscriptionType != null)
-            {
-                _context.SubscriptionTypes.Remove(subscriptionType);
-            }
+                await Task.Run(() =>
+                {
+                    _subscriptionTypeService.DeleteSubscriptionType(id);
+                });
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(IndexSubscriptionType));
         }
 
         private bool SubscriptionTypeExists(int id)
         {
-            return _context.SubscriptionTypes.Any(e => e.Id == id);
+            return _subscriptionTypeService.GetAllSubscriptionType().Any(e => e.Id == id);
         }
     }
 }

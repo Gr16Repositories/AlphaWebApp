@@ -48,10 +48,22 @@ namespace AlphaWebApp.Controllers
                 return View(listOfArticles);
             else
                 return View();
+
+           // if (_articleService.GetAllArticles().ToList().Count>0)
+           // {
+           // List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
+           // return View(listOfArticles);
+           // }
+            //else
+           // {
+             //   return NotFound();
+           //}
+            //return View();
+
         }
 
         // GET: Articles/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {
@@ -85,7 +97,6 @@ namespace AlphaWebApp.Controllers
         }
 
         // POST: Articles/Create      
-       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddArticleVM article)
@@ -113,7 +124,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _articleService.GetAllArticles() == null)
             {
@@ -166,7 +177,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {

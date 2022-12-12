@@ -24,9 +24,19 @@ builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IStorageService, StorageService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedCategoryData.Initialize(services);
+    SeedSubscriptionTypeData.Initialize(services);
+}
 
 //// Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
