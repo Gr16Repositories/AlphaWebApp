@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddControllersWithViews();
 
 //Add Services
 builder.Services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
