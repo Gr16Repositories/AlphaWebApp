@@ -1,4 +1,7 @@
-﻿@{
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +9,19 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>*@
+
+<div>
+
+    <div class="row-cols-3">
+        <h2>Latest New</h2>
+        @foreach (var item in Model.OrderBy(x => x.DateStamp).Take(1).ToList());
+
+
+
+    </div
+
+
+
+
+
+</div>

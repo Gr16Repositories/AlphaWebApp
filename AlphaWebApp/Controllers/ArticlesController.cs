@@ -70,7 +70,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {
