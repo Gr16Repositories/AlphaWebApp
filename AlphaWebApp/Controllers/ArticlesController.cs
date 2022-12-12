@@ -44,6 +44,9 @@ namespace AlphaWebApp.Controllers
             //}
 
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
+
+            return View(listOfArticles);
+            
             if (listOfArticles != null)
                 return View(listOfArticles);
             else
@@ -59,6 +62,7 @@ namespace AlphaWebApp.Controllers
              //   return NotFound();
            //}
             //return View();
+
 
         }
 
