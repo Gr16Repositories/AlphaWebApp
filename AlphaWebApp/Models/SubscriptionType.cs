@@ -9,13 +9,10 @@ namespace AlphaWebApp.Models
         public int Id { get; set; }
 
         [Required]
-        public subscriptionTypeName TypeName { get; set; }
+        public string TypeName { get; set; }
 
         [Required]
         public string Description { get; set; }
-        
-        public enum subscriptionTypeName { Free ,Basic ,Standerd ,Premium }
-
         
         public virtual ICollection<Subscription> Supscriptions { get; set; }
     }

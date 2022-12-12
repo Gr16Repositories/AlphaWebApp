@@ -4,12 +4,26 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="row">
+<div class="container-fluid"> 
+    <h1 class="justify-content-center border-3">@Model.HeadLine</h1>
+    <br />
+    <br />
+    <div class="pt-5 pb-5 ps-5 pe-5 h-50">
+        <img src="@Model.ImageLink" alt="Image"/>
+    </div>
+    <div style="height:10px" class="ps-5">
+        <b>@Model.CategoryId</b> &nbsp;&nbsp;|<b>@Model.DateStamp</b>
+    </div>
+    <br />
+    <br />
+    <div class="ps-5 pe-5">
+        <b>@Model.ContentSummary</b>
+    </div>
+    <div class="ps-5 pe-5">
+        @Model.Content
+    </div>
+   
+   @* <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DateStamp)
         </dt>
@@ -58,9 +72,11 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ImageLink)
         </dd>
-    </dl>
+    </dl>*@
 </div>
+<br />
+<br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-success">Edit</a> |
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>

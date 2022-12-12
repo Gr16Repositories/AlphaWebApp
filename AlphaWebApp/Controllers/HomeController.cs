@@ -71,5 +71,12 @@ namespace AlphaWebApp.Controllers
         {
             return _emailService.SendSubscriptionEmail(newEmail).Result;
         }
+
+        //Article Read More button
+        public IActionResult ReadMore()
+        {
+            var test = _articleService.GetAllArticles().FirstOrDefault();
+            return View(test);
+        }
     }
 }

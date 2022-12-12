@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace AlphaWebApp.Areas.Identity.Pages.Account
 {
@@ -112,12 +113,41 @@ namespace AlphaWebApp.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+
+                // Fadi Added to manage roles 
+                // Fadi start
+                var user = await _signInManager.UserManager.FindByNameAsync(Input.Email);
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
+                // Fadi End
+
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    // Fadi start
+                    var claims = new Claim[]
+                    {
+                        new Claim("amr", "pwd"), 
+                        new Claim("EmployeeNumber", "1")// then you go to program.cs and add function called AddAuthorizationPloicies(builder.Services)
+                    };
+                    await _signInManager.SignInWithClaimsAsync(user, Input.RememberMe, claims);
+                    //Fadi ende
+
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+
+                // Fadi start
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
+                // Fadi end
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });

@@ -2,7 +2,9 @@
 using AlphaWebApp.Models;
 using AlphaWebApp.Models.ViewModels;
 using AutoMapper;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Policy;
 
 namespace AlphaWebApp.Services
 {
@@ -40,18 +42,24 @@ namespace AlphaWebApp.Services
 
         public List<Article> GetAllArticles()
         {
+            List<Article> listOfAllArtiles = _db.Articles.ToList();
+            if(listOfAllArtiles != null)
+            return listOfAllArtiles;          
+            else
+              return new List<Article>();
             //List<Article> listOfAllArtiles = _db.Articles.ToList();
             //return listOfAllArtiles;
-            return null;
+            //return new List<Article>();
+
         }
 
-        public Article GetArticleById(int id)
+        public Article GetArticleById(int? id)
         {
             Article specificArticleById = _db.Articles.FirstOrDefault(x => x.Id == id);
             return specificArticleById;
         }
 
-        public void UpdateArticle(int id, Article article)
+        public void UpdateArticle(int? id, Article article)
         {
             Article articleDetails = _db.Articles.Find(id);
             if (articleDetails != null)
@@ -65,6 +73,8 @@ namespace AlphaWebApp.Services
         public List<Category> GetCategories()
         {
             return _db.Categories.ToList();
-        }       
+        }  
+        
+        
     }
 }

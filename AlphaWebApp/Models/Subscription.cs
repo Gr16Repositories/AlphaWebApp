@@ -13,7 +13,7 @@ namespace AlphaWebApp.Models
         public int Id { get; set; }
 
         [Required]
-        public decimal Pirce { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public DateTime Created { get; set; }

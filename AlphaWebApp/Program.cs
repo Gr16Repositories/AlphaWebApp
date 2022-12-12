@@ -1,6 +1,7 @@
 using AlphaWebApp.Data;
 using AlphaWebApp.Models;
 using AlphaWebApp.Services;
+using Microsoft.AspNetCore.Authorization.Policy;
 //using Castle.Core.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +26,28 @@ builder.Services.AddScoped<IArticleService, ArticleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IStorageService, StorageService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// Adding Claims
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+});
+
+
+
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedCategoryData.Initialize(services);
+    SeedSubscriptionTypeData.Initialize(services);
+}
 
 //// Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
@@ -55,3 +75,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+

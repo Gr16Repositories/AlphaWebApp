@@ -18,25 +18,56 @@ namespace AlphaWebApp.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
         private readonly IStorageService _storageService;
+        private readonly IConfiguration _configuration;
 
         public ArticlesController(ApplicationDbContext db,
             IArticleService articleService,
-            IStorageService storageService)
+            IStorageService storageService,
+            IConfiguration configuration)
         {
             _db = db;
             _articleService = articleService;
             _storageService = storageService;
+            _configuration = configuration;
         }
 
         // GET: Articles
         public async Task<IActionResult> Index()
         {
+            //var articles = _articleService.GetAllArticles();
+            //foreach (var item in articles)
+            //{
+            //    string containerName = "news-images-sm";
+            //    item.ImageLink = _storageService.GetBlob(item.FileName, containerName);
+            //   // item.ImageLink = _configuration["BlobStorage"] + "news-images-sm" + item.fileName
+            //   // item.ImageLink = Address to storageAccount + container name + filename
+            //}
+
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
+
             return View(listOfArticles);
+            
+            if (listOfArticles != null)
+                return View(listOfArticles);
+            else
+                return View();
+
+           // if (_articleService.GetAllArticles().ToList().Count>0)
+           // {
+           // List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
+           // return View(listOfArticles);
+           // }
+            //else
+           // {
+             //   return NotFound();
+           //}
+            //return View();
+
+
         }
 
         // GET: Articles/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {
@@ -70,7 +101,6 @@ namespace AlphaWebApp.Controllers
         }
 
         // POST: Articles/Create      
-       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddArticleVM article)
@@ -98,7 +128,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _articleService.GetAllArticles() == null)
             {
@@ -151,7 +181,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {
