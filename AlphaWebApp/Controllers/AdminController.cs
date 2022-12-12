@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using AlphaWebApp.Data;
 using AlphaWebApp.Models;
 using AlphaWebApp.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AlphaWebApp.Controllers
 {
@@ -15,16 +17,21 @@ namespace AlphaWebApp.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly ISubscriptionTypeService _subscriptionTypeService;
+        //RoleManager<IdentityRole> _roleManager;
+
 
         public AdminController(ICategoryService categoryService , 
-                                ISubscriptionTypeService subscriptionTypeService)
+                                ISubscriptionTypeService subscriptionTypeService
+                                //RoleManager<IdentityRole> roleManager
+                                )
         {
             _categoryService = categoryService;
             _subscriptionTypeService = subscriptionTypeService;
+            //_roleManager = roleManager;
         }
 
-
-        public async Task<IActionResult> Index()
+        // This method has a view to admin page
+        public IActionResult Index()
         {
             return View();
         }
@@ -291,5 +298,26 @@ namespace AlphaWebApp.Controllers
         {
             return _subscriptionTypeService.GetAllSubscriptionType().Any(e => e.Id == id);
         }
+
+
+        //This section give the admin the previlge to show and create delete roles to users
+        //public IActionResult IndexRols()
+        //{
+        //    var roles = _roleManager.Roles.ToList();
+        //    return View(roles);
+        //}
+
+
+        //public IActionResult CreateRole()
+        //{
+        //    return View(new IdentityRole());
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> CreateRole(IdentityRole role)
+        //{
+        //    await _roleManager.CreateAsync(role);
+        //    return RedirectToAction("Index");
+        //}
     }
 }

@@ -1,6 +1,7 @@
 using AlphaWebApp.Data;
 using AlphaWebApp.Models;
 using AlphaWebApp.Services;
+using Microsoft.AspNetCore.Authorization.Policy;
 //using Castle.Core.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,15 @@ builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// Adding Claims
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+});
+
+
+
 
 var app = builder.Build();
 
@@ -64,3 +74,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+
