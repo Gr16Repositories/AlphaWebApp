@@ -31,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="ViewComponents\" />
-    <Folder Include="Views\Shared\Components\" />
     <Folder Include="wwwroot\images\articles\" />
   </ItemGroup>
 
