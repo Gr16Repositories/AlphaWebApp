@@ -78,7 +78,7 @@
         </div>*@
 
 
-        <div class="container d-flex justify-content-between bg-success" style="height: 80px">
+@*        <div class="container d-flex justify-content-between bg-success" style="height: 80px">
             <button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-solid fa-map-pin"></i> Local</button>
             <button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-sharp fa-solid fa-map"></i> Sweden</button>
             <button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-solid fa-earth-americas"></i> World</button>
@@ -87,15 +87,14 @@
             <button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-solid fa-heart-pulse"></i> Health</button>
             <button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-solid fa-medal"></i> Sport</button>
             <button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-regular fa-futbol"></i> FIFA World Cup 2022</button>
-        </div>
-
-
-      @*  <div>
-            foreach(var item from Model)
-            {
-            <partial Model="item.category"><button type="button" class="btn btn-primary" style="font-size: 22px;"><i class="fa-solid fa-map-pin"></i> Local</button></partial>
-            }
         </div>*@
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+                <vc:navbar-categories></vc:navbar-categories>
+        </div>
+    </nav>
+            
 
     </header>
 

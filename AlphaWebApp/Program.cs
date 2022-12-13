@@ -1,5 +1,6 @@
 using AlphaWebApp.Data;
 using AlphaWebApp.Models;
+using AlphaWebApp.Models.Seeds;
 using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Authorization.Policy;
 //using Castle.Core.Smtp;

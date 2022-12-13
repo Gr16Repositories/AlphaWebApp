@@ -1,0 +1,13 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Category>
+
+
+<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+        @foreach (var item in Model)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-route-id="@item.Id" asp-action="News">@item.name</a>
+            </li>
+        }
+    </ul>
+</div>
