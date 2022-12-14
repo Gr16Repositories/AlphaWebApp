@@ -18,11 +18,17 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.name)
         </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.icon)
+    </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.icon)
+        </dd>
     </dl>
     
     <form asp-action="DeleteCategory">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="submit" value="Delete" class="btn btn-danger" /><br /><br />
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
