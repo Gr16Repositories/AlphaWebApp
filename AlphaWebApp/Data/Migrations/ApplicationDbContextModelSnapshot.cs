@@ -66,7 +66,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Articles", (string)null);
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Category", b =>
@@ -82,7 +82,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
@@ -117,7 +117,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Subscriptions");
+                    b.ToTable("Subscriptions", (string)null);
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.SubscriptionType", b =>
@@ -138,7 +138,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubscriptionTypes");
+                    b.ToTable("SubscriptionTypes", (string)null);
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.User", b =>
@@ -249,7 +249,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeatherForecasts");
+                    b.ToTable("WeatherForecasts", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -1,4 +1,5 @@
-﻿@*@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+
 
 @{
     ViewData["Title"] = "IndexRole";
@@ -8,14 +9,16 @@
 <h1>Index Roles</h1>
 
 <p>
-    <a asp-action="CreateRole">Create New</a>
+    <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -26,11 +29,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>*@
-                  @*  <a asp-action="EditCategory" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="DeleteCategory" asp-route-id="@item.Id">Delete</a>*@
- @*               </td>
+                <td>
+                    <a asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+                </td>
+                <td>
+                    <a id="setEmail" asp-action="AddEmailToRole" asp-route-id="@item.Id">Assigne To User</a>
+                </td>
             </tr>
         }
     </tbody>
-</table>*@
+</table>

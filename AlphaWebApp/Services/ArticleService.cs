@@ -50,7 +50,6 @@ namespace AlphaWebApp.Services
             //List<Article> listOfAllArtiles = _db.Articles.ToList();
             //return listOfAllArtiles;
             //return new List<Article>();
-
         }
 
         public Article GetArticleById(int? id)
@@ -71,7 +70,6 @@ namespace AlphaWebApp.Services
                 _db.Articles.Update(dbArticle);
                 _db.SaveChanges();
             }
-
         }
 
         public List<Category> GetCategories()

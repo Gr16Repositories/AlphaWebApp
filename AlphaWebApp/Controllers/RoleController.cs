@@ -1,80 +1,103 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AlphaWebApp.Models;
+using AlphaWebApp.Models.ViewModels;
+using AlphaWebApp.Services;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlphaWebApp.Controllers
 {
     public class RoleController : Controller
     {
-        RoleManager<IdentityRole> _roleManager;
-        public RoleController(RoleManager<IdentityRole> roleManager)
+        private readonly IUserService _userService;
+
+        public RoleController(IUserService userService)
         {
-            _roleManager = roleManager;
+            _userService = userService;
         }
+
         public IActionResult Index()
         {
-            var roles = _roleManager.Roles.ToList();
-            return View(roles);
+            var test = _userService.GetAllRoles();
+            return View(_userService.GetAllRoles());
         }
+
+
         public IActionResult Create()
         {
-            return View(new IdentityRole());
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(IdentityRole role)
         {
-            await _roleManager.CreateAsync(role);
+            if (ModelState.IsValid)
+            {
+                IdentityResult result = await Task.Run(() => _userService.AddRole(role));
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
             return RedirectToAction("Index");
         }
 
 
+        public async Task<IActionResult> DeleteRole(string id)
+        {
 
-        //private async Task CreateRolesandUsers()
-        //{
-        //    bool x = await _roleManager.RoleExistsAsync("Admin");
-        //    if (!x)
-        //    {
-        //        // first we create Admin rool    
-        //        var role = new IdentityRole();
-        //        role.Name = "Admin";
-        //        await _roleManager.CreateAsync(role);
+            if (ModelState.IsValid)
+            {
+                IdentityResult result = await Task.Run(() => _userService.RemoveRole(id));
 
-        //        //Here we create a Admin super user who will maintain the website                   
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
 
-        //        var user = new ApplicationUser();
-        //        user.UserName = "default";
-        //        user.Email = "default@default.com";
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return RedirectToAction("Index");
+        }
 
-        //        string userPWD = "password";
-
-        //        IdentityResult chkUser = await _userManager.CreateAsync(user, userPWD);
-
-        //        //Add default User to Role Admin    
-        //        if (chkUser.Succeeded)
-        //        {
-        //            var result1 = await _userManager.AddToRoleAsync(user, "Admin");
-        //        }
-        //    }
-
-        //    // creating Creating Manager role     
-        //    x = await _roleManager.RoleExistsAsync("Manager");
-        //    if (!x)
-        //    {
-        //        var role = new IdentityRole();
-        //        role.Name = "Manager";
-        //        await _roleManager.CreateAsync(role);
-        //    }
-
-        //    // creating Creating Employee role     
-        //    x = await _roleManager.RoleExistsAsync("Editor");
-        //    if (!x)
-        //    {
-        //        var role = new IdentityRole();
-        //        role.Name = "Editor";
-        //        await _roleManager.CreateAsync(role);
-        //    }
-        //}
+        public async Task<IActionResult> AddRoleToUser(string id)
+        {
+            return View();
+        }
 
 
+        public async Task<IActionResult> AddEmailToRole(string id)
+        {
+            CreateRoleVM roleId = new CreateRoleVM() { RoleId = id };
+            return View(roleId);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEmailToRole(string Email, string id)
+        {
+
+            if (ModelState.IsValid)
+            {
+                IdentityResult result = await Task.Run(() => _userService.AddRoleToUser(id, Email));
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

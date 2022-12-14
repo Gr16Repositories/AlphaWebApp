@@ -15,9 +15,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+
+
+    
 //Add Services
 builder.Services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
@@ -28,15 +32,23 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // Adding Claims
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
-});
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+//});
 
 
+
+//builder.Services.AddIdentity<AlphaWebApp.Models.User, IdentityRole>(options =>
+//{
+//    options.User.RequireUniqueEmail = false;
+//})
+//    .AddEntityFrameworkStores<ApplicationDbContext>()
+//    .AddDefaultTokenProviders();
 
 
 var app = builder.Build();
