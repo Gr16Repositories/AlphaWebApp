@@ -1,17 +1,20 @@
 ﻿using AlphaWebApp.Models;
 using AlphaWebApp.Models.ViewModels;
 using AlphaWebApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace AlphaWebApp.Controllers
 {
-    public class RoleController : Controller
+    [Authorize(Roles = ("Manager"))]
+    public class ManagerController : Controller
     {
         private readonly IUserService _userService;
 
-        public RoleController(IUserService userService)
+        public ManagerController(IUserService userService)
         {
             _userService = userService;
         }
