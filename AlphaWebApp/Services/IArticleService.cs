@@ -22,7 +22,9 @@ namespace AlphaWebApp.Services
         public void DeleteArticle(int id);
 
         //Get Category Details
-        public List<Category> GetCategories();      
+        public List<Category> GetCategories();
+
+       
 
     }
 }

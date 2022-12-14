@@ -35,7 +35,7 @@ namespace AlphaWebApp.Controllers
         {
             return View(_articleService.GetAllArticles());
         }
-
+        
         public IActionResult Privacy()
         {
             return View();
