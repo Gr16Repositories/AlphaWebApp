@@ -260,7 +260,7 @@ namespace AlphaWebApp.Controllers
         {
           return _db.Articles.Any(e => e.Id == id);
         } 
-
+       
         private string UploadImage(EditArticleVM article)
         {
             string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
