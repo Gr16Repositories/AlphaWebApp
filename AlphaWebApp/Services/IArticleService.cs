@@ -10,7 +10,9 @@ namespace AlphaWebApp.Services
         public void AddArticle(AddArticleVM article, Uri blobUri);
 
         //Update Article
-        public void UpdateArticle(int? id, EditArticleVM article, Uri blobUri);
+        public void UpdateArticle(int id, EditArticleVM article, Uri blobUri);
+
+        public void UpdateArticleWithOutImage(int id, EditArticleVM article);
 
         //Get All List of Articles Details
         public List<Article> GetAllArticles();
@@ -24,7 +26,6 @@ namespace AlphaWebApp.Services
         //Get Category Details
         public List<Category> GetCategories();
 
-       
-
+        public Category GetCategoryById(int id);
     }
 }

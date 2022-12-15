@@ -25,7 +25,7 @@ namespace AlphaWebApp.Controllers
         public ArticlesController(ApplicationDbContext db,
             IArticleService articleService,
             IStorageService storageService,
-            IConfiguration configuration,IMapper mapper)
+            IConfiguration configuration, IMapper mapper)
         {
             _db = db;
             _articleService = articleService;
@@ -36,54 +36,27 @@ namespace AlphaWebApp.Controllers
 
         // GET: Articles
         public async Task<IActionResult> Index()
-        {
-            //var articles = _articleService.GetAllArticles();
-            //foreach (var item in articles)
-            //{
-            //    string containerName = "news-images-sm";
-            //    item.ImageLink = _storageService.GetBlob(item.FileName, containerName);
-            //   // item.ImageLink = _configuration["BlobStorage"] + "news-images-sm" + item.fileName
-            //   // item.ImageLink = Address to storageAccount + container name + filename
-            //}
-
+        { 
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
-
-            return View(listOfArticles);
-            
             if (listOfArticles != null)
                 return View(listOfArticles);
             else
-                return View();
-
-           // if (_articleService.GetAllArticles().ToList().Count>0)
-           // {
-           // List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
-           // return View(listOfArticles);
-           // }
-            //else
-           // {
-             //   return NotFound();
-           //}
-            //return View();
-
-
+                return View();  
         }
 
         // GET: Articles/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {
                 return NotFound();
             }
-
             var article = await Task.Run(() => _articleService.GetArticleById(id));
-               
-            if (article == null)
-            {
+            var categoryName = _articleService.GetCategoryById(Convert.ToInt32(article.CategoryId));
+            if (article == null)           
                 return NotFound();
-            }
-
+           
+            ViewBag.CategoryName = categoryName.name;
             return View(article);
         }
 
@@ -92,7 +65,7 @@ namespace AlphaWebApp.Controllers
         {
             AddArticleVM newArticle = new();
             // Should change - fetch Categories from db table
-            // newArticle.Categories.Add(new SelectListItem {_articleService.GetCategories(), "Value", "Text"});
+            // newArticle.Categories.Add(new SelectList {_articleService.GetCategories(), "Value", "Text"});
             newArticle.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
             newArticle.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
             newArticle.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
@@ -100,7 +73,7 @@ namespace AlphaWebApp.Controllers
             newArticle.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
             newArticle.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
 
-            return View(newArticle);            
+            return View(newArticle);
         }
 
         // POST: Articles/Create      
@@ -108,8 +81,8 @@ namespace AlphaWebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddArticleVM article)
         {
-            if(ModelState.IsValid)
-            { 
+            if (ModelState.IsValid)
+            {
                 string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
                 string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
                 if (!Directory.Exists(path))
@@ -125,6 +98,7 @@ namespace AlphaWebApp.Controllers
                 string pathFile = article.CategoryId + "/" + article.File.FileName;
                 Uri blobUri = _storageService.uploadBlob(pathFile);
                 await Task.Run(() => _articleService.AddArticle(article, blobUri));
+                TempData["success"] = "Article Created Successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -137,8 +111,6 @@ namespace AlphaWebApp.Controllers
             {
                 return NotFound();
             }
-
-
             EditArticleVM editArticleVM = new();
             editArticleVM.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
             editArticleVM.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
@@ -148,18 +120,19 @@ namespace AlphaWebApp.Controllers
             editArticleVM.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
 
             Article article = await Task.Run(() => _articleService.GetArticleById(id));
-            EditArticleVM editArticle = new EditArticleVM 
-            { 
+            EditArticleVM editArticle = new EditArticleVM
+            {
                 Categories = editArticleVM.Categories.ToList(),
                 CategoryId = article.CategoryId.ToString(),
                 DateStamp = article.DateStamp,
                 LinkText = article.LinkText,
                 HeadLine = article.HeadLine,
                 ContentSummary = article.ContentSummary,
-                Content = article.Content,                
+                Content = article.Content,
                 ExisingImageLink = article.ImageLink,
-                ImageLink = article.ImageLink
-
+                ImageLink = article.ImageLink,
+                Views = article.Views,
+                Likes = article.Likes
             };
 
             if (article == null)
@@ -172,7 +145,7 @@ namespace AlphaWebApp.Controllers
 
         // POST: Articles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EditArticleVM article)
@@ -181,43 +154,51 @@ namespace AlphaWebApp.Controllers
             {
                 return NotFound();
             }
-                   
-                try
+            try
+            {
+                if (article.File != null)
                 {
                     string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
                     string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
-                    if (System.IO.File.Exists(path))
+                    if (!Directory.Exists(path))
                     {
-                        System.IO.File.Delete(path);
+                        Directory.CreateDirectory(path);
                     }
                     string fileNameWithPath = Path.Combine(path, article.FileName);
                     using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
                     {
                         article.File.CopyTo(stream);
-                        //article.File.CopyTo(stream);
                     }
                     // now the file is store locally we need to store it on Azure bolb
                     string pathFile = article.CategoryId + "/" + article.File.FileName;
                     Uri blobUri = _storageService.uploadBlob(pathFile);
                     await Task.Run(() =>
                     {
-                        _articleService.UpdateArticle(id, article,blobUri);
+                        _articleService.UpdateArticle(id, article, blobUri);
                     });
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!ArticleExists(article.Id))
+                    await Task.Run(() =>
                     {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                        _articleService.UpdateArticleWithOutImage(id, article);
+                    });
                 }
-                return RedirectToAction(nameof(Index));
-            
-           // return View(article);
+                
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ArticleExists(article.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            TempData["success"] = "Article Updated Successfully";
+            return RedirectToAction(nameof(Index));            
         }
 
         // GET: Articles/Delete/5
@@ -252,31 +233,13 @@ namespace AlphaWebApp.Controllers
                 {
                     _articleService.DeleteArticle(id);
                 });
-          
+            TempData["success"] = "Article Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
 
         private bool ArticleExists(int id)
         {
-          return _db.Articles.Any(e => e.Id == id);
+            return _db.Articles.Any(e => e.Id == id);
         } 
-       
-        private string UploadImage(EditArticleVM article)
-        {
-            string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
-            string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            string fileNameWithPath = Path.Combine(path, article.FileName);
-            using (var stream = new FileStream(fileNameWithPath, FileMode.Create))
-            {
-                article.File.CopyTo(stream);
-            }
-            // now the file is store locally we need to store it on Azure bolb
-            string pathFile = article.CategoryId + "/" + article.File.FileName;
-            return pathFile;
-        }
     }
 }

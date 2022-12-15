@@ -25,9 +25,11 @@ namespace AlphaWebApp.Services
             dbArticle.Category = _db.Categories.Find(Convert.ToInt32(newArticle.CategoryId));
             dbArticle.ImageLink = blobUri;
             dbArticle.DateStamp = DateTime.Now;
-
+            if(dbArticle != null)
+            { 
             _db.Articles.Add(dbArticle);
             _db.SaveChanges();
+            }
         }
 
         public void DeleteArticle(int id)
@@ -46,11 +48,7 @@ namespace AlphaWebApp.Services
             if(listOfAllArtiles != null)
             return listOfAllArtiles;          
             else
-              return new List<Article>();
-            //List<Article> listOfAllArtiles = _db.Articles.ToList();
-            //return listOfAllArtiles;
-            //return new List<Article>();
-
+              return new List<Article>(); 
         }
 
         public Article GetArticleById(int? id)
@@ -59,27 +57,53 @@ namespace AlphaWebApp.Services
             return specificArticleById;
         }
 
-        public void UpdateArticle(int? id, EditArticleVM article, Uri blobUri)
+        public void UpdateArticle(int id, EditArticleVM article, Uri blobUri)
         {
             Article articleDetails = _db.Articles.Find(id);
-            Article dbArticle = _mapper.Map<Article>(articleDetails);
-            dbArticle.Category = _db.Categories.Find(Convert.ToInt32(article.CategoryId));
-            dbArticle.ImageLink = blobUri;
-            dbArticle.DateStamp = DateTime.Now;
+            articleDetails.Category = _db.Categories.Find(Convert.ToInt32(article.CategoryId));
+            articleDetails.ImageLink = blobUri;
+            articleDetails.HeadLine = article.HeadLine;
+            articleDetails.LinkText = article.LinkText;
+            articleDetails.DateStamp = DateTime.Now;
+            articleDetails.CategoryId = Convert.ToInt32(article.CategoryId);
+            articleDetails.ContentSummary = article.ContentSummary;
+            articleDetails.Content = article.Content;
+            articleDetails.Views = article.Views;
+            articleDetails.Likes = article.Likes;
             if (articleDetails != null)
             {
-                _db.Articles.Update(dbArticle);
+                _db.Articles.Update(articleDetails);
                 _db.SaveChanges();
             }
-
         }
-       
+        public void UpdateArticleWithOutImage(int id, EditArticleVM article)
+        {
+            Article articleDetails = _db.Articles.Find(id);          
+            articleDetails.Category = _db.Categories.Find(Convert.ToInt32(article.CategoryId));
+            articleDetails.ImageLink = articleDetails.ImageLink;
+            articleDetails.HeadLine = article.HeadLine;
+            articleDetails.LinkText = article.LinkText;
+            articleDetails.DateStamp = DateTime.Now;
+            articleDetails.CategoryId = Convert.ToInt32(article.CategoryId);
+            articleDetails.ContentSummary = article.ContentSummary;
+            articleDetails.Content = article.Content;
+            articleDetails.Views = article.Views;
+            articleDetails.Likes = article.Likes;
+            if (articleDetails != null)
+            {
+                _db.Articles.Update(articleDetails);
+                _db.SaveChanges();
+            }
+        }
 
         public List<Category> GetCategories()
         {
             return _db.Categories.ToList();
-        }  
-        
-        
+        }
+
+        public Category GetCategoryById(int id)
+        {
+            return _db.Categories.Find(id);
+        }
     }
 }
