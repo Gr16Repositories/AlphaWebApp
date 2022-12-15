@@ -4,6 +4,7 @@ using AlphaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlphaWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221214095853_AddIconsToCategoriesDb")]
+    partial class AddIconsToCategoriesDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +69,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Category", b =>
@@ -85,7 +88,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
@@ -120,7 +123,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("Subscriptions", (string)null);
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.SubscriptionType", b =>
@@ -141,7 +144,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SubscriptionTypes", (string)null);
+                    b.ToTable("SubscriptionTypes");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.User", b =>
@@ -252,7 +255,7 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WeatherForecasts", (string)null);
+                    b.ToTable("WeatherForecasts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -1,7 +1,7 @@
 ﻿using AlphaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlphaWebApp.Models
+namespace AlphaWebApp.Models.Seeds
 {
     public class SeedSubscriptionTypeData
     {

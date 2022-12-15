@@ -5,23 +5,45 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>*@
 
-<div>
+<div class="row" style="margin-top:5%;">
 
-    <div class="row-cols-3">
+        <div class= "col-md-3 " >
         <h2>Latest New</h2>
-        @foreach (var item in Model.OrderBy(x => x.DateStamp).Take(1).ToList());
+                     
+        @await Component.InvokeAsync("LatestArticles")
+              
+        
+        </div>
+    <div class="col-md-6 ">
+        <h2>Today News</h2>
 
+          
+            @await Component.InvokeAsync("TodayNews")
 
+    </div>
 
-    </div
-
-
-
-
+       <div class= "col-md-3 ">
+        <h2>Most Popular News</h2>
+       
+       
+        
+        @await Component.InvokeAsync("MostPopular")
+       
+        
+       </div>
+        
+     
 
 </div>
+
+
+
+
+ 
+
+
+
+
+
+

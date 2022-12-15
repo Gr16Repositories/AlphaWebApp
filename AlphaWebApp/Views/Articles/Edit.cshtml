@@ -7,17 +7,11 @@
 <h1>Edit Article</h1>
 <hr />
 <div class="container">
-    <form asp-action="Edit">
+    <form asp-action="Edit" enctype="multipart/form-data">
         <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="col-md-6">
-
-                @*<div class="form-group">
-                <label asp-for="DateStamp" class="control-label"></label>
-                <input asp-for="DateStamp" class="form-control" />
-                <span asp-validation-for="DateStamp" class="text-danger"></span>
-                </div>*@
                 <div class="form-group">
                     <label asp-for="LinkText" class="control-label"></label>
                     <input asp-for="LinkText" class="form-control" />
