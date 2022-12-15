@@ -10,6 +10,7 @@ namespace AlphaWebApp.Models
         public int Id { get; set; }
         [Required]
         public string name { get; set; }
+        public string icon { get; set; }
 
         public virtual ICollection<Article> Articleslist { get; set; }
 

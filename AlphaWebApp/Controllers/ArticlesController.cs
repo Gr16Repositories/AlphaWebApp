@@ -240,6 +240,6 @@ namespace AlphaWebApp.Controllers
         private bool ArticleExists(int id)
         {
             return _db.Articles.Any(e => e.Id == id);
-        }       
+        } 
     }
 }

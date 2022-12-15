@@ -95,6 +95,7 @@ namespace AlphaWebApp.Services
                 _db.SaveChanges();
             }
         }
+
         public List<Category> GetCategories()
         {
             return _db.Categories.ToList();

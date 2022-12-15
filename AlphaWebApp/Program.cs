@@ -1,5 +1,6 @@
 using AlphaWebApp.Data;
 using AlphaWebApp.Models;
+using AlphaWebApp.Models.Seeds;
 using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Authorization.Policy;
 //using Castle.Core.Smtp;
@@ -12,7 +13,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Add services to the container. 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
