@@ -10,21 +10,21 @@ namespace AlphaWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
         private readonly IEmailService _emailService;
         private readonly IStorageService _storageService;
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
 
 
-        public HomeController(ILogger<HomeController> logger,
+        public HomeController(/*ILogger<HomeController> logger,*/
                                 IEmailService emailService,
                                 IStorageService storageService,
                                 ApplicationDbContext db, 
                                 IArticleService articleService
                              )
         {
-            _logger = logger;
+            //_logger = logger;
             _emailService = emailService;
             _storageService = storageService;
             _db = db;
@@ -78,5 +78,8 @@ namespace AlphaWebApp.Controllers
             var test = _articleService.GetAllArticles().FirstOrDefault();
             return View(test);
         }
+
+
+        
     }
 }

@@ -11,20 +11,14 @@ namespace AlphaWebApp.Models
     {
         [Key]
         public int Id { get; set; }
-
         [Required]
         public decimal Price { get; set; }
-
         [Required]
-        public DateTime Created { get; set; }
-
+        public DateTime Created { get; set; } = DateTime.Now;
         [Required]
-        public bool PaymentComplete { get; set; }
-
-        
-        public int SubscriptionTypeId { get; set; }
+        public bool PaymentComplete { get; set; } 
         public int UserId { get; set; }
-
+        public int SubscriptionTypeId { get; set; }
         public  virtual User User { get; set; }
         public virtual SubscriptionType SubscriptionType { get; set; }
     }

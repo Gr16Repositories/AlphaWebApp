@@ -9,7 +9,7 @@ using System.Data;
 
 namespace AlphaWebApp.Controllers
 {
-    [Authorize(Roles = ("Manager"))]
+    //[Authorize(Roles = ("Manager"))]
     public class ManagerController : Controller
     {
         private readonly IUserService _userService;
@@ -72,14 +72,14 @@ namespace AlphaWebApp.Controllers
 
         public async Task<IActionResult> AddRoleToUser(string id)
         {
-            return View();
+            return await Task.Run(()=>View());
         }
 
 
         public async Task<IActionResult> AddEmailToRole(string id)
         {
             CreateRoleVM roleId = new CreateRoleVM() { RoleId = id };
-            return View(roleId);
+            return await Task.Run(() => View(roleId));
         }
 
         [HttpPost]
