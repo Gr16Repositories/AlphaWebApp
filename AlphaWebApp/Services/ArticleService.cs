@@ -49,6 +49,7 @@ namespace AlphaWebApp.Services
             return listOfAllArtiles;          
             else
               return new List<Article>(); 
+
         }
 
         public Article GetArticleById(int? id)

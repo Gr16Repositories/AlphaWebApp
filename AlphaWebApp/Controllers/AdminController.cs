@@ -10,9 +10,11 @@ using AlphaWebApp.Models;
 using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AlphaWebApp.Controllers
 {
+    [Authorize(Roles =("Admin"))]
     public class AdminController : Controller
     {
         private readonly ICategoryService _categoryService;

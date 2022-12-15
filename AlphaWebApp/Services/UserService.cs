@@ -3,62 +3,54 @@ using AlphaWebApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NuGet.Versioning;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace AlphaWebApp.Services
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
-        IList<User> UserList=new List<User> {
-        new User(){FirstName="Padmini",LastName="Dhanapal"},
-        new User(){FirstName="Dani",LastName="Barker"},
-        new User(){FirstName="Claire",LastName="Bautista"},
-        new User(){FirstName="Alexa",LastName="John"},
+        private ApplicationDbContext _db;
+        private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        };
-
-        private readonly ApplicationDbContext _db;
-        public UserService( ApplicationDbContext db)
+        public UserService(ApplicationDbContext db, UserManager<User>
+                        userManager, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
-                
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
-        public List<User> GetCustoners()
+
+        public List<IdentityRole> GetAllRoles()
         {
-            List<User>  UserLists = UserList.OrderBy(s => s.Id).ToList();
-            return UserLists;
+            return _roleManager.Roles.ToList();
         }
-        //public void EditUser( User user)
-        //{
-        //    UserList.Update(User);
-        //}
-        //public void DeleteUser(int id)
-        //{
-        //    var deledterecord = UserList.Find(id);
-        //    if(id != null)
-        //    {
-        //        UserList.Remove(deledterecord);
-        //    }
-        //}
 
-        public void CreteUser([Bind("Id,FirstName,LastName,DataofBirth")] User user)
+        public  async Task<IdentityResult> AddRole(IdentityRole role)
         {
-            UserList.Add(user);
-            
-           
+           return await _roleManager.CreateAsync(role);
         }
-        
-        //public User DetailsUser(int id)
-        //{
-        //    if (id != null)
-        //    {
-        //        var userdetails = UserList.FirstOrDefault(c => c.Id == id);
-        //        return userdetails;
-        //    }
-        //    else
-        //    return null;
 
-        //}
+        public async Task<IdentityResult> RemoveRole(string id)
+        {
+            IdentityRole roleToDelete = await _roleManager.FindByIdAsync(id);
+            if (roleToDelete == null)
+            {
+                return null;
+            }
+            return await _roleManager.DeleteAsync(roleToDelete);
+        }
 
+        public async Task<IdentityResult> AddRoleToUser(string roleId, string userEmail)
+        {
+            User user = _db.Users.FirstOrDefault(u => u.Email == userEmail);
+            IdentityRole roleToAssigne = await _roleManager.FindByIdAsync(roleId);
+
+            return await _userManager.AddToRoleAsync(user, roleToAssigne.Name);
+        }
 
     }
 }
