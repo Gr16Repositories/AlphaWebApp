@@ -29,12 +29,11 @@ namespace AlphaWebApp.Services
 
         public Uri GetBlob(string blobName)
         {
-
             string containerName = "news-images-sm";
-            //BlobContainerClient containerClient = _blobServices.GetBlobContainerClient(containerName);
-            //BlobClient blobclient = containerClient.GetBlobClient(blobName);
-            //return blobclient.Uri;
-            return null;
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            BlobClient blobclient = containerClient.GetBlobClient(blobName);
+            return blobclient.Uri;
+           // return null;
         }
     }
 }

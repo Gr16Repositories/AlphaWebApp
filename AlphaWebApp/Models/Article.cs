@@ -23,10 +23,7 @@ namespace AlphaWebApp.Models
         [Required]
         public int Likes { get; set; }
         [Required]
-        public Uri ImageLink { get; set; }
-
-        [NotMapped]
-        public IFormFile CoverImage { get; set; }
+        public Uri ImageLink { get; set; }        
 
         //[ForeignKey("Category")]
         public int? CategoryId { get; set; } 
