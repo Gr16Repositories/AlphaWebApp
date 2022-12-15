@@ -11,6 +11,8 @@ namespace AlphaWebApp.Models
         public string TypeName { get; set; }
         [Required]
         public string Description { get; set; }
+        [Required]
+        public decimal Price { get; set; }
         public virtual ICollection<Subscription> Supscriptions { get; set; }
     }
 }

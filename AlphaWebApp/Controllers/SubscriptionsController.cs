@@ -30,11 +30,28 @@ namespace AlphaWebApp.Controllers
             _logger = logger;
         }
 
+
+
+        public async Task<IActionResult> GetSubscriptionTypsList()
+        {
+            return View(await _subscriptionService.GetAllSubscriptiontypeList());
+        }
+
+
+
+
+
+
+
+
+
+
+
+
         [Authorize]
         // GET: Subscriptions
         public async Task<IActionResult> Index()
         {
-            //check if user logged in or not.
             bool IsloggedIn = _userService.IsLoggeIn();
             if (IsloggedIn)
             {

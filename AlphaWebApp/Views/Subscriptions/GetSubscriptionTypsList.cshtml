@@ -1,0 +1,30 @@
+﻿@model IEnumerable<AlphaWebApp.Models.SubscriptionType>
+
+@{
+    ViewData["Title"] = "GetSubscriptionTypsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Subscriptions Typs List</h1>
+
+<div class="row" style="justify-content:center">
+
+@foreach (var item in Model) {
+        <div class="card col-sm-3" style="width: 18rem; margin:20px">
+            <img src="/img/subscription.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@item.TypeName</h5>
+                <p class="card-text">@item.Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@item.Price</li>
+            </ul>
+            <div class="card-body">
+                <a asp-action="Create" asp-route-id="@item.Id">Select</a>
+                @*<a href="#" class="card-link">Another link</a>*@
+            </div>
+        </div>
+    }
+</div>
+
+

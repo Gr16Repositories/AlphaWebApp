@@ -1,4 +1,6 @@
 ﻿using AlphaWebApp.Data;
+using AlphaWebApp.Models;
+using System.Runtime.CompilerServices;
 
 namespace AlphaWebApp.Services
 {
@@ -11,7 +13,10 @@ namespace AlphaWebApp.Services
             _db = db;
         }
 
-
+        public async Task<List<SubscriptionType>> GetAllSubscriptiontypeList()
+        {
+            return await Task.Run(() => _db.SubscriptionTypes.ToList());
+        }
 
     }
 }
