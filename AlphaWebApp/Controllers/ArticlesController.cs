@@ -36,12 +36,12 @@ namespace AlphaWebApp.Controllers
 
         // GET: Articles
         public async Task<IActionResult> Index()
-        { 
+        {
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
             if (listOfArticles != null)
                 return View(listOfArticles);
             else
-                return View();  
+                return View();
         }
 
         // GET: Articles/Details/5
@@ -53,9 +53,9 @@ namespace AlphaWebApp.Controllers
             }
             var article = await Task.Run(() => _articleService.GetArticleById(id));
             var categoryName = _articleService.GetCategoryById(Convert.ToInt32(article.CategoryId));
-            if (article == null)           
+            if (article == null)
                 return NotFound();
-           
+
             ViewBag.CategoryName = categoryName.name;
             return View(article);
         }
@@ -64,14 +64,24 @@ namespace AlphaWebApp.Controllers
         public IActionResult Create()
         {
             AddArticleVM newArticle = new();
-            // Should change - fetch Categories from db table
-            // newArticle.Categories.Add(new SelectList {_articleService.GetCategories(), "Value", "Text"});
-            newArticle.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
-            newArticle.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
-            newArticle.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
-            newArticle.Categories.Add(new SelectListItem { Text = "Weather", Value = "4" });
-            newArticle.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
-            newArticle.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
+            //Fetching the Categories from db and binding data to the Categories listbox.
+            if (_articleService.GetCategories().Count > 0)
+            {
+                foreach (var item in _articleService.GetCategories())
+                {
+                    newArticle.Categories.Add(new SelectListItem
+                    {
+                        Value = item.Id.ToString(),
+                        Text = item.name
+                    });
+                }
+            }
+            //newArticle.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
+            //newArticle.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
+            //newArticle.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
+            //newArticle.Categories.Add(new SelectListItem { Text = "Weather", Value = "4" });
+            //newArticle.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
+            //newArticle.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
 
             return View(newArticle);
         }
@@ -112,13 +122,18 @@ namespace AlphaWebApp.Controllers
                 return NotFound();
             }
             EditArticleVM editArticleVM = new();
-            editArticleVM.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
-            editArticleVM.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
-            editArticleVM.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
-            editArticleVM.Categories.Add(new SelectListItem { Text = "Weather", Value = "4" });
-            editArticleVM.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
-            editArticleVM.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
-
+            //Fetching the Categories from db and binding data to the Categories listbox.
+            if (_articleService.GetCategories().Count > 0)
+            {
+                foreach (var item in _articleService.GetCategories())
+                {
+                    editArticleVM.Categories.Add(new SelectListItem
+                    {
+                        Value = item.Id.ToString(),
+                        Text = item.name
+                    });
+                }
+            }
             Article article = await Task.Run(() => _articleService.GetArticleById(id));
             EditArticleVM editArticle = new EditArticleVM
             {
@@ -138,8 +153,7 @@ namespace AlphaWebApp.Controllers
             if (article == null)
             {
                 return NotFound();
-            }
-            //return View(article);
+            }           
             return View(editArticle);
         }
 
@@ -184,7 +198,7 @@ namespace AlphaWebApp.Controllers
                         _articleService.UpdateArticleWithOutImage(id, article);
                     });
                 }
-                
+
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -198,7 +212,7 @@ namespace AlphaWebApp.Controllers
                 }
             }
             TempData["success"] = "Article Updated Successfully";
-            return RedirectToAction(nameof(Index));            
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Articles/Delete/5
@@ -228,11 +242,19 @@ namespace AlphaWebApp.Controllers
                 return Problem("Entity set 'ApplicationDbContext.Article'  is null.");
             }
             var article = await Task.Run(() => _articleService.GetArticleById(id));
+            string image = article.ImageLink.ToString();
+            var currentImagePath = Path.Combine("wwwroot/images/articles" + "/" + article.CategoryId, image.Substring(57));
+            if (System.IO.File.Exists(currentImagePath))
+            {
+                System.IO.File.Delete(currentImagePath);
+            }
             if (article != null)
-                await Task.Run(() =>
-                {
-                    _articleService.DeleteArticle(id);
-                });
+                _storageService.DeleteBlobImage(image.Substring(57), Convert.ToInt32(article.CategoryId));
+            await Task.Run(() =>
+            {
+                _articleService.DeleteArticle(id);
+            });
+
             TempData["success"] = "Article Deleted Successfully";
             return RedirectToAction(nameof(Index));
         }
@@ -240,6 +262,6 @@ namespace AlphaWebApp.Controllers
         private bool ArticleExists(int id)
         {
             return _db.Articles.Any(e => e.Id == id);
-        } 
+        }
     }
 }
