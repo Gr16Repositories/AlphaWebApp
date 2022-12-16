@@ -53,24 +53,24 @@ namespace AlphaWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }  
 
-        // when user click supsucription button
-        public IActionResult CreateSubscription()
-        {
-            Email newEmail = new()
-            {
-                SubscriberEmail = "Fadi.abji@hotmail.com",
-                SubscriptionTypeName = "Basic",
-                SubscriberName = "Fadi Abji"
-            };
-            TempData["ShowMessage"] = SendConfirmation(newEmail);
-            return RedirectToAction("Privacy");
-            //return RedirectToAction("UserPage", "User");
-        }
+        //// when user click supsucription button
+        //public IActionResult CreateSubscription()
+        //{
+        //    Email newEmail = new()
+        //    {
+        //        SubscriberEmail = "Fadi.abji@hotmail.com",
+        //        SubscriptionTypeName = "Basic",
+        //        SubscriberName = "Fadi Abji"
+        //    };
+        //    TempData["ShowMessage"] = SendConfirmation(newEmail);
+        //    return RedirectToAction("Privacy");
+        //    //return RedirectToAction("UserPage", "User");
+        //}
 
-        public string SendConfirmation(Email newEmail)
-        {
-            return _emailService.SendSubscriptionEmail(newEmail).Result;
-        }
+        //public string SendConfirmation(Email newEmail)
+        //{
+        //    return _emailService.SendSubscriptionEmail(newEmail).Result;
+        //}
 
         //Article Read More button
         public IActionResult ReadMore()

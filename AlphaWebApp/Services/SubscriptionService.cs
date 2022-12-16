@@ -13,6 +13,7 @@ namespace AlphaWebApp.Services
             _db = db;
         }
 
+        //starts when any user click on subscribe button, gives list of subscription typs
         public async Task<List<SubscriptionType>> GetAllSubscriptiontypeList()
         {
             return await Task.Run(() => _db.SubscriptionTypes.ToList());

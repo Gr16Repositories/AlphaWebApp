@@ -14,29 +14,29 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Created)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PaymentComplete)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                @Html.DisplayNameFor(model => model.User) info
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User) Email
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.SubscriptionType)
             </th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Created)
             </td>
@@ -44,15 +44,16 @@
                 @Html.DisplayFor(modelItem => item.PaymentComplete)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SubscriptionType.TypeName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

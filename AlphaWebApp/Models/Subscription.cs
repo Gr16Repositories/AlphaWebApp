@@ -17,7 +17,7 @@ namespace AlphaWebApp.Models
         public DateTime Created { get; set; } = DateTime.Now;
         [Required]
         public bool PaymentComplete { get; set; } 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int SubscriptionTypeId { get; set; }
         public  virtual User User { get; set; }
         public virtual SubscriptionType SubscriptionType { get; set; }

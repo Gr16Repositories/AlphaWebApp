@@ -9,6 +9,7 @@ using AlphaWebApp.Data;
 using AlphaWebApp.Models;
 using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Authorization;
+using AlphaWebApp.Models.ViewModels;
 
 namespace AlphaWebApp.Controllers
 {
@@ -18,35 +19,42 @@ namespace AlphaWebApp.Controllers
         private readonly ISubscriptionService _subscriptionService;
         private readonly IUserService _userService;
         private readonly ILogger<SubscriptionsController> _logger;
+        private readonly IEmailService _emailService;
 
         public SubscriptionsController(ApplicationDbContext context,
                                         ISubscriptionService subscriptionService,
                                         IUserService userService,
-                                        ILogger<SubscriptionsController> logger)
+                                        ILogger<SubscriptionsController> logger,
+                                        IEmailService emailService)
         {
             _context = context;
             _subscriptionService = subscriptionService;
             _userService = userService;
             _logger = logger;
+            _emailService = emailService;
         }
 
 
-
+        //starts when any user click on subscribe button, gives list of subscription typs
         public async Task<IActionResult> GetSubscriptionTypsList()
         {
             return View(await _subscriptionService.GetAllSubscriptiontypeList());
         }
 
-
-
-
-
-
-
-
-
-
-
+        
+        [Authorize]
+        // Make paypal payment
+        public async Task<IActionResult> MakePayment(int id)
+        {
+            SubscriptionVM newSub = new SubscriptionVM
+                                        {
+                                            PaymentComplete = true,
+                                            Price = _context.SubscriptionTypes.Find(id).Price,
+                                            UserId = _userService.GetUserId(),
+                                            SubscriptionTypeId = id,
+                                        };
+            return  await Task.Run(()=> RedirectToAction("Create",newSub));
+        }
 
         [Authorize]
         // GET: Subscriptions
@@ -79,32 +87,85 @@ namespace AlphaWebApp.Controllers
 
             return View(subscription);
         }
-        
+
+
+
         [Authorize]
         // GET: Subscriptions/Create
-        public IActionResult Create()
+        public IActionResult Create(SubscriptionVM newSub)
         {
-            ViewData["SubscriptionTypeId"] = new SelectList(_context.SubscriptionTypes, "Id", "TypeName");
-            return View();
+            Subscription subscription = new Subscription()
+            {
+                PaymentComplete = newSub.PaymentComplete,
+                Price = newSub.Price,
+                UserId = newSub.UserId,
+                SubscriptionTypeId = newSub.SubscriptionTypeId
+            };
+            _context.Subscriptions.Add(subscription);
+            _context.SaveChanges();
+            int subscriptionId = subscription.Id; // I don't know why I didn't get the Id after saving in database
+            return RedirectToAction("SendSubscriptionEmail", subscriptionId);
         }
 
-        // POST: Subscriptions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Price,Created,PaymentComplete,UserId,SubscriptionTypeId")] Subscription subscription)
+
+        public void SendSubscriptionEmail(int subscriptionId)
         {
-            if (ModelState.IsValid)
+            Subscription subscription = _context.Subscriptions.Find(subscriptionId);
+            Email newEmail = new()
             {
-                _context.Add(subscription);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["SubscriptionTypeId"] = new SelectList(_context.SubscriptionTypes, "Id", "TypeName", subscription.SubscriptionTypeId);
-            return View(subscription);
+                SubscriberEmail = _context.Users.Find(subscription.UserId).Email,
+                SubscriptionTypeName = _context.SubscriptionTypes.Find(subscription.SubscriptionTypeId).TypeName,
+                SubscriberName = _context.Users.Find(subscription.UserId).FirstName + " " + _context.Users.Find(subscription.UserId).LastName
+            };
+            var result = SendConfirmation(newEmail);
         }
+
+        public string SendConfirmation(Email newEmail)
+        {
+            return _emailService.SendSubscriptionEmail(newEmail).Result;
+        }
+
+        //// when user click supsucription button
+        //public IActionResult CreateSubscription()
+        //{
+        //    Email newEmail = new()
+        //    {
+        //        SubscriberEmail = "Fadi.abji@hotmail.com",
+        //        SubscriptionTypeName = "Basic",
+        //        SubscriberName = "Fadi Abji"
+        //    };
+        //    TempData["ShowMessage"] = SendConfirmation(newEmail);
+        //    return RedirectToAction("Privacy");
+        //    //return RedirectToAction("UserPage", "User");
+        //}
+
+
+
+        //[Authorize]
+        //// GET: Subscriptions/Create
+        //public IActionResult Create(SubscriptionVM newSub)
+        //{
+        //    ViewData["SubscriptionTypeId"] = new SelectList(_context.SubscriptionTypes, "Id", "TypeName");
+        //    return View();
+        //}
+
+        //// POST: Subscriptions/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to.
+        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Authorize]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Price,Created,PaymentComplete,UserId,SubscriptionTypeId")] Subscription subscription)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(subscription);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["SubscriptionTypeId"] = new SelectList(_context.SubscriptionTypes, "Id", "TypeName", subscription.SubscriptionTypeId);
+        //    return View(subscription);
+        //}
 
         // GET: Subscriptions/Edit/5
         public async Task<IActionResult> Edit(int? id)
