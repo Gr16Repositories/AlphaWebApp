@@ -35,22 +35,13 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 builder.Services.AddScoped<ISubscriptionService,SubscriptionService>();
 
+//To make Swagger work
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddResponseCaching();
+
+//Use mapper to map two models, moving properties values automaticly using mapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-// Adding Claims
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
-//});
-
-
-
-//builder.Services.AddIdentity<AlphaWebApp.Models.User, IdentityRole>(options =>
-//{
-//    options.User.RequireUniqueEmail = false;
-//})
-//    .AddEntityFrameworkStores<ApplicationDbContext>()
-//    .AddDefaultTokenProviders();
 
 
 var app = builder.Build();
@@ -64,16 +55,21 @@ using (var scope = app.Services.CreateScope())
 }
 
 //// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-//    app.UseMigrationsEndPoint();
-//}
+if (app.Environment.IsDevelopment())
+{
+    //app.UseMigrationsEndPoint();
+    //To make Swagger work
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 //else
 //{
 //    app.UseExceptionHandler("/Home/Error");
 //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 //    app.UseHsts();
 //}
+
+//app.UseResponseCaching();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
