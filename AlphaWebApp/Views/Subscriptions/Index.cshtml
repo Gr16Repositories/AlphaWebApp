@@ -31,6 +31,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.SubscriptionType)
             </th>
+            <th></th>
 
         </tr>
     </thead>
@@ -54,6 +55,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SubscriptionType.TypeName)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
