@@ -9,7 +9,6 @@ jQuery(function ($) {
     /*==============================================================
     # sticky-nav
     # Date Time
-    # language Select
 	# Search Slide
 	# Breaking News
 	# Owl Carousel
@@ -76,18 +75,6 @@ jQuery(function ($) {
 
     }());
 	
-	/*==============================================================*/
-    // # language Select
-    /*==============================================================*/
-   (function() {
-		$('.language-dropdown').on('click', '.language-change a', function(ev) {
-			if ("#" === $(this).attr('href')) {
-				ev.preventDefault();
-				var parent = $(this).parents('.language-dropdown');
-				parent.find('.change-text').html($(this).html());
-			}
-		});
-	}());
 	
 	/*==============================================================*/
 	// Search Slide

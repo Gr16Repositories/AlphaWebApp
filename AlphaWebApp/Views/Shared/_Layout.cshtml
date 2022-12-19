@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AlphaWebApp.styles.css" asp-append-version="true" />
 
     <!--Google Fonts-->
@@ -22,18 +23,9 @@
 
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
-            <div class="navbar" role="banner">
-                
-                <div class="topbar">
-                    <div class="container">
-                        <div id="topbar" class="navbar-header">
-                            <a class="navbar-brand" href="index.html"><img src="~/img/logo.png" /></a>
-                            <div id="topbar-right">
-                                <div id="date-time"></div>
-                            </div>                         
-                        </div>
-                    </div>
-                </div>
+            <div class="navbar mx-3" role="banner">
+                <a class="navbar-brand" href="index.html"><img src="~/img/logo.png" /></a>
+                <div id="date-time"></div>
             </div>
         </header>
     </div>
@@ -73,17 +65,78 @@
             </nav>
         </div>
 
- 
+    <div class="navbar navbar-expand-sm navbar-dark">
+        <a class="nav-link" href="#">Sign In</a>
+        <a class="nav-link" href="#">Subscribe</a>
+        <a class="nav-link" asp-area="" asp-controller="Articles" asp-action="Index">Article</a>
+        <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+        <a class="nav-link" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
+        <partial name="_LoginPartial" />
+
+    </div>
+
+    @*    <div id="header">
+    <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+    <ul class="navbar-nav">
+    <li class="nav-item">
+    <a class="nav-link" href="#">Sign In</a>
+    </li>
+    <li class="nav-item">
+    <button type="button" class="btn btn-outline-danger rounded-pill" style="font-size: 22px;"> Subscribe</button>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Articles" asp-action="Index">Article</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
+    </li>
+    <li>
+    <partial name="_LoginPartial" />
+    </li>
+    </ul>
+    </div>
+    </nav>
+    </div>*@
+
+
 
 
     @*Navbar Categories View Component VM*@
-
-
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <vc:navbar-categories></vc:navbar-categories>
         </div>
-    </nav>
+    </nav>  
+
+
+
+    @*---------------------------------------------------------------------------------------------------------------*@
+@*    <div class="container">
+        <div class="row" id="ads">
+            <div class="col-md-4">
+                <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row" id="ads">
+            <div class="col-md-4">
+                <img class="img-fluid" src="~/images/articles/1/scottlandweather.jpg" />
+                <img src="~/images/articles/1/ukrainewar.jpg" />
+            </div>
+        </div>
+    </div>*@
+   
+    @*---------------------------------------------------------------------------------------------------------------*@
 
 
     <!--footer-->

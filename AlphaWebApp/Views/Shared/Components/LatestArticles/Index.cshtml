@@ -1,16 +1,37 @@
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@*@model IEnumerable<AlphaWebApp.Models.Article>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
-                                                   
+
                                <b>@item.Category.name</b>
                                 <b>@item.DateStamp</b>
-                       
+
                         <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">@item.HeadLine</a>
 
-                    
+
+        }
+    </div>
+</div>*@
+
+
+@model IEnumerable<AlphaWebApp.Models.Article>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+
+
+            <div id="latest-news">
+                @item.DateStamp | @item.ContentSummary
+            @*<a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id">@item.HeadLine</a>*@
+            </div>
+           
+
+
         }
     </div>
 </div>
-   
+
+
+
