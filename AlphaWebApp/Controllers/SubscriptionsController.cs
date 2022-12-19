@@ -15,19 +15,16 @@ namespace AlphaWebApp.Controllers
 {
     public class SubscriptionsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly ISubscriptionService _subscriptionService;
         private readonly IUserService _userService;
         private readonly ILogger<SubscriptionsController> _logger;
         private readonly IEmailService _emailService;
 
         public SubscriptionsController(ISubscriptionService subscriptionService,
-                                        ApplicationDbContext context,
                                         IUserService userService,
                                         ILogger<SubscriptionsController> logger,
                                         IEmailService emailService)
         {
-            _context = context;
             _subscriptionService = subscriptionService;
             _userService = userService;
             _logger = logger;
@@ -76,18 +73,23 @@ namespace AlphaWebApp.Controllers
         public IActionResult SendSubscriptionEmail(int id)
         {
             Subscription subscription = _subscriptionService.GetSubscriptionById(id);
-            Email newEmail = new();
-            newEmail.SubscriberEmail = _context.Users.Find(subscription.UserId).Email;
-            newEmail.SubscriptionTypeName = _context.SubscriptionTypes.Find(subscription.SubscriptionTypeId).TypeName;
-            newEmail.SubscriberName = _context.Users.Find(subscription.UserId).FirstName + " " + _context.Users.Find(subscription.UserId).LastName;
-            var result = SendConfirmation(newEmail);
+            SubscriptionSummaryVM summary = new SubscriptionSummaryVM();
+            summary.SubscriptionId = subscription.Id;
+            summary.SubscriberName = subscription.User.FirstName + " " + subscription.User.LastName;
+            summary.SubscriberEmail = subscription.User.Email;
+            summary.SubscriptionTypeName = subscription.SubscriptionType.TypeName;
+            summary.SubscriptionPrice = subscription.Price;
+            //Subscribtion will end after one month
+            summary.SubscriptionExpiryDate = subscription.Created.AddMonths(1);
+            var result = SendConfirmation(summary);
             var resultTuple = new Tuple<string>(result);
             return View(resultTuple);
         }
 
-        public string SendConfirmation(Email newEmail)
+
+        public string SendConfirmation(SubscriptionSummaryVM summary)
         {
-            return _emailService.SendSubscriptionEmail(newEmail).Result;
+            return _emailService.SendSubscriptionEmail(summary).Result;
         }
 
 
@@ -123,8 +125,6 @@ namespace AlphaWebApp.Controllers
                 return NotFound();
             }
             ViewData["SubscriptionTypeId"] = new SelectList(await _subscriptionService.GetAllSubscriptiontypeList(), "Id", "TypeName", subscription.SubscriptionTypeId);
-            ViewData["UserId"] =  new SelectListItem { Text = "UserId", Value = subscription.UserId };
-            //var userId = subscription.UserId;
             return View(subscription);
         }
 
@@ -218,5 +218,10 @@ namespace AlphaWebApp.Controllers
             //return _context.Subscriptions.Any(e => e.Id == id).Any(e => e.Id == id);
             //return _subscriptionService.GetAllSubscriptions().Any(e => e.Id == id);
         }
+
+        // How to make a subscription active under some time.
+        // How to send Email when subscritpion is expire.
+        // How to make specification for subscriber?
+
     }
 }
