@@ -2,7 +2,7 @@
 using AlphaWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AlphaWebApp.Services.ViewComponents
+namespace AlphaWebApp.ViewComponents
 {
     public class NavbarCategoriesViewComponent : ViewComponent
     {

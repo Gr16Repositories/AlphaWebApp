@@ -10,21 +10,21 @@ namespace AlphaWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
         private readonly IEmailService _emailService;
         private readonly IStorageService _storageService;
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
 
 
-        public HomeController(ILogger<HomeController> logger,
+        public HomeController(/*ILogger<HomeController> logger,*/
                                 IEmailService emailService,
                                 IStorageService storageService,
                                 ApplicationDbContext db, 
                                 IArticleService articleService
                              )
         {
-            _logger = logger;
+            //_logger = logger;
             _emailService = emailService;
             _storageService = storageService;
             _db = db;
@@ -53,24 +53,24 @@ namespace AlphaWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }  
 
-        // when user click supsucription button
-        public IActionResult CreateSubscription()
-        {
-            Email newEmail = new()
-            {
-                SubscriberEmail = "Fadi.abji@hotmail.com",
-                SubscriptionTypeName = "Basic",
-                SubscriberName = "Fadi Abji"
-            };
-            TempData["ShowMessage"] = SendConfirmation(newEmail);
-            return RedirectToAction("Privacy");
-            //return RedirectToAction("UserPage", "User");
-        }
+        //// when user click supsucription button
+        //public IActionResult CreateSubscription()
+        //{
+        //    Email newEmail = new()
+        //    {
+        //        SubscriberEmail = "Fadi.abji@hotmail.com",
+        //        SubscriptionTypeName = "Basic",
+        //        SubscriberName = "Fadi Abji"
+        //    };
+        //    TempData["ShowMessage"] = SendConfirmation(newEmail);
+        //    return RedirectToAction("Privacy");
+        //    //return RedirectToAction("UserPage", "User");
+        //}
 
-        public string SendConfirmation(Email newEmail)
-        {
-            return _emailService.SendSubscriptionEmail(newEmail).Result;
-        }
+        //public string SendConfirmation(Email newEmail)
+        //{
+        //    return _emailService.SendSubscriptionEmail(newEmail).Result;
+        //}
 
         //Article Read More button
         public IActionResult ReadMore()
@@ -78,5 +78,8 @@ namespace AlphaWebApp.Controllers
             var test = _articleService.GetAllArticles().FirstOrDefault();
             return View(test);
         }
+
+
+        
     }
 }
