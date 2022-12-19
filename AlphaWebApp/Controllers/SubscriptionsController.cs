@@ -76,19 +76,40 @@ namespace AlphaWebApp.Controllers
         public IActionResult SendSubscriptionEmail(int id)
         {
             Subscription subscription = _subscriptionService.GetSubscriptionById(id);
-            Email newEmail = new();
-            newEmail.SubscriberEmail = _context.Users.Find(subscription.UserId).Email;
-            newEmail.SubscriptionTypeName = _context.SubscriptionTypes.Find(subscription.SubscriptionTypeId).TypeName;
-            newEmail.SubscriberName = _context.Users.Find(subscription.UserId).FirstName + " " + _context.Users.Find(subscription.UserId).LastName;
-            var result = SendConfirmation(newEmail);
+            SubscriptionSummaryVM summary = new SubscriptionSummaryVM();
+            summary.SubscriptionId = subscription.Id;
+            summary.SubscriberName = subscription.User.FirstName + " " + subscription.User.LastName;
+            summary.SubscriberEmail = subscription.User.Email;
+            summary.SubscriptionTypeName = subscription.SubscriptionType.TypeName;
+            summary.SubscriptionExpiryDate = subscription.Created.AddMonths(1);
+            summary.SubscriptionPrice = subscription.Price;
+            var result = SendConfirmation(summary);
             var resultTuple = new Tuple<string>(result);
             return View(resultTuple);
         }
 
-        public string SendConfirmation(Email newEmail)
+        public string SendConfirmation(SubscriptionSummaryVM summary)
         {
-            return _emailService.SendSubscriptionEmail(newEmail).Result;
+            return _emailService.SendSubscriptionEmail(summary).Result;
         }
+
+
+        //public IActionResult SendSubscriptionEmail(int id)
+        //{
+        //    Subscription subscription = _subscriptionService.GetSubscriptionById(id);
+        //    Email newEmail = new();
+        //    newEmail.SubscriberEmail = _context.Users.Find(subscription.UserId).Email;
+        //    newEmail.SubscriptionTypeName = _context.SubscriptionTypes.Find(subscription.SubscriptionTypeId).TypeName;
+        //    newEmail.SubscriberName = _context.Users.Find(subscription.UserId).FirstName + " " + _context.Users.Find(subscription.UserId).LastName;
+        //    var result = SendConfirmation(newEmail);
+        //    var resultTuple = new Tuple<string>(result);
+        //    return View(resultTuple);
+        //}
+
+        //public string SendConfirmation(Email newEmail)
+        //{
+        //    return _emailService.SendSubscriptionEmail(newEmail).Result;
+        //}
 
 
         // GET: Subscriptions/Details/5
@@ -123,8 +144,6 @@ namespace AlphaWebApp.Controllers
                 return NotFound();
             }
             ViewData["SubscriptionTypeId"] = new SelectList(await _subscriptionService.GetAllSubscriptiontypeList(), "Id", "TypeName", subscription.SubscriptionTypeId);
-            ViewData["UserId"] =  new SelectListItem { Text = "UserId", Value = subscription.UserId };
-            //var userId = subscription.UserId;
             return View(subscription);
         }
 
