@@ -3,3 +3,12 @@
 
 // Write your JavaScript code.
 
+
+(function () {
+
+    document.getElementById("p100").style.backgroundColor = "red";
+    document.getElementById("p2").style.backgroundColor = "blue";
+
+
+}()); 
+

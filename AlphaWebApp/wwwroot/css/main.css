@@ -548,17 +548,6 @@ img.mfp-img {
 	float:right;
 }
 
-.language-dropdown, 
-#date-time, 
-#weather {
-	display:inline-block;
-	margin-left:20px;
-	padding-left:20px;
-	line-height:60px;
-	color:#525b6e;
-	font-size:14px;
-}
-
 .language-dropdown .dropdown-menu{
 	border-radius:0;
 	border-color:#ebecee;
@@ -569,10 +558,6 @@ img.mfp-img {
 .language-dropdown a{
 	color:#384650;
 	text-transform:uppercase;
-}
-
-#topbar-right #weather img {
-	max-width:61px;
 }
 
 #date-time, #weather {
@@ -945,12 +930,8 @@ img.mfp-img {
 	background-color: #f7941d;
 }
 
-.catagory.health a {
+.catagory.local a {
 	background-color: #92278f;
-}
-
-.catagory.entertainment a {
-	background-color: #1cbbb4;
 }
 
 .catagory.technology a {
@@ -961,9 +942,7 @@ img.mfp-img {
 	background-color: #0072bc;
 }
 
-.catagory.business a {
-	background-color:#00aeef;
-}
+
 
 .catagory.sports a{
 	background-color:#f26522;
@@ -2194,8 +2173,8 @@ img.mfp-img {
 	padding:10px 25px;
 }
 
-#breaking-news ul li {
-	padding:10px 20px;
+#latest-news {
+	color: #003366 !important;
 }
 
 #breaking-news ul li i {
@@ -2203,7 +2182,7 @@ img.mfp-img {
 }
 
 #breaking-news ul li a {
-	color:#525b6e;
+	color:#00aeef;
 }
 
 #breaking-news ul li a:hover {

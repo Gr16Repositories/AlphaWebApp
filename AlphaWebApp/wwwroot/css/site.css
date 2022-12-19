@@ -26,6 +26,8 @@ body {
     border-bottom: solid 10px #fa292a;
 }
 
+
+
 .btn {
     background: #003366 !important
     /*background: #fa292a !important*/
@@ -44,7 +46,7 @@ body {
 
 .container-fluid {
     background: #003366 !important;
-
+    border-bottom: solid 5px #fa292a;
 }
 
 #categories {
@@ -55,23 +57,33 @@ body {
 
 
 
-
 /*Card*/
 /* Category Ads */
 #ads {
     margin: 30px 0 30px 0;
 }
 
-    #ads .card-notify-badge {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        background: #f2d900;
-        text-align: center;
-        color: #000;
-        padding: 5px 10px;
-        font-size: 14px;
-    }
+.card-notify-badge {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: #003366;
+    text-align: center;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-bottom: solid 5px #fa292a;
+}
+
+.catagory.sweden a {
+    background-color: #1cbbb4;
+}
+
+.catagory.health a {
+    background-color: #00aeef;
+}
+
+
 
 /*    #ads .card-notify-year {
         position: absolute;
@@ -149,13 +161,32 @@ body {
     }
 
 
-.language-dropdown,
 #date-time
  {
     display: inline-block;
     margin-left: 20px;
     padding-left: 20px;
     line-height: 60px;
-    color: #525b6e;
-    font-size: 14px;
+    color: #003366;
+    font-size: 16px;
 }
+
+.section-title:before,
+.btn-primary,
+.badge,
+.catagory a,
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span,
+#latest-news .owl-controls .owl-page.active span,
+#latest-news .owl-controls.clickable .owl-page:hover span,
+.widget.news-letter button,
+.pagination li a:hover,
+.pagination .active > a,
+.pagination .active > a:focus,
+.pagination .active > a:hover,
+#breaking-news span,
+.subscribe-me button,
+.top-user-form .btn:hover {
+    background-color: #ed1c24;
+}
+
