@@ -21,7 +21,7 @@ body {
 
 /*Ali*/
 #header {
-    height: 6rem;
+    /*height: 6rem;*/
     background: #003366 !important;
     border-bottom: solid 10px #fa292a;
 }
@@ -46,7 +46,7 @@ body {
 
 .container-fluid {
     background: #003366 !important;
-    border-bottom: solid 5px #fa292a;
+    /*border-bottom: solid 5px #fa292a;*/
 }
 
 #categories {
