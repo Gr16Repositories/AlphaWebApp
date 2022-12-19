@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using AlphaWebApp.Models;
+using Azure.Storage.Blobs;
 using System.Security.Policy;
 
 namespace AlphaWebApp.Services
@@ -17,10 +18,10 @@ namespace AlphaWebApp.Services
         public Uri uploadBlob(string pathfile)
         {
             string containerName = "news-images";// if you want to use a small image on blob so change the name to the folder like "news-images-sm" that exactly the name in storgeacount on azure
-            BlobContainerClient containerClient = 
+            BlobContainerClient containerClient =
                                 _blobServiceClient.GetBlobContainerClient(containerName);
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/articles");
-            BlobClient blobClient= containerClient.GetBlobClient(pathfile);
+            BlobClient blobClient = containerClient.GetBlobClient(pathfile);
             string fileNameWithPath = Path.Combine(path, pathfile);
             blobClient.Upload(fileNameWithPath, true);
 
@@ -29,12 +30,21 @@ namespace AlphaWebApp.Services
 
         public Uri GetBlob(string blobName)
         {
-
             string containerName = "news-images-sm";
-            //BlobContainerClient containerClient = _blobServices.GetBlobContainerClient(containerName);
-            //BlobClient blobclient = containerClient.GetBlobClient(blobName);
-            //return blobclient.Uri;
-            return null;
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
+            BlobClient blobclient = containerClient.GetBlobClient(blobName);
+            return blobclient.Uri;
+            // return null;
+        }
+
+        public void DeleteBlobImage(string pathfile, int categoryId)
+        {
+            string containerName = "news-images";// if you want to use a small image on blob so change the name to the folder like "news-images-sm" that exactly the name in storgeacount on azure
+            BlobContainerClient containerClient =
+                                _blobServiceClient.GetBlobContainerClient(containerName + "/" + categoryId);
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/articles" + "/" + categoryId);
+            BlobClient blobClient = containerClient.GetBlobClient(categoryId + "/" + pathfile);
+            blobClient.Delete();
         }
     }
 }

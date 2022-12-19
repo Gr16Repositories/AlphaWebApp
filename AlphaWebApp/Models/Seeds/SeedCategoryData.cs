@@ -58,11 +58,16 @@ namespace AlphaWebApp.Models.Seeds
                         icon = "fa-solid fa-medal"
                     },
 
+                 
                     new Category
                     {
                         name = "FIFA World Cup 2022",
                         icon = "fa-regular fa-futbol"
                     }
+
+              
+
+
                 );
                 context.SaveChanges();
             }

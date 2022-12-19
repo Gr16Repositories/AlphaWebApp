@@ -2,8 +2,10 @@
 {
     public interface IStorageService
     {
-        Uri uploadBlob(string pathfile);
+        public Uri uploadBlob(string pathfile);
 
-        Uri GetBlob(string pathfile);
+        public Uri GetBlob(string pathfile);
+
+        public void DeleteBlobImage(string pathfile, int categoryId);
     }
 }

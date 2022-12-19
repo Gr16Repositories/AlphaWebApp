@@ -31,13 +31,13 @@ namespace AlphaWebApp.Models.ViewModels
         public string CategoryId { get; set; }
         public List<SelectListItem>  Categories { get; set; }
 
-        [Required]
+     
         [DisplayName("File Name")]
         public string FileName { get; set; }
         
         public IFormFile File { get; set; }
-
-        
+        public int Views { get; set; }     
+        public int Likes { get; set; }
         public Uri ImageLink { get; set; }
 
         public AddArticleVM()

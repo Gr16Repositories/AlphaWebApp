@@ -5,78 +5,26 @@
 }
 
 <div class="container-fluid"> 
-    <h1 class="justify-content-center border-3">@Model.HeadLine</h1>
-    <br />
-    <br />
-    <div class="pt-5 pb-5 ps-5 pe-5 h-50">
+    <h1 class="text-lg-center border border-5 border-primary pt-4">@Model.HeadLine</h1>
+    <br />   
+    <div class="pt-2 pb-5 ps-5 pe-2 h-50">
         <img src="@Model.ImageLink" alt="Image"/>
     </div>
     <div style="height:10px" class="ps-5">
-        <b>@Model.CategoryId</b> &nbsp;&nbsp;|<b>@Model.DateStamp</b>
+        <b class="bg-danger text-white">@ViewBag.CategoryName</b> &nbsp;&nbsp;|&nbsp;&nbsp;<b>@Model.DateStamp</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b class="text-end"><i class="bi bi-eye"></i>&nbsp;@Model.Views</b> &nbsp;&nbsp; <b class="text-end"><i class="bi bi-hand-thumbs-up"></i> &nbsp;@Model.Likes</b>
     </div>
-    <br />
-    <br />
-    <div class="ps-5 pe-5">
+    <br />  
+    <div class="ps-5 pe-5 shadow bg-light mb-2 rounded">
         <b>@Model.ContentSummary</b>
     </div>
-    <div class="ps-5 pe-5">
+    <div class="ps-5 pe-5 shadow bg-light mb-4 rounded">
         @Model.Content
-    </div>
-   
-   @* <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateStamp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateStamp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LinkText)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LinkText)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HeadLine)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HeadLine)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ContentSummary)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ContentSummary)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Views)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Views)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Likes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Likes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageLink)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImageLink)
-        </dd>
-    </dl>*@
+    </div>  
 </div>
 <br />
-<br />
-<div>
+
+<div class="ps-5">
     <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-success">Edit</a> |
     <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>
