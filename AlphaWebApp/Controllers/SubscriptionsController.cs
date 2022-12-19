@@ -15,19 +15,19 @@ namespace AlphaWebApp.Controllers
 {
     public class SubscriptionsController : Controller
     {
-        //private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly ISubscriptionService _subscriptionService;
         private readonly IUserService _userService;
         private readonly ILogger<SubscriptionsController> _logger;
         private readonly IEmailService _emailService;
 
         public SubscriptionsController(ISubscriptionService subscriptionService,
-                                        //ApplicationDbContext context,
+                                        ApplicationDbContext context,
                                         IUserService userService,
                                         ILogger<SubscriptionsController> logger,
                                         IEmailService emailService)
         {
-            //_context = context;
+            _context = context;
             _subscriptionService = subscriptionService;
             _userService = userService;
             _logger = logger;
@@ -77,9 +77,9 @@ namespace AlphaWebApp.Controllers
         {
             Subscription subscription = _subscriptionService.GetSubscriptionById(id);
             Email newEmail = new();
-            //newEmail.SubscriberEmail = _context.Users.Find(subscription.UserId).Email;
-            //newEmail.SubscriptionTypeName = _context.SubscriptionTypes.Find(subscription.SubscriptionTypeId).TypeName;
-            //newEmail.SubscriberName = _context.Users.Find(subscription.UserId).FirstName + " " + _context.Users.Find(subscription.UserId).LastName;
+            newEmail.SubscriberEmail = _context.Users.Find(subscription.UserId).Email;
+            newEmail.SubscriptionTypeName = _context.SubscriptionTypes.Find(subscription.SubscriptionTypeId).TypeName;
+            newEmail.SubscriberName = _context.Users.Find(subscription.UserId).FirstName + " " + _context.Users.Find(subscription.UserId).LastName;
             var result = SendConfirmation(newEmail);
             var resultTuple = new Tuple<string>(result);
             return View(resultTuple);
