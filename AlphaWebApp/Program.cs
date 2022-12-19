@@ -24,20 +24,19 @@ builder.Services.AddScoped<ApplicationDbContext, ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient("sendEmail");
 builder.Services.AddScoped<IArticleService, ArticleService>();
-builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IWeatherForcastService,WeatherForcastService>();
 
 // Adding Claims
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
 });
-
-
 
 
 var app = builder.Build();

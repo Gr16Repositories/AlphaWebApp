@@ -22,6 +22,22 @@
             @await Component.InvokeAsync("TodayNews")
 
     </div>
+    <div class="col-md-3 ">
+        <h2>WeatherForecast</h2>
+        
+        @*<vc:weather-fore-Cast
+            city="Linkoping"
+            lang="en">
+        </vc:weather-fore-Cast>*@
+         @await Component.InvokeAsync("WeatherForeCast" , new { 
+             City = "Linkoping", 
+             Lang = "en"}
+             )
+     @*   <a class="weathertext" asp-area="weather" asp-controller="WeatherForecast" asp-route-id="" asp-action="WeatherForecast">WeatherForecast</a>*@
+       
+
+
+    </div>
 
        <div class= "col-md-3 ">
         <h2>Most Popular News</h2>

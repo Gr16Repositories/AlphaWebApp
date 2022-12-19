@@ -1,0 +1,42 @@
+﻿@model WeatherForecast
+
+@{
+
+}
+<form>
+    
+   Enter the city name <input name="city" placeholder="City" typr="search" aria-label="Search" />
+    <button>Submit</button>
+</form>
+<br />
+
+@if (Model != null)
+{
+    <div class="container px-1 px-md-4 py-5 mx-auto" style="background-color:darkgray">
+        <div class="row d-flex justify-content-center px-3">
+            <div class="card" style="background-color:lightslategray; color:white">
+                <h2 class="ml-auto mr-4 mt-3 mb-0">@Model.City</h2>
+                <p class="ml-auto mr-4 mb-0 med-font">@Model.Summary</p>
+                <h1 class="ml-auto mr-4 large-font">
+                  Weather = @Model.TemperatureC<span class="sm-font">C</span></h1>  <h1 class="ml-auto mr-4 large-font">@Model.TemperatureF<span class="sm-font">F</span> </h1>
+                <p class="time-font mb-0 ml-4 mt-auto">@Model.Date</p>
+                <p class="ml-4 mb-4"> WindSpeed  @Model.WindSpeed </p>
+                <p class="ml-4 mb-4"> Humidity @Model.Humidity </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <p><b>City=</b>@Model.City</p>
+
+    <p><b>Summary=</b>@Model.Summary</p>
+
+    <p><b>TemperatureC=</b>@Model.TemperatureC</p>
+    <p><b>TemperatureF=</b>@Model.TemperatureF</p>
+    <p><b>Humidity=</b>@Model.Humidity</p>
+    <p><b>WindSpeed=</b>@Model.WindSpeed</p>
+    <p><b>Date=</b>@Model.Date</p>
+}
+
+
