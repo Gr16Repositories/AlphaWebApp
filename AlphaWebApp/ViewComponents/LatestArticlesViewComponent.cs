@@ -12,7 +12,7 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            var LatestNews = _db.Articles.OrderByDescending(x => x.DateStamp).Take(5).ToList();
+            var LatestNews = _db.Articles.OrderByDescending(x => x.DateStamp).Take(1).ToList();
             return View("Index", LatestNews);
         }
     }

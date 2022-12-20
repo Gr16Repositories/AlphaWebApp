@@ -12,7 +12,9 @@
 
         }
     </div>
-</div>*@
+</div>
+*@
+
 
 
 @model IEnumerable<AlphaWebApp.Models.Article>
@@ -23,14 +25,14 @@
 
 
             <div id="latest-news">
-                @item.DateStamp | @item.ContentSummary
-            @*<a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id">@item.HeadLine</a>*@
+                @item.Category.name|@item.DateStamp | @item.ContentSummary
+            
             </div>
            
 
 
         }
-    </div>
+   </div>
 </div>
 
 
