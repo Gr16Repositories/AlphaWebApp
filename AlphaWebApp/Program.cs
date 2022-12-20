@@ -45,6 +45,7 @@ builder.Services.AddResponseCaching();
 
 var app = builder.Build();
 
+// Initializing seed for models
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
