@@ -212,11 +212,8 @@
             <a asp-area="" asp-controller="Home" asp-action="CreateSubscription">TestSupscription</a>
         </div>
     </footer>
-
-   
-        @RenderBody()
-
-
+    <partial name="_Notifications" />
+    @RenderBody()
     @*    <!--RenderBody-->
     <div class="container">
     <main role="main" class="pb-3">

@@ -21,6 +21,7 @@
 <hr />
 
 
+
 <div class="container">
     <div class="row" id="ads">
 
@@ -36,10 +37,12 @@
                     @*<div class="card-image-overlay m-auto">
                 <span class="card-detail-badge">Badge-01</span>
                 </div>*@
+
                     <div class="card-body text-start">
                         <div class="ad-title text-center">
                             <h5>@item.HeadLine</h5>
                         </div>
+
                         <p style="color:#000;">@item.Content</p>
                         <div>
                             <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>
@@ -50,7 +53,9 @@
                             <i class="fa fa-eye"> Views</i>
                             <i class="fa-solid fa-thumbs-up"> Likes</i>
                             <i class="fa-sharp fa-solid fa-clock"> Date</i>
+
                         </div>
+
                     </div>
                 </div>
             </div>
