@@ -13,6 +13,10 @@ namespace AlphaWebApp.Helpers
             CreateMap<AddArticleVM, Article>();
             //automap the EditArticleVM and article
             CreateMap<EditArticleVM, Article>();
+
+            CreateMap<SubscriptionVM, Subscription>();
+
+            CreateMap<Subscription, SubscriptionVM>();
         }
     }
 }

@@ -75,6 +75,13 @@ namespace AlphaWebApp.Services
             return userId;           
         }
 
+        //Give me all subscriptions related to this user
+        public List<Subscription> GetUserSubscriptions(string UserId)
+        {
+            List<Subscription> UserSubscriptions = _db.Subscriptions.Where(s => s.UserId == UserId).ToList();
+            return UserSubscriptions;
+        }
+
         
 
     }
