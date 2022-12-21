@@ -28,10 +28,10 @@ body {
 
 
 
-.btn {
-    background: #003366 !important
+/*.btn {
+    background: #003366*/
     /*background: #fa292a !important*/
-}
+/*}*/
 
 #logo-img{
     /*position:absolute;*/
@@ -75,13 +75,6 @@ body {
     border-bottom: solid 5px #fa292a;
 }
 
-.catagory.sweden a {
-    background-color: #1cbbb4;
-}
-
-.catagory.health a {
-    background-color: #00aeef;
-}
 
 
 
@@ -190,3 +183,15 @@ body {
     background-color: #ed1c24;
 }
 
+
+.ListOfArticles {
+    text-align: center;
+    font-size:30px;
+    margin-left: 20px;
+    padding-left: 20px;
+}
+
+.CreateNewArticle {
+    margin-left: 50px;
+    padding-left: 40px;
+}

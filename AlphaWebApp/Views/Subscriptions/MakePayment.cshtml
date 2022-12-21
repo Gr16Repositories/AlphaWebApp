@@ -1,11 +1,57 @@
-﻿@model AlphaWebApp.Models.ViewModels.SubscriptionVM
+﻿@model AlphaWebApp.Models.Subscription
+
+@{
+    if (Model != null)
+    {
+        <h1><strong>You have Already an Active Subscritpion</strong></h1>
+       
+        <h1>Details</h1>
+
+        <div>
+            <h4>Subscription</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Created)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Created)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PaymentComplete)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PaymentComplete)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.SubscriptionType)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SubscriptionType.Description)
+                </dd>
+            </dl>
+        </div>
+    }
+    else
+    {
+
+        <div><strong><a asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">Make Payment</a></strong></div>
+    }
+}
+
+
+
 
 
 <!-- Set up a container element for the button -->
 <div id="paypal-button-container"></div>
 
-
-<div><a asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">Make Payment</a></div>
 
 <!-- Include the PayPal JavaScript SDK -->
 <script src="https://www.paypal.com/sdk/js?client-id=AVSEVXfnaVJTt20STiT0QcUd0pY25kdecvN-wYb_pjQHEwg0pyvvPUL41PWH0A4IyCxflxCRx95F_fzU&currency=USD"></script>

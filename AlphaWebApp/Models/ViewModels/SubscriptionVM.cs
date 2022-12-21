@@ -13,5 +13,7 @@ namespace AlphaWebApp.Models.ViewModels
 
         public bool PaymentComplete { get; set; }
 
+        public int Period { get; set; }
+
     }
 }

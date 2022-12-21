@@ -19,9 +19,9 @@ namespace AlphaWebApp.Services
             var responseMessage = await _httpClient.PostAsJsonAsync(test, newSummary);
             if (!responseMessage.IsSuccessStatusCode)
             {
-                return "Some error ocurred";
+                return "Sorry! Some error ocurred";
             }
-            return "Email will be sent";
+            return "Subscription submitted Successfully";
         }
 
     }
