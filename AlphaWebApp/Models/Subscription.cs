@@ -14,7 +14,7 @@ namespace AlphaWebApp.Models
         [Required]
         public decimal Price { get; set; }
         [Required]
-        public bool Active { get; set; }
+        public bool Active { get; set; } = false;
         [Required]
         public DateTime Created { get; set; } = DateTime.Now;
 

@@ -31,8 +31,9 @@ namespace AlphaWebApp.Controllers
             _emailService = emailService;
         }
 
-        [Authorize]
+
         // GET: Subscriptions
+        [Authorize(Roles = ("Admin"))]
         public async Task<IActionResult> Index()
         {
             return View( await Task.Run(()=> _subscriptionService.GetAllSubscriptions()));
@@ -80,7 +81,8 @@ namespace AlphaWebApp.Controllers
             summary.SubscriptionTypeName = subscription.SubscriptionType.TypeName;
             summary.SubscriptionPrice = subscription.Price;
             //Subscribtion will end after one month
-            summary.SubscriptionExpiryDate = subscription.Created.AddMonths(1);
+            var subscriptionPeriodInMonth = subscription.SubscriptionType.Period;
+            summary.SubscriptionExpiryDate = subscription.Created.AddMonths(subscriptionPeriodInMonth);
             var result = SendConfirmation(summary);
             var resultTuple = new Tuple<string>(result);
             return View(resultTuple);

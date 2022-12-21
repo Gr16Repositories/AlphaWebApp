@@ -24,8 +24,8 @@ namespace AlphaWebApp.Models
         public int Likes { get; set; }
         [Required]
         public Uri ImageLink { get; set; }
-
-        //public bool Archive { get; set; }
+        [Required]
+        public bool Archive { get; set; } = false;
 
         //[ForeignKey("Category")]
         public int? CategoryId { get; set; } 
