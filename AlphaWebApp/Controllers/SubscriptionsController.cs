@@ -10,6 +10,8 @@ using AlphaWebApp.Models;
 using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using AlphaWebApp.Models.ViewModels;
+using NuGet.Protocol;
+using AutoMapper;
 
 namespace AlphaWebApp.Controllers
 {
@@ -19,16 +21,19 @@ namespace AlphaWebApp.Controllers
         private readonly IUserService _userService;
         private readonly ILogger<SubscriptionsController> _logger;
         private readonly IEmailService _emailService;
+        private readonly IMapper _mapper;
 
         public SubscriptionsController(ISubscriptionService subscriptionService,
                                         IUserService userService,
                                         ILogger<SubscriptionsController> logger,
-                                        IEmailService emailService)
+                                        IEmailService emailService,
+                                        IMapper mapper)
         {
             _subscriptionService = subscriptionService;
             _userService = userService;
             _logger = logger;
             _emailService = emailService;
+            _mapper = mapper;
         }
 
 
@@ -51,11 +56,21 @@ namespace AlphaWebApp.Controllers
         // Make paypal payment
         public async Task<IActionResult> MakePayment(int id)
         {
-            // Intial payment, no payment
-            var paymentComplete = false;
-            SubscriptionVM newSub = await Task.Run(()=> _subscriptionService.AddSubscripton(id, paymentComplete));
-            //return  await Task.Run(()=> RedirectToAction("Create",newSub));
-            return View(newSub);
+            var userId = _userService.GetUserId();
+            if(_userService.GetUserSubscriptions(userId).Any(s => s.Active == true))
+            {
+                var userSub = _userService.GetUserSubscriptions(userId).Where(s => s.Active == true).FirstOrDefault();
+                //SubscriptionVM oldActiveSubVm = _mapper.Map<SubscriptionVM>(userSub);
+                return View(userSub);
+            }
+            else
+            {
+                // Intial payment, no payment
+                var paymentComplete = false;
+                SubscriptionVM newSub = await Task.Run(()=> _subscriptionService.AddSubscripton(id, paymentComplete));
+                //return View(newSub);
+                return View();
+            }
         }
 
 

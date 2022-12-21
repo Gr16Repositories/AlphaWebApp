@@ -18,7 +18,7 @@ namespace AlphaWebApp.Models
         [Required]
         public DateTime Created { get; set; } = DateTime.Now;
 
-        //public DateTime ExpireAt { get; set; }
+        public DateTime ExpireAt { get; set; }
         [Required]
         public bool PaymentComplete { get; set; } 
         public string UserId { get; set; }
