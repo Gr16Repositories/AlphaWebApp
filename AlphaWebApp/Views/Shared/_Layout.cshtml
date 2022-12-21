@@ -24,7 +24,7 @@
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
             <div class="navbar mx-3" role="banner">
-                <a class="navbar-brand" href="index.html"><img src="~/img/logo.png" /></a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
                 <div id="date-time"></div>
             </div>
         </header>
@@ -57,6 +57,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
                         </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="WeatherForecast" asp-action="Index">WeatherForecast</a>
+                    </li>
                         <li>
                             <partial name="_LoginPartial" />
                         </li>
