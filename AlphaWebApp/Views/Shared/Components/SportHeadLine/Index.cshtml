@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+
+@{
+   
+    var articles = Model.Skip(1);
+}
+ 
+
+            <div class="row col-10">
+                    <!-- Foreach loop here -->
+                @foreach (var article in articles)
+                {
+                    
+                    <div class="col-2">
+
+            <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="headl" style="color:white">
+                <li>&nbsp;@article.HeadLine &nbsp;</li>&nbsp;
+                
+                </a>
+                    </div>
+                }
+            </div>
+
+
+

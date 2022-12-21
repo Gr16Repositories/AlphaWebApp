@@ -11,7 +11,7 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            var mostpopular = _db.Articles.OrderByDescending(x => x.Views).Take(7).ToList();
+            var mostpopular = _db.Articles.OrderByDescending(x => x.Views).Take(5).ToList();
             return View("Index", mostpopular);
         }
 

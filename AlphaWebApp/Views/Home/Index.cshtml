@@ -2,7 +2,9 @@
 
 
 @{
+    
     ViewData["Title"] = "Home Page";
+    
 }
 
 @*Latest News*@
@@ -27,7 +29,7 @@
 
 
 
-<div class="row" style="margin-top:5%; float:left">
+<div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">
 
       
     <div class="col-md-8 ">
@@ -37,6 +39,7 @@
         @await Component.InvokeAsync("TodayNews")
         <br />
         @await Component.InvokeAsync("TodayWorldNews")
+        <br />
         @await Component.InvokeAsync("Sports")
 
     </div>
@@ -58,19 +61,37 @@
      
        
 
-
+             <br />
    
 
     
-        <h2>Most Popular News</h2>
+        <h2>Most read</h2>
 
 
 
         @await Component.InvokeAsync("MostPopular")
+        <br />
+        @await Component.InvokeAsync("Health")
 
 
     </div>
 
+</div>
+<div class="container-fluid" >
+    <div class="swe" style="margin-left:2%; margin-right:2%;">
+        <h1>Full story</h1>
+    @await Component.InvokeAsync("SwedenNews")
+    </div>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="new" style="margin-left:5%; margin-right:5%;">
+        <h1>Sports News</h1>
+    <br />
+
+    @await Component.InvokeAsync("SportHeadLine")
+    </div>
 </div>
 
 

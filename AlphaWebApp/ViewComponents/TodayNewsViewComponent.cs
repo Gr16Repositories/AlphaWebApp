@@ -15,8 +15,8 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            // Sweden news
-            var todaynews = _articleService.GetArticlesByCategoryName("Sweden").FirstOrDefault();
+            
+            var todaynews = _articleService.GetArticlesByCategoryName("Local").FirstOrDefault();
             return View("Index", todaynews);
         }
     }
