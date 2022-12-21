@@ -55,7 +55,11 @@ namespace AlphaWebApp.Controllers
             var categoryName = _articleService.GetCategoryById(Convert.ToInt32(article.CategoryId));
             if (article == null)
                 return NotFound();
-
+            article.Views++;
+            if (article != null)
+            {
+                _articleService.SaveViewsToArticle(article.Id, article.Views);
+            }
             ViewBag.CategoryName = categoryName.name;
             return View(article);
         }
@@ -76,13 +80,6 @@ namespace AlphaWebApp.Controllers
                     });
                 }
             }
-            //newArticle.Categories.Add(new SelectListItem { Text = "Local", Value = "1" });
-            //newArticle.Categories.Add(new SelectListItem { Text = "Sweden", Value = "2" });
-            //newArticle.Categories.Add(new SelectListItem { Text = "World", Value = "3" });
-            //newArticle.Categories.Add(new SelectListItem { Text = "Weather", Value = "4" });
-            //newArticle.Categories.Add(new SelectListItem { Text = "Economy", Value = "5" });
-            //newArticle.Categories.Add(new SelectListItem { Text = "Sport", Value = "6" });
-
             return View(newArticle);
         }
 
@@ -153,7 +150,7 @@ namespace AlphaWebApp.Controllers
             if (article == null)
             {
                 return NotFound();
-            }           
+            }
             return View(editArticle);
         }
 
@@ -172,6 +169,21 @@ namespace AlphaWebApp.Controllers
             {
                 if (article.File != null)
                 {
+                    // below code is written to delete the old image from folder and blob
+                    Article oldArticle = await Task.Run(() => _articleService.GetArticleById(id));
+                    string oldImage = (oldArticle.ImageLink.ToString()).Substring(57);
+                    if (oldImage != null)
+                    {
+                        var currentImagePath = Path.Combine("wwwroot/images/articles" + "/" + oldArticle.CategoryId, oldImage);
+                        if (System.IO.File.Exists(currentImagePath))
+                        {
+                            System.IO.File.Delete(currentImagePath);
+                        }
+                        if (article != null)
+                            _storageService.DeleteBlobImage(oldImage, Convert.ToInt32(oldArticle.CategoryId));
+                    }
+
+                    //Below code is written to add an updated image to folder and blob
                     string folderPath = "wwwroot/images/articles" + "/" + article.CategoryId;
                     string path = Path.Combine(Directory.GetCurrentDirectory(), folderPath);
                     if (!Directory.Exists(path))

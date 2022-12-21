@@ -32,6 +32,16 @@ namespace AlphaWebApp.Services
             }
         }
 
+        public void SaveViewsToArticle(int id, int viewCount)
+        {
+            var articleDetails = this.GetArticleById(id);
+            articleDetails.Views = viewCount;
+            if (articleDetails != null)
+            {
+                _db.Articles.Update(articleDetails);
+                _db.SaveChanges();
+            }
+        }
         public void DeleteArticle(int id)
         {
             Article articleDetails = _db.Articles.Find(id);

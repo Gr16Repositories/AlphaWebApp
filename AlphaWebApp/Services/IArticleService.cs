@@ -9,6 +9,8 @@ namespace AlphaWebApp.Services
         //Add Article and save the article images in blob in Azure
         public void AddArticle(AddArticleVM article, Uri blobUri);
 
+        public void SaveViewsToArticle(int id, int viewCount);
+
         //Update Article
         public void UpdateArticle(int id, EditArticleVM article, Uri blobUri);
 

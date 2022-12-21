@@ -200,7 +200,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-control {
-  height: 35px;
+  /*height: 35px;*/
   padding:6px 12px;
   color: #000;
   border:2px solid #ececec;
@@ -224,6 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 textarea.form-control {
     padding: 15px 20px;
 	resize:none;
+	height:150px;
 }
 
 label {
