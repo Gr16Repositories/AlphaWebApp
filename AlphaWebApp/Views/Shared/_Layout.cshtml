@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentUrl = Url.Action((string)ViewContext.RouteData.Values["action"], (string)ViewContext.RouteData.Values["controller"]);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,6 +33,45 @@
             </div>
         </header>
     </div>
+
+
+    @*      <div id="header">
+    <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+    <ul class="navbar-nav">
+    <li class="nav-item">
+    <a class="nav-link" href="#">Sign In</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"> Subscribe</a>
+    <a class="nav-link" href="#">Subscribe</a>
+    <button asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList" class="btn btn-outline-danger rounded-pill" style="font-size: 22px;"> Subscribe</button>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Subscriptions" asp-action="Index">Subscriptions</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Articles" asp-action="Index">Article</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
+    </li>
+    <li>
+    <partial name="_LoginPartial" />
+    </li>
+    </ul>
+    </div>
+    </nav>
+    </div>*@
+
+    <div class="navbar navbar-expand-sm navbar-dark">
+        <a class="nav-link" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"> Subscribe</a>
     
         <div id="header">
             <nav class="navbar navbar-expand-sm navbar-dark border-0">
@@ -71,6 +114,7 @@
         <a class="nav-link" asp-area="" asp-controller="Articles" asp-action="Index">Article</a>
         <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
         <a class="nav-link" asp-area="" asp-controller="Manager" asp-action="Index">Manager</a>
+
         <partial name="_LoginPartial" />
     </div>*@
 
@@ -105,39 +149,79 @@
     </div>*@
 
 
-
-
     @*Navbar Categories View Component VM*@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <vc:navbar-categories></vc:navbar-categories>
-        </div>
-    </nav>  
 
+            <div id="main-wrapper" class="homepage">
+                <header id="navigation">
+                    <div class="searchNlogin">
+                        <ul>
 
+                            <li class="search-input-wrapper">
+                                <div class="search">
+                                    <form role="form">
+                                        <input type="text" class="search-form" autocomplete="off" placeholder="Type & Press Enter">
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="search-icon"><i class="fa fa-search"></i></li>
+
+                            <li class="dropdown user-panel">
+                                <a href="javascript:void(0);" style="color:#fff" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+                                <div class="dropdown-menu top-user-section">
+                                    <div class="top-user-form">
+                                        <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
+                                            <div class="input-group" id="top-login-username">
+                                                <span class="input-group-addon"><img src="images/others/user-icon.png" alt="" /></span>
+                                                <input name="Input.Email" type="text" class="form-control" placeholder="Username" required="">
+                                            </div>
+                                            <div class="input-group" id="top-login-password">
+                                                <span class="input-group-addon"><img src="images/others/password-icon.png" alt="" /></span>
+                                                <input name="Input.Password" type="password" class="form-control" placeholder="Password" required="">
+                                            </div>
+                                            <div>
+                                                <p class="reset-user">Forgot <a href="#">Password/Username?</a></p>
+                                                <button class="btn btn-danger" type="submit">Login</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="create-account">
+                                        <a href="#">Create a New Account</a>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>                        
+                    </div>
+                </header>
+            </div>
+            </div>
+    </nav>
+
+    
 
     @*---------------------------------------------------------------------------------------------------------------*@
-@*    <div class="container">
-        <div class="row" id="ads">
-            <div class="col-md-4">
-                <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" />
-            </div>
-        </div>
+    @*    <div class="container">
+    <div class="row" id="ads">
+    <div class="col-md-4">
+    <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262" />
+    </div>
+    </div>
     </div>
 
 
     <div class="container">
-        <div class="row" id="ads">
-            <div class="col-md-4">
-                <img class="img-fluid" src="~/images/articles/1/scottlandweather.jpg" />
-                <img src="~/images/articles/1/ukrainewar.jpg" />
-            </div>
-        </div>
+    <div class="row" id="ads">
+    <div class="col-md-4">
+    <img class="img-fluid" src="~/images/articles/1/scottlandweather.jpg" />
+    <img src="~/images/articles/1/ukrainewar.jpg" />
+    </div>
+    </div>
     </div>*@
-   
-    @*---------------------------------------------------------------------------------------------------------------*@
 
-</body>
+
     <!--footer-->
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -167,17 +251,17 @@
     @await RenderSectionAsync("Scripts", required: false)
 
     <!--#scripts-->
-    <script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="js/moment.min.js"></script>
-    <script type="text/javascript" src="js/jquery.simpleWeather.min.js"></script>
-    <script type="text/javascript" src="js/jquery.sticky-kit.min.js"></script>
-    <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
-    <script type="text/javascript" src="js/jquery.subscribe-better.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/switcher.js"></script>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/moment.min.js"></script>
+    <script src="~/js/jquery.simpleWeather.min.js"></script>
+    <script src="~/js/jquery.sticky-kit.min.js"></script>
+    <script src="~/js/jquery.easy-ticker.min.js"></script>
+    <script src="~/js/jquery.subscribe-better.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script type="text/javascript" src="~/js/switcher.js"></script>
 
 
 </html>
