@@ -14,7 +14,11 @@ namespace AlphaWebApp.Models
         [Required]
         public decimal Price { get; set; }
         [Required]
+        public bool Active { get; set; }
+        [Required]
         public DateTime Created { get; set; } = DateTime.Now;
+
+        //public DateTime ExpireAt { get; set; }
         [Required]
         public bool PaymentComplete { get; set; } 
         public string UserId { get; set; }
