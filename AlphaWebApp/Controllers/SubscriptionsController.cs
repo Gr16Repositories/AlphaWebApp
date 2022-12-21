@@ -10,6 +10,8 @@ using AlphaWebApp.Models;
 using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using AlphaWebApp.Models.ViewModels;
+using NuGet.Protocol;
+using AutoMapper;
 
 namespace AlphaWebApp.Controllers
 {
@@ -19,20 +21,24 @@ namespace AlphaWebApp.Controllers
         private readonly IUserService _userService;
         private readonly ILogger<SubscriptionsController> _logger;
         private readonly IEmailService _emailService;
+        private readonly IMapper _mapper;
 
         public SubscriptionsController(ISubscriptionService subscriptionService,
                                         IUserService userService,
                                         ILogger<SubscriptionsController> logger,
-                                        IEmailService emailService)
+                                        IEmailService emailService,
+                                        IMapper mapper)
         {
             _subscriptionService = subscriptionService;
             _userService = userService;
             _logger = logger;
             _emailService = emailService;
+            _mapper = mapper;
         }
 
-        [Authorize]
+
         // GET: Subscriptions
+        [Authorize(Roles = ("Admin"))]
         public async Task<IActionResult> Index()
         {
             return View( await Task.Run(()=> _subscriptionService.GetAllSubscriptions()));
@@ -50,11 +56,21 @@ namespace AlphaWebApp.Controllers
         // Make paypal payment
         public async Task<IActionResult> MakePayment(int id)
         {
-            // Intial payment, no payment
-            var paymentComplete = false;
-            SubscriptionVM newSub = await Task.Run(()=> _subscriptionService.AddSubscripton(id, paymentComplete));
-            //return  await Task.Run(()=> RedirectToAction("Create",newSub));
-            return View(newSub);
+            var userId = _userService.GetUserId();
+            if(_userService.GetUserSubscriptions(userId).Any(s => s.Active == true))
+            {
+                var userSub = _userService.GetUserSubscriptions(userId).Where(s => s.Active == true).FirstOrDefault();
+                //SubscriptionVM oldActiveSubVm = _mapper.Map<SubscriptionVM>(userSub);
+                return View(userSub);
+            }
+            else
+            {
+                // Intial payment, no payment
+                var paymentComplete = false;
+                SubscriptionVM newSub = await Task.Run(()=> _subscriptionService.AddSubscripton(id, paymentComplete));
+                //return View(newSub);
+                return View();
+            }
         }
 
 
@@ -80,7 +96,8 @@ namespace AlphaWebApp.Controllers
             summary.SubscriptionTypeName = subscription.SubscriptionType.TypeName;
             summary.SubscriptionPrice = subscription.Price;
             //Subscribtion will end after one month
-            summary.SubscriptionExpiryDate = subscription.Created.AddMonths(1);
+            var subscriptionPeriodInMonth = subscription.SubscriptionType.Period;
+            summary.SubscriptionExpiryDate = subscription.Created.AddMonths(subscriptionPeriodInMonth);
             var result = SendConfirmation(summary);
             var resultTuple = new Tuple<string>(result);
             return View(resultTuple);
@@ -219,9 +236,7 @@ namespace AlphaWebApp.Controllers
             //return _subscriptionService.GetAllSubscriptions().Any(e => e.Id == id);
         }
 
-        // How to make a subscription active under some time.
-        // How to send Email when subscritpion is expire.
-        // How to make specification for subscriber?
+       
 
     }
 }

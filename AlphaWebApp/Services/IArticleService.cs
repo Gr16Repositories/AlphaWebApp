@@ -30,5 +30,6 @@ namespace AlphaWebApp.Services
 
         public Category GetCategoryById(int id);
         List<Article> GetArticlesByCategoryName(string name);
+        List<Article> GetArticlesById(int id);
     }
 }

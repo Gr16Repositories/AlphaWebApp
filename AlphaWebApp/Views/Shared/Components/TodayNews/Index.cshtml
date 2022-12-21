@@ -4,10 +4,7 @@
 {
     <div class="container-fluid">
         <div class="row"> 
-
             <div class="name" style="background-color:red">
-
-   
                           @Model.Category.name
             </div>
                     <div class="card" style="width: 100%; height: 100%">
@@ -18,7 +15,6 @@
                                 @Model.ContentSummary
                             </p>
                             <a asp-controller="Articles" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
-
                         </div>
                     </div>
         </div>

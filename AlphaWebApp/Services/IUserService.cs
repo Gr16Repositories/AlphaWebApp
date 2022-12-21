@@ -15,5 +15,7 @@ namespace AlphaWebApp.Services
         //Task<bool> IsLoggeIn();
         bool IsLoggeIn();
         string GetUserId();
+
+        public List<Subscription> GetUserSubscriptions(string UserId);
     }
 }

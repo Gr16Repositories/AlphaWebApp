@@ -275,5 +275,12 @@ namespace AlphaWebApp.Controllers
         {
             return _db.Articles.Any(e => e.Id == id);
         }
+
+        public IActionResult News(int id)
+        {
+            var categoryArticles = _articleService.GetArticlesById(id);
+
+            return View(categoryArticles);
+        }
     }
 }
