@@ -219,9 +219,7 @@ namespace AlphaWebApp.Controllers
             //return _subscriptionService.GetAllSubscriptions().Any(e => e.Id == id);
         }
 
-        // How to make a subscription active under some time.
-        // How to send Email when subscritpion is expire.
-        // How to make specification for subscriber?
+       
 
     }
 }
