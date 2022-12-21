@@ -32,13 +32,7 @@ namespace AlphaWebApp.Models.Seeds
                     {
                         name = "World",
                         icon = "fa-solid fa-earth-americas"
-                    },
-
-                    new Category
-                    {
-                        name = "Weather",
-                        icon = "fa-solid fa-sun"
-                    },
+                    },               
 
                     new Category
                     {
@@ -54,18 +48,19 @@ namespace AlphaWebApp.Models.Seeds
 
                     new Category
                     {
-                        name = "Sport",
+                        name = "Technology",
                         icon = "fa-solid fa-medal"
                     },
 
-                 
+
                     new Category
                     {
-                        name = "FIFA World Cup 2022",
-                        icon = "fa-regular fa-futbol"
+                        name = "Sport",
+                        icon = "fa-solid fa-medal"
                     }
 
-              
+
+
 
 
                 );
