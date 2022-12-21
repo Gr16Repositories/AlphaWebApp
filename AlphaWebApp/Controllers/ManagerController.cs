@@ -9,7 +9,7 @@ using System.Data;
 
 namespace AlphaWebApp.Controllers
 {
-    //[Authorize(Roles = ("Manager"))]
+    [Authorize(Roles = ("Manager"))]
     public class ManagerController : Controller
     {
         private readonly IUserService _userService;

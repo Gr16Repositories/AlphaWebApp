@@ -106,5 +106,15 @@ namespace AlphaWebApp.Services
         {
             return _db.Categories.Find(id);
         }
+
+        public List<Article> GetArticlesByCategoryName(string name)
+        {
+            return _db.Articles.Where(a => a.Category.name == name).ToList();
+        }
+
+        public List<Article> GetArticlesById(int id)
+        {
+            return _db.Articles.Where(a => a.CategoryId == id).ToList();
+        }
     }
 }

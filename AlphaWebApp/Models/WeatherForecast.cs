@@ -1,36 +1,37 @@
 ﻿using MessagePack;
 using Microsoft.Build.Framework;
 using Microsoft.VisualBasic;
+using System.Text.Json.Serialization;
 
 namespace AlphaWebApp.Models
 {
     public class WeatherForecast
     {
-        
-        public int Id { get; set; }
-
-        [Required]
+        [JsonPropertyName("summary")]
         public string Summary { get; set; }
 
-        [Required]
+        [JsonPropertyName("temperatureC")]
         public int  TemperatureC { get; set; }
 
-        [Required]
+        [JsonPropertyName("temperatureF")]
         public int TemperatureF { get; set; }
 
-        [Required]
+        [JsonPropertyName("humidity")]
         public int Humidity { get; set; }
-        
-        [Required]  
+
+        [JsonPropertyName("windSpeed")]
+
         public int WindSpeed { get; set; }
 
-        [Required]
+        [JsonPropertyName("date")]
         public DateTime Date { get; set; }
 
-        [Required]
+        [JsonPropertyName("city")]
         public string  City { get; set; }
 
-        [Required]
-        public string  Description { get; set; }
+             
+
+        [JsonPropertyName("lang")]
+        public string Lang { get; set; }
     }
 }

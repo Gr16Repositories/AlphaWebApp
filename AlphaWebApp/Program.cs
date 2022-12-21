@@ -33,6 +33,8 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IWeatherForcastService,WeatherForcastService>();
 builder.Services.AddScoped<ISubscriptionService,SubscriptionService>();
 
 //To make Swagger work
@@ -40,12 +42,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddResponseCaching();
 
-//Use mapper to map two models, moving properties values automaticly using mapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 
 var app = builder.Build();
 
+// Initializing seed for models
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;

@@ -8,10 +8,8 @@ namespace AlphaWebApp.Models.ViewModels
         public string SubscriberName { get; set; }
         public string SubscriberEmail { get; set;}
         public string SubscriptionTypeName { get; set; }
-
         public DateTime SubscriptionExpiryDate { get; set; }
-
-        public decimal SubscriptionCost { get; set; }
+        public decimal SubscriptionPrice { get; set; }
 
     }
 }

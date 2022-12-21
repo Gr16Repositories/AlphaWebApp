@@ -6,7 +6,10 @@
 }
 
 @*Latest News*@
-<div class="container">
+
+
+
+<div class="container-fluid">
     <div id="breaking-news">
         <span>
             Latest News   <i class="fa fa-angle-double-right"></i>
@@ -19,24 +22,46 @@
 </div>
 
 
-<div class="row" style="margin-top:5%;">
-
-    @*  <div class="col-md-3 ">
-    <h2>Latest New</h2>
-
-    @await Component.InvokeAsync("LatestArticles")
 
 
-    </div>*@
-    <div class="col-md-6 ">
+
+
+
+<div class="row" style="margin-top:5%; float:left">
+
+      
+    <div class="col-md-8 ">
         <h2>Today News</h2>
 
 
         @await Component.InvokeAsync("TodayNews")
+        <br />
+        @await Component.InvokeAsync("TodayWorldNews")
+        @await Component.InvokeAsync("Sports")
 
     </div>
+    
+
+
+
+
+
 
     <div class="col-md-3 ">
+        <h2>WeatherForecast</h2>
+
+        
+         @await Component.InvokeAsync("WeatherForeCast" , new { 
+             City = "Linkoping", 
+             Lang = "en"}
+             )
+     
+       
+
+
+   
+
+    
         <h2>Most Popular News</h2>
 
 
@@ -46,9 +71,10 @@
 
     </div>
 
-
-
 </div>
+
+
+
 
 
 
