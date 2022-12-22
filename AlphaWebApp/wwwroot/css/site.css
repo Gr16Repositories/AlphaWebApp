@@ -20,11 +20,11 @@ body {
 
 
 /*Ali*/
-#header {
+/*#header {*/
     /*height: 6rem;*/
-    background: #003366 !important;
+    /*background: #003366 !important;
     border-bottom: solid 10px #fa292a;
-}
+}*/
 
 
 
@@ -45,8 +45,8 @@ body {
 }
 
 .container-fluid {
-    background: #003366 !important;
-    /*border-bottom: solid 5px #fa292a;*/
+    background: #003366;
+    /*border-bottom: solid 8px #fa292a;*/
 }
 
 #categories {
@@ -72,6 +72,18 @@ body {
     color: #fff;
     padding: 5px 10px;
     font-size: 16px;
+    border-bottom: solid 5px #fa292a;
+}
+
+.card-category-badge {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    background: #003366;
+    text-align: center;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 20px;
     border-bottom: solid 5px #fa292a;
 }
 
