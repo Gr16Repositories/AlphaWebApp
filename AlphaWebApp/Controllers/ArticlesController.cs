@@ -11,27 +11,35 @@ using AlphaWebApp.Services;
 using Microsoft.Extensions.Hosting.Internal;
 using AlphaWebApp.Models.ViewModels;
 using AutoMapper;
+using AutoMapper.Execution;
+using Microsoft.AspNetCore.Authorization;
+using NuGet.Protocol;
 
 namespace AlphaWebApp.Controllers
 {
+
     public class ArticlesController : Controller
     {
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
         private readonly IStorageService _storageService;
         private readonly IConfiguration _configuration;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
         public ArticlesController(ApplicationDbContext db,
             IArticleService articleService,
             IStorageService storageService,
-            IConfiguration configuration, IMapper mapper)
+            IConfiguration configuration,
+            IMapper mapper,
+            IUserService userService)
         {
             _db = db;
             _articleService = articleService;
             _storageService = storageService;
             _configuration = configuration;
             _mapper = mapper;
+            _userService = userService;
         }
 
         // GET: Articles
@@ -45,6 +53,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Details/5
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
@@ -65,6 +74,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Create
+        [Authorize(Roles = "Editor")]
         public IActionResult Create()
         {
             AddArticleVM newArticle = new();
@@ -86,6 +96,7 @@ namespace AlphaWebApp.Controllers
         // POST: Articles/Create      
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Create(AddArticleVM article)
         {
             if (ModelState.IsValid)
@@ -112,6 +123,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Edit/5
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _articleService.GetAllArticles() == null)
@@ -159,6 +171,7 @@ namespace AlphaWebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Edit(int id, EditArticleVM article)
         {
             if (id != article.Id)
@@ -228,6 +241,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles/Delete/5
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
@@ -247,6 +261,7 @@ namespace AlphaWebApp.Controllers
         // POST: Articles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_articleService.GetArticleById(id) == null)
@@ -282,5 +297,53 @@ namespace AlphaWebApp.Controllers
 
             return View(categoryArticles);
         }
+
+        [HttpGet]
+        [Authorize]
+        public JsonResult LikeThis(int articleid)
+        {
+            Article art = _db.Articles.FirstOrDefault(x => x.Id == articleid);
+            if (_userService.IsLoggeIn())
+            {
+                var Username = User.Identity.Name;
+                User m = _db.Users.FirstOrDefault(x => x.UserName == Username);
+                var existingLike = m.Like.FirstOrDefault(x => x.ArticleId == art.Id);
+                if (existingLike != null) 
+                {
+                    return Json(_db.Likes.Where(l => l.ArticleId == art.Id).Count());
+                }
+                Like like = new Like();
+                like.ArticleId = articleid;
+                like.UserId = m.Id;
+                like.LikedDate = DateTime.Now;               
+                _articleService.SaveLikes(like);               
+            }
+            var count = _db.Likes.Where(l => l.ArticleId == art.Id).Count();
+            return Json(count);
+        }
+        [HttpGet]
+        [Authorize]
+        public JsonResult UnlikeThis(int articleid)
+        {
+            try
+            {
+                Article art = _db.Articles.FirstOrDefault(x => x.Id == articleid);
+                if (_userService.IsLoggeIn())
+                {
+                    var username = User.Identity.Name;
+                    User m = _db.Users.FirstOrDefault(x => x.UserName == username);                    
+                    Like likeDetails = _db.Likes.Where(x => x.UserId == m.Id && x.ArticleId == art.Id).OrderByDescending(x => x.Id).FirstOrDefault();
+                    _articleService.RemoveLikes(likeDetails);                        
+                }
+                var count = _db.Likes.Where(l => l.ArticleId == art.Id).Count();
+                return Json(count);              
+
+            }
+            catch (Exception e)
+            {
+                return Json("More than One like not allowed");
+            }
+        }
+
     }
 }

@@ -19,8 +19,7 @@ namespace AlphaWebApp.Models.ViewModels
         [Required]
         public string HeadLine { get; set; }
 
-        [DisplayName("Content Summary")]
-        [StringLength(100), Required]
+        [DisplayName("Content Summary")]       
         public string ContentSummary { get; set; }
 
         [Required]

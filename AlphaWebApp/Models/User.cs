@@ -27,5 +27,7 @@ namespace AlphaWebApp.Models
         public DateTime DateOfBirth { get; set; }
         public virtual ICollection<Subscription> SubscriptionList { get; set; }
 
+        public virtual ICollection<Like> Like { get; set; }
+
     }
 }
