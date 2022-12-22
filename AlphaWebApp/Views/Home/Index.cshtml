@@ -86,12 +86,20 @@
 <br />
 <br />
 <div class="container-fluid">
-    <div class="new" style="margin-left:5%; margin-right:5%;">
+    <div class="new" style="margin-left:2%; margin-right:2%;">
         <h1>Sports News</h1>
     <br />
 
     @await Component.InvokeAsync("SportHeadLine")
     </div>
+</div>
+<div class="container-fluid">
+    <div class="new" style="margin-left:2%; margin-right:2%;">
+    <h1> Must See</h1>
+    <br />
+    @await Component.InvokeAsync("CategoriesNews")
+    </div>
+
 </div>
 
 
