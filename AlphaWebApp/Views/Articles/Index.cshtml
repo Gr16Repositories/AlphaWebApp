@@ -1,4 +1,6 @@
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<AlphaWebApp.Models.Article>
+@inject UserManager<User> userManager
 
 @{
     ViewData["Title"] = "Articles";
@@ -19,16 +21,12 @@
     </div>
 </div>
 <hr />
-
-
-
 <div class="container">
     <div class="row" id="ads">
-
         @foreach (var item in Model)
         {
             <div class="col-md-3">
-                <div class="card">
+                <div class="card h-100 p-5">
                     <div class="card-image">
                         <span class="card-notify-badge">@item.Category.name</span>
                         @*<span class="card-notify-year">@item.DateStamp</span>*@
@@ -37,22 +35,35 @@
                     @*<div class="card-image-overlay m-auto">
                 <span class="card-detail-badge">Badge-01</span>
                 </div>*@
-
                     <div class="card-body text-start">
                         <div class="ad-title text-center">
                             <h5>@item.HeadLine</h5>
                         </div>
-
-                        <p style="color:#000;">@item.Content</p>
+                        <p style="color:#000;">@item.ContentSummary</p>
                         <div>
                             <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>
                             @*<a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">@item.HeadLine</a>*@
                             <a asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger d-inline-block mt-auto">Delete</a>
                         </div>
                         <div class="post-content">
-                            <i class="fa fa-eye"> Views</i>
-                            <i class="fa-solid fa-thumbs-up"> Likes</i>
-                            <i class="fa-sharp fa-solid fa-clock"> Date</i>
+                            <i class="fa fa-eye">@item.Views</i>
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></b>
+                            }
+                            else if (item.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == item.Id))
+                            {
+                                <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@item.Like.Count</span></a>
+                            }
+                           @* else if (item.Like.Any(x => x.UserId == User.Identity.Name && x.ArticleId == item.Id ))
+                            {
+                                <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Likes</span></a>
+                            }*@
+                            else 
+                            {
+                                <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></a>
+                            }
+                            <i class="fa-sharp fa-solid fa-clock">@item.DateStamp.ToString("dd-MM-yyyy HH:mm")</i>
 
                         </div>
 
@@ -62,3 +73,40 @@
         }
     </div>
 </div>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            //LIKE
+            $(document).on("click", "a.like", function () {
+                var id = $(this).data("id");// gets the article id
+                var link = "/Articles/LikeThis/"; ///Articles/LikeThis/
+                var a = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i> ' + result).removeClass("like").addClass("unlike");
+                    }
+                });
+            });
+            //UNLIKE
+            $(document).on("click", "a.unlike", function () {
+                var id = $(this).data("id");
+                var link = "/Articles/UnlikeThis/";
+                var a = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i>' + result).removeClass("unlike").addClass("like");
+                    }
+                });
+            });
+
+        });
+    </script>
+}

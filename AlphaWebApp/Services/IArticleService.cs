@@ -11,6 +11,10 @@ namespace AlphaWebApp.Services
 
         public void SaveViewsToArticle(int id, int viewCount);
 
+        public void SaveLikes(Like like);
+
+        public void RemoveLikes(Like like);
+
         //Update Article
         public void UpdateArticle(int id, EditArticleVM article, Uri blobUri);
 
