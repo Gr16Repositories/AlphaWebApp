@@ -1,7 +1,7 @@
 ﻿@model AlphaWebApp.Models.Subscription
 
 @{
-    if (Model != null)
+    if (Model != null && Model.Active == true)
     {
         <h1><strong>You have Already an Active Subscritpion</strong></h1>
        
@@ -24,6 +24,12 @@
                     @Html.DisplayFor(model => model.Created)
                 </dd>
                 <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ExpireAt)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ExpireAt)
+                </dd>
+                <dt class="col-sm-2">
                     @Html.DisplayNameFor(model => model.PaymentComplete)
                 </dt>
                 <dd class="col-sm-10">
@@ -40,7 +46,6 @@
     }
     else
     {
-
         <div><strong><a asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">Make Payment</a></strong></div>
     }
 }

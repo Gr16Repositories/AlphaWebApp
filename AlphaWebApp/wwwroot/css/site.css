@@ -49,6 +49,12 @@ body {
     /*border-bottom: solid 8px #fa292a;*/
 }
 
+#navbar_border {
+    border-bottom: solid 8px #ed1c24;
+}
+
+
+
 #categories {
     /*background: #f2d900 !important;*/
     background: #003366 !important;
@@ -210,6 +216,7 @@ body {
 
 
 
+
 #cookieConsentdiv {
     z-index: 1000;
     position: fixed;
@@ -253,3 +260,7 @@ body {
         color: gray;
         text-decoration: underline;
     }
+.form-group-buttons {
+    margin: 20px;
+}
+
