@@ -18,11 +18,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AlphaWebApp.styles.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--Google Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Signika+Negative:400,300,600,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
+    
 
 
     <div id="main-wrapper" class="homepage">
@@ -33,7 +35,12 @@
             </div>
         </header>
     </div>
+    <div class="container">
+  
+        <partial name="_CookieConsentPartial" />
+</div>
 
+    
 
     @*      <div id="header">
     <nav class="navbar navbar-expand-sm navbar-dark">
@@ -208,7 +215,7 @@
     <!--footer-->
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - AlphaWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        &copy; 2022 - AlphaWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             <a asp-area="" asp-controller="Home" asp-action="CreateSubscription">TestSupscription</a>
         </div>
     </footer>
