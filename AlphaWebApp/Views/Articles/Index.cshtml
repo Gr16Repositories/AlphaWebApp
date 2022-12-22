@@ -10,42 +10,45 @@
 
 <div>
     <h2 class="ListOfArticles">
-        <i class="fa-solid fa-newspaper"></i>
-
         <b>List of Articles</b>
     </h2>
     <div class="CreateNewArticle">
-        <a asp-action="Create" class="btn btn-success">
+        <a asp-action="Create" class="btn" style="color:#fff; background-color:#003366">
             <b><i class="fa-solid fa-plus"></i> Create New Article</b>
         </a>
     </div>
 </div>
 <hr />
 <div class="container">
-    <div class="row" id="ads">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-3">
-                <div class="card h-100 p-5">
-                    <div class="card-image">
-                        <span class="card-notify-badge">@item.Category.name</span>
-                        @*<span class="card-notify-year">@item.DateStamp</span>*@
-                        <img class="img-fluid" src="@item.ImageLink" />
-                    </div>
-                    @*<div class="card-image-overlay m-auto">
-                <span class="card-detail-badge">Badge-01</span>
-                </div>*@
-                    <div class="card-body text-start">
-                        <div class="ad-title text-center">
-                            <h5>@item.HeadLine</h5>
+    <div class="row" id="ads"> 
+    @foreach (var group in Model.GroupBy(a => a.Category))
+    {
+        <div class="row" id="ads">
+            <div>
+                @group.Key.name
+            </div>
+            @foreach (var item in group)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-image">
+                            <span class="card-notify-badge">@item.Category.name</span>
+                            @*<span class="card-notify-year">@item.DateStamp</span>*@
+                            <img class="img-fluid" src="@item.ImageLink" style="height: 150px; width: 100%; object-fit: cover;" />
                         </div>
-                        <p style="color:#000;">@item.ContentSummary</p>
-                        <div>
-                            <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>
-                            @*<a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">@item.HeadLine</a>*@
-                            <a asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger d-inline-block mt-auto">Delete</a>
-                        </div>
-                        <div class="post-content">
+
+                        <div class="card-body text-start d-flex flex-column">
+                            <div class="ad-title text-center">
+                                <h5>@item.HeadLine</h5>
+                            </div>
+
+
+                            <p style="color:#000;">@item.ContentSummary</p>
+                            <div class="mt-auto">
+                                <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>
+                                <a asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger d-inline-block mt-auto">Delete</a>
+                            </div>
+                            <div class="post-content">
                             <i class="fa fa-eye">@item.Views</i>
                             @if (!User.Identity.IsAuthenticated)
                             {
@@ -64,9 +67,8 @@
                                 <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></a>
                             }
                             <i class="fa-sharp fa-solid fa-clock">@item.DateStamp.ToString("dd-MM-yyyy HH:mm")</i>
-
+                            </div>                            
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -110,3 +112,4 @@
         });
     </script>
 }
+

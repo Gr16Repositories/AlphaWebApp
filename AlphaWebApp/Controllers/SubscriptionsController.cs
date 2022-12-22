@@ -59,17 +59,17 @@ namespace AlphaWebApp.Controllers
             var userId = _userService.GetUserId();
             if(_userService.GetUserSubscriptions(userId).Any(s => s.Active == true))
             {
-                var userSub = _userService.GetUserSubscriptions(userId).Where(s => s.Active == true).FirstOrDefault();
+                var userSub = await Task.Run(() =>_userService.GetUserSubscriptions(userId).Where(s => s.Active == true).FirstOrDefault());
                 //SubscriptionVM oldActiveSubVm = _mapper.Map<SubscriptionVM>(userSub);
                 return View(userSub);
             }
             else
             {
-                // Intial payment, no payment
-                var paymentComplete = false;
-                SubscriptionVM newSub = await Task.Run(()=> _subscriptionService.AddSubscripton(id, paymentComplete));
-                //return View(newSub);
-                return View();
+                Subscription test = new()
+                {
+                    SubscriptionTypeId = id
+                };
+                return View(test);
             }
         }
 

@@ -17,6 +17,16 @@
                 </p>
                 <a asp-controller="Articles" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
 
+
+@if (Model != null) 
+{
+    <div class="container-fluid">
+        <div class="row"> 
+            <div class="name" style="background-color:red">
+
+
+                          @Model.Category.name
+
             </div>
 
 
@@ -25,4 +35,8 @@
 
         </div>
     </div>
+}
+</div>
+</div>
+</div>
 </div>

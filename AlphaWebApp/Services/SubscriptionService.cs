@@ -50,7 +50,8 @@ namespace AlphaWebApp.Services
                 Price = _db.SubscriptionTypes.Find(SubscriptionTypeId).Price,
                 UserId = _userService.GetUserId(),
                 SubscriptionTypeId = SubscriptionTypeId,
-                Period = _db.SubscriptionTypes.Find(SubscriptionTypeId).Period
+                Period = _db.SubscriptionTypes.Find(SubscriptionTypeId).Period,
+                CreatedAt = DateTime.Now
             };
 
             return await Task.Run(() => newSub);
@@ -64,7 +65,8 @@ namespace AlphaWebApp.Services
                 Price = newSub.Price,
                 UserId = newSub.UserId,
                 SubscriptionTypeId = newSub.SubscriptionTypeId,
-                Active = true
+                Active = true,
+                ExpireAt = newSub.CreatedAt.AddMonths(newSub.Period)
             };
             _db.Subscriptions.Add(subscription);
             _db.SaveChanges();

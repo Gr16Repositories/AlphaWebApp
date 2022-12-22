@@ -4,10 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Article</h1>
-<hr />
+
+<div class="container">
+<h1>Create New Article</h1>
+    <hr style="border: 5px solid #003366;" />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
         <form asp-action="Create" enctype="multipart/form-data" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
@@ -38,25 +40,40 @@
             </div>
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label">Category Name</label>
-                <select class="form-control" style="width:auto" size="5" asp-for="CategoryId" asp-items="Model.Categories"></select>
+                <select class="form-control" style="width:auto; height:180px;" size="5" asp-for="CategoryId" asp-items="Model.Categories"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>         
-            <div class="form-group">
+            </div>    
+            
+            <div class="row">
+                            <label asp-for="FileName" class="control-label"></label>
+                    <div class="col-md-8">                       
+                            <input asp-for="FileName" class="form-control" placeholder="Select Image" />
+                            <span asp-validation-for="FileName" class="text-danger"></span>                       
+                    </div>
+                    <div class="col-md-3">
+                        <input type="button" value="Choose file" class="btn btn-secondary" onclick="typevaluefunc()" />
+                    </div>
+                    <input asp-for="File" hidden class="form-control" onchange="givevaluetofilename()" />
+            </div>
+
+        @*    <div class="form-group">
                 <label asp-for="FileName" class="control-label"></label>
                 <input asp-for="FileName" class="form-control" placeholder="Select Image"/>
-                <input type="button" value="Choose file" class="btn btn-success" onclick="typevaluefunc()" />
                 <span asp-validation-for="FileName" class="text-danger"></span>
+                <input type="button" value="Choose file" class="btn btn-success" onclick="typevaluefunc()" />
             </div>
             <div class="form-group">
                 <input asp-for="File" hidden class="form-control" onchange="givevaluetofilename()" />
-            </div>
+            </div>*@
            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" /> |
-                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            <div class="form-group-buttons">
+                    <input type="submit" value="Create" class="btn" style="color:#fff; background-color:#003366" /> |
+                    <a asp-action="Index" class="btn" style="color:#fff; background-color:#003366">Back to List</a>
             </div>
         </form>
     </div>
+</div>
+
 </div>
 
 @section Scripts {
