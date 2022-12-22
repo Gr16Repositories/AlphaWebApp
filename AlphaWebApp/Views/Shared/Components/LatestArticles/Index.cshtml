@@ -1,4 +1,30 @@
-﻿@*@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+@{
+    var activeClass = "active";
+}
+
+<div class="container">
+    <div class="row">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach (var item in Model)
+                {
+                    <div class="carousel-item @activeClass">
+                        <b style="color:red">
+                            @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") |&nbsp; @item.Category.name |&nbsp; @item.ContentSummary
+                        </b>
+                    </div>
+
+                    activeClass = "";
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Arkiv*@
+@*@model IEnumerable<AlphaWebApp.Models.Article>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
@@ -13,27 +39,4 @@
         }
     </div>
 </div>
-*@
-
-
-
-@model IEnumerable<AlphaWebApp.Models.Article>
-<div class="container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-
-
-            <div id="latest-news">
-                @item.Category.name|@item.DateStamp | @item.ContentSummary
-            
-            </div>
-           
-
-
-        }
-   </div>
-</div>
-
-
-
+@*/Arkiv*@

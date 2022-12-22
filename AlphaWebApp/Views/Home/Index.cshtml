@@ -11,7 +11,20 @@
 
 
 
-<div class="container-fluid">
+@*<div class="container-fluid">
+    <div id="breaking-news">
+        <span>
+            Latest News   <i class="fa fa-angle-double-right"></i>
+        </span>
+
+        <div id="latest-news">
+            @await Component.InvokeAsync("LatestArticles")
+        </div>
+    </div>
+</div>*@
+
+
+<div class="container">
     <div id="breaking-news">
         <span>
             Latest News   <i class="fa fa-angle-double-right"></i>
@@ -25,6 +38,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*
 
 
 
@@ -93,7 +120,7 @@
     @await Component.InvokeAsync("SportHeadLine")
     </div>
 </div>
-
+*@
 
 
 
