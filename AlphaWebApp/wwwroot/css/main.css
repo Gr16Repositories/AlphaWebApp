@@ -838,7 +838,7 @@ img.mfp-img {
 }
 
 .entry-meta {
-	font-size:12px;
+	font-size:18px;
 }
 
 .post {
@@ -1154,9 +1154,9 @@ img.mfp-img {
 }
 
 .entry-content {
-	color:#888;
-	font-size:14px;
-	font-weight: 300;
+	color:#000;
+	font-size:18px;
+	font-weight: 500;
 }
 
 .left-content .post .entry-title {
@@ -1696,28 +1696,6 @@ img.mfp-img {
 	border-bottom:1px solid #f2f3f5;
 }
 
-#twitter-feed {
-	margin-top:40px;
-}
-
-#twitter-feed a{
-	color:#00aeef;
-}
-
-#twitter-feed h2, 
-#twitter-feed img{
-	display:inline-block;
-}
-
-#twitter-feed h2 {
-	margin-bottom:35px;
-}
-
-#twitter-feed img {
-	margin-right:5px;
-	margin-top:-10px;
-}
-
 .widget address{
 	color:#aeaeae;
 	margin-top:25px;
@@ -1968,7 +1946,7 @@ img.mfp-img {
 
 .details-news .entry-meta {
 	margin-bottom:25px;
-	margin-top:10px;
+	margin-top:-17px;
 }
 
 .details-news .entry-meta .posted-by a{
