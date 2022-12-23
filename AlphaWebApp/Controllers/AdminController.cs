@@ -19,16 +19,20 @@ namespace AlphaWebApp.Controllers
     {
         private readonly ICategoryService _categoryService;
         private readonly ISubscriptionTypeService _subscriptionTypeService;
+        private readonly ISubscriptionService _subscriptionService;
         //RoleManager<IdentityRole> _roleManager;
 
 
+
         public AdminController(ICategoryService categoryService , 
-                                ISubscriptionTypeService subscriptionTypeService
+                                ISubscriptionTypeService subscriptionTypeService,
+                                ISubscriptionService subscriptionService
                                 //RoleManager<IdentityRole> roleManager
                                 )
         {
             _categoryService = categoryService;
             _subscriptionTypeService = subscriptionTypeService;
+            _subscriptionService = subscriptionService;
             //_roleManager = roleManager;
         }
 
@@ -300,6 +304,46 @@ namespace AlphaWebApp.Controllers
         {
             return _subscriptionTypeService.GetAllSubscriptionType().Any(e => e.Id == id);
         }
+
+        //Give the Admin all Subscrptioins in Database
+        public async Task<IActionResult> Statistics()
+        {
+            //var test = _subscriptionService.GetAllSubscriptions().ToList();
+            if (_subscriptionService.GetAllSubscriptions().ToList().Count > 0)
+            {
+                return View(await Task.Run(() => _subscriptionService.GetAllSubscriptions().ToList()));
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //This section give the admin the previlge to show and create delete roles to users
