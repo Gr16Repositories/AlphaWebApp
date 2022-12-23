@@ -1,4 +1,4 @@
-/*
+/*card-body
   Theme Name: News Press
   Theme URL: http://demo.themeregion.com/newspress
   Author: ThemeRegion
@@ -563,8 +563,9 @@ img.mfp-img {
 	text-transform:uppercase;
 }
 
-#date-time, #weather {
-	border-left:1px solid #ebecee;
+#date-time {
+	border-left: 1px solid #ebecee;
+	margin-right: 25px;
 }
 
 .searchNlogin {

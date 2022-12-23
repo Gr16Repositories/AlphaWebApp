@@ -25,10 +25,10 @@ namespace AlphaWebApp.Services
             dbArticle.Category = _db.Categories.Find(Convert.ToInt32(newArticle.CategoryId));
             dbArticle.ImageLink = blobUri;
             dbArticle.DateStamp = DateTime.Now;
-            if(dbArticle != null)
-            { 
-            _db.Articles.Add(dbArticle);
-            _db.SaveChanges();
+            if (dbArticle != null)
+            {
+                _db.Articles.Add(dbArticle);
+                _db.SaveChanges();
             }
         }
 
@@ -42,6 +42,25 @@ namespace AlphaWebApp.Services
                 _db.SaveChanges();
             }
         }
+
+        public void SaveLikes(Like like)
+        {
+            if (like != null)
+            {
+                _db.Likes.Add(like);
+                _db.SaveChanges();
+            }
+        }
+
+        public void RemoveLikes(Like like)
+        {
+            if (like != null)
+            {
+                _db.Likes.Remove(like);
+                _db.SaveChanges();
+            }
+        }
+
         public void DeleteArticle(int id)
         {
             Article articleDetails = _db.Articles.Find(id);
@@ -55,10 +74,10 @@ namespace AlphaWebApp.Services
         public List<Article> GetAllArticles()
         {
             List<Article> listOfAllArtiles = _db.Articles.ToList();
-            if(listOfAllArtiles != null)
-            return listOfAllArtiles;          
+            if (listOfAllArtiles != null)
+                return listOfAllArtiles;
             else
-              return new List<Article>(); 
+                return new List<Article>();
 
         }
 
@@ -89,7 +108,7 @@ namespace AlphaWebApp.Services
         }
         public void UpdateArticleWithOutImage(int id, EditArticleVM article)
         {
-            Article articleDetails = _db.Articles.Find(id);          
+            Article articleDetails = _db.Articles.Find(id);
             articleDetails.Category = _db.Categories.Find(Convert.ToInt32(article.CategoryId));
             articleDetails.ImageLink = articleDetails.ImageLink;
             articleDetails.HeadLine = article.HeadLine;

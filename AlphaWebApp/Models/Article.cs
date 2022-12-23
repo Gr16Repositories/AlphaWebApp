@@ -31,5 +31,7 @@ namespace AlphaWebApp.Models
         public int? CategoryId { get; set; } 
         public virtual Category Category { get; set; }
 
+        public virtual ICollection<Like> Like { get; set; }
+
     }
 }
