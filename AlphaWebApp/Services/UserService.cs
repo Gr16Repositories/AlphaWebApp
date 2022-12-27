@@ -83,7 +83,7 @@ namespace AlphaWebApp.Services
             return UserSubscriptions;
         }
 
-        // give me all users 
+        // gives all users 
         public List<User> GetallUsers()
         {
             return _db.Users.ToList();
