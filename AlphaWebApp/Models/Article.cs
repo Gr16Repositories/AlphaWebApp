@@ -26,6 +26,7 @@ namespace AlphaWebApp.Models
         public Uri ImageLink { get; set; }
         [Required]
         public bool Archive { get; set; } = false;
+        public bool EditorsChoice { get; set; } = false;
 
         //[ForeignKey("Category")]
         public int? CategoryId { get; set; } 
