@@ -304,7 +304,6 @@ namespace AlphaWebApp.Controllers
         {
             if (_subscriptionService.GetAllSubscriptions().ToList().Count > 0)
             {
-
                 var result = (from s in _subscriptionService.GetAllSubscriptions().ToList()
                               group s by s.Created.Date into g
                               orderby g.Key
@@ -316,76 +315,12 @@ namespace AlphaWebApp.Controllers
 
                 var subscriptionJsonObject = JsonConvert.SerializeObject(result);
                 ViewBag.subData = subscriptionJsonObject;
-                return await Task.Run(() => View(result)); 
+                return await Task.Run(() => View()); 
             }
             else
             {
-                return await Task.Run(() => View(new List<SubscriptionsStatisticsVM>()));
+                return await Task.Run(() => View());
             }
         }
-      
-
-
-    ////Give the Admin all Subscrptioins in Database
-    //[HttpPost]
-    //public List<Subscription> GetSubToStatistics()
-    //{
-    //    if (_subscriptionService.GetAllSubscriptions().ToList().Count > 0)
-    //    {
-    //        return _subscriptionService.GetAllSubscriptions().ToList();
-    //    }
-    //    else
-    //    {
-    //        return new List<Subscription>();
-    //    }
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //This section give the admin the previlge to show and create delete roles to users
-    //public IActionResult IndexRols()
-    //{
-    //    var roles = _roleManager.Roles.ToList();
-    //    return View(roles);
-    //}
-
-
-    //public IActionResult CreateRole()
-    //{
-    //    return View(new IdentityRole());
-    //}
-
-    //[HttpPost]
-    //public async Task<IActionResult> CreateRole(IdentityRole role)
-    //{
-    //    await _roleManager.CreateAsync(role);
-    //    return RedirectToAction("Index");
-    //}
-}
+    }
 }
