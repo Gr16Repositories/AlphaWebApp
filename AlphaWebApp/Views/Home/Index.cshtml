@@ -2,12 +2,8 @@
 
 
 @{
-    
     ViewData["Title"] = "Home Page";
-    
 }
-
-@*Latest News*@
 
 
 
@@ -23,6 +19,7 @@
     </div>
 </div>*@
 
+@*<-----------------------------------------------------Latest News------------------------------------------------------------->*@
 
 <div class="container">
     <div id="breaking-news">
@@ -38,67 +35,52 @@
 
 
 
-
-
-
-
-
-
-
-
+@*<----------------------------------------------------- ALL ------------------------------------------------------------->*@
 
 <div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">
 
-      
-    <div class="col-md-8 ">
-        <h2>Today News</h2>
+
+       <div class="col-md-8 ">
+    <h2>Today News</h2>
 
 
-        @await Component.InvokeAsync("TodayNews")
-        <br />
-        @await Component.InvokeAsync("TodayWorldNews")
-        <br />
-        @await Component.InvokeAsync("Sports")
+    @await Component.InvokeAsync("TodayNews")
+    <br />
+    @await Component.InvokeAsync("TodayWorldNews")
+    <br />
+    @await Component.InvokeAsync("Sports")
 
     </div>
-    
+
+    @*<----------------------------------------------------- Weather ------------------------------------------------------------->*@
+
+
+        <div class="col-md-3 ">
+    <h2>WeatherForecast</h2>
+
+
+    @await Component.InvokeAsync("WeatherForeCast" , new {
+    City = "Linkoping",
+    Lang = "en"}
+    )
+    <br />
+
+    <h2>Most read</h2>
 
 
 
-
-
-
-    <div class="col-md-3 ">
-        <h2>WeatherForecast</h2>
-
-        
-         @await Component.InvokeAsync("WeatherForeCast" , new { 
-             City = "Linkoping", 
-             Lang = "en"}
-             )
-     
-       
-
-             <br />
-   
-
-    
-        <h2>Most read</h2>
-
-
-
-        @await Component.InvokeAsync("MostPopular")
-        <br />
-        @await Component.InvokeAsync("Health")
+    @await Component.InvokeAsync("MostPopular")
+    <br />
+    @await Component.InvokeAsync("Health")
 
 
     </div>
 
 </div>
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="swe" style="margin-left:2%; margin-right:2%;">
         <h1>Full story</h1>
-    @await Component.InvokeAsync("SwedenNews")
+        @await Component.InvokeAsync("SwedenNews")
     </div>
 </div>
 <br />
@@ -106,31 +88,36 @@
 <div class="container-fluid">
     <div class="new" style="margin-left:2%; margin-right:2%;">
         <h1>Sports News</h1>
-    <br />
+        <br />
 
-    @await Component.InvokeAsync("SportHeadLine")
+        @await Component.InvokeAsync("SportHeadLine")
     </div>
 </div>
 
 <div class="container-fluid">
     <div class="new" style="margin-left:2%; margin-right:2%;">
-    <h1> Must See</h1>
-    <br />
-    @await Component.InvokeAsync("CategoriesNews")
+        <h1> Must See</h1>
+        <br />
+        @await Component.InvokeAsync("CategoriesNews")
     </div>
 
 </div>
 
 
+@*<----------------------------------------------------- Conent/1 = Sport Head Line/index ------------------------------------------------------------->*@
 
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col-sm-4">
 
+                @await Component.InvokeAsync("SportHeadLine")
 
+            </div>
 
-
-
-
-
-
+        </div>
+    </div>
+</div>
 
 
 
