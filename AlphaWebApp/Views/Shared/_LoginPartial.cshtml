@@ -32,9 +32,12 @@
                 <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="MyPage">My Page</a>
             </li>
         }
-
-       
-
+        @if (!subscriptionsService.HasSubscription(User))
+        {
+            <li>
+                <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"> Subscribe</a>
+            </li>
+        }
             <li class="nav-item" >
                 <a class="nav-link  text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
             </li>

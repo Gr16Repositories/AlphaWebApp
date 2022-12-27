@@ -1,11 +1,14 @@
-﻿@model AlphaWebApp.Models.Article
+﻿@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+@model AlphaWebApp.Models.Article
 <div class="container-fluid" style="">
     <div class="row">
-
-
         <div class="name" style="background-color:blueviolet">
-
-
             @Model.Category.name
         </div>
         <div class="card" style="width: 100%; height: 100%">
@@ -15,11 +18,11 @@
                 <p style="color:#7A2048;">
                     @Model.ContentSummary
                 </p>
-                <a asp-controller="Articles" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
-
-
-
-</div>
-</div>
-</div>
+                @if (subscriptionsService.HasSubscription(User))
+                {
+                    <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@Model.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
+                }
+            </div>
+        </div>
+    </div>
 </div>

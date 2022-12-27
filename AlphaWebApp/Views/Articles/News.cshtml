@@ -1,4 +1,11 @@
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+@model IEnumerable<AlphaWebApp.Models.Article>
 
 
 @*@foreach (var item in Model)
@@ -44,12 +51,14 @@
                                         <h2 class="entry-title">
                                             @item.HeadLine
                                         </h2>
-                                        <div class="entry-content">
-                                            @*<p>@item.Content</p>*@
-                                            @item.ContentSummary
-                                            <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
-                                        </div>
-
+                                        @if (subscriptionsService.HasSubscription(User))
+                                        {
+                                            <div class="entry-content">
+                                                @*<p>@item.Content</p>*@
+                                                @item.ContentSummary
+                                                <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

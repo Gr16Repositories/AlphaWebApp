@@ -43,6 +43,7 @@ namespace AlphaWebApp.Controllers
         }
 
         // GET: Articles
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Index()
         {
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
@@ -55,6 +56,27 @@ namespace AlphaWebApp.Controllers
         // GET: Articles/Details/5
         [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _articleService.GetArticleById(id) == null)
+            {
+                return NotFound();
+            }
+            var article = await Task.Run(() => _articleService.GetArticleById(id));
+            var categoryName = _articleService.GetCategoryById(Convert.ToInt32(article.CategoryId));
+            if (article == null)
+                return NotFound();
+            article.Views++;
+            if (article != null)
+            {
+                _articleService.SaveViewsToArticle(article.Id, article.Views);
+            }
+            ViewBag.CategoryName = categoryName.name;
+            return View(article);
+        }
+
+        // added in order to make continue reading sperate from Detailes that specified to Editor
+        [Authorize]
+        public async Task<IActionResult> ContinueReading(int? id)
         {
             if (id == null || _articleService.GetArticleById(id) == null)
             {
