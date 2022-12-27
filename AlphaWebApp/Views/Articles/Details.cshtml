@@ -1,4 +1,7 @@
-﻿@model AlphaWebApp.Models.Article
+﻿@using Microsoft.AspNetCore.Identity
+@model AlphaWebApp.Models.Article
+
+@inject UserManager<User> userManager
 
 @{
     ViewData["Title"] = "Details";
@@ -6,14 +9,16 @@
 
 @*<div class="container-fluid">
 
+
     <h1 class="text-lg-center border border-5 border-primary pt-4">@Model.HeadLine</h1>
     <br />
     <div class="pt-2 pb-5 ps-5 pe-2 h-50">
-        <img src="@Model.ImageLink" alt="Image"/>
+        <img src="@Model.ImageLink" alt="Image" />
     </div>
     <div style="height:10px" class="ps-5">
         <b class="bg-danger text-white">@ViewBag.CategoryName</b> &nbsp;&nbsp;|&nbsp;&nbsp;<b>@Model.DateStamp</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <b class="text-end"><i class="bi bi-eye"></i>&nbsp;@Model.Views</b> &nbsp;&nbsp; <b class="text-end"><i class="bi bi-hand-thumbs-up"></i> &nbsp;@Model.Likes</b>
+        <b class="text-end"><i class="bi bi-eye"></i>&nbsp;@Model.Views</b> &nbsp;&nbsp;
+        
     </div>
     <br />
     <div class="ps-5 pe-5 shadow bg-light mb-2 rounded">
@@ -25,9 +30,9 @@
 </div>
 <br />
 
-<div class="ps-5">
-    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-outline-success">Edit</a> |
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+
+
+
 </div>*@
 
 
@@ -49,8 +54,25 @@
                                     <div class="entry-meta">
                                         <ul class="list-inline">
                                             <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @Model.DateStamp </a></li>&nbsp; &nbsp;
-                                            <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @Model.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                            <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @Model.Likes </a></li>
+                                            <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@Model.Views </a></li>&nbsp;&nbsp;&nbsp;
+                                            <li class="loves">@if (!User.Identity.IsAuthenticated)
+        {
+            <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Like.Count</span></b>
+        }
+        else if (@Model.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == Model.Id ))
+        {
+            <a href="javascript:void(0)" class="unlike" data-id="@Model.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@Model.Like.Count</span></a>
+        }
+       @* else if (@Model.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == Model.Id ))
+        {
+            <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Likes</span></a>
+        }*@
+        else
+        {
+            <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Like.Count</span></a>
+        }
+</li>
+
                                         </ul>
                                     </div>
                                     <div class="entry-title">
@@ -67,4 +89,48 @@
             </div>
         </div>
     </div>
+    <br />
+    <div class="ps-5">
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a> |
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+
 </div>
+</div>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            //LIKE
+            $(document).on("click", "a.like", function () {
+                var id = $(this).data("id");// gets the article id               
+                var link = "/Articles/LikeThis/"; ///Articles/LikeThis/            
+                var a = $(this);               
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i> ' + result).removeClass("like").addClass("unlike");
+                    }
+                });
+            });
+            //UNLIKE
+            $(document).on("click", "a.unlike", function () {            
+                var id = $(this).data("id");               
+                var link = "/Articles/UnlikeThis/";              
+                var a = $(this);              
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i>' + result).removeClass("unlike").addClass("like");
+                    }
+                });
+            });
+
+        });
+    </script>
+}
+

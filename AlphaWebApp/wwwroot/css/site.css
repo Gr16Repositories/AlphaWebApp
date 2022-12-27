@@ -219,6 +219,50 @@ body {
 }
 
 
+
+
+#cookieConsentdiv {
+    z-index: 1000;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 30px 20px 30px;
+    font-family: 'Century Gothic', sans-serif;
+    box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    
+}
+
+    #cookieConsentdiv button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border: none;
+        background-color: green;
+        padding: 10px 50px;
+        margin-top: -5px;
+        color: white;
+        transition: all ease 0.5s;
+    }
+
+        #cookieConsentdiv button:hover {
+            background-color: darkgreen;
+        }
+
+    #cookieConsentdiv h3 {
+        font-size: 22px;
+    }
+
+    #cookieConsentdiv p {
+        font-size: 13px;
+    }
+
+    #cookieConsentdiv a {
+        color: gray;
+        text-decoration: underline;
+    }
 .form-group-buttons {
     margin: 20px;
-}

@@ -40,12 +40,7 @@ namespace AlphaWebApp.Controllers
         {
             return View();
         }
-        public IActionResult Articles( int id)
-        {
-            //var articles =    _articlesServices.GetArticles(id)
-            
-            return View();
-        }
+     
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -54,13 +49,7 @@ namespace AlphaWebApp.Controllers
         }  
 
    
-        //Article Read More button
-        public IActionResult ReadMore()
-        {
-            var test = _articleService.GetAllArticles().FirstOrDefault();
-            return View(test);
-        }
-
+      
 
         
     }

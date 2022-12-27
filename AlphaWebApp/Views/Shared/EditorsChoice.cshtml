@@ -1,0 +1,51 @@
+﻿
+@model IEnumerable<AlphaWebApp.Models.Article>
+@{
+    ViewData["Title"] = "EditorsChoice";
+}
+@{
+    var art = Model;
+}
+<div class="container">
+  
+
+    <table class="table">
+        <thead class="tablen">
+            <tr>
+                <th>
+                    Headline
+                </th>
+                <th>
+                    ContantSummary
+                </th>
+                <th>
+                    CategoryName
+                </th>
+                <th>
+                    Editor Choice
+                </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach(var item in art)
+            {
+                <tr>   
+                
+                  @Html.DisplayFor(modelItem=>item.HeadLine)
+                </tr>
+                <tr>
+
+                    @Html.DisplayFor(modelItem=>item.Content)
+                </tr>
+                <tr>
+
+                    @Html.DisplayFor(modelItem=>item.EditorsChoice)
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+
+</div>
