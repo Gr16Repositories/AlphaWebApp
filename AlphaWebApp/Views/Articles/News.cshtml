@@ -1,21 +1,5 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Article>
 
-
-@*@foreach (var item in Model)
-{
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
-        <div class="card-body">
-            <h3 class="card-title"><b>@item.HeadLine></b></h3>
-            <p class="card-text">@item.ContentSummary</p>
-            <p class="card-text">@item.Content</p>
-            <p class="card-text">@item.DateStamp</p>
-            <p class="card-text">Likes: @item.Likes &nbsp Views: @item.Views</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-}*@
-
 @foreach (var item in Model)
 {
     <div class="container section">
