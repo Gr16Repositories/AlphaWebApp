@@ -379,10 +379,10 @@ namespace AlphaWebApp.Controllers
             }
         }
 
+
         [HttpPost]
         public IActionResult Editorschoice(int id) 
         {
-
             var article = _articleService.GetArticleById(id);
             if (article == null)
             {
@@ -393,8 +393,8 @@ namespace AlphaWebApp.Controllers
             _db.Update(article);
             _db.SaveChanges();
             return Json(new { editorsChoice = article.EditorsChoice });
-           
         }
+
 
     }
 }

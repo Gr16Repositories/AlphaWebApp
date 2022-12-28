@@ -1,0 +1,119 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+
+
+@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<User> userManager
+
+@{
+    ViewData["Title"] = "SearchResult";
+}
+
+<hr />
+<div class="ListOfArticles">
+    <h2>
+        <b>List of Articles</b>
+    </h2>
+</div>
+<hr />
+<div class="container">
+
+
+    @foreach (var group in Model.GroupBy(a => a.Category))
+    {
+        <div class="row gy-4" id="ads">
+            <div style="color: #fff; font-size:22px; background-color: @group.Key.Color">
+
+                @group.Key.name
+            </div>
+            @foreach (var item in group)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-image">
+                            <span class="card-notify-badge">@item.Category.name</span>
+                            @*<span class="card-notify-year">@item.DateStamp</span>*@
+                            <img class="img-fluid" src="@item.ImageLink" style="height: 150px; width: 100%; object-fit: cover;" />
+                        </div>
+                        <div class="card-body text-start d-flex flex-column">
+                            <div class="ad-title text-center">
+                                <h5>@item.HeadLine</h5>
+                            </div>
+                            <p style="color:#000;">
+                                @item.ContentSummary
+                                @if (subscriptionsService.HasSubscription(User))
+                                {
+                                    <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
+                                }
+                            </p>
+                            <div class="post-content">
+                                <i class="fa fa-eye">@item.Views</i>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></b>
+                                }
+                                else if (item.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == item.Id))
+                                {
+                                    <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@item.Like.Count</span></a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></a>
+                                }
+                                <i class="fa-sharp fa-solid fa-clock">@item.DateStamp.ToString("dd-MM-yyyy HH:mm")</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            //LIKE
+            $(document).on("click", "a.like", function () {
+                var id = $(this).data("id");// gets the article id
+                var link = "/Articles/LikeThis/"; ///Articles/LikeThis/
+                var a = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i> ' + result).removeClass("like").addClass("unlike");
+                    }
+                });
+            });
+            //UNLIKE
+            $(document).on("click", "a.unlike", function () {
+                var id = $(this).data("id");
+                var link = "/Articles/UnlikeThis/";
+                var a = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i>' + result).removeClass("unlike").addClass("like");
+                    }
+                });
+            });
+
+        });
+    </script>
+}
+
