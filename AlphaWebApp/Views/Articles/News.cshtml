@@ -1,9 +1,10 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+@using Microsoft.AspNetCore.Identity
 @using AlphaWebApp.Services
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject ISubscriptionService subscriptionsService
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+
 
 @foreach (var item in Model)
 {
