@@ -327,7 +327,7 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult News(int id)
         {
-            var categoryArticles = _articleService.GetArticlesById(id);
+            var categoryArticles = _articleService.GetArticlesByCategoryId(id);
             return View(categoryArticles);
         }
 

@@ -141,9 +141,14 @@ namespace AlphaWebApp.Services
             return _db.Articles.Where(a => a.Category.name == name).ToList();
         }
 
-        public List<Article> GetArticlesById(int id)
+        public List<Article> GetArticlesByCategoryId(int id)
         {
             return _db.Articles.Where(a => a.CategoryId == id).ToList();
+        }
+
+        public Article GetSpecificArticleByCategoryId(int id)
+        {
+            return _db.Articles.FirstOrDefault(a => a.CategoryId == id);
         }
     }
 }
