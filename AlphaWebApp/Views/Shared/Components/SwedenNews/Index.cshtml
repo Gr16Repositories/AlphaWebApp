@@ -1,4 +1,11 @@
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+@model IEnumerable<AlphaWebApp.Models.Article>
 
 @{
     var firstArticle = Model.FirstOrDefault();
@@ -20,8 +27,10 @@
                         <p style="color:#7A2048;">
                             @firstArticle.ContentSummary
                         </p>
-                        <a asp-controller="Articles" asp-action="Details" asp-route-id="@firstArticle.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
-
+                        @if (subscriptionsService.HasSubscription(User))
+                        {
+                            <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@firstArticle.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
+                        }
                     </div>
                 </div>
             </div>
@@ -31,10 +40,10 @@
                 {
                     <div class="col-4">
                         <img src="@article.ImageLink" class="card-img-top" alt="Image" style="padding:1px; object-fit: cover; height: 150px; width:150%;">
-
-
-
-                        <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="headline" style="color:whitesmoke"><u>@article.HeadLine</u></a>
+                        @if (subscriptionsService.HasSubscription(User))
+                        {
+                            <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@article.Id" class="headline" style="color:whitesmoke"><u>@article.HeadLine</u></a>
+                        }
                     </div>
                 }
             </div>

@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Statistics";
+}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<canvas id="myChart" style="width:100%; max-height:600px"></canvas>
+
+<script>
+    // How to use NewtonSoft to get Model data to Javascritp variable
+    var data = @Html.Raw(ViewBag.subData);
+
+    const labels = [];
+    const yValues = [];
+        data.forEach(obj => {
+            labels.push(new Date(obj.SubscriptionsDate).toLocaleDateString());
+            yValues.push(obj.SubScriptionsInOneDay);
+        });
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels,
+                datasets: [{
+                    label: "Subscrptions",
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                legend: { display: false },
+                scales: {
+                    yAxes: [{ ticks: { min: 0} }],
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+</script>
+
+
+
+

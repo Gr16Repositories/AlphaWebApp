@@ -4,7 +4,7 @@
 @inject UserManager<User> userManager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "ContinueReading";
 }
 
 @*<div class="container-fluid">
@@ -58,22 +58,26 @@
                                             <li class="loves">
                                                 @if (!User.Identity.IsAuthenticated)
                                                 {
-                                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@Model.Like.Count</span></b>
+                                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Like.Count</span></b>
                                                 }
                                                 else if (@Model.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == Model.Id))
                                                 {
-                                                    <a href="javascript:void(0)" class="unlike" data-id="@Model.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@Model.Like.Count</span></a>
+                                                    <a href="javascript:void(0)" class="unlike" data-id="@Model.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@Model.Like.Count</span></a>
                                                 }
+                                                @* else if (@Model.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == Model.Id ))
+                                                {
+                                                <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Likes</span></a>
+                                                }*@
                                                 else
                                                 {
-                                                    <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@Model.Like.Count</span></a>
+                                                    <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Like.Count</span></a>
                                                 }
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="entry-title">
+                                    <h2 class="entry-title">
                                         @Model.HeadLine
-                                    </div>
+                                    </h2>
                                     <div class="entry-content">
                                         <p>@Model.Content</p>
                                     </div>
@@ -86,11 +90,6 @@
         </div>
     </div>
     <br />
-    <div class="ps-5">
-        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-success">Edit</a> |
-        <a asp-action="Index" class="btn btn-primary">Back to List</a>
-
-    </div>
 </div>
 
 @section scripts
@@ -107,7 +106,7 @@
                     url: link,
                     data: { 'articleid': id },
                     success: function (result) {
-                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes: ' + result + '</span>').removeClass("like").addClass("unlike");
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i> ' + result).removeClass("like").addClass("unlike");
                     }
                 });
             });
@@ -121,7 +120,7 @@
                     url: link,
                     data: { 'articleid': id },
                     success: function (result) {
-                        a.html('<i class="bi bi-heart bi-lg text-danger"></i><span>Likes:' + result + '</span>').removeClass("unlike").addClass("like");
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i>' + result).removeClass("unlike").addClass("like");
                     }
                 });
             });

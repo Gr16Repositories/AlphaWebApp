@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AlphaWebApp.Data;
-using AlphaWebApp.Models;
+﻿using AlphaWebApp.Models;
+using AlphaWebApp.Models.ViewModels;
 using AlphaWebApp.Services;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace AlphaWebApp.Controllers
 {
@@ -305,65 +299,28 @@ namespace AlphaWebApp.Controllers
             return _subscriptionTypeService.GetAllSubscriptionType().Any(e => e.Id == id);
         }
 
-        //Give the Admin all Subscrptioins in Database
-        public async Task<IActionResult> Statistics()
+        // Making View to Render Statistics data
+        public async Task<IActionResult> ShowStatistics()
         {
-            //var test = _subscriptionService.GetAllSubscriptions().ToList();
             if (_subscriptionService.GetAllSubscriptions().ToList().Count > 0)
             {
-                return View(await Task.Run(() => _subscriptionService.GetAllSubscriptions().ToList()));
+                var result = (from s in _subscriptionService.GetAllSubscriptions().ToList()
+                              group s by s.Created.Date into g
+                              orderby g.Key
+                              select new SubscriptionsStatisticsVM
+                              {
+                                  SubscriptionsDate = g.Select(s => s.Created).FirstOrDefault(),
+                                  SubScriptionsInOneDay = g.Count(),
+                              }).ToList();
+
+                var subscriptionJsonObject = JsonConvert.SerializeObject(result);
+                ViewBag.subData = subscriptionJsonObject;
+                return await Task.Run(() => View()); 
             }
             else
             {
-                return RedirectToAction("Index");
+                return await Task.Run(() => View());
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //This section give the admin the previlge to show and create delete roles to users
-        //public IActionResult IndexRols()
-        //{
-        //    var roles = _roleManager.Roles.ToList();
-        //    return View(roles);
-        //}
-
-
-        //public IActionResult CreateRole()
-        //{
-        //    return View(new IdentityRole());
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> CreateRole(IdentityRole role)
-        //{
-        //    await _roleManager.CreateAsync(role);
-        //    return RedirectToAction("Index");
-        //}
     }
 }

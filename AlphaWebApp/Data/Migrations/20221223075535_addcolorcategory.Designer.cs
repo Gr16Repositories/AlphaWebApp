@@ -4,6 +4,7 @@ using AlphaWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AlphaWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221223075535_addcolorcategory")]
+    partial class addcolorcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,9 +52,6 @@ namespace AlphaWebApp.Data.Migrations
 
                     b.Property<DateTime>("DateStamp")
                         .HasColumnType("datetime2");
-
-                    b.Property<bool>("EditorsChoice")
-                        .HasColumnType("bit");
 
                     b.Property<string>("HeadLine")
                         .IsRequired()
@@ -98,32 +98,6 @@ namespace AlphaWebApp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("AlphaWebApp.Models.Like", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ArticleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LikedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
@@ -411,23 +385,6 @@ namespace AlphaWebApp.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("AlphaWebApp.Models.Like", b =>
-                {
-                    b.HasOne("AlphaWebApp.Models.Article", "Article")
-                        .WithMany("Like")
-                        .HasForeignKey("ArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AlphaWebApp.Models.User", "User")
-                        .WithMany("Like")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Article");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("AlphaWebApp.Models.Subscription", b =>
                 {
                     b.HasOne("AlphaWebApp.Models.SubscriptionType", "SubscriptionType")
@@ -496,11 +453,6 @@ namespace AlphaWebApp.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AlphaWebApp.Models.Article", b =>
-                {
-                    b.Navigation("Like");
-                });
-
             modelBuilder.Entity("AlphaWebApp.Models.Category", b =>
                 {
                     b.Navigation("Articleslist");
@@ -513,8 +465,6 @@ namespace AlphaWebApp.Data.Migrations
 
             modelBuilder.Entity("AlphaWebApp.Models.User", b =>
                 {
-                    b.Navigation("Like");
-
                     b.Navigation("SubscriptionList");
                 });
 #pragma warning restore 612, 618

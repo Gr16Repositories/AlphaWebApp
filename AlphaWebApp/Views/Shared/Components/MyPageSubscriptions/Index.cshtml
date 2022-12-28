@@ -1,0 +1,23 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Subscription>
+
+
+
+
+
+<h2>Subscriptions</h2>
+
+<div class="card-deck">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><b>@item.SubscriptionType.TypeName</b></h4>
+                <p class="card-text">Created at: @item.Created.ToString("yyyy/MM/dd")</p>
+                <p class="card-text">Expires at: @item.ExpireAt.ToString("yyyy/MM/dd")</p>
+                <p class="card-text">Status: @item.Price</p>
+                <p class="card-text">Status: @item.Active</p>
+                @*<a href="#" class="btn btn-primary">View Details</a>*@
+            </div>
+        </div>
+    }
+</div>

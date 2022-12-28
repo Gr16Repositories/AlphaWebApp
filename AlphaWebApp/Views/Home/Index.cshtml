@@ -2,12 +2,8 @@
 
 
 @{
-    
     ViewData["Title"] = "Home Page";
-    
 }
-
-@*Latest News*@
 
 
 
@@ -23,13 +19,13 @@
     </div>
 </div>*@
 
+@*<-----------------------------------------------------Latest News------------------------------------------------------------->*@
 
 <div class="container">
     <div id="breaking-news">
         <span>
             Latest News   <i class="fa fa-angle-double-right"></i>
         </span>
-
         <div id="latest-news">
             @await Component.InvokeAsync("LatestArticles")
         </div>
@@ -39,66 +35,50 @@
 
 
 
+@*<----------------------------------------------------- ALL ------------------------------------------------------------->*@
+
+@*<div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">*@
+
+
+@*    <div class="col-md-8 ">
+    <h2>Today News</h2>
+
+
+    @await Component.InvokeAsync("TodayNews")
+    <br />
+    @await Component.InvokeAsync("TodayWorldNews")
+    <br />
+    @await Component.InvokeAsync("Sports")
+
+    </div>*@
+
+@*<----------------------------------------------------- Weather ------------------------------------------------------------->*@
+
+
+@*        <div class="col-md-3 ">
+    <h2>WeatherForecast</h2>
+
+
+    @await Component.InvokeAsync("WeatherForeCast" , new {
+    City = "Linkoping",
+    Lang = "en"}
+    )
+    <br />
+
+    <h2>Most read</h2>
 
 
 
+    @await Component.InvokeAsync("MostPopular")
+    <br />
+    @await Component.InvokeAsync("Health")
 
 
 
-
-
-<div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">
-
-      
-    <div class="col-md-8 ">
-        <h2>Today News</h2>
-
-
-        @await Component.InvokeAsync("TodayNews")
-        <br />
-        @await Component.InvokeAsync("TodayWorldNews")
-        <br />
-        @await Component.InvokeAsync("Sports")
-
-    </div>
-    
-
-
-
-
-
-
-    <div class="col-md-3 ">
-        <h2>WeatherForecast</h2>
-
-        
-         @await Component.InvokeAsync("WeatherForeCast" , new { 
-             City = "Linkoping", 
-             Lang = "en"}
-             )
-     
-       
-
-             <br />
-   
-
-    
-        <h2>Most read</h2>
-
-
-
-        @await Component.InvokeAsync("MostPopular")
-        <br />
-        @await Component.InvokeAsync("Health")
-
-
-    </div>
-
-</div>
-<div class="container-fluid" >
+@*<div class="container-fluid">
     <div class="swe" style="margin-left:2%; margin-right:2%;">
         <h1>Full story</h1>
-    @await Component.InvokeAsync("SwedenNews")
+        @await Component.InvokeAsync("SwedenNews")
     </div>
 </div>
 <br />
@@ -106,31 +86,107 @@
 <div class="container-fluid">
     <div class="new" style="margin-left:2%; margin-right:2%;">
         <h1>Sports News</h1>
-    <br />
+        <br />
 
-    @await Component.InvokeAsync("SportHeadLine")
+        @await Component.InvokeAsync("SportHeadLine")
     </div>
 </div>
 
 <div class="container-fluid">
     <div class="new" style="margin-left:2%; margin-right:2%;">
-    <h1> Must See</h1>
-    <br />
-    @await Component.InvokeAsync("CategoriesNews")
+        <h1> Must See</h1>
+        <br />
+        @await Component.InvokeAsync("CategoriesNews")
     </div>
 
+</div>*@
+
+
+
+
+@*<----------------------------------------------------- Conent/1 = Sport Head Line/index ------------------------------------------------------------->*@
+
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col-sm-4">
+
+                @await Component.InvokeAsync("SportHeadLine")
+
+            </div>
+
+            @await Component.InvokeAsync("WeatherForeCast" , new {
+            City = "Linkoping",
+            Lang = "en"})
+
+
+
+            <!--Editor Choice-->
+            <div class="section">
+                <div class="latest-news-wrapper">
+                    <h1 class="section-title">This Is Rising!</h1>
+                    <div id="latest-news">
+                        <div class="post medium-post">
+                            <div class="entry-header">
+                                <div class="entry-thumbnail">
+                                    <img class="img-responsive" src="images/post/1.jpg" alt="" />
+                                </div>
+                                <div class="catagory politics"><span><a href="#">Politics</a></span></div>
+                            </div>
+                            <div class="post-content">
+                                <div class="entry-meta">
+                                    <ul class="list-inline">
+                                        <li class="publish-date"><a href="#"><i class="fa fa-clock-o"></i> Nov 5, 2015 </a></li>
+                                        <li class="views"><a href="#"><i class="fa fa-eye"></i>15k</a></li>
+                                        <li class="loves"><a href="#"><i class="fa fa-heart-o"></i>278</a></li>
+                                    </ul>
+                                </div>
+                                <h2 class="entry-title">
+                                    <a href="news-details.html">Our closest relatives aren't fans of daylight saving time</a>
+                                </h2>
+                            </div>
+                        </div><!--/post-->
+
+
+                    </div>
+                </div><!--/.latest-news-wrapper-->
+            </div><!--/.section-->
+            <!--Popular News-->
+            <div class="widget">
+                <h1 class="section-title title">Popular News!</h1>
+                <ul class="post-list">
+                    <li>
+                        <div class="post small-post">
+                            <div class="entry-header">
+                                <div class="entry-thumbnail">
+                                    <img class="img-responsive" src="images/post/rising/1.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <div class="video-catagory"><a href="#">World</a></div>
+                                <h2 class="entry-title">
+                                    <a href="news-details.html">3 students arrested after body-slamming principal</a>
+                                </h2>
+                            </div>
+                        </div><!--/post-->
+                    </li>
+                    <li>
+                        <div class="post small-post">
+                            <div class="entry-header">
+                                <div class="entry-thumbnail">
+                                    <img class="img-responsive" src="images/post/rising/2.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <div class="video-catagory"><a href="#">Business</a></div>
+                                <h2 class="entry-title">
+                                    <a href="news-details.html">3 students arrested after body-slamming principal</a>
+                                </h2>
+                            </div>
+                        </div><!--/post-->
+                    </li>
+                </ul>
+            </div><!--/#widget-->
+        </div>
+    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -26,13 +26,15 @@ namespace AlphaWebApp.Controllers
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly ISubscriptionService _subscriptionService;
 
         public ArticlesController(ApplicationDbContext db,
             IArticleService articleService,
             IStorageService storageService,
             IConfiguration configuration,
             IMapper mapper,
-            IUserService userService)
+            IUserService userService,
+            ISubscriptionService subscriptionService)
         {
             _db = db;
             _articleService = articleService;
@@ -40,9 +42,11 @@ namespace AlphaWebApp.Controllers
             _configuration = configuration;
             _mapper = mapper;
             _userService = userService;
+            _subscriptionService = subscriptionService;
         }
 
         // GET: Articles
+        [Authorize(Roles = "Editor")]
         public async Task<IActionResult> Index()
         {
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
@@ -71,6 +75,36 @@ namespace AlphaWebApp.Controllers
             }
             ViewBag.CategoryName = categoryName.name;
             return View(article);
+        }
+
+        // added in order to make continue reading sperate from Detailes that specified to Editor
+        [Authorize]
+        public async Task<IActionResult> ContinueReading(int? id)
+        {
+            // if an user has an active subscription from subscriptionsService then continue reading otherwise redirect to make a new subscription 
+            if (_subscriptionService.HasSubscription(User))
+            {
+
+                if (id == null || _articleService.GetArticleById(id) == null)
+                {
+                    return NotFound();
+                }
+                var article = await Task.Run(() => _articleService.GetArticleById(id));
+                var categoryName = _articleService.GetCategoryById(Convert.ToInt32(article.CategoryId));
+                if (article == null)
+                    return NotFound();
+                article.Views++;
+                if (article != null)
+                {
+                    _articleService.SaveViewsToArticle(article.Id, article.Views);
+                }
+                ViewBag.CategoryName = categoryName.name;
+                return View(article);
+            }
+            else
+            {
+                return RedirectToAction("GetSubscriptionTypsList", "Subscriptions");
+            }
         }
 
         // GET: Articles/Create
@@ -294,7 +328,6 @@ namespace AlphaWebApp.Controllers
         public IActionResult News(int id)
         {
             var categoryArticles = _articleService.GetArticlesById(id);
-
             return View(categoryArticles);
         }
 

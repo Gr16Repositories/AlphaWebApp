@@ -1,20 +1,9 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
 ﻿@model IEnumerable<AlphaWebApp.Models.Article>
-@inject UserManager<User> userManager
-
-@*@foreach (var item in Model)
-{
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
-        <div class="card-body">
-            <h3 class="card-title"><b>@item.HeadLine></b></h3>
-            <p class="card-text">@item.ContentSummary</p>
-            <p class="card-text">@item.Content</p>
-            <p class="card-text">@item.DateStamp</p>
-            <p class="card-text">Likes: @item.Likes &nbsp Views: @item.Views</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-}*@
 
 @foreach (var item in Model)
 {
@@ -29,7 +18,7 @@
                                     <div class="entry-header">
                                         <div class="entry-thumbnail">
                                             <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
-                                            <span class="card-category-badge">@item.Category.name</span>
+                                            <span class="card-category-badge">@item.Category.name</span>                                            
                                         </div>
                                     </div>
                                     <div class="post-content">
@@ -37,6 +26,7 @@
                                             <ul class="list-inline">
                                                 &nbsp;
                                                 <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
+
                                                 |&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@item.Views </a></li>&nbsp;&nbsp;&nbsp;
                                                 |&nbsp;
                                                 <li class="loves">
@@ -44,7 +34,7 @@
                                                     {
                                                         <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></b>
                                                     }
-                                                    else if (@item.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == item.Id))
+                                                    else if (@item.Like.Any(x => x.UserId == UserManager.GetUserId(User) && x.ArticleId == item.Id))
                                                     {
                                                         <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@item.Like.Count</span></a>
                                                     }
@@ -53,16 +43,25 @@
                                                         <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
                                                     }
                                                 </li>
-                                            </ul>
+
+                                                &nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
+                                                &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>
+                                        </ul>
                                         </div>
                                         <h2 class="entry-title">
                                             @item.HeadLine
                                         </h2>
                                         <div class="entry-content">                                           
                                             @item.ContentSummary
-                                            <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                            @if (subscriptionsService.HasSubscription(User))
+                                            {
+                                                <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
+                                            }
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
