@@ -6,20 +6,7 @@
 }
 
 
-
-@*<div class="container-fluid">
-    <div id="breaking-news">
-        <span>
-            Latest News   <i class="fa fa-angle-double-right"></i>
-        </span>
-
-        <div id="latest-news">
-            @await Component.InvokeAsync("LatestArticles")
-        </div>
-    </div>
-</div>*@
-
-@*<-----------------------------------------------------Latest News------------------------------------------------------------->*@
+<!-------------------------- Latest News -------------------------->
 
 <div class="container">
     <div id="breaking-news">
@@ -35,93 +22,43 @@
 
 
 
-@*<----------------------------------------------------- ALL ------------------------------------------------------------->*@
-
-@*<div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">*@
 
 
-@*    <div class="col-md-8 ">
-    <h2>Today News</h2>
 
 
-    @await Component.InvokeAsync("TodayNews")
-    <br />
-    @await Component.InvokeAsync("TodayWorldNews")
-    <br />
-    @await Component.InvokeAsync("Sports")
 
-    </div>*@
+<!-------------------------- Old Code  -------------------------->
+@*@await Component.InvokeAsync("TodayNews")
+@await Component.InvokeAsync("TodayWorldNews")
+@await Component.InvokeAsync("Health")
+@await Component.InvokeAsync("MostPopular")
+@await Component.InvokeAsync("CategoriesNews")
+@await Component.InvokeAsync("SwedenNews")
+@await Component.InvokeAsync("SportHeadLine")
+@await Component.InvokeAsync("Sports")*@
 
-@*<----------------------------------------------------- Weather ------------------------------------------------------------->*@
 
+<!-------------------------- Weather API -------------------------->
 
-@*        <div class="col-md-3 ">
+<div class="col-md-3 ">
     <h2>WeatherForecast</h2>
-
-
     @await Component.InvokeAsync("WeatherForeCast" , new {
     City = "Linkoping",
     Lang = "en"}
     )
-    <br />
-
-    <h2>Most read</h2>
-
-
-
-    @await Component.InvokeAsync("MostPopular")
-    <br />
-    @await Component.InvokeAsync("Health")
-
-
-
-@*<div class="container-fluid">
-    <div class="swe" style="margin-left:2%; margin-right:2%;">
-        <h1>Full story</h1>
-        @await Component.InvokeAsync("SwedenNews")
-    </div>
-</div>
-<br />
-<br />
-<div class="container-fluid">
-    <div class="new" style="margin-left:2%; margin-right:2%;">
-        <h1>Sports News</h1>
-        <br />
-
-        @await Component.InvokeAsync("SportHeadLine")
-    </div>
 </div>
 
-<div class="container-fluid">
-    <div class="new" style="margin-left:2%; margin-right:2%;">
-        <h1> Must See</h1>
-        <br />
-        @await Component.InvokeAsync("CategoriesNews")
-    </div>
-
-</div>*@
 
 
-
-
-@*<----------------------------------------------------- Conent/1 = Sport Head Line/index ------------------------------------------------------------->*@
+<!-------------------------- Sport Head Line/index -------------------------->
 
 <div class="container">
     <div class="section">
         <div class="row">
             <div class="col-sm-4">
-
-                @await Component.InvokeAsync("SportHeadLine")
-
+                @*@await Component.InvokeAsync("SportHeadLine")*@
             </div>
 
-            @await Component.InvokeAsync("WeatherForeCast" , new {
-            City = "Linkoping",
-            Lang = "en"})
-
-
-
-            <!--Editor Choice-->
             <div class="section">
                 <div class="latest-news-wrapper">
                     <h1 class="section-title">This Is Rising!</h1>
@@ -151,45 +88,171 @@
                     </div>
                 </div><!--/.latest-news-wrapper-->
             </div><!--/.section-->
-            <!--Popular News-->
-            <div class="widget">
-                <h1 class="section-title title">Popular News!</h1>
-                <ul class="post-list">
-                    <li>
-                        <div class="post small-post">
-                            <div class="entry-header">
-                                <div class="entry-thumbnail">
-                                    <img class="img-responsive" src="images/post/rising/1.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <div class="video-catagory"><a href="#">World</a></div>
-                                <h2 class="entry-title">
-                                    <a href="news-details.html">3 students arrested after body-slamming principal</a>
-                                </h2>
-                            </div>
-                        </div><!--/post-->
-                    </li>
-                    <li>
-                        <div class="post small-post">
-                            <div class="entry-header">
-                                <div class="entry-thumbnail">
-                                    <img class="img-responsive" src="images/post/rising/2.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="post-content">
-                                <div class="video-catagory"><a href="#">Business</a></div>
-                                <h2 class="entry-title">
-                                    <a href="news-details.html">3 students arrested after body-slamming principal</a>
-                                </h2>
-                            </div>
-                        </div><!--/post-->
-                    </li>
-                </ul>
-            </div><!--/#widget-->
+
         </div>
     </div>
 </div>
+
+
+@*<----------------------------------------------------- < Final Style Home Page > ------------------------------------------------------------->*@
+
+<!--Editor Choice-->
+<div class="container">
+    <div class="widget">
+        <h1 class="section-title title">Editor Choice</h1>
+        <main role="main" class="pb-3">
+            <div id="main-wrapper" class="homepage">
+                <div class="container">
+                    <div class="section">
+                        <div class="row">
+                            <div class="site-content col-md-9">
+                                <div class="col-sm-8">
+                                    <div id="home-slider">
+                                        <div class="post feature-post">
+                                            <div class="entry-header">
+                                                <div class="entry-thumbnail">
+                                                    @*<img class="img-responsive" src="images/post/slider/1.jpg" alt="" />*@
+                                                    <img src="~/images/articles/1/002.png" />
+                                                </div>
+                                                <div class="catagory world"><a href="#">World</a></div>
+                                            </div>
+                                            <div class="post-content">
+                                                <div class="entry-meta">
+                                                    <ul class="list-inline">
+                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
+                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
+                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
+                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="entry-title">
+                                                    <a href="news-details.html">We Are Seeing The Effects Of The Minimum Wage Rise In San Francisco</a>
+                                                </h2>
+                                            </div>
+                                        </div><!--/post-->
+                                        <div class="post feature-post">
+                                            <div class="entry-header">
+                                                <div class="entry-thumbnail">
+                                                    @*<img class="img-responsive" src="images/post/slider/7.jpg" alt="" />*@
+                                                    <img src="~/images/articles/1/003.png" />
+
+                                                </div>
+                                                <div class="catagory sports"><a href="#">Sports</a></div>
+                                            </div>
+                                            <div class="post-content">
+                                                <div class="entry-meta">
+                                                    <ul class="list-inline">
+                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
+                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
+                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
+                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="entry-title">
+                                                    <a href="news-details.html">The 20 moments in sports that tried to break the Internet in 2015</a>
+                                                </h2>
+                                            </div>
+                                        </div><!--/post-->
+                                        <div class="post feature-post">
+                                            <div class="entry-header">
+                                                <div class="entry-thumbnail">
+                                                    @*<img class="img-responsive" src="images/post/slider/13.jpg" alt="" />*@
+                                                    <img src="~/images/articles/1/004.png" />
+
+                                                </div>
+                                                <div class="catagory entertainment"><a href="#">Entertainment</a></div>
+                                            </div>
+                                            <div class="post-content">
+                                                <div class="entry-meta">
+                                                    <ul class="list-inline">
+                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
+                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
+                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
+                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="entry-title">
+                                                    <a href="news-details.html">The best games in 2015 for your new iPhone, iPad, or Android phone</a>
+                                                </h2>
+                                            </div>
+                                        </div><!--/post-->
+                                        <div class="post feature-post">
+                                            <div class="entry-header">
+                                                <div class="entry-thumbnail">
+                                                    @*<img class="img-responsive" src="images/post/slider/12.jpg" alt="" />*@
+                                                    <img src="~/images/articles/1/005.png" />
+
+                                                </div>
+                                                <div class="catagory world"><a href="#">World</a></div>
+                                            </div>
+                                            <div class="post-content">
+                                                <div class="entry-meta">
+                                                    <ul class="list-inline">
+                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
+                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
+                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
+                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="entry-title">
+                                                    <a href="news-details.html">The Force Awakens doubles previous Christmas Day record with $49.3 million box office</a>
+                                                </h2>
+                                            </div>
+                                        </div><!--/post-->
+                                        <div class="post feature-post">
+                                            <div class="entry-header">
+                                                <div class="entry-thumbnail">
+                                                    @*<img class="img-responsive" src="images/post/slider/14.jpg" alt="" />*@
+                                                    <img src="~/images/articles/1/006.png" />
+
+                                                </div>
+                                                <div class="catagory sports"><a href="#">Sports</a></div>
+                                            </div>
+                                            <div class="post-content">
+                                                <div class="entry-meta">
+                                                    <ul class="list-inline">
+                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
+                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
+                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
+                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
+                                                    </ul>
+                                                </div>
+                                                <h2 class="entry-title">
+                                                    <a href="news-details.html">Bran Stark is all grown up in new 'Game of Thrones' Season 6 photo</a>
+                                                </h2>
+                                            </div>
+                                        </div><!--/post-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+<div class="container">
+    <main role="main" class="pb-3">
+
+        <div id="main-wrapper" class="homepage">
+            <div class="container">
+
+                					<div class="section">
+						<div class="latest-news-wrapper">
+                        <h1 class="section-title">Most Popular</h1>
+                        @await Component.InvokeAsync("MostPopular")
+
+						</div><!--/.latest-news-wrapper-->
+					</div><!--/.section-->
+            </div>
+        </div>
+    </main>
+</div>
+
+
 
 <!-- View component for Stocks Details-->
 <div class="container">
@@ -204,3 +267,4 @@
         </div>
     </div>
 </div>
+

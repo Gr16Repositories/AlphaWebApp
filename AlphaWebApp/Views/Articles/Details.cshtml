@@ -53,22 +53,29 @@
                                 <div class="post-content">
                                     <div class="entry-meta">
                                         <ul class="list-inline">
-                                            <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @Model.DateStamp </a></li>&nbsp; &nbsp;
-                                            <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@Model.Views </a></li>&nbsp;&nbsp;&nbsp;
+
+                                            <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @Model.DateStamp.ToString("dd-MM-yyyy HH:mm tt") </a></li>&nbsp; &nbsp;
+                                            <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @Model.Views </a></li>&nbsp;&nbsp;&nbsp;
                                             <li class="loves">
                                                 @if (!User.Identity.IsAuthenticated)
                                                 {
-                                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@Model.Like.Count</span></b>
+                                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Like.Count</span></b>
                                                 }
                                                 else if (@Model.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == Model.Id))
                                                 {
-                                                    <a href="javascript:void(0)" class="unlike" data-id="@Model.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@Model.Like.Count</span></a>
+                                                    <a href="javascript:void(0)" class="unlike" data-id="@Model.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@Model.Like.Count</span></a>
                                                 }
+                                                @* else if (@Model.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == Model.Id ))
+                                                {
+                                                <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Likes</span></a>
+                                                }*@
                                                 else
                                                 {
-                                                    <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@Model.Like.Count</span></a>
+                                                    <a href="javascript:void(0)" class="like" data-id="@Model.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@Model.Like.Count</span></a>
                                                 }
                                             </li>
+
+                                           
                                         </ul>
                                     </div>
                                     <div class="entry-title">
