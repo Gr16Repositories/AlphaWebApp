@@ -6,7 +6,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Title-->
     <title>@ViewData["Title"] - AlphaWebApp</title>
+    <!--CSS-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+	  <link href="css/magnific-popup.css" rel="stylesheet">
+	  <link href="css/owl.carousel.css" rel="stylesheet">
+	  <link href="css/subscribe-better.css" rel="stylesheet">
+	  <link href="css/main.css" rel="stylesheet">
+	  <link id="preset" rel="stylesheet" type="text/css" href="css/presets/preset1.css">
+	  <link href="css/responsive.css" rel="stylesheet">
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +31,11 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AlphaWebApp.styles.css" asp-append-version="true" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Signika+Negative:400,300,600,700' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
@@ -57,27 +71,12 @@
                         <header id="navigation">
                            <div class="searchNlogin">
                                 <ul>
-                                  @*<li class="search-input-wrapper">
-                                        <div class="search">
-                                            <form role="form">
-                                                <input type="text" class="search-form" autocomplete="off" placeholder="Type & Press Enter">
-                                                //<button type="submit">Search</button>
-                                            </form>
-                                            <form method="post" action="/process-form">
-                                                <input type="text" name="query" placeholder="Search...">
-                                                <button type="submit" asp-controller="Home" asp-action="Search">Search</button>
-                                            </form>
-                                        </div>
-                                    </li>*@
                                     <li>
                                         <form method="post" action="/process-form">
                                             <input type="text" name="query" placeholder="Search...">
                                             <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">Search</button>
                                         </form>
                                     </li>
-                                   @* <li class="search-icon">
-                                        <i class="fa fa-search"></i>
-                                    </li>*@
                                     <li class="dropdown user-panel">
                                         <a href="javascript:void(0);" style="color:#fff" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                                         <div class="dropdown-menu top-user-section">
@@ -142,6 +141,17 @@
     <script src="~/js/jquery.subscribe-better.min.js"></script>
     <script src="~/js/main.js"></script>
     <script type="text/javascript" src="~/js/switcher.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/jquery.simpleWeather.min.js"></script>
+    <script type="text/javascript" src="js/jquery.sticky-kit.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easy-ticker.min.js"></script>
+    <script type="text/javascript" src="js/jquery.subscribe-better.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/switcher.js"></script>
 </body>
 </html>
 

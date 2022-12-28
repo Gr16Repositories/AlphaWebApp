@@ -1,0 +1,27 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+@{
+    var articles = Model;
+}
+
+<div class="container">
+   
+    <div class="row row-cols-sm">
+        
+        @foreach (var article in articles)
+        {
+
+            <div class="col-sm">
+                <img src="@article.ImageLink" class="card-img-top" alt="Image" style="padding:1px; object-fit: cover; height: 150px; width:150%;">
+
+
+
+                <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="headline" style="color:black"><u>@article.HeadLine</u></a>
+            </div>
+
+
+
+
+
+        }
+    </div>
+</div>

@@ -1,11 +1,10 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@model IEnumerable<AlphaWebApp.Models.Article>
+@using Microsoft.AspNetCore.Identity
 @using AlphaWebApp.Services
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject ISubscriptionService subscriptionsService
 
-
-@model IEnumerable<AlphaWebApp.Models.Article>
 
 @foreach (var item in Model)
 {
@@ -20,23 +19,40 @@
                                     <div class="entry-header">
                                         <div class="entry-thumbnail">
                                             <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
-                                            <span class="card-category-badge">@item.Category.name</span>
+                                            <span class="card-category-badge">@item.Category.name</span>                                            
                                         </div>
                                     </div>
                                     <div class="post-content">
                                         <div class="entry-meta">
                                             <ul class="list-inline">
-                                                |&nbsp;
+                                                &nbsp;
                                                 <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
+
                                                 |&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                |&nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Like.Count </a></li>
-                                            </ul>
+                                                |&nbsp;
+                                                <li class="loves">
+                                                    @if (!User.Identity.IsAuthenticated)
+                                                    {
+                                                        <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></b>
+                                                    }
+                                                    else if (@item.Like.Any(x => x.UserId == UserManager.GetUserId(User) && x.ArticleId == item.Id))
+                                                    {
+                                                        <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@item.Like.Count</span></a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
+                                                    }
+                                                </li>
+
+                                                @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
+                                                &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
+                                        </ul>
                                         </div>
                                         <h2 class="entry-title">
                                             @item.HeadLine
                                         </h2>
-                                        <div class="entry-content">
-                                            @*<p>@item.Content</p>*@
+                                        <div class="entry-content">                                           
                                             @item.ContentSummary
                                             @if (subscriptionsService.HasSubscription(User))
                                             {
@@ -56,4 +72,41 @@
             </div>
         </div>
     </div>
+}
+
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            //LIKE
+            $(document).on("click", "a.like", function () {
+                var id = $(this).data("id");// gets the article id
+                var link = "/Articles/LikeThis/"; ///Articles/LikeThis/
+                var a = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes: ' + result + '</span>').removeClass("like").addClass("unlike");
+                    }
+                });
+            });
+            //UNLIKE
+            $(document).on("click", "a.unlike", function () {
+                var id = $(this).data("id");
+                var link = "/Articles/UnlikeThis/";
+                var a = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: link,
+                    data: { 'articleid': id },
+                    success: function (result) {
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i><span>Likes:' + result + '</span>').removeClass("unlike").addClass("like");
+                    }
+                });
+            });
+
+        });
+    </script>
 }

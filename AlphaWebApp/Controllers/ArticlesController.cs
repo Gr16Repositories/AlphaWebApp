@@ -14,6 +14,7 @@ using AutoMapper;
 using AutoMapper.Execution;
 using Microsoft.AspNetCore.Authorization;
 using NuGet.Protocol;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AlphaWebApp.Controllers
 {
@@ -327,7 +328,7 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult News(int id)
         {
-            var categoryArticles = _articleService.GetArticlesById(id);
+            var categoryArticles = _articleService.GetArticlesByCategoryId(id);
             return View(categoryArticles);
         }
 
@@ -379,54 +380,20 @@ namespace AlphaWebApp.Controllers
         }
 
 
-        // how to implement search for articles in my websit
-        // how to make search based on subscrption type
-        // two method one search for users anothor for premium subscriber that they could serch from archived articles 
-        //
-        // 
-        //@app.route('/search', methods=['POST'])
-        //def search():
-        //  query = request.form['query']
-        //  # do something with the query
-        //  return "Search results for: " + query
-
-        //[HttpPost]
-        //// GET: Movies
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(_movieService.MoviesIndex());
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> Index(string? movieSearch)
-        //{
-        //    ViewData["getMovieDetailes"] = movieSearch;
-        //    var movieQuery = from m in _context.Movies.ToList()
-        //                     select m;
-        //    if (!String.IsNullOrEmpty(movieSearch))
-        //    {
-        //        movieQuery = movieQuery.ToList().Where(m => m.Title.Contains(movieSearch));
-        //    }
-        //    return View(movieQuery);
-        //}
-
-        //public IActionResult Search(string query)
-        //{
-        //    // perform the search
-        //    var results = SearchService.Search(query);
-        //    return View(results);
-        //}
-
-//        @model IEnumerable<SearchResult>
-
-//<ul>
-//  @foreach (var result in Model)
-//        {
-//    < li > @result.Title </ li >
-//  }
-//</ul>
-
-
+        [HttpPost]
+        public IActionResult Editorschoice(int id) 
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return Json(new { editorsChoice = false });
+            }
+            article.EditorsChoice = !article.EditorsChoice;
+            
+            _db.Update(article);
+            _db.SaveChanges();
+            return Json(new { editorsChoice = article.EditorsChoice });
+        }
 
 
     }
