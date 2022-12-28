@@ -62,7 +62,18 @@
                                     <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></a>
                                 }
                                 <i class="fa-sharp fa-solid fa-clock">@item.DateStamp.ToString("dd-MM-yyyy HH:mm")</i>
+
+                                @if (item.EditorsChoice)
+                                {
+                                    <input checked="checked" data-id="@item.Id" name="check" type="checkbox" />
+                                }
+                                else 
+                                {
+                                    <input data-id="@item.Id" name="check" type="checkbox" />
+                                }
+                                
                             </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -104,7 +115,27 @@
                 });
             });
 
+            // Change Editors Choice
+            $(document).on("change", "[name='check']", function () {
+                var id = $(this).data('id');
+
+                console.log(id);
+
+                var link = "/Articles/Editorschoice/";
+                var a = $(this);
+                $.ajax({
+                    url: link,
+                    data: { id },
+                    type: 'POST',
+                    success: function (result) {
+                        // { editorsChoice: true } result object
+                        console.log(result.editorsChoice);
+                        //a.html(result).add("editorschoice");
+                    }
+                });
+
+            });
+
         });
     </script>
 }
-
