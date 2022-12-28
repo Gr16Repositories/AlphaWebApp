@@ -52,25 +52,30 @@ namespace AlphaWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        
-        public IActionResult Search()
-        {
-            return View(new Article());
-        }
-
-
-        [HttpPost]
+        // make search and if the user has a subscription they could search in archive 
         public IActionResult Search(string query)
         {
-            var articlesList = _db.Articles.ToList();
+            if(String.IsNullOrEmpty(query))
+            {
+                return View(new List<Article>());
+            }
+            var lowerQuery = query.ToLower().Trim();
+            
             if (_subscriptionService.HasSubscription(User))
             {
-                var articleQuery = articlesList.Where(a => a.Content.Contains(query));
+                var articleQuery = _db.Articles.ToList().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery)||
+                                                            a.ContentSummary.ToLower().Trim().Contains(lowerQuery)||
+                                                            a.HeadLine.ToLower().Trim().Contains(lowerQuery));
                 return View(articleQuery);
             }
-            else if(!String.IsNullOrEmpty(query))
+            else if(!String.IsNullOrEmpty(lowerQuery))
             {
-                var articleQuery = articlesList.Where(a => a.Content.Contains(query) && a.Archive == false);
+                var articleQuery = _db.Articles.ToList().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) &&
+                                                            a.Archive == false ||
+                                                            a.ContentSummary.ToLower().Trim().Contains(lowerQuery) &&
+                                                            a.Archive == false ||
+                                                            a.HeadLine.ToLower().Trim().Contains(lowerQuery) &&
+                                                            a.Archive == false);
                 return View(articleQuery);
             }
             else
