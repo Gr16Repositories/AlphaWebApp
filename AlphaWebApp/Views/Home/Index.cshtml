@@ -52,6 +52,35 @@
 
 <!-------------------------- Sport Head Line/index -------------------------->
 
+
+    </div>
+
+</div>
+<div class="container" style="margin-left:2%; margin-right:2%;">
+    <div class="new" >
+        <h1> Editor's Picks</h1>
+        <br />
+        @await Component.InvokeAsync("EditorsChoice")
+    </div>
+
+</div>
+<div class="container-fluid" >
+    <div class="swe" style="margin-left:2%; margin-right:2%;">
+        <h1>Full story</h1>
+    @await Component.InvokeAsync("SwedenNews")
+    </div>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="new" style="margin-left:2%; margin-right:2%;">
+        <h1>Sports News</h1>
+    <br />
+
+    @await Component.InvokeAsync("SportHeadLine")
+    </div>
+</div>
+
 <div class="container">
     <div class="section">
         <div class="row">
@@ -88,6 +117,7 @@
                     </div>
                 </div><!--/.latest-news-wrapper-->
             </div><!--/.section-->
+
 
         </div>
     </div>
@@ -267,4 +297,5 @@
         </div>
     </div>
 </div>
+
 
