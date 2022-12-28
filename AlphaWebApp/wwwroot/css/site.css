@@ -266,3 +266,8 @@ body {
     }
 .form-group-buttons {
     margin: 20px;
+}
+
+.table-striped > tr:nth-child(odd) {
+    background-color: #0094ff;
+}

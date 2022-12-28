@@ -17,7 +17,8 @@ namespace AlphaWebApp.Controllers
 
         public async Task<IActionResult> Index(string region)
         {
-            StockDetails stockDetails = await Task.Run(() => _stockService.GetStockDetails(region));
+            region = "uk";
+            IEnumerable<StockDetails> stockDetails = await Task.Run(() => _stockService.GetStockDetails(region));
             if (stockDetails != null)
                 return View(stockDetails);
             else

@@ -190,3 +190,17 @@
         </div>
     </div>
 </div>
+
+<!-- View component for Stocks Details-->
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="text-dark" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
+            @await Component.InvokeAsync("Stock" , new {region = "uk"}) 
+        </div>
+        <div class="col-4">
+            <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
+            @await Component.InvokeAsync("Stock" , new {region = "us"})
+        </div>
+    </div>
+</div>

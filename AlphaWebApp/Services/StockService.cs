@@ -1,4 +1,5 @@
 ﻿using AlphaWebApp.Models;
+using System.Net.Http;
 
 namespace AlphaWebApp.Services
 {
@@ -11,13 +12,13 @@ namespace AlphaWebApp.Services
             _httpClient = httpClient;
         }
     
-        public StockDetails GetStockDetails(string region)
+        public IEnumerable<StockDetails> GetStockDetails(string region)
         {
-            StockDetails result = new StockDetails();
-            var response = _httpClient.GetAsync("https://stockapinewsapp.azurewebsites.net/summary?region={region}").Result;
+            IEnumerable<StockDetails> result = Enumerable.Empty<StockDetails>();
+            var response = _httpClient.GetAsync($"https://stockapinewsapp.azurewebsites.net/summary?region={region}").Result;
             if(response.IsSuccessStatusCode)
             {
-               result  = response.Content.ReadFromJsonAsync<StockDetails>().Result;
+               result = response.Content.ReadFromJsonAsync<StockResponse>().Result.Top10;
             }
             return result;
         }
