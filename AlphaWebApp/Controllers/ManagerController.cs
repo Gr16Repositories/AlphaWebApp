@@ -21,7 +21,6 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult Index()
         {
-            var test = _userService.GetAllRoles();
             return View(_userService.GetAllRoles());
         }
 

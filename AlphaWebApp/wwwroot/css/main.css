@@ -29,7 +29,7 @@
 ==========================*/
 
 body{
-	font-family: 'Signika Negative', sans-serif;
+	font-family: 'Lora';
 	font-size: 16px;
 	color: #000000;
 	background-color: #f2f3f5;
@@ -691,7 +691,7 @@ img.mfp-img {
 }
 
 .create-account {	
-	padding:20px 30px 17px;text
+	padding:20px 30px 17px;
 	background-color:#1f1f1f;
 	text-align:center;
 	text-transform:uppercase;
@@ -1056,6 +1056,7 @@ img.mfp-img {
 
 #latest-news {
 	position:relative;
+	font-size:20px;
 }
 
 .post.medium-post .entry-title {

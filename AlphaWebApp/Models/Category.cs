@@ -11,7 +11,7 @@ namespace AlphaWebApp.Models
         [Required]
         public string name { get; set; }
         public string icon { get; set; }
-
+        public string Color { get; set; }
         public virtual ICollection<Article> Articleslist { get; set; }
 
         public Category()

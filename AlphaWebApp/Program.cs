@@ -45,7 +45,7 @@ builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 //builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
-
+builder.Services.AddScoped<IStockService, StockService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IWeatherForcastService,WeatherForcastService>();
 builder.Services.AddScoped<ISubscriptionService,SubscriptionService>();
