@@ -7,12 +7,13 @@
 }
 
 <hr />
-
-<div>
-    <h2 class="ListOfArticles">
+<div class="ListOfArticles">
+    <h2 >
         <b>List of Articles</b>
     </h2>
-    <div class="CreateNewArticle text-end">
+
+    <div class="text-end">   
+
         <a asp-action="Create" class="btn" style="color:#fff; background-color:#003366">
             <b><i class="fa-solid fa-plus"></i> Create New Article</b>
         </a>
@@ -20,10 +21,13 @@
 </div>
 <hr />
 <div class="container">
-    <div class="row" id="ads">
-        @foreach (var group in Model.GroupBy(a => a.Category))
-        {
-            <div>
+
+
+    @foreach (var group in Model.GroupBy(a => a.Category))
+    {
+        <div class="row gy-4" id="ads">
+            <div style="color: #fff; font-size:22px; background-color: @group.Key.Color">
+
                 @group.Key.name
             </div>
             @foreach (var item in group)
@@ -42,10 +46,14 @@
                             </div>
 
 
-                            <p style="color:#000;">@item.ContentSummary</p>
+                            <p style="color:#000;">@item.ContentSummary
+                                <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                            </p>
+
                             <div class="mt-auto">
-                                <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>
                                 <a asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger d-inline-block mt-auto">Delete</a>
+                                <a asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning d-inline-block mt-auto">Edit</a>
+                                @*<a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>*@
                             </div>
                             <div class="post-content">
                                 <i class="fa fa-eye">@item.Views</i>
@@ -67,8 +75,8 @@
                     </div>
                 </div>
             }       
+        </div>
         }
-</div>
 </div>
 
 @section scripts

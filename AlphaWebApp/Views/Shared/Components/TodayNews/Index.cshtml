@@ -18,6 +18,7 @@
                 <p style="color:#7A2048;">
                     @Model.ContentSummary
                 </p>
+
                 @if (subscriptionsService.HasSubscription(User))
                 {
                     <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@Model.Id" class="btn btn-primary d-inline-block mt-auto">Read About Article</a>
