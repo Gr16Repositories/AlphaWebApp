@@ -17,5 +17,7 @@ namespace AlphaWebApp.Services
         string GetUserId();
 
         public List<Subscription> GetUserSubscriptions(string UserId);
+
+        List<User> GetallUsers();
     }
 }

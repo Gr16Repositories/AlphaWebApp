@@ -71,7 +71,8 @@ namespace AlphaWebApp.Services
         // Gives a User Id where you call it in the project, Condition! you have to call it from Authorized method
         public string GetUserId()
         {
-            var userId = _httpContext.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = _userManager.GetUserId(_httpContext.HttpContext.User);
+            //var userId = _httpContext.HttpContext.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return userId;           
         }
 
@@ -82,6 +83,11 @@ namespace AlphaWebApp.Services
             return UserSubscriptions;
         }
 
+        // gives all users 
+        public List<User> GetallUsers()
+        {
+            return _db.Users.ToList();
+        }
         
 
     }

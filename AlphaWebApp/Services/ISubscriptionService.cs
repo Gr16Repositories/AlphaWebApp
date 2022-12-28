@@ -1,5 +1,6 @@
 ﻿using AlphaWebApp.Models;
 using AlphaWebApp.Models.ViewModels;
+using System.Security.Claims;
 
 namespace AlphaWebApp.Services
 {
@@ -15,5 +16,7 @@ namespace AlphaWebApp.Services
         void UpdateSubscription(int id, Subscription subscription);
 
         void RemoveSubscription(int id);
+        Subscription GetActiveSubscription(ClaimsPrincipal claimsPrincipal);
+        bool HasSubscription(ClaimsPrincipal claimsPrincipal);
     }
 }

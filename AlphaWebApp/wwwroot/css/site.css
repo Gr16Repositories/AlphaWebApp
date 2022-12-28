@@ -1,3 +1,7 @@
+* {
+    font-family: 'Lora', serif;
+}
+
 html {
   font-size: 14px;
 }
@@ -264,3 +268,6 @@ body {
     margin: 20px;
 }
 
+.table-striped > tr:nth-child(odd) {
+    background-color: #0094ff;
+}
