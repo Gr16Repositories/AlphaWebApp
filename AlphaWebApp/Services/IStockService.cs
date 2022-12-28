@@ -4,7 +4,7 @@ namespace AlphaWebApp.Services
 {
     public interface IStockService
     {
-       StockDetails GetStockDetails(string region);
+        IEnumerable<StockDetails> GetStockDetails(string region);
 
     }
 }
