@@ -1,19 +1,21 @@
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+@model IEnumerable<AlphaWebApp.Models.Article>
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
         {
-
             <b>@item.Category.name</b>
             @*<b>@item.DateStamp</b>*@
-
-            <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">@item.HeadLine</a>
-               
-         
-                    
-                         
-            
+            @if (subscriptionsService.HasSubscription(User))
+            {
+                <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">@item.HeadLine</a>
+            }
         }
     </div>
 </div>
-   

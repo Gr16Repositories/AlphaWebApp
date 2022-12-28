@@ -1,4 +1,11 @@
-﻿@model IEnumerable<AlphaWebApp.Models.Article>
+﻿@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+@model IEnumerable<AlphaWebApp.Models.Article>
 
 @foreach (var item in Model)
 {
@@ -21,8 +28,10 @@
                                             <ul class="list-inline">
                                                 &nbsp;
                                                 <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
+
                                                 &nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
                                                 &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>
+
                                             </ul>
                                         </div>
                                         <h2 class="entry-title">
@@ -31,9 +40,15 @@
                                         <div class="entry-content">
                                             @*<p>@item.Content</p>*@
                                             @item.ContentSummary
-                                            <a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                            @if (subscriptionsService.HasSubscription(User))
+                                            {
+                                                <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
+                                            }
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
