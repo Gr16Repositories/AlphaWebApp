@@ -37,10 +37,10 @@
 
 @*<----------------------------------------------------- ALL ------------------------------------------------------------->*@
 
-<div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">
+@*<div class="row" style="margin-top:5%;margin-left:2%; margin-right:2%; float:left">*@
 
 
-       <div class="col-md-8 ">
+@*    <div class="col-md-8 ">
     <h2>Today News</h2>
 
 
@@ -50,12 +50,12 @@
     <br />
     @await Component.InvokeAsync("Sports")
 
-    </div>
+    </div>*@
 
-    @*<----------------------------------------------------- Weather ------------------------------------------------------------->*@
+@*<----------------------------------------------------- Weather ------------------------------------------------------------->*@
 
 
-        <div class="col-md-3 ">
+@*        <div class="col-md-3 ">
     <h2>WeatherForecast</h2>
 
 
@@ -75,9 +75,7 @@
 
 
 
-    </div>
-</div>
-<div class="container-fluid">
+@*<div class="container-fluid">
     <div class="swe" style="margin-left:2%; margin-right:2%;">
         <h1>Full story</h1>
         @await Component.InvokeAsync("SwedenNews")
@@ -100,7 +98,10 @@
         <br />
         @await Component.InvokeAsync("CategoriesNews")
     </div>
-</div>
+
+</div>*@
+
+
 
 
 @*<----------------------------------------------------- Conent/1 = Sport Head Line/index ------------------------------------------------------------->*@
@@ -114,9 +115,78 @@
 
             </div>
 
+            @await Component.InvokeAsync("WeatherForeCast" , new {
+            City = "Linkoping",
+            Lang = "en"})
+
+
+
+            <!--Editor Choice-->
+            <div class="section">
+                <div class="latest-news-wrapper">
+                    <h1 class="section-title">This Is Rising!</h1>
+                    <div id="latest-news">
+                        <div class="post medium-post">
+                            <div class="entry-header">
+                                <div class="entry-thumbnail">
+                                    <img class="img-responsive" src="images/post/1.jpg" alt="" />
+                                </div>
+                                <div class="catagory politics"><span><a href="#">Politics</a></span></div>
+                            </div>
+                            <div class="post-content">
+                                <div class="entry-meta">
+                                    <ul class="list-inline">
+                                        <li class="publish-date"><a href="#"><i class="fa fa-clock-o"></i> Nov 5, 2015 </a></li>
+                                        <li class="views"><a href="#"><i class="fa fa-eye"></i>15k</a></li>
+                                        <li class="loves"><a href="#"><i class="fa fa-heart-o"></i>278</a></li>
+                                    </ul>
+                                </div>
+                                <h2 class="entry-title">
+                                    <a href="news-details.html">Our closest relatives aren't fans of daylight saving time</a>
+                                </h2>
+                            </div>
+                        </div><!--/post-->
+
+
+                    </div>
+                </div><!--/.latest-news-wrapper-->
+            </div><!--/.section-->
+            <!--Popular News-->
+            <div class="widget">
+                <h1 class="section-title title">Popular News!</h1>
+                <ul class="post-list">
+                    <li>
+                        <div class="post small-post">
+                            <div class="entry-header">
+                                <div class="entry-thumbnail">
+                                    <img class="img-responsive" src="images/post/rising/1.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <div class="video-catagory"><a href="#">World</a></div>
+                                <h2 class="entry-title">
+                                    <a href="news-details.html">3 students arrested after body-slamming principal</a>
+                                </h2>
+                            </div>
+                        </div><!--/post-->
+                    </li>
+                    <li>
+                        <div class="post small-post">
+                            <div class="entry-header">
+                                <div class="entry-thumbnail">
+                                    <img class="img-responsive" src="images/post/rising/2.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                <div class="video-catagory"><a href="#">Business</a></div>
+                                <h2 class="entry-title">
+                                    <a href="news-details.html">3 students arrested after body-slamming principal</a>
+                                </h2>
+                            </div>
+                        </div><!--/post-->
+                    </li>
+                </ul>
+            </div><!--/#widget-->
         </div>
     </div>
 </div>
-
-
-
