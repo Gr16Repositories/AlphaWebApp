@@ -1,8 +1,10 @@
 ﻿using AlphaWebApp.Data;
 using AlphaWebApp.Models;
 using AlphaWebApp.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 
 namespace AlphaWebApp.Services
 {
@@ -10,10 +12,12 @@ namespace AlphaWebApp.Services
     {
         private readonly ApplicationDbContext _db;
         private readonly IUserService _userService;
+        private readonly UserManager<User> _userManager;
 
-        public SubscriptionService(ApplicationDbContext db, IUserService userservice)
+        public SubscriptionService(ApplicationDbContext db, IUserService userservice, UserManager<User> userManager)
         {
             _userService= userservice;
+            _userManager = userManager;
             _db = db;
         }
 
@@ -85,5 +89,21 @@ namespace AlphaWebApp.Services
             _db.Subscriptions.Remove(GetSubscriptionById(id));
             _db.SaveChanges();
         }
+
+        //give me subscription for specific  user - use it in _loginPartial
+        public Subscription GetActiveSubscription(ClaimsPrincipal claimsPrincipal)
+        {
+            var userId = _userManager.GetUserId(claimsPrincipal);
+            var sub = _userService.GetUserSubscriptions(userId);
+            var activeSub = sub.FirstOrDefault(s => s.Active);
+            return activeSub;
+        }
+
+        //has user have an active subscripion - use it in _loginPartial
+        public bool HasSubscription(ClaimsPrincipal claimsPrincipal)
+        {
+            return GetActiveSubscription(claimsPrincipal) != null;
+        }
+
     }
 }
