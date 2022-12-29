@@ -63,14 +63,14 @@ namespace AlphaWebApp.Controllers
             
             if (_subscriptionService.HasSubscription(User))
             {
-                var articleQuery = _db.Articles.ToList().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery)||
+                var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery)||
                                                             a.ContentSummary.ToLower().Trim().Contains(lowerQuery)||
                                                             a.HeadLine.ToLower().Trim().Contains(lowerQuery));
                 return View(articleQuery);
             }
             else if(!String.IsNullOrEmpty(lowerQuery))
             {
-                var articleQuery = _db.Articles.ToList().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) &&
+                var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) &&
                                                             a.Archive == false ||
                                                             a.ContentSummary.ToLower().Trim().Contains(lowerQuery) &&
                                                             a.Archive == false ||
