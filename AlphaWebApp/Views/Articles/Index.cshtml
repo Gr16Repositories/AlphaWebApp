@@ -57,6 +57,32 @@
                             </div>
 
                             <div class="post-content">
+
+                                <i class="fa fa-eye">@item.Views</i>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></b>
+                                }
+                                else if (item.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == item.Id))
+                                {
+                                    <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@item.Like.Count</span></a>
+                                }                               
+                                else
+                                {
+                                    <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></a>
+                                }
+                                <i class="fa-sharp fa-solid fa-clock">@item.DateStamp.ToString("dd-MM-yyyy HH:mm")</i>
+
+                                @if (item.EditorsChoice)
+                                {
+                                    <input checked="checked" data-id="@item.Id" name="check" type="checkbox" />
+                                }
+                                else 
+                                {
+                                    <input data-id="@item.Id" name="check" type="checkbox" />
+                                }
+                                
+
                                 <div class="entry-meta">
                                     <ul class="list-inline">
                                         @*<li><i class="fa-sharp fa-solid fa-clock"> @item.DateStamp.ToString("dd-MM-yyyy HH:mm tt")</i></li>*@
@@ -85,7 +111,9 @@
                                     </ul>
 
                                 </div>
+
                             </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -127,7 +155,27 @@
                 });
             });
 
+            // Change Editors Choice
+            $(document).on("change", "[name='check']", function () {
+                var id = $(this).data('id');
+
+                console.log(id);
+
+                var link = "/Articles/Editorschoice/";
+                var a = $(this);
+                $.ajax({
+                    url: link,
+                    data: { id },
+                    type: 'POST',
+                    success: function (result) {
+                        // { editorsChoice: true } result object
+                        console.log(result.editorsChoice);
+                        //a.html(result).add("editorschoice");
+                    }
+                });
+
+            });
+
         });
     </script>
 }
-

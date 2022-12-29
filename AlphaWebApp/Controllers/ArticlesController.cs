@@ -14,6 +14,7 @@ using AutoMapper;
 using AutoMapper.Execution;
 using Microsoft.AspNetCore.Authorization;
 using NuGet.Protocol;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AlphaWebApp.Controllers
 {
@@ -327,7 +328,7 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult News(int id)
         {
-            var categoryArticles = _articleService.GetArticlesById(id);
+            var categoryArticles = _articleService.GetArticlesByCategoryId(id);
             return View(categoryArticles);
         }
 
@@ -377,6 +378,23 @@ namespace AlphaWebApp.Controllers
                 return Json("More than One like not allowed");
             }
         }
+
+
+        [HttpPost]
+        public IActionResult Editorschoice(int id) 
+        {
+            var article = _articleService.GetArticleById(id);
+            if (article == null)
+            {
+                return Json(new { editorsChoice = false });
+            }
+            article.EditorsChoice = !article.EditorsChoice;
+            
+            _db.Update(article);
+            _db.SaveChanges();
+            return Json(new { editorsChoice = article.EditorsChoice });
+        }
+
 
     }
 }
