@@ -13,7 +13,7 @@ namespace AlphaWebApp.Services
 
         Task<Subscription> SaveSubscripton(SubscriptionVM newSub);
 
-        void UpdateSubscription(int id, Subscription subscription);
+        void UpdateSubscription(Subscription subscription);
 
         void RemoveSubscription(int id);
         Subscription GetActiveSubscription(ClaimsPrincipal claimsPrincipal);

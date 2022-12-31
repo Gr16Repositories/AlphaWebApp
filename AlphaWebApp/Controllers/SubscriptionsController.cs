@@ -168,7 +168,7 @@ namespace AlphaWebApp.Controllers
             {
                 try
                 {
-                    _subscriptionService.UpdateSubscription(id, subscription);
+                    _subscriptionService.UpdateSubscription(subscription);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
