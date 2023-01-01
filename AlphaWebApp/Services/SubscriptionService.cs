@@ -77,7 +77,7 @@ namespace AlphaWebApp.Services
             return await Task.Run(() => subscription);
         }
 
-        public void UpdateSubscription(int id, Subscription subscription)
+        public void UpdateSubscription(Subscription subscription)
         {
             _db.Update(subscription);
             _db.SaveChanges();
