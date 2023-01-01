@@ -56,10 +56,10 @@
                                 @*<a asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">Read More</a>*@
                             </div>
 
+
                             <div class="post-content">
 
-                                <i class="fa fa-eye">@item.Views</i>
-                                @if (!User.Identity.IsAuthenticated)
+                      @*          @if (!User.Identity.IsAuthenticated)
                                 {
                                     <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></b>
                                 }
@@ -80,34 +80,54 @@
                                 else 
                                 {
                                     <input data-id="@item.Id" name="check" type="checkbox" />
-                                }
+                                }*@
                                 
 
+                                @*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*@
+
                                 <div class="entry-meta">
+                                        <div class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i> Date: @item.DateStamp.ToString("dd-MM-yyyy HH:mm tt") </a></div>
+
+                                    <div>
+                                    @if (item.EditorsChoice)
+                                    {
+                                        <input checked="checked" data-id="@item.Id" name="check" type="checkbox" />
+                                    }
+                                    else
+                                    {
+                                        <input data-id="@item.Id" name="check" type="checkbox" />
+                                    }
+                                     Editor Choice</div>
+
                                     <ul class="list-inline">
                                         @*<li><i class="fa-sharp fa-solid fa-clock"> @item.DateStamp.ToString("dd-MM-yyyy HH:mm tt")</i></li>*@
-                                        <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i> @item.DateStamp.ToString("dd-MM-yyyy HH:mm tt") </a></li>&nbsp;
-
-                                        @*<li><i class="fa fa-eye"> @item.Views</i></li>*@
-                                        <li class="views"><a href="#"><i class="fa fa-eye"></i>@item.Views</a></li>&nbsp;
-
-                                        <li class="loves">
-                                            <a>
+                                        <li class="views"><a href="#"><i class="fa fa-eye"></i> Views: @item.Views</a></li>
+                                        <li class="loves">                                            
 
                                             @if (!User.Identity.IsAuthenticated)
                                             {
-                                                <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></b>
+                                                <b class="text-end"><i class="bi bi-heart bi-lg"></i><span>Likes: @item.Like.Count</span></b>
                                             }
                                             else if (@item.Like.Any(x => x.UserId == userManager.GetUserId(User) && x.ArticleId == item.Id))
                                             {
-                                                <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>@item.Like.Count</span></a>
+                                                <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span> Likes: @item.Like.Count</span></a>
                                             }
                                             else
                                             {
                                                 <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i> @item.Like.Count</a>
-                                            }
-                                            </a>
+                                            }                                           
                                         </li>
+
+                                 @*       <li>
+                                            @if (item.EditorsChoice)
+                                            {
+                                                <input checked="checked" data-id="@item.Id" name="check" type="checkbox" />
+                                            }
+                                            else
+                                            {
+                                                <input data-id="@item.Id" name="check" type="checkbox" />
+                                            }
+                                        </li>*@
                                     </ul>
 
                                 </div>
