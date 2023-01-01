@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Runtime.InteropServices;
 
 namespace AlphaWebApp.Controllers
 {
@@ -315,12 +316,25 @@ namespace AlphaWebApp.Controllers
 
                 var subscriptionJsonObject = JsonConvert.SerializeObject(result);
                 ViewBag.subData = subscriptionJsonObject;
+                // pie chart
+                int basicCount = _subscriptionService.GetAllSubscriptions().Where(s => s.SubscriptionType.TypeName == "Basic").ToList().Count();
+                int standardCount = _subscriptionService.GetAllSubscriptions().Where(s => s.SubscriptionType.TypeName == "Standard").ToList().Count();
+                int premiumCount = _subscriptionService.GetAllSubscriptions().Where(s => s.SubscriptionType.TypeName == "Premium").ToList().Count();
+                int allSubCount = _subscriptionService.GetAllSubscriptions().Count();
+                var avarages= new List<int>();
+                avarages.Add((basicCount * 100) / allSubCount);
+                avarages.Add((standardCount * 100) / allSubCount);
+                avarages.Add((premiumCount * 100) / allSubCount);
+                var subscriptionPieData = JsonConvert.SerializeObject(avarages);
+                ViewBag.avarages = subscriptionPieData;
                 return await Task.Run(() => View()); 
             }
             else
             {
                 return await Task.Run(() => View());
             }
+
+
         }
     }
 }

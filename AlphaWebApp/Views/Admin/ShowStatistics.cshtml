@@ -7,8 +7,15 @@
 }
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div  class="row" style="margin-bottom:20px">
+    <div class="col-md-8">
+        <canvas id="lineChart" style="width:100%; max-height:500px; margin-right:30px"></canvas>
+    </div>
+    <div class="col-md-3">
+        <canvas id="pieChart" style="width:100%; max-height:500px"></canvas>
+    </div>
+</div>
 
-<canvas id="myChart" style="width:100%; max-height:600px"></canvas>
 
 <script>
     // How to use NewtonSoft to get Model data to Javascritp variable
@@ -21,7 +28,7 @@
             yValues.push(obj.SubScriptionsInOneDay);
         });
 
-        new Chart("myChart", {
+        new Chart("lineChart", {
             type: "line",
             data: {
                 labels,
@@ -50,3 +57,32 @@
 
 
 
+<script>
+    var ctx = document.getElementById('pieChart').getContext('2d');
+
+    var avrages = @Html.Raw(ViewBag.avarages);
+
+    const avaragesData = [];
+        avrages.forEach(item => {
+        avaragesData.push(item);
+        });
+
+var chart = new Chart(ctx, {
+  // The type of chart we want to create
+  type: 'pie',
+
+  // The data for our dataset
+  data: {
+    labels: ["Basic", "Standard", "Premium"],
+    datasets: [{
+      label: "Subscriptions Type data",
+      backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)'],
+      //backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)', 'rgb(75, 192, 192)', 'rgb(153, 102, 255)', 'rgb(255, 159, 64)'],
+      data: avaragesData
+    }]
+  },
+
+  // Configuration options go here
+  options: {}
+});
+</script>
