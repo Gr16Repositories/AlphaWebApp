@@ -26,22 +26,22 @@
                                         <div class="entry-meta">
                                             <ul class="list-inline">
                                                 &nbsp;
-                                                <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
+                                                <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i> Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt")</a></li>&nbsp; &nbsp;
 
-                                                |&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                |&nbsp;
+                                                &nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i> Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
+                                                &nbsp;
                                                 <li class="loves">
                                                     @if (!User.Identity.IsAuthenticated)
                                                     {
-                                                        <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></b>
+                                                        <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span> Likes: @item.Like.Count</span></b>
                                                     }
                                                     else if (@item.Like.Any(x => x.UserId == UserManager.GetUserId(User) && x.ArticleId == item.Id))
                                                     {
-                                                        <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@item.Like.Count</span></a>
+                                                        <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span> Likes: @item.Like.Count</span></a>
                                                     }
                                                     else
                                                     {
-                                                        <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
+                                                        <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span> Likes: @item.Like.Count</span></a>
                                                     }
                                                 </li>
 

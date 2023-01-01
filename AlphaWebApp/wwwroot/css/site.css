@@ -54,7 +54,7 @@ body {
 }
 
 #navbar_border {
-    border-bottom: solid 8px #ed1c24;
+    border-bottom: solid 10px #FF0000;
 }
 
 
@@ -87,8 +87,8 @@ body {
 
 .card-category-badge {
     position: absolute;
-    right: 50px;
-    top: 50px;
+    right: 35px;
+    top: 40px;
     background: #003366;
     text-align: center;
     color: #fff;
@@ -218,9 +218,6 @@ body {
     padding-left: 40px;
 }
 
-
-
-
 #cookieConsentdiv {
     z-index: 1000;
     position: fixed;
@@ -230,7 +227,7 @@ body {
     transform: translateX(-50%);
     background-color: rgba(255, 255, 255, 0.9);
     padding: 20px 30px 20px 30px;
-    font-family: 'Century Gothic', sans-serif;
+    font-family: 'Lora', sans-serif;
     box-shadow: 0px 3px 10px 5px rgba(0, 0, 0, 0.4);
     text-align: center;
     
@@ -271,3 +268,8 @@ body {
 .table-striped > tr:nth-child(odd) {
     background-color: #0094ff;
 }
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: red;
+}
+

@@ -16,7 +16,7 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke( int id)
         {
-            var articleList = _db.Articles.Where(a => a.EditorsChoice == true).Take(5).ToList();
+              var articleList = _db.Articles.Where(a => a.EditorsChoice == true).Take(5).ToList();
            
               return View(articleList);
                     
