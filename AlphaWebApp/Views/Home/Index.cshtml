@@ -7,8 +7,7 @@
 
 
 <!-------------------------- Latest News -------------------------->
-
-<div class="container">
+@*<div class="container">
     <div id="breaking-news">
         <span>
             Latest News   <i class="fa fa-angle-double-right"></i>
@@ -17,17 +16,10 @@
             @await Component.InvokeAsync("LatestArticles")
         </div>
     </div>
-</div>
+</div>*@
 
 
-
-
-
-
-
-
-
-<!-------------------------- Old Code  -------------------------->
+<!-------------------------- Old Code (Padmini+Swathi)  -------------------------->
 @*@await Component.InvokeAsync("TodayNews")
 @await Component.InvokeAsync("TodayWorldNews")
 @await Component.InvokeAsync("Health")
@@ -35,267 +27,84 @@
 @await Component.InvokeAsync("CategoriesNews")
 @await Component.InvokeAsync("SwedenNews")
 @await Component.InvokeAsync("SportHeadLine")
-@await Component.InvokeAsync("Sports")*@
-
-
-<!-------------------------- Weather API -------------------------->
-
-<div class="col-md-3 ">
-    <h2>WeatherForecast</h2>
-    @await Component.InvokeAsync("WeatherForeCast" , new {
-    City = "Linkoping",
-    Lang = "en"}
-    )
-</div>
-
-
+@await Component.InvokeAsync("Sports")
+@await Component.InvokeAsync("EditorsChoice")
+*@
 
 <!-------------------------- Sport Head Line/index -------------------------->
-
-
-    </div>
-
-</div>
-<div class="container" style="margin-left:2%; margin-right:2%;">
-    <div class="new" >
-        <h1> Editor's Picks</h1>
-        <br />
-        @await Component.InvokeAsync("EditorsChoice")
-    </div>
-
-</div>
-<div class="container-fluid" >
+@*<div class="container-fluid" >
     <div class="swe" style="margin-left:2%; margin-right:2%;">
         <h1>Full story</h1>
     @await Component.InvokeAsync("SwedenNews")
     </div>
-</div>
-<br />
-<br />
-<div class="container-fluid">
+</div>*@
+
+@*<div class="container-fluid">
     <div class="new" style="margin-left:2%; margin-right:2%;">
         <h1>Sports News</h1>
     <br />
 
     @await Component.InvokeAsync("SportHeadLine")
     </div>
-</div>
+</div>*@
 
-<div class="container">
-    <div class="section">
-        <div class="row">
-            <div class="col-sm-4">
-                @*@await Component.InvokeAsync("SportHeadLine")*@
-            </div>
+<!-------------------------- Editor Choice -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Editor's Choice</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:red; opacity:1">
 
-            <div class="section">
-                <div class="latest-news-wrapper">
-                    <h1 class="section-title">This Is Rising!</h1>
-                    <div id="latest-news">
-                        <div class="post medium-post">
-                            <div class="entry-header">
-                                <div class="entry-thumbnail">
-                                    <img class="img-responsive" src="images/post/1.jpg" alt="" />
-                                </div>
-                                <div class="catagory politics"><span><a href="#">Politics</a></span></div>
-                            </div>
-                            <div class="post-content">
-                                <div class="entry-meta">
-                                    <ul class="list-inline">
-                                        <li class="publish-date"><a href="#"><i class="fa fa-clock-o"></i> Nov 5, 2015 </a></li>
-                                        <li class="views"><a href="#"><i class="fa fa-eye"></i>15k</a></li>
-                                        <li class="loves"><a href="#"><i class="fa fa-heart-o"></i>278</a></li>
-                                    </ul>
-                                </div>
-                                <h2 class="entry-title">
-                                    <a href="news-details.html">Our closest relatives aren't fans of daylight saving time</a>
-                                </h2>
-                            </div>
-                        </div><!--/post-->
-
-
-                    </div>
-                </div><!--/.latest-news-wrapper-->
-            </div><!--/.section-->
-
-
-        </div>
+    <div id="editor-choice" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("EditorsChoice")
     </div>
 </div>
 
+<!-------------------------- Sports -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Sport</b></h3>
+    <hr style="height:3px; border-width:0; color:white; background-color:#ffff00; opacity:1">
 
-@*<----------------------------------------------------- < Final Style Home Page > ------------------------------------------------------------->*@
 
-<!--Editor Choice-->
-<div class="container">
-    <div class="widget">
-        <h1 class="section-title title">Editor Choice</h1>
-        <main role="main" class="pb-3">
-            <div id="main-wrapper" class="homepage">
-                <div class="container">
-                    <div class="section">
-                        <div class="row">
-                            <div class="site-content col-md-9">
-                                <div class="col-sm-8">
-                                    <div id="home-slider">
-                                        <div class="post feature-post">
-                                            <div class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    @*<img class="img-responsive" src="images/post/slider/1.jpg" alt="" />*@
-                                                    <img src="~/images/articles/1/002.png" />
-                                                </div>
-                                                <div class="catagory world"><a href="#">World</a></div>
-                                            </div>
-                                            <div class="post-content">
-                                                <div class="entry-meta">
-                                                    <ul class="list-inline">
-                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
-                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
-                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
-                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
-                                                    </ul>
-                                                </div>
-                                                <h2 class="entry-title">
-                                                    <a href="news-details.html">We Are Seeing The Effects Of The Minimum Wage Rise In San Francisco</a>
-                                                </h2>
-                                            </div>
-                                        </div><!--/post-->
-                                        <div class="post feature-post">
-                                            <div class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    @*<img class="img-responsive" src="images/post/slider/7.jpg" alt="" />*@
-                                                    <img src="~/images/articles/1/003.png" />
-
-                                                </div>
-                                                <div class="catagory sports"><a href="#">Sports</a></div>
-                                            </div>
-                                            <div class="post-content">
-                                                <div class="entry-meta">
-                                                    <ul class="list-inline">
-                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
-                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
-                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
-                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
-                                                    </ul>
-                                                </div>
-                                                <h2 class="entry-title">
-                                                    <a href="news-details.html">The 20 moments in sports that tried to break the Internet in 2015</a>
-                                                </h2>
-                                            </div>
-                                        </div><!--/post-->
-                                        <div class="post feature-post">
-                                            <div class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    @*<img class="img-responsive" src="images/post/slider/13.jpg" alt="" />*@
-                                                    <img src="~/images/articles/1/004.png" />
-
-                                                </div>
-                                                <div class="catagory entertainment"><a href="#">Entertainment</a></div>
-                                            </div>
-                                            <div class="post-content">
-                                                <div class="entry-meta">
-                                                    <ul class="list-inline">
-                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
-                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
-                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
-                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
-                                                    </ul>
-                                                </div>
-                                                <h2 class="entry-title">
-                                                    <a href="news-details.html">The best games in 2015 for your new iPhone, iPad, or Android phone</a>
-                                                </h2>
-                                            </div>
-                                        </div><!--/post-->
-                                        <div class="post feature-post">
-                                            <div class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    @*<img class="img-responsive" src="images/post/slider/12.jpg" alt="" />*@
-                                                    <img src="~/images/articles/1/005.png" />
-
-                                                </div>
-                                                <div class="catagory world"><a href="#">World</a></div>
-                                            </div>
-                                            <div class="post-content">
-                                                <div class="entry-meta">
-                                                    <ul class="list-inline">
-                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
-                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
-                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
-                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
-                                                    </ul>
-                                                </div>
-                                                <h2 class="entry-title">
-                                                    <a href="news-details.html">The Force Awakens doubles previous Christmas Day record with $49.3 million box office</a>
-                                                </h2>
-                                            </div>
-                                        </div><!--/post-->
-                                        <div class="post feature-post">
-                                            <div class="entry-header">
-                                                <div class="entry-thumbnail">
-                                                    @*<img class="img-responsive" src="images/post/slider/14.jpg" alt="" />*@
-                                                    <img src="~/images/articles/1/006.png" />
-
-                                                </div>
-                                                <div class="catagory sports"><a href="#">Sports</a></div>
-                                            </div>
-                                            <div class="post-content">
-                                                <div class="entry-meta">
-                                                    <ul class="list-inline">
-                                                        <li class="publish-date"><i class="fa fa-clock-o"></i><a href="#"> Nov 1, 2015 </a></li>
-                                                        <li class="views"><i class="fa fa-eye"></i><a href="#">15k</a></li>
-                                                        <li class="loves"><i class="fa fa-heart-o"></i><a href="#">278</a></li>
-                                                        <li class="comments"><i class="fa fa-comment-o"></i><a href="#">189</a></li>
-                                                    </ul>
-                                                </div>
-                                                <h2 class="entry-title">
-                                                    <a href="news-details.html">Bran Stark is all grown up in new 'Game of Thrones' Season 6 photo</a>
-                                                </h2>
-                                            </div>
-                                        </div><!--/post-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+    <div id="sports" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("SportHeadLine")
     </div>
 </div>
 
-
-<div class="container">
-    <main role="main" class="pb-3">
-
-        <div id="main-wrapper" class="homepage">
-            <div class="container">
-
-                					<div class="section">
-						<div class="latest-news-wrapper">
-                        <h1 class="section-title">Most Popular</h1>
-                        @await Component.InvokeAsync("MostPopular")
-
-						</div><!--/.latest-news-wrapper-->
-					</div><!--/.section-->
-            </div>
-        </div>
-    </main>
-</div>
+<!-------------------------- Most-Popular -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Most-Popular</b></h3>
+    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
 
 
-
-<!-- View component for Stocks Details-->
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-            <div class="text-dark" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
-            @await Component.InvokeAsync("Stock" , new {region = "uk"}) 
-        </div>
-        <div class="col-4">
-            <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-            @await Component.InvokeAsync("Stock" , new {region = "us"})
-        </div>
+    <div id="most-popular" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("MostPopular")
     </div>
 </div>
 
+<!-------------------------- Weather API -------------------------->
+<div class="col-md-4">
+    <h3> <b>| WeatherForecast</b></h3>
+    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
 
+    @await Component.InvokeAsync("WeatherForeCast" , new {
+    City = "Linkoping",
+    Lang = "en"}
+    )
+</div>
+
+<!-------------------------- Stocks Details -------------------------->
+
+<div class="col-md-12">
+    <h3> <b>| Stocks Details</b></h3>
+    <hr style="height:3px; border-width:0; color:white; background-color:blue; opacity:1">
+
+    <div class="col-md-6">
+        <div class="text-dark" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
+        @await Component.InvokeAsync("Stock" , new {region = "uk"})
+    </div>
+
+    <div class="col-md-6">
+        <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
+        @await Component.InvokeAsync("Stock" , new {region = "us"})
+
+    </div>
+</div>

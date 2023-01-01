@@ -14,8 +14,8 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    @if (@item.Name == "Nasdaq Futures" || @item.Name == "Crude Oil" || @item.Name == "Gold" || @item.Name == "Silver" || @item.Name == "EUR/USD" || @item.Name == "10-Yr Bond")
-                    {
+                    @if (@item.Name == "Crude Oil" || @item.Name == "Gold" || @item.Name == "Silver" || @item.Name == "EUR/USD" || @item.Name == "10-Yr Bond")
+                    {                       
                         <td>@item.Name</td>
                         <td>@item.PrevClose.ToString("0.00")</td>
                         <td>@item.Close.ToString("0.00")</td>
@@ -38,3 +38,9 @@
     </table>
 </div>
 
+@*@foreach (var item in Model)
+{
+    <td>@Html.DisplayFor(modelItem => item.PrevClose)</td>
+   
+    <td>@Html.DisplayFor(modelItem => item.Name) </td>
+}*@
