@@ -17,7 +17,7 @@
     <link href="css/owl.carousel.min.css" rel="stylesheet">
     <link href="css/owl.theme.default.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    
+
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,26 +34,31 @@
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AlphaWebApp.styles.css" asp-append-version="true" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
-
 </head>
 
 <body>
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
             <div class="navbar mx-3" role="banner">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>                
-                <div id="weather">
-                  <img src="~/weathericons/icons8-weather-75.png" />
-                  <span id="WeatherCount"></span>
-                  <span id="WeatherCity"></span>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
+                <div id="weather" style="height:80px;">
+                    <div style="float:left">
+                        <div class="p-0 gy-0">
+                            <img id="weatherImage" style="height:100px;width:120px;" />
+                            <p id="WeatherSummary" class="badge bg-primary text-wrap"></p>
+                        </div>
+                    </div>
+                    <div style="float:left">
+                        <span id="WeatherCount" class="fs-3 fw-bold"></span> &nbsp;&nbsp;
+                        <span id="WeatherCity" class="fs-4 fw-bold"></span>
+                    </div>
                 </div>
                 <div id="date-time"></div>
-               
+
             </div>
 
-          @*  <div class="container">
-                <partial name="_CookieConsentPartial" />
+            @*  <div class="container">
+            <partial name="_CookieConsentPartial" />
             </div>*@
             <div class="navbar navbar-expand-sm navbar-dark">
                 <div id="header">
@@ -124,7 +129,7 @@
         <main role="main" class="pb-3">
             <partial name="_Notifications" />
             <partial name="_CookieConsentPartial" />
-           
+
             @RenderBody()
         </main>
     </div>
@@ -153,6 +158,15 @@
     <script src="~/js/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            async function requestData(linkUrl) {
+                const res = await fetch(linkUrl);
+                const data = await res.json();
+                $("#WeatherCount").html(data.temperatureC + "℃");
+                $("#WeatherCity").html(data.city);
+                $("#weatherImage").attr("src", data.icon.url);
+                $("#WeatherSummary").html(data.summary);
+            }
+
             $.ajax({
                 url: "https://geolocation-db.com/jsonp",
                 jsonpCallback: "callback",
@@ -160,23 +174,8 @@
                 success: function (location) {
                     var city = location.city;
                     var lang = "en";
-                    $.ajax({
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        crossDomain: true,
-                        url: "https://weatherapi.dreammaker-it.se/forecast?",
-                        data: 'city=' + city + '&lang=' + lang,
-                        dataType: "jsonp",
-                        success: function (result) {
-                            alert(result);
-                            $("#WeatherCount").html(result);
-                            $("#WeatherCity").html(result);
-                            return result;
-                        },
-                        error: function () {
-                            alert('Error occured while calling weather api');
-                        }
-                    });
+                    var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
+                    requestData(linkUrl);
                 }
             });
         });
@@ -186,9 +185,9 @@
 
     <!-------------------------- bubble-shooter game -------------------------->
     <script type='text/javascript' src="~/js/bubble-shooter-example.js"></script>
-    
+
 </body>
-</html>    
+</html>
 
 
 
