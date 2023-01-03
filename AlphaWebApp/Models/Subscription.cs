@@ -16,9 +16,13 @@ namespace AlphaWebApp.Models
         [Required]
         public bool Active { get; set; } = false;
         [Required]
+
+        //[DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
         public DateTime Created { get; set; } = DateTime.Now;
 
+        //[DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
         public DateTime ExpireAt { get; set; }
+
         [Required]
         public bool PaymentComplete { get; set; } 
         public string UserId { get; set; }

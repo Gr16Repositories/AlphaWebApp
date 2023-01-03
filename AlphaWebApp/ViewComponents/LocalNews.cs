@@ -3,11 +3,11 @@ using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 namespace AlphaWebApp.ViewComponents
 {
-    public class SportsViewComponent: ViewComponent
+    public class LocalViewComponent: ViewComponent
     {
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
-        public SportsViewComponent( ApplicationDbContext db, IArticleService articleService)
+        public LocalViewComponent(ApplicationDbContext db, IArticleService articleService)
         {
             _db = db;
             _articleService = articleService;
@@ -16,9 +16,8 @@ namespace AlphaWebApp.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var sport = _articleService.GetArticlesByCategoryName("Sport").FirstOrDefault();
-            return View("Index", sport);
+            var local = _articleService.GetArticlesByCategoryName("Local").OrderByDescending(x => x.DateStamp).Take(5).ToList(); ;
+            return View("Index", local);
         }
-
     }
 }

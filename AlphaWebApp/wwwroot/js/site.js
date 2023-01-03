@@ -4,8 +4,7 @@
 // Write your JavaScript code.
 
 
-//ALI
-
+//editor-choice
 $(document).ready(function () {
     $('#editor-choice').owlCarousel({
         
@@ -30,6 +29,7 @@ $(document).ready(function () {
     })
 });
 
+//sports
 $(document).ready(function () {
     $('#sports').owlCarousel({
         margin: 20,
@@ -53,8 +53,135 @@ $(document).ready(function () {
     })
 });
 
+//sports
 $(document).ready(function () {
     $('#most-popular').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+
+//Local News
+$(document).ready(function () {
+    $('#local-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+//Sweden News
+$(document).ready(function () {
+    $('#sweden-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+//World News
+$(document).ready(function () {
+    $('#world-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+//Economy News
+$(document).ready(function () {
+    $('#economy-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+//Health News
+$(document).ready(function () {
+    $('#health-news').owlCarousel({
 
         margin: 20,
         dots: true,
@@ -77,6 +204,63 @@ $(document).ready(function () {
     })
 });
 
+//Sport News
+$(document).ready(function () {
+    $('#sport-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+//Technology News
+$(document).ready(function () {
+    $('#technology-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 2000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+});
+
+
+
+
+
+
+
+
 //$("#home-slider").owlCarousel({
 //    pagination: true,
 //    autoPlay: true,
@@ -98,4 +282,5 @@ $(document).ready(function () {
 //    autoPlay: true,
 //    stopOnHover: true
 //});
+
 
