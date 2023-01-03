@@ -3,20 +3,21 @@ using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 namespace AlphaWebApp.ViewComponents
 {
-    public class HealthViewComponent:ViewComponent
+    public class EconomyViewComponent: ViewComponent
     {
         private readonly ApplicationDbContext _db;
         private readonly IArticleService _articleService;
-        public HealthViewComponent( ApplicationDbContext db, IArticleService articleService)
+        public EconomyViewComponent(ApplicationDbContext db, IArticleService articleService)
         {
             _db = db;
             _articleService = articleService;
 
         }
+
         public IViewComponentResult Invoke()
         {
-            var healthdnews = _articleService.GetArticlesByCategoryName("Health").FirstOrDefault();
-            return View("Index", healthdnews);
+            var economy = _articleService.GetArticlesByCategoryName("Economy").OrderByDescending(x => x.DateStamp).Take(3).ToList(); ;
+            return View("Index", economy);
         }
     }
 }
