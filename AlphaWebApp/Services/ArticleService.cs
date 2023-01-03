@@ -74,7 +74,7 @@ namespace AlphaWebApp.Services
         public List<Article> GetAllArticles()
         {
             List<Article> listOfAllArtiles = _db.Articles.ToList();
-            if (listOfAllArtiles != null)
+            if (listOfAllArtiles != null && listOfAllArtiles.Any(a => a.Archive != true))
                 return listOfAllArtiles;
             else
                 return new List<Article>();
@@ -138,17 +138,17 @@ namespace AlphaWebApp.Services
 
         public List<Article> GetArticlesByCategoryName(string name)
         {
-            return _db.Articles.Where(a => a.Category.name == name).ToList();
+            return _db.Articles.Where(a => a.Category.name == name && a.Archive != true).ToList();
         }
 
         public List<Article> GetArticlesByCategoryId(int id)
         {
-            return _db.Articles.Where(a => a.CategoryId == id).ToList();
+            return _db.Articles.Where(a => a.CategoryId == id && a.Archive != true).ToList();
         }
 
         public Article GetSpecificArticleByCategoryId(int id)
         {
-            return _db.Articles.FirstOrDefault(a => a.CategoryId == id);
+            return _db.Articles.FirstOrDefault(a => a.CategoryId == id && a.Archive != true);
         }
     }
 }

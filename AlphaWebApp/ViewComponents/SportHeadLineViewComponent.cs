@@ -12,8 +12,9 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            var sportHead = _articleService.GetArticlesByCategoryName("Sport").Take(5);
-            return View("Index", sportHead);
+            var sportHead = _articleService.GetArticlesByCategoryName("Sport").Take(5);           
+               return View("Index", sportHead);
+          
         }
     }
 }

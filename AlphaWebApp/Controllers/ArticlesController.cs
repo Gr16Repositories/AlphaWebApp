@@ -51,7 +51,7 @@ namespace AlphaWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
-            if (listOfArticles != null)
+            if (listOfArticles != null && listOfArticles.Any(x => x.Archive != true))
                 return View(listOfArticles);
             else
                 return View();
