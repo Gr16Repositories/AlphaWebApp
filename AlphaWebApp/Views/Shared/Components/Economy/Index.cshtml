@@ -4,7 +4,7 @@
     var articles = Model.Skip(1);
 }
 
-@*<----------------------------------------------------- Health/index ------------------------------------------------------------->*@
+@*<----------------------------------------------------- Economy/index ------------------------------------------------------------->*@
 @foreach (var article in articles)
 {
     <div class="post feature-post style:height:500px;">
@@ -12,7 +12,6 @@
             <div class="entry-thumbnail">
                 <img src="@article.ImageLink" class="card-img-top" style="height: 200px; width: 100%; object-fit: cover;">
             </div>
-
 
         </div>
         <div class="post-content">
@@ -22,11 +21,6 @@
                     <li class="views"><a href="#"><i class="fa fa-eye"></i>@article.Views </a></li>&nbsp;&nbsp;&nbsp;
                     @*<li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>@article.Likes </a></li>*@
                 </ul>
-
-                @if (subscriptionsService.HasSubscription(User))
-                {
-                    <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@Model.Id" class="head" style="color:black"><u>@Model.HeadLine</u></a>
-                }
 
             </div>
             <h2 class="entry-title">
