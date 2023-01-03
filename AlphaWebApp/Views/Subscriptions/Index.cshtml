@@ -15,7 +15,7 @@
                 @Html.DisplayNameFor(model => model.Created)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaymentComplete)
+                @Html.DisplayNameFor(model => model.ExpireAt)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User) info
@@ -29,18 +29,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.SubscriptionType)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
             <th></th>
 
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
+            <tr>
+                <td>
+                    @item.Created.Date.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaymentComplete)
+                    @item.ExpireAt.Date.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.FirstName) @Html.DisplayFor(modelItem => item.User.LastName)
@@ -55,8 +58,12 @@
                 @Html.DisplayFor(modelItem => item.SubscriptionType.TypeName)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @item.Active
+            </td>
+
+            <td>
+                    <a class="text-dark" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="text-dark" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
