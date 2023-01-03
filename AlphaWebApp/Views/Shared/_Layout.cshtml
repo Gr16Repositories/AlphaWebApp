@@ -1,6 +1,8 @@
 ﻿@{
     var currentUrl = Url.Action((string)ViewContext.RouteData.Values["action"], (string)ViewContext.RouteData.Values["controller"]);
 }
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +34,7 @@
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AlphaWebApp.styles.css" asp-append-version="true" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   
 
 </head>
 
@@ -43,9 +46,9 @@
                 <div id="date-time"></div>
             </div>
 
-            <div class="container">
+          @*  <div class="container">
                 <partial name="_CookieConsentPartial" />
-            </div>
+            </div>*@
             <div class="navbar navbar-expand-sm navbar-dark">
                 <div id="header">
                     <nav class="navbar navbar-expand-sm navbar-dark border-0">
@@ -115,6 +118,7 @@
         <main role="main" class="pb-3">
             <partial name="_Notifications" />
             <partial name="_CookieConsentPartial" />
+           
             @RenderBody()
         </main>
     </div>
@@ -142,6 +146,9 @@
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
 
+    <!-------------------------- bubble-shooter game -------------------------->
+    <script type='text/javascript' src="~/js/bubble-shooter-example.js"></script>
+    
 </body>
 </html>
 
