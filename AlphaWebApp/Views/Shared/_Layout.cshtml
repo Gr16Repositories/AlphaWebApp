@@ -42,8 +42,14 @@
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
             <div class="navbar mx-3" role="banner">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>                
+                <div id="weather">
+                  <img src="~/weathericons/icons8-weather-75.png" />
+                  <span id="WeatherCount"></span>
+                  <span id="WeatherCity"></span>
+                </div>
                 <div id="date-time"></div>
+               
             </div>
 
           @*  <div class="container">
@@ -145,9 +151,44 @@
     <script src="~/js/jquery.subscribe-better.min.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://geolocation-db.com/jsonp",
+                jsonpCallback: "callback",
+                dataType: "jsonp",
+                success: function (location) {
+                    var city = location.city;
+                    var lang = "en";
+                    $.ajax({
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        crossDomain: true,
+                        url: "https://weatherapi.dreammaker-it.se/forecast?",
+                        data: 'city=' + city + '&lang=' + lang,
+                        dataType: "jsonp",
+                        success: function (result) {
+                            alert(result);
+                            $("#WeatherCount").html(result);
+                            $("#WeatherCity").html(result);
+                            return result;
+                        },
+                        error: function () {
+                            alert('Error occured while calling weather api');
+                        }
+                    });
+                }
+            });
+        });
+
+
+    </script>
 
     <!-------------------------- bubble-shooter game -------------------------->
     <script type='text/javascript' src="~/js/bubble-shooter-example.js"></script>
     
 </body>
-</html>
+</html>    
+
+
+

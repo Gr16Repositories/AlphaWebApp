@@ -94,14 +94,14 @@
         @await Component.InvokeAsync("Stock" , new {region = "uk"})
     </div>
 
-    <div class="col-md-6">
-        <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-        @await Component.InvokeAsync("Stock" , new {region = "us"})
+    @*<div class="col-md-6">
+    <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
+    @await Component.InvokeAsync("Stock" , new {region = "us"})
 
+    </div>*@
+</div>
     </div>
 </div>
-
-
 
 <!-------------------------- Local News -------------------------->
 <div class="col-md-12">
@@ -174,4 +174,5 @@
         @await Component.InvokeAsync("Technology")
     </div>
 </div>
+
 

@@ -8,6 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Stock\**" />
+    <Content Remove="Views\Stock\**" />
+    <EmbeddedResource Remove="Views\Stock\**" />
+    <None Remove="Views\Stock\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\StockController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
     <PackageReference Include="MatplotlibCS" Version="1.0.63" />
@@ -35,6 +46,8 @@
   <ItemGroup>
 
     <Folder Include="wwwroot\images\articles\" />
+
+    <Folder Include="wwwroot\WeatherIcons\" />
   </ItemGroup>
 
 </Project>
