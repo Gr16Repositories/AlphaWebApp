@@ -25,5 +25,6 @@ namespace AlphaWebApp.Models
         public int SubscriptionTypeId { get; set; }
         public  virtual User User { get; set; }
         public virtual SubscriptionType SubscriptionType { get; set; }
+        public virtual ICollection<Category> Categories {get; set;}
     }
 }

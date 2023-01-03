@@ -3,7 +3,7 @@
 <h1>Personalized Newsletter</h1>
 
 
-<form id="newsletterForm">
+<form id="newsletterForm" asp-action="CreateCategory">
     @foreach (var item in Model)
     {
         <input type="checkbox" id="@item.Id" name="@item.name" value="@item.Id"/>
@@ -29,3 +29,5 @@
         console.log;
     }
 </script>
+
+
