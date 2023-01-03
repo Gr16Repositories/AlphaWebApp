@@ -844,15 +844,37 @@ label {
     transform: scale(1);
 }
 
+#editor-choice .owl-dots {
+    /*float: right;
+    margin-top: -40px;
+    position: relative;*/
+    /*padding-right: 0px;*/
+    position: absolute;
+    top: -40px;
+    right: 16px;
+}
 
-/*.owl-controls .owl-pagination {
+#sports .owl-dots {
+    /*float: right;
+    margin-top: -40px;
+    position: relative;*/
+    /*padding-right: 0px;*/
+    position: absolute;
+    top: -40px;
+    right: 16px;
+}
+
+
+
+
+.owl-controls .owl-pagination {
 	float:right;
 	margin-top:-40px;
 	position:relative;
 	padding-right:25px;
 }
 
-.owl-theme .owl-controls .owl-pagination {
+/*.owl-theme .owl-controls .owl-pagination {
 	text-align:center;
 }
 .owl-theme .owl-controls .owl-page{

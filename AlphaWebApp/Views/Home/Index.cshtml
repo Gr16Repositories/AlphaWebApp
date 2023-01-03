@@ -6,6 +6,7 @@
 }
 
 
+
 <!-------------------------- Latest News -------------------------->
 <div class="container">
     <div id="breaking-news">
@@ -19,53 +20,37 @@
 </div>
 
 
-<!-------------------------- Old Code (Padmini+Swathi)  -------------------------->
+
 @*@await Component.InvokeAsync("TodayNews")
 @await Component.InvokeAsync("TodayWorldNews")
 @await Component.InvokeAsync("Health")
 @await Component.InvokeAsync("MostPopular")
 @await Component.InvokeAsync("CategoriesNews")
 @await Component.InvokeAsync("SwedenNews")
-@await Component.InvokeAsync("SportHeadLine")
 @await Component.InvokeAsync("Sports")
-@await Component.InvokeAsync("EditorsChoice")
 *@
 
-<!-------------------------- Sport Head Line/index -------------------------->
-@*<div class="container-fluid" >
-    <div class="swe" style="margin-left:2%; margin-right:2%;">
-        <h1>Full story</h1>
-    @await Component.InvokeAsync("SwedenNews")
-    </div>
-</div>*@
 
-@*<div class="container-fluid">
-    <div class="new" style="margin-left:2%; margin-right:2%;">
-        <h1>Sports News</h1>
-    <br />
-
-    @await Component.InvokeAsync("SportHeadLine")
+<!-------------------------- Latest News -------------------------->
+<div class="container">
+    <div id="breaking-news">
+        <span>
+            Latest News   <i class="fa fa-angle-double-right"></i>
+        </span>
+        <div id="latest-news">
+            @await Component.InvokeAsync("LatestArticles")
+        </div>
     </div>
-</div>*@
+</div>
+
 
 <!-------------------------- Editor Choice -------------------------->
 <div class="col-md-12">
     <h3> <b>| Editor's Choice</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:red; opacity:1">
+    <hr style="width:94%; height:3px;border-width:0;color:white;background-color:red; opacity:1">
 
     <div id="editor-choice" class="owl-carousel owl-theme">
         @await Component.InvokeAsync("EditorsChoice")
-    </div>
-</div>
-
-<!-------------------------- Sports -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Sport</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:#ffff00; opacity:1">
-
-
-    <div id="sports" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("SportHeadLine")
     </div>
 </div>
 
@@ -117,4 +102,76 @@
 </div>
 
 
+
+<!-------------------------- Local News -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Local</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:#FCD500; opacity:1">
+
+    <div id="local-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("Local")
+    </div>
+</div>
+
+<!-------------------------- Sweden News -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Sweden</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:#FA9200; opacity:1">
+
+    <div id="sweden-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("Sweden")
+    </div>
+</div>
+
+<!-------------------------- World News -------------------------->
+<div class="col-md-12">
+    <h3> <b>| World</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:#DE4439; opacity:1">
+
+    <div id="world-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("World")
+    </div>
+</div>
+
+<!-------------------------- Sports -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Sport</b></h3>
+    <hr style="width:94%; height:3px; border-width:0; color:white; background-color:#ffff00; opacity:1">
+
+
+    <div id="sports" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("Sport")
+
+    </div>
+</div>
+
+<!-------------------------- Economy News -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Economy</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:#0b5394; opacity:1">
+
+    <div id="economy-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("Economy")
+    </div>
+</div>
+
+<!-------------------------- Health News -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Health</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:#58cf23; opacity:1">
+
+    <div id="health-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("Health")
+    </div>
+</div>
+
+<!-------------------------- Technology News -------------------------->
+<div class="col-md-12">
+    <h3> <b>| Technology</b></h3>
+    <hr style="height:3px;border-width:0;color:white;background-color:#3d85c6; opacity:1">
+
+    <div id="technology-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("Technology")
+    </div>
+</div>
 

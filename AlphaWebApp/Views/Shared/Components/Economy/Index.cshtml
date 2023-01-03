@@ -1,36 +1,16 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Article>
 
 @{
-
     var articles = Model.Skip(1);
 }
 
-
-@*<div class="row col-10">
-    <!-- Foreach loop here -->
-    @foreach (var article in articles)
-    {
-
-        <div class="col-2">
-
-            <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" class="headl">
-                <li>&nbsp;@article.HeadLine &nbsp;</li>&nbsp;
-                <img src="@article.ImageLink" class="card-img-top" alt="Image" style="padding:1px; object-fit: cover; height: 150px; width:150%;">
-            </a>
-        </div>
-    }
-</div>*@
-
-
-
-@*<----------------------------------------------------- Conent/1 = Sport Head Line/index ------------------------------------------------------------->*@
-
+@*<----------------------------------------------------- Economy/index ------------------------------------------------------------->*@
 @foreach (var article in articles)
 {
     <div class="post feature-post style:height:500px;">
         <div class="entry-header">
             <div class="entry-thumbnail">
-                <img src="@article.ImageLink" class="card-img-top" style="height: 500px; width: 100%; object-fit: cover;">
+                <img src="@article.ImageLink" class="card-img-top" style="height: 200px; width: 100%; object-fit: cover;">
             </div>
 
         </div>
@@ -44,7 +24,7 @@
 
             </div>
             <h2 class="entry-title">
-                <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@article.Id">
+                <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">
                     <span style="color:#003366"></span>@article.HeadLine
                 </a>
             </h2>
