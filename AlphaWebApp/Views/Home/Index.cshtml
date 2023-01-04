@@ -6,21 +6,6 @@
 }
 
 
-
-<!-------------------------- Latest News -------------------------->
-<div class="container">
-    <div id="breaking-news">
-        <span>
-            Latest News   <i class="fa fa-angle-double-right"></i>
-        </span>
-        <div id="latest-news">
-            @await Component.InvokeAsync("LatestArticles")
-        </div>
-    </div>
-</div>
-
-
-
 @*@await Component.InvokeAsync("TodayNews")
 @await Component.InvokeAsync("TodayWorldNews")
 @await Component.InvokeAsync("Health")
@@ -76,11 +61,6 @@
     )
 </div>
 
-<!-------------------------- bubble-shooter game -------------------------->
-
-<div class="col-md-6">
-    <canvas style="margin-left: 30%;" id="viewport"  width="628" height="628"></canvas>
-</div>
 
 
 <!-------------------------- Stocks Details -------------------------->
@@ -176,3 +156,8 @@
 </div>
 
 
+<!-------------------------- bubble-shooter game -------------------------->
+
+<div class="col-md-6">
+    <canvas style="margin-left: 30%;" id="viewport"  width="628" height="628"></canvas>
+</div>
