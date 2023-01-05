@@ -41,7 +41,20 @@
         <header id="navigation">
             <div class="navbar mx-3" role="banner">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
-                <div id="weather" style="height:80px;">
+                <div id="date-time"></div>
+                <div id="weather" style="display:flex;align-items:center;">
+                    <div>
+                        <div class="p-0 gy-0">
+                            <img id="weatherImage" style="height:80px;width:80px;position:absolute;" />
+                            <p id="WeatherSummary" class="badge bg-primary text-wrap" style="margin-top:64px;"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <span id="WeatherCount" class="fs-4 fw-bold"></span> &nbsp;&nbsp;
+                        <span id="WeatherCity" class="fs-5 fw-bold"></span>
+                    </div>
+                </div>
+              @*  <div id="weather" style="height:80px;">
                     <div style="float:left">
                         <div class="p-0 gy-0">
                             <img id="weatherImage" style="height:100px;width:120px;" />
@@ -54,14 +67,10 @@
                     </div>
                 </div>
 
-                <div id="date-time"></div>
+               
+*@
 
-
-                <div id="weather"><span>Linköping </span>
-                   
-
-
-                </div>
+               
 
                
             </div>
@@ -181,10 +190,17 @@
                 jsonpCallback: "callback",
                 dataType: "jsonp",
                 success: function (location) {
-                    var city = location.city;
+                    var city = location.city;                   
                     var lang = "en";
-                    var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
-                    requestData(linkUrl);
+                    if(city != null) {
+                        var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
+                        requestData(linkUrl);
+                    }
+                    else{
+                        city = "LinkÖping";
+                        var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
+                        requestData(linkUrl);
+                   }                   
                 }
             });
         });
