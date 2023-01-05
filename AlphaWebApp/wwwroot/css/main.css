@@ -2468,4 +2468,65 @@ label {
         z-index: -1;
     }
 
+
+.Stock-scroll {
+    /*padding: 0 10px 0 10px;*/
+    display: flex;
+    height: 24px;
+    /*margin: 10px 0;*/
+   /* overflow: hidden;*/
+    border-radius: 3px;
+    background-color:white;
+}
+#StockHeaderText {
+    width: 200px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: White;
+    font-weight: 900;
+    margin: auto 0;
+    background-color: red;
+   padding: 9px 20px 2px 20px;
+   align-items: center;
+}
+
+.stock-scrolling-text {
+    padding: 9px 10px 0px 10px;
+    color: black;
+    font-weight: 900;
+    display: inline-block;
+    background-color: white;
+    display: inline-block;
+    align-items: center;
+}
+    .stock-scrolling-text:hover{
+        color: red;
+        cursor:pointer;
+    }
+    .btntime {
+        display: inline-block;
+        color: rgba(255, 255,255, 0.5);
+        padding: 0 10px;
+        font-size: 12px;
+    }
+marquee p{
+    display:inline-block;
+   /* padding:5px 10px;*/
+}
+marquee p b {
+    display: inline-block;
+    background-color: red;
+    padding:5px 25px;
+    font-weight:900;
+}
+.stock-Detail{
+    padding-right:15px;
+}
+    .stock-Detail-last{
+        padding-right:40px;
+    }
+    #stock-Name {
+        padding-left:15px;
+        background-color: blanchedalmond;
+    }
 /*=========================================:: END :: =============================================*/
