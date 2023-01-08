@@ -18,7 +18,8 @@
                 <h2 class="ml-auto mr-4 mt-3 mb-0">@Model.City</h2>
                 <p class="ml-auto mr-4 mb-0 med-font">@Model.Summary</p>
                 <h1 class="ml-auto mr-4 large-font">
-                  Weather = @Model.TemperatureC<span class="sm-font">C</span></h1>  <h1 class="ml-auto mr-4 large-font">@Model.TemperatureF<span class="sm-font">F</span> </h1>
+                  Weather = @Model.TemperatureC<span class="sm-font">C</span></h1>  
+                  <h1 class="ml-auto mr-4 large-font">@Model.TemperatureF<span class="sm-font">F</span> </h1>
                 <p class="time-font mb-0 ml-4 mt-auto">@Model.Date</p>
                 <p class="ml-4 mb-4"> WindSpeed  @Model.WindSpeed </p>
                 <p class="ml-4 mb-4"> Humidity @Model.Humidity </p>
@@ -28,7 +29,7 @@
 
 
 
-    <p><b>City=</b>@Model.City</p>
+   @* <p><b>City=</b>@Model.City</p>
 
     <p><b>Summary=</b>@Model.Summary</p>
 
@@ -36,7 +37,10 @@
     <p><b>TemperatureF=</b>@Model.TemperatureF</p>
     <p><b>Humidity=</b>@Model.Humidity</p>
     <p><b>WindSpeed=</b>@Model.WindSpeed</p>
-    <p><b>Date=</b>@Model.Date</p>
+    <p><b>Date=</b>@Model.Date</p>*@
+}
+else{
+    <p>Loading........</p>
 }
 
 
