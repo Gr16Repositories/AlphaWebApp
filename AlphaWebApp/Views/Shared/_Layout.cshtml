@@ -41,6 +41,7 @@
         <header id="navigation">
             <div class="navbar mx-3" role="banner">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
+
                 <div id="date-time"></div>
                 <div id="weather" style="display:flex;align-items:center;">
                     <div>
@@ -68,15 +69,11 @@
                 </div>
 
                
-*@
-
-               
-
-               
+*@   
             </div>
-
             @*  <div class="container">
             <partial name="_CookieConsentPartial" />
+
             </div>*@
             <div class="navbar navbar-expand-sm navbar-dark">
                 <div id="header">
@@ -94,14 +91,12 @@
             @*Navbar Categories View Component VM*@
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div id="navbar_border" class="container-fluid">
-
                     <a class="nav-link text-light" asp-controller="Home" asp-action="Index">
                         <b>
                             <img src="~/img/logo_home.png" style="height: 30px;" />Home
                         </b>
                     </a>
                     <vc:navbar-categories></vc:navbar-categories>
-
                     <div id="main-wrapper" class="homepage">
                         <header id="navigation">
                             <div class="searchNlogin">
@@ -109,7 +104,7 @@
                                     <li>
                                         <form method="post" action="/process-form">
                                             <input type="text" name="query" placeholder="Search...">
-                                            <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">Search</button>
+                                            @*<button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">Search</button>*@
                                             <a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>
                                         </form>
                                     </li>
@@ -147,7 +142,6 @@
         <main role="main" class="pb-3">
             <partial name="_Notifications" />
             <partial name="_CookieConsentPartial" />
-
             @RenderBody()
         </main>
     </div>

@@ -126,9 +126,5 @@ namespace AlphaWebApp.Controllers
             }
             return RedirectToAction("SubscriptionHistory");
         }
-
-     
-
-
     }
 }

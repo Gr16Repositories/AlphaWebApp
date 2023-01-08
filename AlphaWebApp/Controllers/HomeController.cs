@@ -46,29 +46,23 @@ namespace AlphaWebApp.Controllers
         }
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        // make search and if the user has a subscription they could search in archive 
+        // Make Search and if the user has a subscription they could search in archive 
         public IActionResult Search(string query)
         {
-            if(String.IsNullOrEmpty(query))
+            if (String.IsNullOrEmpty(query))
             {
                 return View(new List<Article>());
             }
             var lowerQuery = query.ToLower().Trim();
-            
+
             if (_subscriptionService.HasSubscription(User))
             {
-                var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery)||
-                                                            a.ContentSummary.ToLower().Trim().Contains(lowerQuery)||
+                var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) ||
+                                                            a.ContentSummary.ToLower().Trim().Contains(lowerQuery) ||
                                                             a.HeadLine.ToLower().Trim().Contains(lowerQuery));
                 return View(articleQuery);
             }
-            else if(!String.IsNullOrEmpty(lowerQuery))
+            else if (!String.IsNullOrEmpty(lowerQuery))
             {
                 var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) &&
                                                             a.Archive == false ||
@@ -83,6 +77,20 @@ namespace AlphaWebApp.Controllers
                 return View(new List<Article>());
             }
         }
+
+
+
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+       
+        
+        
 
     }
 }
