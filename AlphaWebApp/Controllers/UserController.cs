@@ -99,7 +99,11 @@ namespace AlphaWebApp.Controllers
             {
                 if (userSubscription.Categories.Select(c => c.name).Contains(category.Text))
                 {
-                    userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected = true;
+                    userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected = true; // was at first true
+                    //if (userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected == true)
+                    //{
+                    //    userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected = false;
+                    //}
                 }
             }
             return View(userSelection);
@@ -124,11 +128,12 @@ namespace AlphaWebApp.Controllers
                 }
                 _subscriptionService.UpdateSubscription(userSubscription);
             }
-            return RedirectToAction("SubscriptionHistory");
+            return RedirectToAction("ConfirmNewsletterSubscription");
         }
 
-     
-
-
+        public IActionResult ConfirmNewsletterSubscription() // Used to render view for confirming subscription of weekly newsletter
+        {
+            return View();
+        }
     }
 }
