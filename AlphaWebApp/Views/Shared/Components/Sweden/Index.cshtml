@@ -4,13 +4,13 @@
     var articles = Model.Skip(1);
 }
 
-@*<----------------------------------------------------- Technology/index ------------------------------------------------------------->*@
+@*<----------------------------------------------------- Sweden/index ------------------------------------------------------------->*@
 @foreach (var article in articles)
 {
     <div class="post feature-post style:height:500px;">
         <div class="entry-header">
             <div class="entry-thumbnail">
-                <img src="@article.ImageLink" class="card-img-top" style="height: 200px; width: 100%; object-fit: cover;">
+                <img src="@article.ImageLink" class="card-img-top" style="height: 300px; width: 100%; object-fit: cover;">
             </div>
 
         </div>
@@ -18,8 +18,8 @@
             <div class="entry-meta">
                 <ul class="list-inline">
                     <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>@article.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
-                    <li class="views"><a href="#"><i class="fa fa-eye"></i>@article.Views </a></li>&nbsp;&nbsp;&nbsp;
-                    @*<li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>@article.Likes </a></li>*@
+                    <li class="views"><a href="#"><i class="fa fa-eye"></i>@article.Views </a></li>&nbsp;&nbsp;
+                    <li class="loves"><a href="#"><i class="bi bi-heart bi-lg"></i>@article.Like.Count </a></li>
                 </ul>
 
             </div>

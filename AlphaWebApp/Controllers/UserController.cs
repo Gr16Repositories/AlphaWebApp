@@ -130,7 +130,6 @@ namespace AlphaWebApp.Controllers
             }
             return RedirectToAction("ConfirmNewsletterSubscription");
         }
-
         public IActionResult ConfirmNewsletterSubscription() // Used to render view for confirming subscription of weekly newsletter
         {
             return View();

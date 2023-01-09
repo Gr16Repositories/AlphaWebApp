@@ -18,13 +18,11 @@
 <hr />
 <div class="ListOfArticles">
     <h2>
-        <b>List of Articles</b>
+        <b>Searching Result</b>
     </h2>
 </div>
 <hr />
 <div class="container">
-
-
     @foreach (var group in Model.GroupBy(a => a.Category))
     {
         <div class="row gy-4" id="ads">
@@ -56,7 +54,7 @@
                                     <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
                                 }
                             </p>
-                            <div class="post-content">
+                            @*<div class="post-content">
                                 <i class="fa fa-eye">@item.Views</i>
                                 @if (!User.Identity.IsAuthenticated)
                                 {
@@ -71,7 +69,7 @@
                                     <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>@item.Like.Count</span></a>
                                 }
                                 <i class="fa-sharp fa-solid fa-clock">@item.DateStamp.ToString("dd-MM-yyyy HH:mm")</i>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 </div>

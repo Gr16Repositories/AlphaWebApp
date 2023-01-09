@@ -3,6 +3,9 @@
     var activeClass = "active";
 }
 
+
+@*<----------------------------------------------------- Latest News ------------------------------------------------------------->*@
+
 <div class="container">
     <div class="row">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -11,7 +14,11 @@
                 {
                     <div class="carousel-item @activeClass">
                         <b style="color:red">
-                            @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") |&nbsp; @item.Category.name |&nbsp; @item.ContentSummary
+                            @*@item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") |&nbsp; @item.Category.name |&nbsp; @item.ContentSummary*@
+
+                            <a style="color:red" asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id">
+                                @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") |&nbsp; @item.Category.name |&nbsp; @item.ContentSummary
+                            </a>
                         </b>
                     </div>
 
@@ -21,22 +28,3 @@
         </div>
     </div>
 </div>
-
-
-@*Arkiv*@
-@*@model IEnumerable<AlphaWebApp.Models.Article>
-<div class="container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-
-                               <b>@item.Category.name</b>
-                                <b>@item.DateStamp</b>
-
-                        <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id" class="btn btn-primary d-inline-block mt-auto">@item.HeadLine</a>
-
-
-        }
-    </div>
-</div>
-@*/Arkiv*@

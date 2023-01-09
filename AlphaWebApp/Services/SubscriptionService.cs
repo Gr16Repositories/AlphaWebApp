@@ -72,6 +72,7 @@ namespace AlphaWebApp.Services
                 Active = true,
                 ExpireAt = newSub.CreatedAt.AddMonths(newSub.Period)
             };
+            
             _db.Subscriptions.Add(subscription);
             _db.SaveChanges();
             return await Task.Run(() => subscription);
