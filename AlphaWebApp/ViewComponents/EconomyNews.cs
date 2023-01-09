@@ -16,7 +16,7 @@ namespace AlphaWebApp.ViewComponents
 
         public IViewComponentResult Invoke()
         {
-            var economy = _articleService.GetArticlesByCategoryName("Economy").OrderByDescending(x => x.DateStamp).Take(3).ToList(); ;
+            var economy = _articleService.GetArticlesByCategoryName("Economy").OrderByDescending(x => x.DateStamp).Take(5).ToList(); ;
             return View("Index", economy);
         }
     }

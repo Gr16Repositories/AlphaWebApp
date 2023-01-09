@@ -5,22 +5,11 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-@*@await Component.InvokeAsync("TodayNews")
-@await Component.InvokeAsync("TodayWorldNews")
-@await Component.InvokeAsync("Health")
-@await Component.InvokeAsync("MostPopular")
-@await Component.InvokeAsync("CategoriesNews")
-@await Component.InvokeAsync("SwedenNews")
-@await Component.InvokeAsync("Sports")
-*@
-
-
 <!-------------------------- Latest News -------------------------->
-<div class="container">
+<div class="col-md-12">
     <div id="breaking-news">
         <span>
-            Latest News   <i class="fa fa-angle-double-right"></i>
+            Latest News  <i class="fa fa-angle-double-right"></i>
         </span>
         <div id="latest-news">
             @await Component.InvokeAsync("LatestArticles")
@@ -28,30 +17,132 @@
     </div>
 </div>
 
-
-<!-------------------------- Editor Choice -------------------------->
+<!-------------------------- Alpha News -------------------------->
 <div class="col-md-12">
-    <h3> <b>| Editor's Choice</b></h3>
-    <hr style="width:94%; height:3px;border-width:0;color:white;background-color:red; opacity:1">
+    <h3> <b> <i class="fa-solid fa-globe"></i> ALPHA NEWS</b></h3>
+    <hr style="height:5px; color:red; opacity:1">
+    <div id="categories-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("CategoriesNews")
+    </div>
+</div>
 
-    <div id="editor-choice" class="owl-carousel owl-theme">
+
+<div class="row">
+    <!-------------------------- Local News -------------------------->
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="section-title title">| Local</h1>
+            @*<hr style="width:92%; height:3px; border-width:0; color:white; background-color:#FCD500; opacity:1">*@
+            <div id="local-news" class="owl-carousel owl-theme">
+                @await Component.InvokeAsync("Local")
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <!-------------------------- Sweden News -------------------------->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title title">| Sweden</h1>
+                <div id="sweden-news" class="owl-carousel owl-theme">
+                    @await Component.InvokeAsync("Sweden")
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------- World News -------------------------->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title title">| World</h1>
+                <div id="world-news" class="owl-carousel owl-theme">
+                    @await Component.InvokeAsync("World")
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------- Economy News -------------------------->
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title title">| Economy</h1>
+                <div id="economy-news" class="owl-carousel owl-theme">
+                    @await Component.InvokeAsync("Economy")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-------------------------- Editor Choice -------------------------->
+    <div class="col-md-3">
+        <h1 class="section-title title">| Editor's Choice</h1>
         @await Component.InvokeAsync("EditorsChoice")
     </div>
 </div>
 
-<!-------------------------- Most-Popular -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Most-Popular</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
+<div class="row">
+    <div class="row">
+        <!-------------------------- Sports -------------------------->
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <h1 class="section-title title">| Sport</h1>
+                <div id="sports" class="owl-carousel owl-theme">
+                    @await Component.InvokeAsync("Sport")
+                </div>
+            </div>
+        </div>
 
+        <!-------------------------- Most Popular -------------------------->
+        <div class="col-md-6">
+            <div class="col-md-12">
 
-    <div id="most-popular" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("MostPopular")
+                <h1 class="section-title title">| Most Popular</h1>
+                @await Component.InvokeAsync("MostPopular")
+            </div>
+            <hr style="height:5px; color:red; opacity:1">
+
+            <!-------------------------- Lexicon -------------------------->
+            <div class="col-sm-12">
+                <hr style="height:5px; color:red; opacity:1">
+                <h4 style="color:black;"><i>"On behalf of Arbetsförmedlingen, Lexicon trains new professionals IT for organizations and companies within the IT industry."</i></h4>
+                <div class="text-center pt-2">
+                    <img style="  margin: auto; display: block;" class="img-responsive " src="~/img/lexicon_logo.gif" height="100px;" width="300px;" />
+                    <h4 style="color:black;">Expression of interest IT extension</h4>
+                    <h4><i>Lexicon-Linköping.se</i></h4>
+                    <hr style="height:5px; color:red; opacity:1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-------------------------- Health News -------------------------->
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <h1 class="section-title title">| Health</h1>
+
+                <div id="health-news" class="owl-carousel owl-theme">
+                    @await Component.InvokeAsync("Health")
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------- Technology News -------------------------->
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <h1 class="section-title title">| Technology</h1>
+
+                @* <h3> <b>| Technology</b></h3>
+                <hr style="width:85%; height:3px; border-width:0; color:white; background-color:#3d85c6; opacity:1">*@
+
+                <div id="technology-news" class="owl-carousel owl-theme">
+                    @await Component.InvokeAsync("Technology")
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-------------------------- Weather API -------------------------->
-<div class="col-md-4">
+@*<div class="col-md-4">
     <h3> <b>| WeatherForecast</b></h3>
     <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
 
@@ -59,13 +150,10 @@
     City = "Linkoping",
     Lang = "en"}
     )
-</div>
-
-
+</div>*@
 
 <!-------------------------- Stocks Details -------------------------->
-
-<div class="col-md-12">
+@*<div class="col-md-12">
     <h3> <b>| Stocks Details</b></h3>
     <hr style="height:3px; border-width:0; color:white; background-color:blue; opacity:1">
 
@@ -74,90 +162,138 @@
         @await Component.InvokeAsync("Stock" , new {region = "uk"})
     </div>
 
-    @*<div class="col-md-6">
+    <div class="col-md-6">
     <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
     @await Component.InvokeAsync("Stock" , new {region = "us"})
 
-    </div>*@
-</div>
     </div>
-</div>
-
-<!-------------------------- Local News -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Local</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:#FCD500; opacity:1">
-
-    <div id="local-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("Local")
-    </div>
-</div>
-
-<!-------------------------- Sweden News -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Sweden</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:#FA9200; opacity:1">
-
-    <div id="sweden-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("Sweden")
-    </div>
-</div>
-
-<!-------------------------- World News -------------------------->
-<div class="col-md-12">
-    <h3> <b>| World</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:#DE4439; opacity:1">
-
-    <div id="world-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("World")
-    </div>
-</div>
-
-<!-------------------------- Sports -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Sport</b></h3>
-    <hr style="width:94%; height:3px; border-width:0; color:white; background-color:#ffff00; opacity:1">
-
-
-    <div id="sports" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("Sport")
-
-    </div>
-</div>
-
-<!-------------------------- Economy News -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Economy</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:#0b5394; opacity:1">
-
-    <div id="economy-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("Economy")
-    </div>
-</div>
-
-<!-------------------------- Health News -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Health</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:#58cf23; opacity:1">
-
-    <div id="health-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("Health")
-    </div>
-</div>
-
-<!-------------------------- Technology News -------------------------->
-<div class="col-md-12">
-    <h3> <b>| Technology</b></h3>
-    <hr style="height:3px;border-width:0;color:white;background-color:#3d85c6; opacity:1">
-
-    <div id="technology-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("Technology")
-    </div>
-</div>
-
+</div>*@
 
 <!-------------------------- bubble-shooter game -------------------------->
+@*<div class="col-md-6">
+    <canvas style="margin-left: 30%;" id="viewport" width="628" height="628"></canvas>
+</div>*@
 
-<div class="col-md-6">
-    <canvas style="margin-left: 30%;" id="viewport"  width="628" height="628"></canvas>
-</div>
+
+
+<div class="footer-widget">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="widget news-letter">
+                    <h1 class="section-title title">Search Article</h1>
+                    <p>Find you article quickly what you’re looking for by keywords in every category on "AlphaNews"</p>
+
+                    <form method="post" action="/process-form">
+                        <input type="text" name="query" placeholder="Search Article">
+
+                        <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">
+                            search
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--/.footer-widget-->
+
+
+
+<footer id="footer">
+    <div class="footer-top">
+        <div class="container text-center p-2">
+            <img src="~/img/logo_color.png" style="height: 70px;" />
+        </div>
+    </div>
+
+    <div class="bottom-widgets">
+        <div class="container">
+
+            @*<div class="col-sm-4">
+            <div class="widget">
+            <h2>Category</h2>
+            <ul>
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Politics</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">World</a></li>
+            <li><a href="#">Technology</a></li>
+            </ul>
+            <ul>
+            <li><a href="#">Environment</a></li>
+            <li><a href="#">Health</a></li>
+            <li><a href="#">Entertainment</a></li>
+            <li><a href="#">Lifestyle</a></li>
+            </ul>
+            </div>
+            </div>*@
+
+
+            @*<div class="col-sm-4">
+            <div class="widget">
+            <h2>Tag</h2>
+            <ul>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Sports</a></li>
+            <li><a href="#">Featured</a></li>
+            <li><a href="#">World</a></li>
+            <li><a href="#">Fashion</a></li>
+            </ul>
+            <ul>
+            <li><a href="#">Environment</a></li>
+            <li><a href="#">Health</a></li>
+            <li><a href="#">Entertainment</a></li>
+            <li><a href="#">Lifestyle</a></li>
+            <li><a href="#">Business</a></li>
+            </ul>
+            <ul>
+            <li><a href="#">Tech</a></li>
+            <li><a href="#">Movie</a></li>
+            <li><a href="#">Music</a></li>
+            </ul>
+            </div>
+            </div>*@
+
+            <div class="col-sm-6">
+                <div class="widget">
+                    <h1 class="section-title title" style="color:#fff">About Us</h1>
+                    <p>Established by  Alpha Coporation, is principally funded through the licence fee paid by Sweden households. Our role is to fulfil our mission and promote our Public Purposes. </p>
+                    <address style="color:#fff">
+                        <p>Address : 12345 Linköping, Sweden</p>
+                        <p>Call : +1234-222-3333</p>
+                        <p>Email: info@alphaweb.com</p>
+                    </address>
+
+                    <br />
+                    <h4><u>Follow Us:</u></h4>
+                    <div class="d-inline">
+                        <i class="bi bi-twitter fa-lg"></i>&nbsp;
+                        <i class="bi bi-facebook fa-lg"></i>&nbsp;
+                        <i class="bi bi-rss-fill fa-lg"></i>&nbsp;
+                        <i class="bi bi-telegram fa-lg"></i>&nbsp;
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6">
+                <div class="widget news-letter">
+                    <h1 class="section-title title" style="color:#fff">Weekly NewsLetter</h1>
+                    <p>AlphaWeb is the weekly e-mail newsletter that gives you everything you need to start your day. </p>
+
+                    <form action="#" method="post" id="subscribe-form" name="subscribe-form">
+                        <input type="text" placeholder="Your E-mail" name="email">
+
+                        <button type="submit" name="subscribe" id="subscribe">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</footer>

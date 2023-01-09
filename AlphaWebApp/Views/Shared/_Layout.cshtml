@@ -2,12 +2,12 @@
     var currentUrl = Url.Action((string)ViewContext.RouteData.Values["action"], (string)ViewContext.RouteData.Values["controller"]);
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!--Title-->
     <title>@ViewData["Title"] - AlphaWebApp</title>
 
@@ -39,71 +39,64 @@
 <body>
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
-            <div class="navbar mx-3" role="banner">
+            <div class="navbar" role="banner">
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
-                <div id="weather" style="height:80px;">
-                    <div style="float:left">
-                        <div class="p-0 gy-0">
-                            <img id="weatherImage" style="height:100px;width:120px;" />
-                            <p id="WeatherSummary" class="badge bg-primary text-wrap"></p>
-                        </div>
-                    </div>
-                    <div style="float:left">
-                        <span id="WeatherCount" class="fs-3 fw-bold"></span> &nbsp;&nbsp;
-                        <span id="WeatherCity" class="fs-4 fw-bold"></span>
+
+                @*<div id="weather">
+                <div style="float:left">
+                <div>
+                <img id="weatherImage" style="height:100px;width:120px;" />
+                <p id="WeatherSummary" class="badge bg-primary text-wrap"></p>
+                </div>
+                </div>
+                <div style="float:left">
+                <span id="WeatherCount" class="fs-3 fw-bold"></span> &nbsp;&nbsp;
+                <span id="WeatherCity" class="fs-4 fw-bold"></span>
+                </div>
+                </div>*@
+
+                <div id="topbar-right">
+                    <div id="date-time"></div>
+                    <div id="weather">
+                        <img id="weatherImage" />
+                        @*<p id="WeatherSummary"></p>*@
+                        <span id="WeatherCount"></span>
+                        <span id="WeatherCity"><b> </b></span>
                     </div>
                 </div>
-
-                <div id="date-time"></div>
-
-
-                <div id="weather"><span>Linköping </span>
-                   
-
-
-                </div>
-
-               
             </div>
 
             @*  <div class="container">
             <partial name="_CookieConsentPartial" />
             </div>*@
-            <div class="navbar navbar-expand-sm navbar-dark">
-                <div id="header">
-                    <nav class="navbar navbar-expand-sm navbar-dark border-0">
-                        <div class="container-fluid">
-                            <ul class="navbar-nav">
-                                <li>
-                                    <partial name="_LoginPartial" />
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-            @*Navbar Categories View Component VM*@
+
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div id="navbar_border" class="container-fluid">
 
+                    <!-------- Home -------->
                     <a class="nav-link text-light" asp-controller="Home" asp-action="Index">
-                        <b>
-                            <img src="~/img/logo_home.png" style="height: 30px;" />Home
-                        </b>
+                        <b><img src="~/img/logo_home.png" style="height: 30px;" />Home</b>
                     </a>
+
+                    <!-------- Categories -------->
                     <vc:navbar-categories></vc:navbar-categories>
 
+                    <!-------- _LogIn -------->
+                    <div><partial name="_LoginPartial" /></div>
+
+                    <!-------- Search & Log-in form -------->
                     <div id="main-wrapper" class="homepage">
                         <header id="navigation">
                             <div class="searchNlogin">
                                 <ul>
-                                    <li>
-                                        <form method="post" action="/process-form">
-                                            <input type="text" name="query" placeholder="Search...">
-                                            <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">Search</button>
-                                            <a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>
-                                        </form>
-                                    </li>
+                                    @*    <li>
+                                    <form method="post" action="/process-form">
+                                    <input type="text" name="query" placeholder="Search...">
+                                    <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">
+                                    <i style="color:#003366" class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                    </form>
+                                    </li>*@
                                     <li class="dropdown user-panel">
                                         <a href="javascript:void(0);" style="color:#fff" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
                                         <div class="dropdown-menu top-user-section">
@@ -124,6 +117,12 @@
                                             <div class="create-account">
                                                 <a asp-area="Identity" asp-page="/Account/Register">Create a New Account</a>
                                             </div>
+
+
+                                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                                            </form>
+
                                         </div>
                                     </li>
                                 </ul>
@@ -142,12 +141,16 @@
             @RenderBody()
         </main>
     </div>
+
     <!--footer-->
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - AlphaWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <footer class="footer text-center">
+        <a asp-area="" asp-controller="Home" asp-action="Privacy">
+            <h5 style="color:black">
+                AlphaWebApp<sup>&copy;</sup> 2023
+            </h5>
+        </a>
     </footer>
+
     <!--#scripts-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
