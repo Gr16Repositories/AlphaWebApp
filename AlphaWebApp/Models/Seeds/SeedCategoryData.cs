@@ -16,6 +16,12 @@ namespace AlphaWebApp.Models.Seeds
                     return;
                 }
                 context.Categories.AddRange(
+                     new Category
+                     {
+                         name = "Home",
+                         icon = "fa-solid fa-map-pin"
+                     },
+
                     new Category
                     {
                         name = "Local",

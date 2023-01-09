@@ -4,18 +4,37 @@
     var articles = Model.Skip(1);
 }
 
-
-            <div class="row col-10" style="margin-right:11px;">
-                <!-- Foreach loop here -->
-                @foreach (var article in articles)
-                {
-                    <div class="col-2">
-                       
-                        <img src="@article.ImageLink" class="card-img-top" alt="Image" style="padding:1px; object-fit: cover; height: 150px; width:150%;">
-
-                        <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@article.Id" class="headline" style="color:whitesmoke"><u>@article.HeadLine</u></a>
-                    </div>
-                }
+@*<----------------------------------------------------- ALPHA News ------------------------------------------------------------->*@
+@foreach (var article in articles)
+{
+    <div class="post feature-post style:height:500px;">
+        <div class="entry-header">
+            <div class="entry-thumbnail">
+                <img src="@article.ImageLink" class="card-img-top" style="height: 340px; width: 100%; object-fit: cover;">
             </div>
-       
+        </div>
+        <div class="post-content">
+            <div class="entry-header">
+                <div class="entry-thumbnail">
+                    <h3>
+                        <i class="fa-solid fa-bookmark" style="color:red"></i>
+                        <b>
+                            @article.Category.name
+                        </b>
+                    </h3>
+                </div>
+            </div>
+            <div class="entry-meta">
+                <ul class="list-inline">
+                    <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>@article.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>
+                </ul>
+            </div>
+            <h2 class="entry-title">
+                <a asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id">
+                    <span style="color:#003366"></span>@article.HeadLine
+                </a>
+            </h2>
+        </div>
+    </div>
+}
 
