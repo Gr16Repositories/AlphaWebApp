@@ -29,8 +29,10 @@
                                         <div class="entry-meta">
                                             <ul class="list-inline">
                                                 &nbsp;
+
                                                 <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i> Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt")</a></li>&nbsp; &nbsp; &nbsp;
                                                 <li class="views"><a href="#"><i class="fa fa-eye"></i> Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+
                                                 <li class="loves">
                                                     @if (!User.Identity.IsAuthenticated)
                                                     {
@@ -45,6 +47,7 @@
                                                         <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span> Likes: @item.Like.Count</span></a>
                                                     }
                                                 </li>
+
 
                                                 @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
                                         &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
@@ -75,79 +78,84 @@
                 else
                 {
                     <div class="container">
+                        <div id="Stock-scroll">
+                            <span id="StockHeaderText"><b>Stocks</b>   <i class="fa fa-angle-double-down"></i></span>
+                            @await Component.InvokeAsync("Stock" , new {region = "uk"})
+                        </div>
                         <div class="row">
-                            <div class="col-sm-8">
-                                @foreach (var item in Model)
-                                {
-                                    <div class="left-content">
-                                        <div class="details-news">
-                                            <div class="post">
-                                                <div class="entry-header">
-                                                    <div class="entry-thumbnail">
-                                                        <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
-                                                        <span class="card-category-badge-Economy">@item.Category.name</span>
-                                                    </div>
+                            @foreach (var item in Model)
+                            {
+                                <div class="left-content">
+                                    <div class="details-news">
+                                        <div class="post">
+                                            <div class="entry-header">
+                                                <div class="entry-thumbnail">
+                                                    <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
+                                                    <span class="card-category-badge-Economy">@item.Category.name</span>
                                                 </div>
-                                                <div class="post-content">
-                                                    <div class="entry-meta">
-                                                        <ul class="list-inline">
-                                                            &nbsp;
-                                                            <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
+                                            </div>
+                                            <div class="post-content">
+                                                <div class="entry-meta">
+                                                    <ul class="list-inline">
+                                                        &nbsp;
+                                                        <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
 
-                                                            |&nbsp;
-                                                            <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                            |&nbsp;
-                                                            <li class="loves">
-                                                                @if (!User.Identity.IsAuthenticated)
-                                                                {
-                                                                    <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></b>
-                                                                }
-                                                                else if (@item.Like.Any(x => x.UserId == UserManager.GetUserId(User) && x.ArticleId == item.Id))
-                                                                {
-                                                                    <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@item.Like.Count</span></a>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
-                                                                }
-                                                            </li>
+                                                        |&nbsp;
+                                                        <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@item.Views </a></li>&nbsp;&nbsp;&nbsp;
+                                                        |&nbsp;
+                                                        <li class="loves">
+                                                            @if (!User.Identity.IsAuthenticated)
+                                                            {
+                                                                <b class="text-end"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></b>
+                                                            }
+                                                            else if (@item.Like.Any(x => x.UserId == UserManager.GetUserId(User) && x.ArticleId == item.Id))
+                                                            {
+                                                                <a href="javascript:void(0)" class="unlike" data-id="@item.Id"><i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes:@item.Like.Count</span></a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
+                                                            }
+                                                        </li>
 
-                                                            @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                    &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
-                                                        </ul>
-                                                    </div>
-                                                    <h2 class="entry-title">
-                                                        @item.HeadLine
-                                                    </h2>
-                                                    <div class="entry-content">
-                                                        @item.ContentSummary
-                                                        @if (subscriptionsService.HasSubscription(User))
-                                                        {
-                                                            <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
-                                                        }
-                                                        else
-                                                        {
-                                                            <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
-                                                        }
-                                                    </div>
+                                                        @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
+                                                &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
+                                                    </ul>
+                                                </div>
+                                                <h2 class="entry-title">
+                                                    @item.HeadLine
+                                                </h2>
+                                                <div class="entry-content">
+                                                    @item.ContentSummary
+                                                    @if (subscriptionsService.HasSubscription(User))
+                                                    {
+                                                        <a asp-controller="Articles" asp-action="ContinueReading" asp-route-id="@item.Id"><span style="color:#003366"><b>... Continue Reading</b></span></a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                }
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="pt-5 text-end">
-                                    <div class="text-dark text-center p-3" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
-                                    @await Component.InvokeAsync("Stock" , new {region = "uk"})
                                 </div>
-                                @* <div class="pt-5 text-end">
-                            <div class="text-dark text-center p-3" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-                            @await Component.InvokeAsync("Stock" , new {region = "us"})
-                            </div>*@
-                            </div>
+
+                            }
+
+                            @*<div class="col-sm-4">
+                        <div class="pt-5 text-end">
+                        <div class="text-dark text-center p-3" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
+                        @await Component.InvokeAsync("Stock" , new {region = "uk"})
+                        </div>
+                        @* <div class="pt-5 text-end">
+                        <div class="text-dark text-center p-3" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
+                        @await Component.InvokeAsync("Stock" , new {region = "us"})
+                        </div>*@
+
                         </div>
                     </div>
+
                 }
 
             </div>

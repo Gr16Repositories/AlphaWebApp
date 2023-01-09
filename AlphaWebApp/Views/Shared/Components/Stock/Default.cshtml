@@ -1,6 +1,44 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.StockDetails>
 
-<div class="table-responsive-md">
+<div>
+    <marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();" height="60px">
+
+        <a class="stock-scrolling-text">
+            <p><b>UK Stocks Details</b></p>
+            @foreach (var item in Model)
+            {
+                @* @if (@item.Name == "Crude Oil" || @item.Name == "Gold" || @item.Name == "Silver" || @item.Name == "EUR/USD" || @item.Name == "10-Yr Bond")
+            {*@
+                
+                <p class="stock-Detail" id="stock-Name"> @item.Name</p>
+                <p class="stock-Detail">
+                    @item.PrevClose.ToString("0.00")
+                </p>
+                <p class="stock-Detail">
+                    @item.Close.ToString("0.00")
+                </p>
+                <p p class="stock-Detail-last">
+                    @if (@item.PercentChange >= 0)
+                    {
+                        <i class="fa-solid fa-caret-up text-success"></i>
+                        <span>@item.PercentChange.ToString("0.00")%</span>
+                    }
+                    else
+                    {
+                        <i class="fa-solid fa-caret-down text-danger"></i>
+                        <span>@item.PercentChange.ToString("0.00")%</span>
+                    }
+                </p>
+            }
+            @*}*@
+        </a>
+    </marquee>
+</div>
+
+
+
+
+@*<div class="table-responsive-md">
     <table class="table table-hover table-md table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
@@ -15,7 +53,7 @@
             {
                 <tr>
                     @if (@item.Name == "Crude Oil" || @item.Name == "Gold" || @item.Name == "Silver" || @item.Name == "EUR/USD" || @item.Name == "10-Yr Bond")
-                    {                       
+                    {
                         <td>@item.Name</td>
                         <td>@item.PrevClose.ToString("0.00")</td>
                         <td>@item.Close.ToString("0.00")</td>
@@ -36,11 +74,11 @@
             }
         </tbody>
     </table>
-</div>
+</div>*@
 
 @*@foreach (var item in Model)
 {
     <td>@Html.DisplayFor(modelItem => item.PrevClose)</td>
-   
+
     <td>@Html.DisplayFor(modelItem => item.Name) </td>
 }*@

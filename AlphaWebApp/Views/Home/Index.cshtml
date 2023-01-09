@@ -5,6 +5,13 @@
     ViewData["Title"] = "Home Page";
 }
 
+<!-- Stock manquee  -->
+@*<div class="container">*@
+    <div id="Stock-scroll">
+        <span id="StockHeaderText"><b>Stocks</b>   <i class="fa fa-angle-double-down"></i></span>      
+            @await Component.InvokeAsync("Stock" , new {region = "uk"}) 
+    </div>
+
 <!-------------------------- Latest News -------------------------->
 <div class="col-md-12">
     <div id="breaking-news">
