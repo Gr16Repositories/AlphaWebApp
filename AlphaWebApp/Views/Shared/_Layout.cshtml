@@ -37,12 +37,68 @@
 </head>
 
 <body>
+    <!-- First Header -->
+    <div id="main-wrapper" class="homepage-two fixed-nav">
+        <div class="topbar">
+            <div class="container" style="height:40px;">
+                <!-- Date-Time -->
+                <div id="date-time"></div>
+
+                <!-- Log-In Form -->
+                <div id="topbar-right">
+                    @*<div class="searchNlogin">*@
+                        <!-------- _LoginPartial -------->
+                    <ul class="navbar navbar-expand">
+                            <partial name="_LoginPartial" />
+
+                            <!-------- User account/new -------->
+                            <li class="dropdown user-panel">
+                                <a href="javascript:void(0);" class="dropdown-toggle text-white" data-toggle="dropdown"><i class="fa fa-user text-white"></i></a>
+                                <div class="dropdown-menu top-user-section">
+                                    <div class="top-user-form">
+                                        <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
+                                            <div class="input-group" id="top-login-username">
+                                                <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/user-icon.png" /></span>
+                                                <input name="Input.Email" type="text" class="form-control" placeholder="Username" required="">
+                                            </div>
+                                            <div class="input-group" id="top-login-password">
+                                                <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/password-icon.png" /></span>
+                                                <input name="Input.Password" type="password" class="form-control" placeholder="Password" required="">
+                                            </div>
+                                            <div>
+                                                <p class="reset-user">Forgot <a href="#">Password/Username?</a></p>
+                                                <button class="btn btn-danger" type="submit">Login</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="create-account">
+                                        <a asp-area="Identity" asp-page="/Account/Register">Create a New Account</a>
+                                    </div>
+
+                                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                        <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    @*</div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /First Header -->
+    <!-- Second Header -->
+
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
             <div class="navbar" role="banner">
+
+                <!-- Logo Title -->
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
 
-                <div id="date-time"></div>
+                <!-- Weather API -->
                 <div id="weather" style="display:flex;align-items:center;">
                     <div>
                         <div class="p-0 gy-0">
@@ -55,26 +111,10 @@
                         <span id="WeatherCity" class="fs-5 fw-bold"></span>
                     </div>
                 </div>
-              @*  <div id="weather" style="height:80px;">
-                    <div style="float:left">
-                        <div class="p-0 gy-0">
-                            <img id="weatherImage" style="height:100px;width:120px;" />
-                            <p id="WeatherSummary" class="badge bg-primary text-wrap"></p>
-                        </div>
-                    </div>
-                    <div style="float:left">
-                        <span id="WeatherCount" class="fs-3 fw-bold"></span> &nbsp;&nbsp;
-                        <span id="WeatherCity" class="fs-4 fw-bold"></span>
-                    </div>
-                </div>
-
-               
-*@   
-
             </div>
+
             @*  <div class="container">
             <partial name="_CookieConsentPartial" />
-
             </div>*@
 
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -82,7 +122,6 @@
 
 
                     <!-------- Home -------->
-
                     <a class="nav-link text-light" asp-controller="Home" asp-action="Index">
                         <b><img src="~/img/logo_home.png" style="height: 30px;" />Home</b>
                     </a>
@@ -91,60 +130,39 @@
                     <vc:navbar-categories></vc:navbar-categories>
 
 
-                    <!-------- _LogIn -------->
-                    <div><partial name="_LoginPartial" /></div>
-
                     <!-------- Search & Log-in form -------->
-
                     <div id="main-wrapper" class="homepage">
-                        <header id="navigation">
                             <div class="searchNlogin">
                                 <ul>
+                                    <li>
+
+                                    <button class="subBtn">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
+
+                                    </button>
+
+                                   @* <button  type="submit" name="subscribe" id="subscribe">
+                                            <a class="text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
+                                        </button>*@
+
+
+                                    </li>
 
                                     <li>
                                         <form method="post" action="/process-form">
                                             <input type="text" name="query" placeholder="Search...">
-                                            @*<button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">Search</button>*@
-                                            <a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>
+                                            <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
+                                            @*<a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>*@
                                         </form>
-                                    </li>
-
-                                    <li class="dropdown user-panel">
-                                        <a href="javascript:void(0);" style="color:#fff" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i></a>
-                                        <div class="dropdown-menu top-user-section">
-                                            <div class="top-user-form">
-                                                <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
-                                                    <div class="input-group" id="top-login-username">
-                                                        <input name="Input.Email" type="text" class="form-control" placeholder="Username" required="">
-                                                    </div>
-                                                    <div class="input-group" id="top-login-password">
-                                                        <input name="Input.Password" type="password" class="form-control" placeholder="Password" required="">
-                                                    </div>
-                                                    <div>
-                                                        <p class="reset-user">Forgot <a href="#">Password/Username?</a></p>
-                                                        <button class="btn btn-danger" type="submit">Login</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="create-account">
-                                                <a asp-area="Identity" asp-page="/Account/Register">Create a New Account</a>
-                                            </div>
-
-
-                                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
-                                            </form>
-
-                                        </div>
                                     </li>
                                 </ul>
                             </div>
-                        </header>
                     </div>
                 </div>
             </nav>
         </header>
     </div>
+
     <div class="container">
         <main role="main" class="pb-3">
             <partial name="_Notifications" />
@@ -195,17 +213,17 @@
                 jsonpCallback: "callback",
                 dataType: "jsonp",
                 success: function (location) {
-                    var city = location.city;                   
+                    var city = location.city;
                     var lang = "en";
-                    if(city != null) {
+                    if (city != null) {
                         var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
                         requestData(linkUrl);
                     }
-                    else{
+                    else {
                         city = "LinkÖping";
                         var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
                         requestData(linkUrl);
-                   }                   
+                    }
                 }
             });
         });
