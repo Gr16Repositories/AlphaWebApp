@@ -55,7 +55,7 @@
                         <span id="WeatherCity" class="fs-5 fw-bold"></span>
                     </div>
                 </div>
-              @*  <div id="weather" style="height:80px;">
+              @*<div id="weather" style="height:80px;">
                     <div style="float:left">
                         <div class="p-0 gy-0">
                             <img id="weatherImage" style="height:100px;width:120px;" />
@@ -66,14 +66,10 @@
                         <span id="WeatherCount" class="fs-3 fw-bold"></span> &nbsp;&nbsp;
                         <span id="WeatherCity" class="fs-4 fw-bold"></span>
                     </div>
-                </div>
-
-               
-*@   
+                </div>*@   
             </div>
-            @*  <div class="container">
-            <partial name="_CookieConsentPartial" />
-
+            @*<div class="container">
+                <partial name="_CookieConsentPartial" />
             </div>*@
             <div class="navbar navbar-expand-sm navbar-dark">
                 <div id="header">
@@ -104,8 +100,7 @@
                                     <li>
                                         <form method="post" action="/process-form">
                                             <input type="text" name="query" placeholder="Search...">
-                                            @*<button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">Search</button>*@
-                                            <a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>
+                                            <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-black"></i></button>
                                         </form>
                                     </li>
                                     <li class="dropdown user-panel">

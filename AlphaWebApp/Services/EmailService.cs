@@ -24,16 +24,7 @@ namespace AlphaWebApp.Services
             return "Subscription submitted Successfully";
         }
 
-        public async Task<string> SendNewsletterEmail(PersonalizedNewsletterVM newNewsletter)
-        {
-            var test = _configuration["AzureKeyRequestAdress"];
-            var responseMessage = await _httpClient.PostAsJsonAsync(test, newNewsletter);
-            if (!responseMessage.IsSuccessStatusCode)
-            {
-                return "Sorry! Some error ocurred";
-            }
-            return "Subscribed to newsletter";
-        }
+       
 
     }
 }

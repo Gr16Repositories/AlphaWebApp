@@ -56,29 +56,6 @@ namespace AlphaWebApp.Controllers
             return View();
         }
 
-        public IActionResult SendNewsletterEmail(int id)
-        {
-            Article articles = _articleService.GetSpecificArticleByCategoryId(id);
-            PersonalizedNewsletterVM newsletter = new PersonalizedNewsletterVM();
-            newsletter.ArticleId = articles.Id;
-            newsletter.ArticleDateStamp = articles.DateStamp;
-            newsletter.ArticleHeadLine = articles.HeadLine;
-            newsletter.ArticleContentSummary = articles.ContentSummary;
-            newsletter.ArticleViews = articles.Views;
-            newsletter.ArticleLikes = articles.Likes;
-            newsletter.ArticleImageLink = articles.ImageLink;
-            newsletter.ArticleCategoryId = articles.CategoryId;
-            newsletter.ArticleCategory = articles.Category;
-            var result = SendConfirmation(newsletter);
-            var resultTuple = new Tuple<string>(result);
-            return View(resultTuple);
-        }
-
-        public string SendConfirmation(PersonalizedNewsletterVM newsletter)
-        {
-            return _emailService.SendNewsletterEmail(newsletter).Result;
-        }
-
         // User select categories in order to recive newsletter email based in the first place on Categories Selecletion
         [Authorize]
         public IActionResult GetUserCategoriesSelection()
