@@ -183,29 +183,6 @@
 
 
 
-<div class="footer-widget">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="widget news-letter">
-                    <h1 class="section-title title">Search Article</h1>
-                    <p>Find you article quickly what you’re looking for by keywords in every category on "AlphaNews"</p>
-
-                    <form method="post" action="/process-form">
-                        <input type="text" name="query" placeholder="Search Article">
-
-                        <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value">
-                            search
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><!--/.footer-widget-->
-
-
-
 <footer id="footer">
     <div class="footer-top">
         <div class="container text-center p-2">
@@ -283,21 +260,7 @@
             </div>
 
 
-            <div class="col-sm-6">
-                <div class="widget news-letter">
-                    <h1 class="section-title title" style="color:#fff">Weekly NewsLetter</h1>
-                    <p>AlphaWeb is the weekly e-mail newsletter that gives you everything you need to start your day. </p>
-
-                    <form action="#" method="post" id="subscribe-form" name="subscribe-form">
-                        <input type="text" placeholder="Your E-mail" name="email">
-
-                        <button type="submit" name="subscribe" id="subscribe">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
-                        </button>
-
-                    </form>
-                </div>
-            </div>
+     
 
 
         </div>
