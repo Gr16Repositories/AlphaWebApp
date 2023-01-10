@@ -12,26 +12,26 @@
 
         @if (User.IsInRole("Admin"))
         {
-            <li style="font-size:16px;">
-                <a class="text-white" asp-area="" asp-controller="Admin" asp-action="Index">Admin Page &nbsp;</a>
+            <li style="font-size:18px;">
+                <a class="text-white" asp-area="" asp-controller="Admin" asp-action="Index">| Admin Page &nbsp;</a>
             </li>
         }
         @if (User.IsInRole("Manager"))
         {
-            <li style="font-size:16px;">
-                <a class="text-white" asp-area="" asp-controller="Manager" asp-action="Index">Manager Page &nbsp;</a>
+            <li style="font-size:18px;">
+                <a class="text-white" asp-area="" asp-controller="Manager" asp-action="Index">| Manager Page &nbsp;</a>
             </li>
         }
         @if (User.IsInRole("Editor"))
         {
-            <li style="font-size:16px;" class="text-">
-                <a class="text-white" asp-area="" asp-controller="Articles" asp-action="Index">Editor Page &nbsp;</a>
+            <li style="font-size:18px;" class="text-">
+                <a class="text-white" asp-area="" asp-controller="Articles" asp-action="Index">| Editor Page &nbsp;</a>
             </li>
         }
         @if (subscriptionsService.HasSubscription(User))
         {
-            <li style="font-size:16px;">
-                <a class="text-white" asp-area="" asp-controller="User" asp-action="MyPage">My Page &nbsp;</a>
+            <li style="font-size:18px;">
+                <a class="text-white" asp-area="" asp-controller="User" asp-action="MyPage">| My Page &nbsp;</a>
             </li>
         }
         @if (!subscriptionsService.HasSubscription(User))
@@ -41,8 +41,8 @@
             </li>*@
         }
 
-        <li style="font-size:16px;">
-            <a class="text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">| Hello @User.Identity?.Name &nbsp;&nbsp; </a>
+        <li style="font-size:18px;">
+            <a class="text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">| Hello @User.Identity?.Name &nbsp;</a>
         </li>
         @*<li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
