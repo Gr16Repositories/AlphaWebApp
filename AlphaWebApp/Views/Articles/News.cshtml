@@ -24,17 +24,15 @@
                                                 <span class="card-category-badge">@item.Category.name</span>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="post-content">
                                         <div class="entry-meta">
                                             <ul class="list-inline">
                                                 &nbsp;
-                                                <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i> Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt")</a></li>&nbsp; &nbsp;
 
-                                                &nbsp;
-                                                <li class="views"><a href="#"><i class="fa fa-eye"></i> Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                &nbsp;
+                                                <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i> Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt")</a></li>&nbsp; &nbsp; &nbsp;
+                                                <li class="views"><a href="#"><i class="fa fa-eye"></i> Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;&nbsp;
+
                                                 <li class="loves">
                                                     @if (!User.Identity.IsAuthenticated)
                                                     {
@@ -69,6 +67,8 @@
                                                 <a asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"><span style="color:#003366"><b>... Subscribe In Order To See Entire Article</b></span></a>
                                             }
                                         </div>
+                                        <hr style="height:5px; color:red; opacity:1">
+
                                     </div>
                                 </div>
                             </div>
@@ -140,6 +140,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             }
 
                             @*<div class="col-sm-4">
@@ -151,6 +152,7 @@
                         <div class="text-dark text-center p-3" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
                         @await Component.InvokeAsync("Stock" , new {region = "us"})
                         </div>*@
+
                         </div>
                     </div>
 

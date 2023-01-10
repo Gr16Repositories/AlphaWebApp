@@ -1,10 +1,31 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿// Alpha News
+$(document).ready(function () {
+    $('#categories-news').owlCarousel({
 
-// Write your JavaScript code.
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 4000,       
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 2
+            }
+        }
+    })
+});
 
 
-//editor-choice
+// editor-choice
 $(document).ready(function () {
     $('#editor-choice').owlCarousel({
         
@@ -13,14 +34,41 @@ $(document).ready(function () {
         nav: false,
         loop: true,
         autoplay: true,
-        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        autoplayTimeout: 5000,
 
         responsive: {
             0: {
                 items: 1
             },
             600: {
-                items: 3
+                items: 5
+            },
+            1000: {
+                items: 5
+            }
+        }
+    })
+});
+
+// Local News
+$(document).ready(function () {
+    $('#local-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
             },
             1000: {
                 items: 3
@@ -29,7 +77,86 @@ $(document).ready(function () {
     })
 });
 
-//sports
+// Sweden News 
+$(document).ready(function () {
+    $('#sweden-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 2
+            }
+        }
+    })
+});
+
+// World News
+$(document).ready(function () {
+    $('#world-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 10000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 1
+            },
+            1000: {
+                items: 2
+            }
+        }
+    })
+});
+
+// Economy News
+$(document).ready(function () {
+    $('#economy-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 6000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 2
+            }
+        }
+    })
+});
+
+
+// sports
 $(document).ready(function () {
     $('#sports').owlCarousel({
         margin: 20,
@@ -37,25 +164,54 @@ $(document).ready(function () {
         nav: false,
         loop: true,
         autoplay: true,
-        autoplayTimeout: 8000,
+        autoplayHoverPause: true,
+        autoplayTimeout: 5000,
 
         responsive: {
             0: {
                 items: 1
             },
             600: {
-                items: 3
+                items: 2
             },
             1000: {
-                items: 3
+                items: 2
             }
         }
     })
 });
 
-//sports
+
+// Health News
 $(document).ready(function () {
-    $('#most-popular').owlCarousel({
+    $('#health-news').owlCarousel({
+
+        margin: 20,
+        dots: true,
+        nav: false,
+        loop: true,
+        autoplay: true,
+        autoplayHoverPause: true,
+        autoplayTimeout: 4000,
+
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 2
+            }
+        }
+    })
+});
+
+
+// Technology News
+$(document).ready(function () {
+    $('#technology-news').owlCarousel({
 
         margin: 20,
         dots: true,
@@ -69,218 +225,11 @@ $(document).ready(function () {
                 items: 1
             },
             600: {
-                items: 3
+                items: 2
             },
             1000: {
-                items: 3
+                items: 2
             }
         }
     })
 });
-
-
-//Local News
-$(document).ready(function () {
-    $('#local-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 10000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-//Sweden News
-$(document).ready(function () {
-    $('#sweden-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 10000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-//World News
-$(document).ready(function () {
-    $('#world-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 10000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-//Economy News
-$(document).ready(function () {
-    $('#economy-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 10000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-//Health News
-$(document).ready(function () {
-    $('#health-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 3000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-//Sport News
-$(document).ready(function () {
-    $('#sport-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 10000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-//Technology News
-$(document).ready(function () {
-    $('#technology-news').owlCarousel({
-
-        margin: 20,
-        dots: true,
-        nav: false,
-        loop: true,
-        autoplay: true,
-        autoplayTimeout: 2000,
-
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 3
-            },
-            1000: {
-                items: 3
-            }
-        }
-    })
-});
-
-
-
-
-
-
-
-
-//$("#home-slider").owlCarousel({
-//    pagination: true,
-//    autoPlay: true,
-//    singleItem: true,
-//    stopOnHover: true,
-//});
-
-//$("#latest-news").owlCarousel({
-//    items: 4,
-//    pagination: true,
-//    autoPlay: true,
-//    stopOnHover: true,
-//});
-
-//$("#main-slider").owlCarousel({
-//    items: 3,
-//    pagination: false,
-//    navigation: false,
-//    autoPlay: true,
-//    stopOnHover: true
-//});
-
-
