@@ -111,10 +111,23 @@
                         <span id="WeatherCity" class="fs-5 fw-bold"></span>
                     </div>
                 </div>
-            </div>
 
-            @*  <div class="container">
-            <partial name="_CookieConsentPartial" />
+              @*<div id="weather" style="height:80px;">
+                    <div style="float:left">
+                        <div class="p-0 gy-0">
+                            <img id="weatherImage" style="height:100px;width:120px;" />
+                            <p id="WeatherSummary" class="badge bg-primary text-wrap"></p>
+                        </div>
+                    </div>
+                    <div style="float:left">
+                        <span id="WeatherCount" class="fs-3 fw-bold"></span> &nbsp;&nbsp;
+                        <span id="WeatherCity" class="fs-4 fw-bold"></span>
+                    </div>
+                </div>*@   
+            </div>
+            
+            @*<div class="container">
+                <partial name="_CookieConsentPartial" />
             </div>*@
 
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -135,6 +148,12 @@
                             <div class="searchNlogin">
                                 <ul>
                                     <li>
+                                        <form method="post" action="/process-form">
+                                            <input type="text" name="query" placeholder="Search...">
+                                            <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-black"></i></button>
+                                        </form>
+                                    </li>
+
 
                                     <button class="subBtn">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
