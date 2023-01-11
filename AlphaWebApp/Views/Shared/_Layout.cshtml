@@ -48,6 +48,47 @@
                 <div id="date-time"></div>
 
                 <!-- Log-In Form -->
+
+                <div id="topbar-right">
+                    @*<div class="searchNlogin">*@
+                    <!-------- _LoginPartial -------->
+                    <ul class="navbar navbar-expand">
+                        <partial name="_LoginPartial" />
+
+                        <!-------- User account/new -------->
+                        <li class="dropdown user-panel">
+                            <a href="javascript:void(0);" class="dropdown-toggle text-white" data-toggle="dropdown"><i class="fa fa-user text-white"></i></a>
+                            <div class="dropdown-menu top-user-section">
+                                <div class="top-user-form">
+                                    <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
+                                        <div class="input-group" id="top-login-username">
+                                            <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/user-icon.png" /></span>
+                                            <input name="Input.Email" type="text" class="form-control" placeholder="Username" required="">
+                                        </div>
+                                        <div class="input-group" id="top-login-password">
+                                            <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/password-icon.png" /></span>
+                                            <input name="Input.Password" type="password" class="form-control" placeholder="Password" required="">
+                                        </div>
+                                        <div>
+                                            <p class="reset-user">Forgot <a href="#">Password/Username?</a></p>
+                                            <button class="btn btn-danger" type="submit">Login</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="create-account">
+                                    <a asp-area="Identity" asp-page="/Account/Register">Create a New Account</a>
+                                </div>
+
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    @*</div>*@
+                </div>
+
                 <!-------- _LoginPartial -------->
                 <ul class="navbar navbar-expand m-0 p-0">
                     <partial name="_LoginPartial" />
@@ -83,6 +124,7 @@
                         </div>
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>
@@ -94,20 +136,21 @@
 
                 <!-- Logo Title -->
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
-
                 <!-- Weather API -->
-                <div id="weather" style="display:flex;align-items:center;">
-                    <div>
-                        <div class="p-0 gy-0">
-                            <img id="weatherImage" style="height:80px;width:80px;position:absolute;" />
-                            <p id="WeatherSummary" class="badge bg-primary text-wrap" style="margin-top:64px;"></p>
-                        </div>
+                <div id="WeatherContainer" class="float-end" style="display:flex;width:200px;">
+                    <div class="float-end" style="width=100px;">
+                        <img id="weatherImage" style="height:80px;width:80px;position:absolute;" />
+                        <p id="WeatherSummary" class="badge bg-primary text-wrap" style="margin-top:64px;width:70px;"></p>
                     </div>
-                    <div>
-                        <span id="WeatherCount" class="fs-4 fw-bold"></span> &nbsp;&nbsp;
-                        <span id="WeatherCity" class="fs-5 fw-bold"></span>
+                    <div class="text-start float-right" style="width:100px;padding-top:26px;">
+                        <span id="WeatherCount" class="fs-4 fw-bold"></span>
+                        <span id="WeatherCity" class="fs-6 fw-bold" style="padding-left:3px;"></span>
                     </div>
-                </div>
+
+                </div>              
+
+               @* </div>*@
+
             </div>
 
             @*<div class="container">
@@ -125,6 +168,38 @@
 
                     <!-------- Categories -------->
                     <vc:navbar-categories></vc:navbar-categories>
+
+
+
+                    <!-------- Search & Log-in form -------->
+                    <div id="main-wrapper" class="homepage">
+                        <div class="searchNlogin">
+                            <ul>
+                                <li>
+                                    <form method="post" action="/process-form">
+                                        <input type="text" name="query" placeholder="Search...">
+                                        <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-black"></i></button>
+                                    </form>
+                                </li>
+
+
+                                <button class="subBtn">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
+
+                                </button>
+
+                                @* <button  type="submit" name="subscribe" id="subscribe">
+                                <a class="text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
+                                </button>*@
+
+
+                                </li>
+
+                                <li>
+                                    <form method="post" action="/process-form">
+                                        <input type="text" name="query" placeholder="Search...">
+                                        <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
+                                        @*<a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>*@
 
                     <!-------- SubscriptionDynamicBtn -------->
                     <div><partial name="_SubscriptionBtn" /></div>
@@ -145,6 +220,7 @@
                                 <li>
                                     <form asp-controller="Home" asp-action="Search" asp-route-query="value">
                                         <input class="form-control" type="text" name="query" placeholder=" Search...">
+
                                     </form>
                                 </li>
                             </ul>
@@ -174,6 +250,7 @@
 
     <!--#scripts-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -189,39 +266,7 @@
     <script src="~/js/jquery.subscribe-better.min.js"></script>
     <script src="~/js/owl.carousel.min.js"></script>
     <script src="~/js/main.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            async function requestData(linkUrl) {
-                const res = await fetch(linkUrl);
-                const data = await res.json();
-                $("#WeatherCount").html(data.temperatureC + "℃");
-                $("#WeatherCity").html(data.city);
-                $("#weatherImage").attr("src", data.icon.url);
-                $("#WeatherSummary").html(data.summary);
-            }
-
-            $.ajax({
-                url: "https://geolocation-db.com/jsonp",
-                jsonpCallback: "callback",
-                dataType: "jsonp",
-                success: function (location) {
-                    var city = location.city;
-                    var lang = "en";
-                    if (city != null) {
-                        var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
-                        requestData(linkUrl);
-                    }
-                    else {
-                        city = "LinkÖping";
-                        var linkUrl = "https://weatherapi.dreammaker-it.se/forecast?city=" + city + "&lang=" + lang;
-                        requestData(linkUrl);
-                    }
-                }
-            });
-        });
-
-
-    </script>
+    <script type="text/javascript" src="~/js/WeatherAPICallFunctions.js"></script>
 
     <!-------------------------- bubble-shooter game -------------------------->
     <script type='text/javascript' src="~/js/bubble-shooter-example.js"></script>
