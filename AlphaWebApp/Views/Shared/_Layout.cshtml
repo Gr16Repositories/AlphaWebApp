@@ -147,9 +147,9 @@
                         <span id="WeatherCity" class="fs-6 fw-bold" style="padding-left:3px;"></span>
                     </div>
 
-                </div>              
+                </div>
 
-               @* </div>*@
+                @* </div>*@
 
             </div>
 
@@ -192,41 +192,45 @@
                                 <a class="text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
                                 </button>*@
 
-
-                                </li>
+                                @*
+                                </li>*@
 
                                 <li>
                                     <form method="post" action="/process-form">
                                         <input type="text" name="query" placeholder="Search...">
                                         <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
                                         @*<a type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-white"></i></a>*@
-
-                    <!-------- SubscriptionDynamicBtn -------->
-                    <div><partial name="_SubscriptionBtn" /></div>
-
-
-
-                    <!-------- Search & Log-in form -------->
-                    <div class="homepage">
-                        <div class="searchNlogin">
-                            <ul class="m-0">
-                                @*  <li>
-                                <form method="post" action="/process-form">
-                                <input class="form-control" type="text" name="query" placeholder=" Search...">
-                                <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
-                                </form>
-                                </li>*@
-
-                                <li>
-                                    <form asp-controller="Home" asp-action="Search" asp-route-query="value">
-                                        <input class="form-control" type="text" name="query" placeholder=" Search...">
-
                                     </form>
                                 </li>
+
+                                <!-------- SubscriptionDynamicBtn -------->
+                                <div><partial name="_SubscriptionBtn" /></div>
+
+
+
+                                <!-------- Search & Log-in form -------->
+                                <div class="homepage">
+                                    <div class="searchNlogin">
+                                        <ul class="m-0">
+                                            @*  <li>
+                                            <form method="post" action="/process-form">
+                                            <input class="form-control" type="text" name="query" placeholder=" Search...">
+                                            <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
+                                            </form>
+                                            </li>*@
+
+                                            <li>
+                                                <form asp-controller="Home" asp-action="Search" asp-route-query="value">
+                                                    <input class="form-control" type="text" name="query" placeholder=" Search...">
+
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </ul>
                         </div>
                     </div>
-                </div>
             </nav>
         </header>
     </div>
