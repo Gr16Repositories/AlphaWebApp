@@ -86,10 +86,8 @@
             </div>
         </div>
     </div>
-
     <!-- /First Header -->
     <!-- Second Header -->
-
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
             <div class="navbar" role="banner">
@@ -109,7 +107,7 @@
                         <span id="WeatherCount" class="fs-4 fw-bold"></span> &nbsp;&nbsp;
                         <span id="WeatherCity" class="fs-5 fw-bold"></span>
                     </div>
-                </div>           
+                </div>
             </div>
 
             @*<div class="container">
@@ -131,22 +129,22 @@
                     <!-------- SubscriptionDynamicBtn -------->
                     <div><partial name="_SubscriptionBtn" /></div>
 
-                    
+
 
                     <!-------- Search & Log-in form -------->
                     <div class="homepage">
                         <div class="searchNlogin">
                             <ul class="m-0">
-                                <li class="my-auto">
-                                    <button class="subBtn">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Subscribe</a>
-                                    </button>
-                                </li>
+                                @*  <li>
+                                <form method="post" action="/process-form">
+                                <input class="form-control" type="text" name="query" placeholder=" Search...">
+                                <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
+                                </form>
+                                </li>*@
 
                                 <li>
-                                    <form method="post" action="/process-form">
+                                    <form asp-controller="Home" asp-action="Search" asp-route-query="value">
                                         <input class="form-control" type="text" name="query" placeholder=" Search...">
-                                        @*<button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>*@
                                     </form>
                                 </li>
                             </ul>
