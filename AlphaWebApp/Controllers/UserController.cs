@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace AlphaWebApp.Controllers
 {
@@ -72,15 +73,20 @@ namespace AlphaWebApp.Controllers
                 });
             }
 
-            foreach (var category in userSelection.Categories)
+            bool activeSub = _userService.GetUserSubscriptions(_userService.GetUserId()).Any(s => s.Active);
+            if (activeSub == false) // Redirects user without subscription to a view that tells them they lack some requirements
             {
-                if (userSubscription.Categories.Select(c => c.name).Contains(category.Text))
+                return RedirectToAction("NoSubscription");
+            }
+
+            else
+            {
+                foreach (var category in userSelection.Categories)
                 {
-                    userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected = true; // was at first true
-                    //if (userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected == true)
-                    //{
-                    //    userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected = false;
-                    //}
+                    if (userSubscription.Categories.Select(c => c.name).Contains(category.Text))
+                    {
+                        userSelection.Categories.FirstOrDefault(s => s.Text == category.Text).Selected = true;
+                    }
                 }
             }
             return View(userSelection);
@@ -108,6 +114,12 @@ namespace AlphaWebApp.Controllers
             return RedirectToAction("ConfirmNewsletterSubscription");
         }
         public IActionResult ConfirmNewsletterSubscription() // Used to render view for confirming subscription of weekly newsletter
+        {
+            return View();
+        }
+
+        public IActionResult NoSubscription() // Used to render view for failure of access to specific views that require for example a subscription
+                                              // Can be used for other redirections when user or other role is missing requirements
         {
             return View();
         }

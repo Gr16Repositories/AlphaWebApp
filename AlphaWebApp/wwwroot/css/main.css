@@ -492,7 +492,7 @@ label {
     padding-left: 20px;
     line-height: 60px;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 #topbar-right #weather img {
@@ -514,8 +514,8 @@ label {
 
 .searchNlogin li{
     float: left;
-    border-left: 1px solid #ebecee;
-    padding: 20px 25px;
+    padding: 15px 5px;
+    margin: 5px;
     color: #FF0000;
 }
 
@@ -741,7 +741,8 @@ label {
 .post {
     overflow: hidden;
     border-radius: 3px;
-    margin-top: 30px;
+    margin-top: 1px;
+    margin-bottom: 20px;
     background-color: #fff;
     border-bottom: 2px solid #f2f3f5;
     -webkit-transition: all 0.5s ease-in-out;
@@ -1725,10 +1726,10 @@ label {
     padding-left: 0;
 }
 
-.homepage-two #weather,
+/*.homepage-two #weather,
 .homepage-two .searchNlogin li {
     border-left: 1px solid #dedfe0;
-}
+}*/
 
 .homepage-two #weather {
     padding-right: 20px;
@@ -1818,8 +1819,8 @@ label {
 
 #main-wrapper {
     background-color: #003366;
-    border-left: 1px solid #e4e4e4;
-    border-right: 1px solid #e4e4e4;
+  /*  border-left: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;*/
     -webkit-box-shadow: 0 0 3px rgba(0,0,0,.175);
     box-shadow: 0 0 3px rgba(0,0,0,.175);
 }
