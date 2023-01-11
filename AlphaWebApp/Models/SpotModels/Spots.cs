@@ -3,14 +3,13 @@ using System.Text.Json.Serialization;
 
 namespace AlphaWebApp.Models.SpotModels
 {
-   
-
     public class TodaysSpotData
     {
         [JsonPropertyName("todaysSpotPrices")]
         public List<SpotPriceHour> TodaysSpotPrices { get; set; }
 
     }
+
     public class SpotPriceHour
     {
         [JsonPropertyName("spotData")]
@@ -27,7 +26,5 @@ namespace AlphaWebApp.Models.SpotModels
 
         [JsonPropertyName("price")]
         public string Price { get; set; }
-
-
     }
 }
