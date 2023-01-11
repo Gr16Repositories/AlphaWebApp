@@ -73,9 +73,19 @@ namespace AlphaWebApp.Services
 
         public List<Article> GetAllArticles()
         {
+            List<Article> articles = new List<Article>();
             List<Article> listOfAllArtiles = _db.Articles.ToList();
-            if (listOfAllArtiles != null && listOfAllArtiles.Any(a => a.Archive != true))
-                return listOfAllArtiles;
+            if (listOfAllArtiles != null)
+            {
+                foreach (var item in listOfAllArtiles)
+                {
+                    if(item.Archive != true)
+                    {
+                        articles.Add(item);
+                    }
+                }
+                return articles;
+            }               
             else
                 return new List<Article>();
 
