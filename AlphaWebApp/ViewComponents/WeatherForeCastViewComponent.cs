@@ -17,7 +17,7 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke(string city , string lang)
         {
-            WeatherForecast weatherReport = _weatherForecastService.GetForecast(city, lang);
+            var weatherReport = _weatherForecastService.GetForecast(city, lang);
             if(weatherReport != null)
             return View(weatherReport);
             else
