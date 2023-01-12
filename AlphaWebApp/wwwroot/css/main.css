@@ -484,9 +484,8 @@ label {
     margin-right: 25px;
 }
 
-.language-dropdown,
-#date-time,
-#weather {
+/*Date-Time*/
+#date-time {
     display: inline-block;
     margin-left: 20px;
     padding-left: 20px;
@@ -494,6 +493,20 @@ label {
     color: #fff;
     font-size: 18px;
 }
+
+/*Weather*/
+#weather {
+    display: inline-block;
+    margin-left: 20px;
+    padding-left: 20px;
+    line-height: 18px;
+    color: #000;
+    font-size: 10px;
+}
+
+
+
+
 
 #topbar-right #weather img {
     max-width: 61px;
@@ -606,7 +619,8 @@ label {
     right: 15px;
     top: 52px;
     min-width: 360px;
-    background-color: #3a3a3a;
+    /*background-color: #3a3a3a;*/
+    background-color: #004080;
     z-index: 10;
     left: inherit;
     margin-top: 0 !important;

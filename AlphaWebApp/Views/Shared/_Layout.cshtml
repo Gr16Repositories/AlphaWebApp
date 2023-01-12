@@ -39,6 +39,14 @@
 </head>
 
 <body>
+
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+
     <!-- First Header -->
     <div id="main-wrapper" class="homepage-two fixed-nav">
         <div class="topbar">
@@ -87,11 +95,12 @@
         </div>
     </div>
     <!-- /First Header -->
+
     <!-- Second Header -->
     <div id="main-wrapper" class="homepage">
         <header id="navigation">
-            <div class="navbar" role="banner">
 
+            <div class="navbar" role="banner">
                 <!-- Logo Title -->
                 <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
 
@@ -108,18 +117,13 @@
                         <span id="WeatherCity" class="fs-5 fw-bold"></span>
                     </div>
                 </div>
-            </div>
-
-            @*<div class="container">
-            <partial name="_CookieConsentPartial" />
-            </div>*@
+            </div> 
 
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div id="navbar_border" class="container-fluid">
 
-
                     <!-------- Home -------->
-                    <a class="nav-link text-light" asp-controller="Home" asp-action="Index">
+                    <a class="nav-link text-light mx-auto" asp-controller="Home" asp-action="Index">
                         <b><img src="~/img/logo_home.png" style="height: 30px;" />Home</b>
                     </a>
 
@@ -127,34 +131,28 @@
                     <vc:navbar-categories></vc:navbar-categories>
 
                     <!-------- SubscriptionDynamicBtn -------->
-                    <div><partial name="_SubscriptionBtn" /></div>
+                    <div class="nav-link text-light mx-auto">
 
+                    <partial name="_SubscriptionBtn" />
+                    </div>
 
-
-                    <!-------- Search & Log-in form -------->
-                    <div class="homepage">
+                    <!-------- SearchBar -------->
+                  <div class="homepage">
                         <div class="searchNlogin">
-                            <ul class="m-0">
-                                @*  <li>
-                                <form method="post" action="/process-form">
-                                <input class="form-control" type="text" name="query" placeholder=" Search...">
-                                <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
-                                </form>
-                                </li>*@
-
+                            <ul class="mx-auto">
                                 <li>
                                     <form asp-controller="Home" asp-action="Search" asp-route-query="value">
-                                        <input class="form-control" type="text" name="query" placeholder=" Search...">
+                                        <input class="form-control nav-link mx-auto" type="text" name="query" placeholder=" Search...">
                                     </form>
                                 </li>
                             </ul>
                         </div>
-                    </div>
+                    </div><!-------- /Search & Log-in form -------->
+
                 </div>
             </nav>
         </header>
     </div>
-
     <div class="container">
         <main role="main" class="pb-3">
             <partial name="_Notifications" />
@@ -162,7 +160,6 @@
             @RenderBody()
         </main>
     </div>
-
     <!--footer-->
     <footer class="footer text-center">
         <a asp-area="" asp-controller="Home" asp-action="Privacy">
