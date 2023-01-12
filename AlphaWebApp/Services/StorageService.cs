@@ -131,6 +131,17 @@ namespace AlphaWebApp.Services
         }
 
 
+        // get lattest Swedish Articles
+        public async Task<List<NewsArticle>> GetLattestSwedishArticles()
+        {
+            // add request for data 
+            HttpClient _newsApiHttpClient = new HttpClient();
+            var request = await _newsApiHttpClient.GetStringAsync("https://newsapi.org/v2/top-headlines?country=se&apiKey=dd231824ef6d4c0c93824940ca899491");
+            NewsArticlesList newsApiData = JsonConvert.DeserializeObject<NewsArticlesList>(request);
+            List<NewsArticle> allNewsArticlesData = newsApiData.NewsArticles.Select(a => a).ToList();
+            return await Task.Run(() => allNewsArticlesData);
+        }
+
 
     }
 }

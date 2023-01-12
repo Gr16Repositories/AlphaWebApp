@@ -1,4 +1,5 @@
 ﻿using AlphaWebApp.Models.Entities;
+using AlphaWebApp.Models.SpotModels;
 
 namespace AlphaWebApp.Services
 {
@@ -18,6 +19,9 @@ namespace AlphaWebApp.Services
 
 
         void UpdateEntity(string rowKey);
+
+
+        Task<List<NewsArticle>> GetLattestSwedishArticles();
 
     }
 }
