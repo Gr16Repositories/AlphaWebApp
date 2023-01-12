@@ -1,4 +1,5 @@
-﻿using AlphaWebApp.Services;
+﻿using AlphaWebApp.Models.ViewModels;
+using AlphaWebApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlphaWebApp.Controllers
@@ -13,7 +14,14 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            _storageService.AddSpotPriceToTable();
+            SpotPricesVM allAreas = new SpotPricesVM();
+            allAreas.SpotPriceListSE1 = _storageService.GetEntities("SE1");
+            allAreas.SpotPriceListSE1 = _storageService.GetEntities("SE2");
+            allAreas.SpotPriceListSE1 = _storageService.GetEntities("SE3");
+            allAreas.SpotPriceListSE1 = _storageService.GetEntities("SE4");
+
+            return View(allAreas);
         }
 
         public void StorePriceData()
