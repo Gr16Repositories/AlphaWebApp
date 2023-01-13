@@ -21,6 +21,9 @@ namespace AlphaWebApp.Services
 
             List<NewsApiData> areaData = new List<NewsApiData>();
 
+            // after I get the data I will continue  put it in the azure table in order to make new request every some time 
+
+
             //var se1Data = allarticlesData.Where(a => d.AreaName == "SE1").ToList();
             //var se1High = se1Data.Max(p => (Convert.ToDouble(p.Price.Replace(" ", "")) / 1000));
             //var se1Low = se1Data.Min(p => (Convert.ToDouble(p.Price.Replace(" ", "")) / 1000));

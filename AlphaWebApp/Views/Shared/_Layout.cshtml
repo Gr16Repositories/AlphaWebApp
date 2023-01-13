@@ -171,12 +171,12 @@
                     <!-------- Categories -------->
                     <vc:navbar-categories></vc:navbar-categories>
 
-                    <!-------- SubscriptionDynamicBtn -------->
+                   @* <!-------- SubscriptionDynamicBtn -------->
                     <div class="nav-link text-light mx-auto">
 
 
                     <partial name="_SubscriptionBtn" />
-                    </div>
+                    </div>*@
 
 
                     <!-------- SearchBar -------->
@@ -184,31 +184,33 @@
                         <div class="searchNlogin">
                             <ul class="mx-auto">
                                 <li>
+                                    <!-------- SubscriptionDynamicBtn -------->
+                                    @*<div><partial name="_SubscriptionBtn" /></div>*@
+                                    <partial name="_SubscriptionBtn" />
+                                </li>
+
+
+                                <li>
                                     <form asp-controller="Home" asp-action="Search" asp-route-query="value">
                                         <input class="form-control nav-link mx-auto" type="text" name="query" placeholder=" Search...">
-                                         @* <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-black"></i></button>*@
+                                        <span><button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-black"></i></button></span>
 
                                     </form>
                                 </li>
 
-                                <!-------- SubscriptionDynamicBtn -------->
-                                <div><partial name="_SubscriptionBtn" /></div>
-
-
-
                                 <!-------- Search & Log-in form -------->
-                                <div class="homepage">
+                                @*<div class="homepage">
                                     <div class="searchNlogin">
                                         <ul class="m-0">
-                                            @*  <li>
+                                              <li>
                                             <form method="post" action="/process-form">
                                             <input class="form-control" type="text" name="query" placeholder=" Search...">
                                             <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"><i class="fa-solid fa-magnifying-glass text-black"></i></button>
                                             </form>
-                                            </li>*@
+                                            </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div>*@
                             </ul>
                         </div>
 
