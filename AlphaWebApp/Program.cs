@@ -44,6 +44,12 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 
+builder.Services.AddHttpClient("newsApi", config =>
+{
+    config.BaseAddress = new(builder.Configuration["MybusinessApiAdress"]);
+});
+
+
 builder.Services.AddControllersWithViews();
 
 builder.Services.Configure<CookiePolicyOptions>(options =>
