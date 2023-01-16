@@ -1,12 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AlphaWebApp.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AlphaWebApp.Controllers
 {
     public class NewsApiController : Controller
     {
-        public IActionResult Index()
+        private readonly IStorageService _storgeService;
+
+        public NewsApiController(IStorageService storgeService)
         {
-            return View();
+                _storgeService= storgeService;
         }
+       
+        public IActionResult EnglishNews()
+        {
+            return View(_storgeService.GetLatestEnglishNewsApiArticles());
+        }
+
+        public IActionResult SwedishNews()
+        {
+            return View(_storgeService.GetLatestSwedishNewsApiArticles());
+        }
+
     }
 }

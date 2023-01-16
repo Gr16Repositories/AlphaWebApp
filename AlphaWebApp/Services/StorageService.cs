@@ -3,10 +3,16 @@ using AlphaWebApp.Models.Entities;
 using AlphaWebApp.Models.SpotModels;
 using Azure.Data.Tables;
 using Azure.Storage.Blobs;
+using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Security.Policy;
+using NewsAPI;
+using NewsAPI.Models;
+using NewsAPI.Constants;
+using System;
+using AlphaWebApp.Models.ViewModels;
 
 namespace AlphaWebApp.Services
 {
@@ -131,16 +137,79 @@ namespace AlphaWebApp.Services
         }
 
 
-        // get lattest Swedish Articles
-        public async Task<List<NewsArticle>> GetLattestSwedishArticles()
+        // Get lattest Swedish Articles
+        public List<NewsApiDataVM> GetLatestSwedishNewsApiArticles()
         {
-            // add request for data 
-            HttpClient _newsApiHttpClient = new HttpClient();
-            var request = await _newsApiHttpClient.GetStringAsync("https://newsapi.org/v2/top-headlines?country=se&apiKey=dd231824ef6d4c0c93824940ca899491");
-            NewsArticlesList newsApiData = JsonConvert.DeserializeObject<NewsArticlesList>(request);
-            List<NewsArticle> allNewsArticlesData = newsApiData.NewsArticles.Select(a => a).ToList();
-            return await Task.Run(() => allNewsArticlesData);
+            // Init with your API key
+            var newsApiClient = new NewsApiClient("dd231824ef6d4c0c93824940ca899491");
+            var articlesResponse = newsApiClient.GetTopHeadlines(new TopHeadlinesRequest
+            {
+                //Country = Countries.SE,
+                Language = Languages.SV,
+                //Category = Categories.Technology,
+            });
+            if (articlesResponse.Status == Statuses.Ok)
+            {
+               var result = new List<NewsApiDataVM>();
+
+                foreach (var item in articlesResponse.Articles)
+                {
+                    NewsApiDataVM newEntity = new();
+                    newEntity.Source = item.Source.Name;
+                    newEntity.Author = item.Author;
+                    newEntity.Title = item.Title;
+                    newEntity.Description = item.Description;
+                    newEntity.Url = item.Url;
+                    newEntity.UrlToImaage = item.UrlToImage;
+                    newEntity.PublishedAt = item.PublishedAt;
+                    newEntity.Content = item.Content;
+                    result.Add(newEntity);
+                }
+                return result;
+            }
+            else
+            {
+                return new List<NewsApiDataVM>();
+            }
         }
+
+
+        // Get lattest English Articles
+        public List<NewsApiDataVM> GetLatestEnglishNewsApiArticles()
+        {
+            // Init with your API key
+            var newsApiClient = new NewsApiClient("dd231824ef6d4c0c93824940ca899491");
+            var articlesResponse = newsApiClient.GetTopHeadlines(new TopHeadlinesRequest
+            {
+                //Country = Countries.SE,
+                Language = Languages.EN,
+                //Category = Categories.Technology,
+            });
+            if (articlesResponse.Status == Statuses.Ok)
+            {
+                var result = new List<NewsApiDataVM>();
+
+                foreach (var item in articlesResponse.Articles)
+                {
+                    NewsApiDataVM newEntity = new();
+                    newEntity.Source = item.Source.Name;
+                    newEntity.Author = item.Author;
+                    newEntity.Title = item.Title;
+                    newEntity.Description = item.Description;
+                    newEntity.Url = item.Url;
+                    newEntity.UrlToImaage = item.UrlToImage;
+                    newEntity.PublishedAt = item.PublishedAt;
+                    newEntity.Content = item.Content;
+                    result.Add(newEntity);
+                }
+                return result;
+            }
+            else
+            {
+                return new List<NewsApiDataVM>();
+            }
+        }
+
 
 
     }

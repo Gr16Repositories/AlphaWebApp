@@ -15,11 +15,11 @@ namespace AlphaWebApp.Services
         }
 
 
-        public void StoreNewsApiArticleInTable()
-        {
-            var allarticlesData = _storageService.GetLattestSwedishArticles();
+        //public void StoreNewsApiArticleInTable()
+        //{
+        //    var allarticlesData = _storageService.GetLattestSwedishArticles();
 
-            List<NewsApiData> areaData = new List<NewsApiData>();
+        //    List<NewsApiData> areaData = new List<NewsApiData>();
 
             // after I get the data I will continue  put it in the azure table in order to make new request every some time 
 
@@ -63,7 +63,7 @@ namespace AlphaWebApp.Services
             //            .Select(s => s[random.Next(s.Length)]).ToArray());
             //    tableClient.AddEntity(newEntity);
             //}
-        }
+        //}
 
 
     }
