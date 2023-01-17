@@ -14,7 +14,7 @@ namespace AlphaWebApp.ViewComponents
         {
             if (string.IsNullOrEmpty(name))
             {
-                var allArticles = _articleService.GetAllArticles().Take(20).ToList();
+                var allArticles = _articleService.GetAllArticles().OrderByDescending(a=>a.DateStamp).Take(20).ToList();
                 return View("Index", allArticles);
             }
 

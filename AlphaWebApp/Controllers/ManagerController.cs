@@ -26,15 +26,15 @@ namespace AlphaWebApp.Controllers
         }
 
 
-        //public IActionResult UsersRoles()
-        //{
-        //    var users = _userService.GetallUsers();
-        //    foreach(var user in users)
-        //    {
-        //        user.
-        //    }
-        //    return View();
-        //}
+        public IActionResult UsersRoles()
+        {
+            var users = _userService.GetallUsers();
+            foreach (var user in users)
+            {
+                
+            }
+            return View();
+        }
 
 
         public IActionResult Create()
