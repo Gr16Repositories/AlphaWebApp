@@ -8,7 +8,6 @@ namespace AlphaWebApp.ViewComponents
         public CategoriesNewsViewComponent( IArticleService articleService)
         {
             _articleService = articleService;
-                
         }
         public IViewComponentResult Invoke(string name)
         {
@@ -17,10 +16,8 @@ namespace AlphaWebApp.ViewComponents
                 var allArticles = _articleService.GetAllArticles().OrderByDescending(a=>a.DateStamp).Take(20).ToList();
                 return View("Index", allArticles);
             }
-
             var allcategories = _articleService.GetArticlesByCategoryName(name);
             return View("Index", allcategories);
         }
     }
-
 }
