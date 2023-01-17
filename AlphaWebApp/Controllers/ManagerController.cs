@@ -21,8 +21,20 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult Index()
         {
+            
             return View(_userService.GetAllRoles());
         }
+
+
+        //public IActionResult UsersRoles()
+        //{
+        //    var users = _userService.GetallUsers();
+        //    foreach(var user in users)
+        //    {
+        //        user.
+        //    }
+        //    return View();
+        //}
 
 
         public IActionResult Create()
