@@ -14,7 +14,7 @@
                 {
                     <div class="container">
                         <div id="Stock-scroll">
-                            <span id="StockHeaderText"><b>Stocks</b>   <i class="fa fa-angle-double-down"></i></span>
+                            <span id="StockHeaderText"><b>Stocks</b><i class="fa fa-angle-double-down"></i></span>
                             @await Component.InvokeAsync("Stock" , new {region = "uk"})
                         </div>
                         <div class="row">
@@ -34,7 +34,6 @@
                                                     <ul class="list-inline">
                                                         &nbsp;
                                                         <li class="publish-date"><a href="#"><i class="fa-sharp fa-solid fa-clock"></i>Date: @item.DateStamp.ToString("yyyy/MM/dd hh:mm tt") </a></li>&nbsp; &nbsp;
-
                                                         |&nbsp;
                                                         <li class="views"><a href="#"><i class="fa fa-eye"></i>Views:@item.Views </a></li>&nbsp;&nbsp;&nbsp;
                                                         |&nbsp;
@@ -52,9 +51,6 @@
                                                                 <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
                                                             }
                                                         </li>
-
-                                                        @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
                                                     </ul>
                                                 </div>
                                                 <h2 class="entry-title">
@@ -75,11 +71,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            }
-                            else
+                            } else
                             {
-
                             @foreach (var item in Model)
                             {
                                 <div class="col-sm-12">
@@ -115,10 +108,6 @@
                                                                 <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span> Likes: @item.Like.Count</span></a>
                                                             }
                                                         </li>
-
-
-                                                        @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
                                                     </ul>
                                                 </div>
                                                 <h2 class="entry-title">
@@ -136,30 +125,15 @@
                                                     }
                                                 </div>
                                                 <hr style="height:5px; color:red; opacity:1">
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             }
-
                             }
-
-                            @*<div class="col-sm-4">
-                        <div class="pt-5 text-end">
-                        <div class="text-dark text-center p-3" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
-                        @await Component.InvokeAsync("Stock" , new {region = "uk"})
-                        </div>
-                        @* <div class="pt-5 text-end">
-                        <div class="text-dark text-center p-3" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-                        @await Component.InvokeAsync("Stock" , new {region = "us"})
-                        </div>*@
-
                         </div>
                     </div>
-
                 }
-
             </div>
         </div>
     </div>
