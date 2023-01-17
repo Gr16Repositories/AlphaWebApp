@@ -335,7 +335,7 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult News(int id)
         {
-            var categoryArticles = _articleService.GetArticlesByCategoryId(id);
+            var categoryArticles = _articleService.GetArticlesByCategoryId(id).OrderByDescending(a => a.DateStamp);
             return View(categoryArticles);
         }
 

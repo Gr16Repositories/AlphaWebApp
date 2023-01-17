@@ -9,7 +9,7 @@
 <h1>Index Roles</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class ="nav-link   text-dark" asp-action="Create">Create New</a>
 </p>
 
 <table class="table">
@@ -30,12 +30,14 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+                    <a class="nav-link   text-dark" asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
-                    <a id="setEmail" asp-action="AddEmailToRole" asp-route-id="@item.Id">Assigne To User</a>
+                    <a class="nav-link   text-dark" id="setEmail" asp-action="AddEmailToRole" asp-route-id="@item.Id">Assigne To User</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+
