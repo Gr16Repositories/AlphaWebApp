@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Category>
+
+<style>
+    .mypageUnSub {
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .mypageUnSubBody {
+        border: 5px double dodgerblue;
+        border-radius: 25px;
+        padding: 5px;
+        color: black;
+    }
+</style>
+
+<h1>You have successfully unsubscribed to our newsletter</h1>
+
+@*<div>
+    @foreach (var item in Model)
+    {
+        <p>@item.name</p>
+    }
+</div>*@
+
+<h3>
+    <br /><b class="mypageUnSub"><a class="mypageUnSubBody" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a></b>
+</h3>
