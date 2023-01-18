@@ -15,7 +15,7 @@ namespace AlphaWebApp.ViewComponents
         }
         public IViewComponentResult Invoke()
         {
-            var todayworldnews = _articleService.GetArticlesByCategoryName("World").FirstOrDefault();
+            var todayworldnews = _articleService.GetArticlesByCategoryName("World").OrderByDescending(x => x.DateStamp).FirstOrDefault();
             return View("Index", todayworldnews);
         }
     }

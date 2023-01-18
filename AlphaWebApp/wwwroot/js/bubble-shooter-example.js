@@ -38,12 +38,12 @@ window.onload = function () {
         y: 83,          // Y position
         width: 0,       // Width, gets calculated
         height: 0,      // Height, gets calculated
-        columns: 15,    // Number of tile columns
+        columns: 9,    // Number of tile columns
         rows: 14,       // Number of tile rows
-        tilewidth: 40,  // Visual width of a tile
-        tileheight: 40, // Visual height of a tile
+        tilewidth: 20,  // Visual width of a tile
+        tileheight: 20, // Visual height of a tile
         rowheight: 34,  // Height of a row
-        radius: 20,     // Bubble collision radius
+        radius: 10,     // Bubble collision radius
         tiles: []       // The two-dimensional tile array
     };
 
