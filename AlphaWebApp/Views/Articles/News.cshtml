@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Article>
 @using Microsoft.AspNetCore.Identity
 @using AlphaWebApp.Services
+@using Microsoft.Extensions.Primitives
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject ISubscriptionService subscriptionsService
@@ -19,7 +20,27 @@
                 }
                 @if (@Model.Any(x => x.CategoryId == 16))
                 {
-                    <div>
+                    <div class="col-8" style="justify-content:left">
+                        
+                        <form>
+                            Enter the city name <input name="city" placeholder="City" type="search" aria-label="Search" />
+                            <button>Submit</button>
+                            @*Enter the city name  <input name="city" type="text" placeholder="City" />
+                            <button type="submit">Search</button>*@
+                        </form>
+
+                        @{
+                            StringValues city;
+                            Context.Request.Query.TryGetValue("city", out city);
+                        }
+                        @await Component.InvokeAsync("WeatherForeCast" ,
+                            new 
+                            {
+                                City = city.ToString(),
+                                Lang = "en"
+                            }
+                        )
+                        
                         <h1>Padmini test</h1>
                     </div>
                 }
