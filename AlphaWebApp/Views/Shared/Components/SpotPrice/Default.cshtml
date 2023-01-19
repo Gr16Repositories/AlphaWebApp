@@ -10,16 +10,23 @@
         </div>
         <br />
         <br />
-        <div style="height:40px;" class="text-center p-2">
-            <span style="background-color: #E5E4E2; display:inline-block;" class="fw-bold p-2 fs-5"><strong> High:<p id="highValue" style="width:45px;display:inline-block;" class="fw-bold p-2 fs-5"></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low:<p id="lowValue" style="width:45px;display:inline-block;" class="fw-bold p-2 fs-5"></p></strong></span>
-        </div>
-        <br />
-        <div class="p-2 text-center" style="margin-top:65px;">
-            <button class="btn btn-primary text-md-center fs-5" id="btnSE1" style="width:60px;" onclick="LoadSE1Data();">SE1</button>&nbsp;<button class="btn btn-primary text-md-center fs-5" id="btnSE2" style="width:35px;" onclick="LoadSE2Data();">SE2</button>&nbsp;<button class="btn btn-primary text-md-center fs-5" style="width:35px;" id="btnSE3" onclick="LoadSE3Data();">SE3</button>&nbsp;<button class="btn btn-primary text-md-center fs-5" style="width:35px;" id="btnSE4" onclick="LoadSE4Data();">SE4</button>
+        <div class="row">
+            <div class="col-9">
+            <div style="height:40px;" class="text-center p-2">
+                <span style="background-color: #E5E4E2; display:inline-block;" class="fw-bold p-2 fs-5"><strong> High:<p id="highValue" style="width:45px;display:inline-block;" class="fw-bold p-2 fs-5"></p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Low:<p id="lowValue" style="width:45px;display:inline-block;" class="fw-bold p-2 fs-5"></p></strong></span>
+            </div>
+            <br />
+            <div class="p-2 text-center" style="margin-top:65px;">
+                <button class="btn btn-primary text-md-center fs-5" id="btnSE1" style="width:60px;" onclick="LoadSE1Data();">SE1</button>&nbsp;<button class="btn btn-primary text-md-center fs-5" id="btnSE2" style="width:35px;" onclick="LoadSE2Data();">SE2</button>&nbsp;<button class="btn btn-primary text-md-center fs-5" style="width:35px;" id="btnSE3" onclick="LoadSE3Data();">SE3</button>&nbsp;<button class="btn btn-primary text-md-center fs-5" style="width:35px;" id="btnSE4" onclick="LoadSE4Data();">SE4</button>
+            </div>
+            </div>
+            <div class="col-3">
+                <img src="~/img/Sweden_map.png" alt="Sweden Map" style="width:150px;height:200px;">
+            </div>
         </div>
         <br />
 
-        <p style="background-color:red;color:white" class="p-2"><strong class="fw-bold fs-5">Electricity Prices(Kilowatt/Hour)</strong></p>
+        <p style="background-color:red;color:white" class="p-2" id="electricityHeader"><strong class="fw-bold fs-5"></strong></p>
         <div class="table-responsive p-3">
             <table class="table" id="table">
                 <thead id="tableHead">
@@ -52,7 +59,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr id="tabel-rows">                       
+                    <tr id="tabel-rows">
                     </tr>
                 </tbody>
             </table>
@@ -63,17 +70,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
 <script type="text/javascript">
 
-    $(document).ready(function () {       
+    $(document).ready(function () {
         LoadSE1Data(true);
         $("#highValue").html(@(((double)ViewBag.SE1High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE1Low).ToString("0.00", CultureInfo.InvariantCulture)));
     });
 
     let chart;
-    function CreateChart(xval, yValues)
-    {
-          var ctx = document.getElementById('lineChart').getContext('2d');
-          chart = new Chart(ctx, {
+    function CreateChart(xval, yValues) {
+        var ctx = document.getElementById('lineChart').getContext('2d');
+        chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: xval,
@@ -92,41 +98,40 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true                        
+                        beginAtZero: true
                     }
                 }
             }
         });
     }
 
-    function setData(labels, data)
-    {
+    function setData(labels, data) {
         chart.data.labels = labels;
         chart.data.datasets = [{
-                    label: 'Prices',
-                    data,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)'
-                    ],
-                    borderWidth: 1
-                }];
-                chart.update();
+            label: 'Prices',
+            data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }];
+        chart.update();
     }
 
-    function generateTable(data) {  
+    function generateTable(data) {
         const tbRows = document.getElementById("tabel-rows");
         let tbRowsHtml = "<td>Price</td>";
-        for(let item of data) {
+        for (let item of data) {
             tbRowsHtml += `<td>${item}</td>`
         }
         tbRows.innerHTML = tbRowsHtml;
     }
 
 
-    function LoadSE1Data(initialize) {        
+    function LoadSE1Data(initialize) {
         let se1Data = @Html.Raw(Json.Serialize(ViewBag.SE1));
         var datapoints = [];
         $.each(se1Data, function (index, item) {
@@ -143,18 +148,18 @@
         for (var i = 0; i < yValues.length; i++) {
             yValues[i] = ((parseFloat(yValues[i])) / 1000).toFixed(2);
         }
-        if(initialize === true)
+        if (initialize === true)
             CreateChart(xval, yValues);
         else
-            setData(xval, yValues);      
+            setData(xval, yValues);
 
         $("#highValue").html(@(((double)ViewBag.SE1High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE1Low).ToString("0.00", CultureInfo.InvariantCulture)));
-
-        generateTable(datapoints.map((item) => item.y.replace(' ', '')));       
+        $("#electricityHeader").html("Luleå Area Electricity Prices(Kilowatt/Hour)");
+        generateTable(datapoints.map((item) => item.y.replace(' ', '')));
     }
 
-    function LoadSE2Data() {       
+    function LoadSE2Data() {
         let se2Data = @Html.Raw(Json.Serialize(ViewBag.SE2));
         var datapoints2 = [];
         $.each(se2Data, function (index, item) {
@@ -170,16 +175,16 @@
         let yValues2 = datapoints2.map((item) => item.y.replace(' ', ''));
         for (var i = 0; i < yValues2.length; i++) {
             yValues2[i] = ((parseFloat(yValues2[i])) / 1000).toFixed(2);
-        }              
+        }
         setData(xval2, yValues2);
 
         $("#highValue").html(@(((double)ViewBag.SE2High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE2Low).ToString("0.00", CultureInfo.InvariantCulture)));
-
+        $("#electricityHeader").html("Sundsvall Area Electricity Prices(Kilowatt/Hour)");
         generateTable(datapoints2.map((item) => item.y.replace(' ', '')));
 
     }
-    function LoadSE3Data() {       
+    function LoadSE3Data() {
         let se3Data = @Html.Raw(Json.Serialize(ViewBag.SE3));
         var datapoints3 = [];
         $.each(se3Data, function (index, item) {
@@ -198,14 +203,14 @@
         }
 
         setData(xval3, yValues3);
-        
+
         $("#highValue").html(@(((double)ViewBag.SE3High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE3Low).ToString("0.00", CultureInfo.InvariantCulture)));
-
+        $("#electricityHeader").html("Stockholm Area Electricity Prices(Kilowatt/Hour)");
         generateTable(datapoints3.map((item) => item.y.replace(' ', '')));
     }
 
-    function LoadSE4Data() {        
+    function LoadSE4Data() {
         let se4Data = @Html.Raw(Json.Serialize(ViewBag.SE4));
         var datapoints4 = [];
         $.each(se4Data, function (index, item) {
@@ -222,13 +227,13 @@
         for (var i = 0; i < yValues4.length; i++) {
             yValues4[i] = ((parseFloat(yValues4[i])) / 1000).toFixed(2);
         }
-         setData(xval4, yValues4);
+        setData(xval4, yValues4);
 
         $("#highValue").html(@(((double)ViewBag.SE4High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE4Low).ToString("0.00", CultureInfo.InvariantCulture)));
-
+        $("#electricityHeader").html("Malmö Area Electricity Prices(Kilowatt/Hour)");
         generateTable(datapoints4.map((item) => item.y.replace(' ', '')));
-    }                                                    
+    }
 </script>
 
 
