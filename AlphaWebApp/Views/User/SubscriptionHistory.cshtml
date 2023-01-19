@@ -2,12 +2,6 @@
 
     <style>
         .subCard {
-/*            text-align: center;
-            width: 75%;
-            background-color: dodgerblue;
-            color: black;
-            border-radius: 10px;
-            font-size: 1.2em;*/
         border: 5px double dodgerblue;
         text-align: center;
         border-radius: 100px;
@@ -15,29 +9,33 @@
         }
 
         .subCardBody {
-/*            background-color: white;
-            border-radius: 25px;
-            margin: 10px;*/
         border: 5px double dodgerblue;
         border-radius: 60px;
         padding: 5px;
         color: black;
         }
 
-    .mypageSubHistory {
-        text-align: center;
-        border-radius: 10px;
-    }
+        .mypageSubHistory {
+            /*text-align: center;*/
+            /*border-radius: 10px;*/
+        }
 
-    .mypageSubHistoryBody {
-        border: 5px double dodgerblue;
-        border-radius: 25px;
-        padding: 5px;
-        color: black;
-    }
+        .mypageSubHistoryBody {
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+            /*border-radius: 25px;*/
+            /*padding: 5px;*/
+            color: black;
+        }
+        #Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        }
     </style>
 
-<h1>Subscriptions</h1><br />
+<h1><span id="Title">Subscriptions</span></h1><br />
 
 <div class="row">
     @foreach (var item in Model)
