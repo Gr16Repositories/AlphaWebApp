@@ -1,0 +1,21 @@
+@using Microsoft.AspNetCore.Identity
+@using AlphaWebApp.Services
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject ISubscriptionService subscriptionsService
+
+
+<ul class="navbar-nav flex-grow-1 justify-content-end">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li style="font-size:18px;">
+            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">| Hello @User.Identity?.Name &nbsp;</a>
+        </li>
+
+        <li style="font-size:18px;" class="my-auto">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn text-white btn-link">Logout</button>
+            </form>
+        </li>
+    }
+</ul>
