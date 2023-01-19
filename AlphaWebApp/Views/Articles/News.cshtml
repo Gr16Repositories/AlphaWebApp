@@ -82,7 +82,11 @@
                             <span id="StockHeaderText"><b>Stocks</b>   <i class="fa fa-angle-double-down"></i></span>
                             @await Component.InvokeAsync("Stock" , new {region = "uk"})
                         </div>
-                        <div class="row">
+                        <div id="SpotPrice" class="text-lg-center bg-white p-3">
+                            <span style="background-color:red;color:white;" class="text-lg-center p-3 border border-3 border-danger fs-4"><b class="fw-3 text-lg-center">Electricity Prices</b></span>
+                            @await Component.InvokeAsync("SpotPrice")
+                        </div>
+                        <div class="row mt-4" >
                             @foreach (var item in Model)
                             {
                                 <div class="left-content">
@@ -91,7 +95,7 @@
                                             <div class="entry-header">
                                                 <div class="entry-thumbnail">
                                                     <img class="card-img-top" src="@item.ImageLink" alt="Card image cap">
-                                                    <span class="card-category-badge-Economy">@item.Category.name</span>
+                                                  @*  <span class="card-category-badge-Economy">@item.Category.name</span>*@
                                                 </div>
                                             </div>
                                             <div class="post-content">
@@ -116,10 +120,7 @@
                                                             {
                                                                 <a href="javascript:void(0)" class="like" data-id="@item.Id"><i class="bi bi-heart bi-lg"></i>&nbsp;<span>Likes:@item.Like.Count</span></a>
                                                             }
-                                                        </li>
-
-                                                        @*&nbsp; <li class="views"><a href="#"><i class="fa fa-eye"></i>Views: @item.Views </a></li>&nbsp;&nbsp;&nbsp;
-                                                &nbsp; <li class="loves"><a href="#"><i class="fa-solid fa-thumbs-up"></i>Likes: @item.Likes </a></li>*@
+                                                        </li>                                                       
                                                     </ul>
                                                 </div>
                                                 <h2 class="entry-title">
@@ -142,17 +143,6 @@
                                 </div>
 
                             }
-
-                            @*<div class="col-sm-4">
-                        <div class="pt-5 text-end">
-                        <div class="text-dark text-center p-3" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
-                        @await Component.InvokeAsync("Stock" , new {region = "uk"})
-                        </div>
-                        @* <div class="pt-5 text-end">
-                        <div class="text-dark text-center p-3" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-                        @await Component.InvokeAsync("Stock" , new {region = "us"})
-                        </div>*@
-
                         </div>
                     </div>
 
