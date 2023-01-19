@@ -18,6 +18,7 @@
     <link href="~/css/owl.theme.default.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/main.css" asp-append-version="true" />
+    <link href="~/css/responsive.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/AlphaWebApp.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
@@ -39,116 +40,93 @@
 </head>
 
 <body>
+    <div class="row">
+        <div class="row" style="background-color:red">
 
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-
-    <!-- First Header -->
-    <div id="main-wrapper" class="homepage-two fixed-nav">
-        <div class="topbar">
-            <div class="d-flex align-items-center justify-content-between px-3" style="height:40px;">
-
-                <!-- Date-Time -->
+            <!-------- Date-Time -------->
+            <div class="col-lg-2 my-auto mx-auto">
                 <div id="date-time"></div>
+            </div>
 
-                <!-------- _LoginPartial -------->
-                <ul class="navbar navbar-expand m-0 p-0">
-                    <partial name="_LoginPartial" />
+            <!-------- Weather API -------->
+            <div class="col-lg-4 my-auto mx-auto justify-content-start p-0">
+                <img class="my-auto mx-auto" id="weatherImage" style="width:60px;" />
+                <span class="my-auto mx-auto" id="WeatherCount"></span>
+                <span class="my-auto mx-auto" id="WeatherCity"></span>
+            </div>
 
-                    <!-------- User account/new -------->
-                    <li class="dropdown user-panel">
-                        <a href="javascript:void(0);" class="dropdown-toggle text-white" data-toggle="dropdown"><i class="fa fa-user text-white"></i></a>
-                        <div class="dropdown-menu top-user-section">
-                            <div class="top-user-form">
-                                <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
-                                    <div class="input-group" id="top-login-username">
-                                        <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/user-icon.png" /></span>
-                                        <input name="Input.Email" type="text" class="form-control" placeholder="Username" required="">
+            <div class="col-lg-6">
+                <nav class="navbar navbar-expand-sm bg-opacity-10 navbar-toggleable-sm navbar-light bg-white box-shadow my-auto">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end d-flex">
+
+                        <!-------- Subscription Button -------->
+                        <li class="nav-item m-2 text-light my-auto">
+                            <partial name="_SubscriptionBtn" />
+                        </li>
+
+                        <!-------- _LoginPartial -------->                       
+                        <partial name="_LoginPartial" />
+                     
+
+                        <!-------- Login Form -------->
+                        <li class="nav-item m-3 my-auto">
+                            <div class="dropdown user-panel">
+                                <a href="javascript:void(0);" class="dropdown-toggle text-white" data-toggle="dropdown"><i class="fa fa-user text-white"></i></a>
+                                <div class="dropdown-menu top-user-section">
+                                    <div class="top-user-form">
+                                        <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
+                                            <div class="input-group" id="top-login-username">
+                                                <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/user-icon.png" /></span>
+                                                <input name="Input.Email" type="text" class="form-control" placeholder="Username" required="">
+                                            </div>
+                                            <div class="input-group" id="top-login-password">
+                                                <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/password-icon.png" /></span>
+                                                <input name="Input.Password" type="password" class="form-control" placeholder="Password" required="">
+                                            </div>
+                                            <div>
+                                                <a class="reset-user" asp-area="Identity" asp-page="/Account/Register" style="font-size:16px; color:#fff">Register</a>
+                                                <button style="background-color:red" class="btn" type="submit">Login</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="input-group" id="top-login-password">
-                                        <span class="input-group-addon" style="padding-right: 20px;"><img src="~/img/password-icon.png" /></span>
-                                        <input name="Input.Password" type="password" class="form-control" placeholder="Password" required="">
-                                    </div>
-                                    <div>
-                                        <p class="reset-user">Forgot <a href="#">Password/Username?</a></p>
-                                        <button class="btn btn-danger" type="submit">Login</button>
-                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <!-- SearchBar Expand -->
+                        <li class="searchNlogin">
+                            <ul><li class="search-icon my-auto"><i class="fa fa-search"></i></li></ul>
+                            <div class="search my-auto">
+                                <form role="form" asp-controller="Home" asp-action="Search" asp-route-query="value">
+                                    <input class="search-form" type="text" name="query" placeholder="Search...">
                                 </form>
                             </div>
-
-                            <div class="create-account">
-                                <a asp-area="Identity" asp-page="/Account/Register">Create a New Account</a>
-                            </div>
-
-                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
-                            </form>
-                        </div>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </div>
-    <!-- /First Header -->
-    <!-- Second Header -->
-    <div id="main-wrapper" class="homepage">
-        <header id="navigation">
 
-            <div class="navbar" role="banner">
-                <!-- Logo Title -->
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" /></a>
-                <!-- Weather API -->
-                <div id="WeatherContainer" class="float-end" style="display:flex;width:200px;">
-                    <div class="float-end" style="width:100px;">
-                        <img id="weatherImage" style="height:80px;width:80px;position:absolute;" />
-                        <p id="WeatherSummary" class="badge bg-primary text-wrap" style="margin-top:64px;width:70px;"></p>
-                    </div>
-                    <div class="text-start float-right" style="width:100px;padding-top:26px;">
-                        <span id="WeatherCount" class="fs-4 fw-bold"></span>
-                        <span id="WeatherCity" class="fs-6 fw-bold" style="padding-left:3px;"></span>
-                    </div>
-
-                </div>
+        <header>
+            <div class="row">
+                <div class="my-auto mx-auto d-flex justify-content-center p-4">
+                    <a asp-controller="Home" asp-action="Index"><img style="height: 100%; width:320px;" src="~/img/logo.png" /></a>
+                </div>   
             </div>
-
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div id="navbar_border" class="container-fluid">
-
-                    <!-------- Home -------->
-                    <a class="nav-link text-light mx-auto" asp-controller="Home" asp-action="Index">
-                        <b><img src="~/img/logo_home.png" style="height: 30px;" />Home</b>
-                    </a>
-
-                    <!-------- Categories -------->
-                    <vc:navbar-categories></vc:navbar-categories>
-
-                    <!-------- SubscriptionDynamicBtn -------->
-                    <div class="nav-link text-light mx-auto">
-                        <partial name="_SubscriptionBtn" />
-                    </div>
-
-
-                    <!-------- SearchBar -------->
-                    <div class="homepage">
-                        <div class="searchNlogin">
-                            <ul class="mx-auto">
-                                <li>
-                                    <form asp-controller="Home" asp-action="Search" asp-route-query="value">
-                                        <input class="form-control nav-link mx-auto" type="text" name="query" placeholder=" Search...">
-                                        @* <button type="submit" asp-controller="Home" asp-action="Search" asp-route-query="value"> <i class="fa-solid fa-magnifying-glass text-black"></i></button>*@
-
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-------- /Search & Log-in form -------->
-                </div>
-            </nav>
         </header>
+
+        <div id="categories-navbar" class="row mb-3">
+            <div class="col-lg-8">
+                <nav class="navbar navbar-expand-md navbar-toggleable-sm my-auto m-3">
+                    <vc:navbar-categories></vc:navbar-categories>
+                </nav>
+            </div>
+            <div class="col-lg-4">
+                <nav class="navbar navbar-expand-md navbar-toggleable-sm my-auto">
+                    <partial name="_HelloMsgLogout" />
+                </nav>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -191,11 +169,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
