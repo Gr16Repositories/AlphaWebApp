@@ -57,14 +57,14 @@ namespace AlphaWebApp.Controllers
 
             if (_subscriptionService.HasSubscription(User))
             {
-                var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) ||
+                var articleQuery = _articleService.GetAllArticlesForSearch().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) ||
                                                             a.ContentSummary.ToLower().Trim().Contains(lowerQuery) ||
                                                             a.HeadLine.ToLower().Trim().Contains(lowerQuery));
                 return View(articleQuery);
             }
-            else if (!String.IsNullOrEmpty(lowerQuery))
+            else 
             {
-                var articleQuery = _articleService.GetAllArticles().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) &&
+                var articleQuery = _articleService.GetAllArticlesForSearch().Where(a => a.Content.ToLower().Trim().Contains(lowerQuery) &&
                                                             a.Archive == false ||
                                                             a.ContentSummary.ToLower().Trim().Contains(lowerQuery) &&
                                                             a.Archive == false ||
@@ -72,13 +72,8 @@ namespace AlphaWebApp.Controllers
                                                             a.Archive == false);
                 return View(articleQuery);
             }
-            else
-            {
-                return View(new List<Article>());
-            }
+            
         }
-
-
 
 
 
@@ -88,9 +83,7 @@ namespace AlphaWebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-       
-        
-        
+     
 
     }
 }

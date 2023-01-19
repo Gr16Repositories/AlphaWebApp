@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace AlphaWebApp.Controllers
 {
@@ -18,11 +21,17 @@ namespace AlphaWebApp.Controllers
         private readonly IEmailService _emailService;
         private readonly IArticleService _articleService;
         private readonly ISubscriptionService _subscriptionService;
+        private readonly ApplicationDbContext _db;
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContext;
         public UserController(IUserService userService, 
                                 ICategoryService categoryService, 
                                 IEmailService emailService, 
                                 IArticleService articleService,
-                                ISubscriptionService subscriptionService
+                                ISubscriptionService subscriptionService,
+                                ApplicationDbContext db,
+                                UserManager<User> userManager,
+                                IHttpContextAccessor httpContext
                                 )
         {
             _userService = userService;
@@ -30,6 +39,9 @@ namespace AlphaWebApp.Controllers
             _emailService = emailService;
             _articleService = articleService;
             _subscriptionService = subscriptionService;
+            _db = db;
+            _userManager = userManager;
+            _httpContext = httpContext;
         }
 
         [Authorize]
@@ -122,6 +134,43 @@ namespace AlphaWebApp.Controllers
                                               // Can be used for other redirections when user or other role is missing requirements
         {
             return View();
+        }
+
+        public IActionResult NewsletterUnSubConfirm() // Used to unsubscribe to newsletter and delete the record from DB and then show a view for confirmation
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult UnSubscribeToNewsletter()
+        {
+            //var userId = _db.Users.Where(u => u.Email == User.Identity.Name).FirstOrDefault().Id;
+
+
+            var userId = _userService.GetUserId();
+
+            var listToDelete = _db.Subscriptions
+                        .Where(s => s.UserId == userId)
+                        .Include(c => c.Categories)
+                        .ToList();
+
+           
+
+            if (listToDelete.Count > 0)
+            {
+                Subscription userSubscription = _userService.GetUserSubscriptions(_userService.GetUserId()).FirstOrDefault(s => s.Active);
+                foreach (var item in userSubscription.Categories)
+                {
+                    userSubscription.Categories.Remove(item);
+                    _subscriptionService.UpdateSubscription(userSubscription);
+                }
+                return RedirectToAction("NewsletterUnSubConfirm");
+                
+            }
+            else
+            {
+                return RedirectToAction("NewsletterUnSubConfirm");
+            }
         }
     }
 }

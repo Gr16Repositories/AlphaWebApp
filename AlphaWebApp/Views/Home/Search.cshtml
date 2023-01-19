@@ -1,15 +1,10 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Article>
-
-
 @using Microsoft.AspNetCore.Identity
 @using AlphaWebApp.Services
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject ISubscriptionService subscriptionsService
 
-
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<User> userManager
 
 @{
     ViewData["Title"] = "SearchResult";
