@@ -7,10 +7,10 @@
 
 <!-- Stock manquee  -->
 @*<div class="container">*@
-    <div id="Stock-scroll">
-        <span id="StockHeaderText"><b>Stocks</b>   <i class="fa fa-angle-double-down"></i></span>      
-            @await Component.InvokeAsync("Stock" , new {region = "uk"}) 
-    </div>
+<div id="Stock-scroll" class="p-4">
+    <span id="StockHeaderText"><b>Stocks</b>   <i class="fa fa-angle-double-down"></i></span>
+    @await Component.InvokeAsync("Stock" , new {region = "uk"})
+</div>
 
 <!-------------------------- Latest News -------------------------->
 <div class="col-md-12">
@@ -147,17 +147,25 @@
         </div>
     </div>
 </div>
+<!-------------------------- bubble-shooter game -------------------------->
+<div class="col-md-6">
+    @*<canvas style="margin-left: 0%;" id="viewport" width="628" height="628"></canvas>*@
+    <canvas style="margin-left: 0%;" id="viewport" width="628" height="628"></canvas>
+
+</div>
 
 <!-------------------------- Weather API -------------------------->
-@*<div class="col-md-4">
+<div class="col-md-4">
     <h3> <b>| WeatherForecast</b></h3>
     <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
 
-    @await Component.InvokeAsync("WeatherForeCast" , new {
-    City = "Linkoping",
+    @await Component.InvokeAsync("WeatherForeCast" ,
+    new {
+    City = "Linköping",
     Lang = "en"}
     )
-</div>*@
+</div>
+
 
 <!-------------------------- Stocks Details -------------------------->
 @*<div class="col-md-12">
@@ -176,10 +184,6 @@
     </div>
 </div>*@
 
-<!-------------------------- bubble-shooter game -------------------------->
-@*<div class="col-md-6">
-    <canvas style="margin-left: 30%;" id="viewport" width="628" height="628"></canvas>
-</div>*@
 
 
 
@@ -192,56 +196,14 @@
 
     <div class="bottom-widgets">
         <div class="container">
-
-            @*<div class="col-sm-4">
-            <div class="widget">
-            <h2>Category</h2>
-            <ul>
-            <li><a href="#">Business</a></li>
-            <li><a href="#">Politics</a></li>
-            <li><a href="#">Sports</a></li>
-            <li><a href="#">World</a></li>
-            <li><a href="#">Technology</a></li>
-            </ul>
-            <ul>
-            <li><a href="#">Environment</a></li>
-            <li><a href="#">Health</a></li>
-            <li><a href="#">Entertainment</a></li>
-            <li><a href="#">Lifestyle</a></li>
-            </ul>
-            </div>
-            </div>*@
-
-
-            @*<div class="col-sm-4">
-            <div class="widget">
-            <h2>Tag</h2>
-            <ul>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Sports</a></li>
-            <li><a href="#">Featured</a></li>
-            <li><a href="#">World</a></li>
-            <li><a href="#">Fashion</a></li>
-            </ul>
-            <ul>
-            <li><a href="#">Environment</a></li>
-            <li><a href="#">Health</a></li>
-            <li><a href="#">Entertainment</a></li>
-            <li><a href="#">Lifestyle</a></li>
-            <li><a href="#">Business</a></li>
-            </ul>
-            <ul>
-            <li><a href="#">Tech</a></li>
-            <li><a href="#">Movie</a></li>
-            <li><a href="#">Music</a></li>
-            </ul>
-            </div>
-            </div>*@
-
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <div class="widget">
                     <h1 class="section-title title" style="color:#fff">About Us</h1>
-                    <p>Established by  Alpha Coporation, is principally funded through the licence fee paid by Sweden households. Our role is to fulfil our mission and promote our Public Purposes. </p>
+
+                    <p>AlphaNews is a News web site providing the best in local and global news.</p>
+                    <p>It is dedicated to helping people understand the world through on-the-ground, expert and deeply reported independent journalism.</p>
+                    <p>The content’s diversity and the team’s curatorial expertise are another reason to keep you browsing.</p>
+
                     <address style="color:#fff">
                         <p>Address : 12345 Linköping, Sweden</p>
                         <p>Call : +1234-222-3333</p>
@@ -259,11 +221,32 @@
                 </div>
             </div>
 
-
-     
-
+            <div class="col-sm-4">
+                <div class="widget news-letter">
+                    <h1 class="section-title title" style="color:#fff">Weekly NewsLetter</h1>
+                    <p>However, it still provides enough guidance for browsing the website with regiteration and even three subsriptions types Basic, Standard and Premium.</p>
+                    <button><a asp-area="Identity" asp-page="/Account/Register" style="color:#fff">Register</a></button>
+                </div>
+            </div>
 
         </div>
     </div>
 
+    <div class="footer-menu">
+        <div class="container">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Local</a></li>
+                <li><a href="#">World</a></li>
+                <li><a href="#">Economy</a></li>
+                <li><a href="#">Health</a></li>
+                <li><a href="#">Sport</a></li>
+                <li><a href="#">Weather</a></li>
+                <li><a href="#">Sweden</a></li>
+                <li><a href="#">Technology</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy</a></li>
+            </ul>
+        </div>
+    </div>
 </footer>

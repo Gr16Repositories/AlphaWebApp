@@ -15,13 +15,16 @@ namespace AlphaWebApp.ViewComponents
             _db = db;
             _weatherForecastService = weatherForcastService;    
         }
-        public IViewComponentResult Invoke(string city , string lang)
+        public IViewComponentResult Invoke(string city, string lang)
         {
-            WeatherForecast weatherReport = _weatherForecastService.GetForecast(city, lang);
-            if(weatherReport != null)
-            return View(weatherReport);
+            var weatherReport = _weatherForecastService.GetForecast(city, lang);
+            if (weatherReport != null)
+                return View(weatherReport);
             else
                 return Content(string.Empty);
         }
+
+
+        
     }
 }

@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
+    <style>
+    #Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    </style>
 
 @{
     ViewData["Title"] = "IndexRole";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index Roles</h1>
+<h1><span id="Title">Index Roles</span></h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class ="nav-link   text-dark" asp-action="Create">Create New</a>
 </p>
 
 <table class="table">
@@ -18,6 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
@@ -30,12 +38,17 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+                    <a class="nav-link   text-dark" asp-action="Update" asp-route-id="@item.Id">Update</a>
                 </td>
                 <td>
-                    <a id="setEmail" asp-action="AddEmailToRole" asp-route-id="@item.Id">Assigne To User</a>
+                    <a class="nav-link   text-dark" asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+                </td>
+                <td>
+                    <a class="nav-link   text-dark" id="setEmail" asp-action="AddEmailToRole" asp-route-id="@item.Id">Assigne To User</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+

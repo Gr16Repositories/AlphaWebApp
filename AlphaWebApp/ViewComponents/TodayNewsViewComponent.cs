@@ -16,7 +16,7 @@ namespace AlphaWebApp.ViewComponents
         public IViewComponentResult Invoke()
         {
             
-            var todaynews = _articleService.GetArticlesByCategoryName("Local").FirstOrDefault();
+            var todaynews = _articleService.GetArticlesByCategoryName("Local").OrderByDescending(x => x.DateStamp).FirstOrDefault();
             return View("Index", todaynews);
         }
     }

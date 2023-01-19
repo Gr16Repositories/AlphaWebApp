@@ -91,6 +91,24 @@ namespace AlphaWebApp.Services
 
         }
 
+
+        public List<Article> GetAllArticlesForSearch()
+        {
+            List<Article> articles = new List<Article>();
+            List<Article> listOfAllArtiles = _db.Articles.ToList();
+            if (listOfAllArtiles != null)
+            {
+                foreach (var item in listOfAllArtiles)
+                {
+                    articles.Add(item);                    
+                }
+                return articles;
+            }
+            else
+                return new List<Article>();
+
+        }
+
         public Article GetArticleById(int? id)
         {
             Article specificArticleById = _db.Articles.FirstOrDefault(x => x.Id == id);

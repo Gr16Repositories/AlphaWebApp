@@ -48,13 +48,20 @@ namespace AlphaWebApp.Controllers
 
         // GET: Articles
         [Authorize(Roles = "Editor")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> EditorPageIndex()
         {
             List<Article> listOfArticles = await Task.Run(() => _articleService.GetAllArticles().ToList());
             if (listOfArticles != null && listOfArticles.Any(x => x.Archive != true))
                 return View(listOfArticles);
             else
                 return View();
+        }
+
+        // GET: Articles
+        [Authorize(Roles = "Editor")]
+        public async Task<IActionResult> Index()
+        {
+           return await Task.Run(()=>View());
         }
 
         // GET: Articles/Details/5
@@ -152,7 +159,7 @@ namespace AlphaWebApp.Controllers
                 Uri blobUri = _storageService.uploadBlob(pathFile);
                 await Task.Run(() => _articleService.AddArticle(article, blobUri));
                 TempData["success"] = "Article Created Successfully";
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(EditorPageIndex));
             }
             return View();
         }
@@ -272,7 +279,7 @@ namespace AlphaWebApp.Controllers
                 }
             }
             TempData["success"] = "Article Updated Successfully";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(EditorPageIndex));
         }
 
         // GET: Articles/Delete/5
@@ -318,7 +325,7 @@ namespace AlphaWebApp.Controllers
             });
 
             TempData["success"] = "Article Deleted Successfully";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(EditorPageIndex));
         }
 
         private bool ArticleExists(int id)
@@ -328,7 +335,7 @@ namespace AlphaWebApp.Controllers
 
         public IActionResult News(int id)
         {
-            var categoryArticles = _articleService.GetArticlesByCategoryId(id);
+            var categoryArticles = _articleService.GetArticlesByCategoryId(id).OrderByDescending(a => a.DateStamp);
             return View(categoryArticles);
         }
 

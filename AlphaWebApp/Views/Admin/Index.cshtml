@@ -1,15 +1,39 @@
-﻿
+﻿<style>
+    .adminPage {
+        /*text-align: center;*/
+        /*border-radius: 10px;*/
+    }
+
+    .adminPageBody {
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        /*border-radius: 25px;*/
+        /*padding: 5px;*/
+        color: black;
+    }
+
+    #Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>
+
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Admin page</h1>
+<h1><span id="Title">Admin page</span></h1>
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="Admin" asp-action="IndexCategory">Category Adminstration</a></h3>
+<h3>
+    <br /><b class="adminPage"><a class="adminPageBody" asp-area="" asp-controller="Admin" asp-action="IndexCategory">Category Adminstration</a></b><br />
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="Admin" asp-action="IndexSubscriptionType">SubscriptionType Adminstration</a></h3>
+    <br /><b class="adminPage"><a class="adminPageBody" asp-area="" asp-controller="Admin" asp-action="IndexSubscriptionType">SubscriptionType Adminstration</a></b><br />
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="Subscriptions" asp-action="Index">Subscriptions Adminstration</a></h3>
+    <br /><b class="adminPage"><a class="adminPageBody" asp-area="" asp-controller="Subscriptions" asp-action="Index">Subscriptions Adminstration</a></b><br />
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="Admin" asp-action="ShowStatistics">Subscriptions Statistics</a></h3>
+    <br /><b class="adminPage"><a class="adminPageBody" asp-area="" asp-controller="Admin" asp-action="ShowStatistics">Subscriptions Statistics</a></b><br />
+</h3>

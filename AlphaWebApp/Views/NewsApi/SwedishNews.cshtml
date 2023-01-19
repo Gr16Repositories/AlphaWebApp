@@ -1,0 +1,22 @@
+﻿@model IEnumerable<AlphaWebApp.Models.ViewModels.NewsApiDataVM>
+
+@{
+    ViewData["Title"] = "Latest Swedish Articles";
+}
+
+<h1>Latest Swedish Articles</h1>
+
+
+@foreach (var item in Model) {
+            <br />
+            <h1>--------------------------------------------------------------------------</h1>
+            <img src="@item.UrlToImaage" style="width: 100%; height: auto">
+            <h3><strong>Title :</strong> @item.Title</h3>
+            <h3><strong>Source :</strong> @item.Source</h3>
+            <h3><strong>Author : </strong>@item.Author</h3>
+            <h3><strong>Published At : </strong>@item.PublishedAt</h3>
+            <h3><strong>Url : </strong> <a href="@item.Url" style="color:blue">"@item.Url"</a></h3>
+            <h3><strong>Description : </strong> @item.Description</h3>
+            <br />
+            <h3><strong>Content : </strong> @item.Content</h3>
+}

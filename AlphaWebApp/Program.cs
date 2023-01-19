@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+// EmailSedner
+using Microsoft.AspNetCore.Identity.UI.Services;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +20,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Add services to the container. 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseLazyLoadingProxies().UseSqlServer(connectionString));
+
 
 // Identity things here
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -41,6 +45,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = false;
+});
+
+
+builder.Services.AddHttpClient("newsApi", config =>
+{
+    config.BaseAddress = new(builder.Configuration["MybusinessApiAdress"]);
 });
 
 
@@ -69,6 +79,9 @@ builder.Services.AddScoped<IStockService, StockService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IWeatherForcastService,WeatherForcastService>();
 builder.Services.AddScoped<ISubscriptionService,SubscriptionService>();
+// EmailSender
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
 //To make Swagger work
 builder.Services.AddEndpointsApiExplorer();
@@ -112,6 +125,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllerRoute(
     name: "default",

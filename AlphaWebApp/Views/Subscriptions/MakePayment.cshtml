@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Payment";
 }
-
+@*
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {
@@ -131,4 +131,100 @@ span.price {
             </form>
     </div>
 </div>
-@*<div><strong><a asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">Make Payment</a></strong></div>*@
+<div><strong><a asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">Make Payment</a></strong></div>*@
+
+<style>
+    .form-outline{
+         border: 2px solid;
+    border-radius: 5px;
+    }
+</style>
+
+<div class="tophead col-1" style="background-color:#ffc0cb">
+    Klarna
+
+</div>
+
+
+
+<div class="rows col-lg-8" >
+    <div class="box-inner-2">
+        <div>
+            <h3 class="fw-bold">Please enter your address</h3>
+            <p class="fw-bold"> We need your  address to complete the purchase.</p>
+            
+        </div>
+        <form action="" >
+            <div class="form-outline">
+                <label class="form-label" for="form1">Country</label>
+                <input type="text" id="form1" class="form-control form-icon-trailing" />
+                
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <p class="dis fw-bold mb-2">Email address</p>
+                        <input class="form-control" type="email" value="">
+
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <p class="dis fw-bold mb-2">Postal code</p>
+                        <input class="form-control" type="number" value="">
+                        <label class="form-label" for="form9Example4"></label>
+
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-outline">
+                <label class="form-label" for="form1">National ID number(YYMMDDXXX) </label>
+                <input type="number" id="form1" class="form-control form-icon-trailing" />
+
+            </div>
+          
+           
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <label class="form-label" for="form3Example1m">First name</label>
+                        <input type="text" id="form3Example1m" class="form-control form-control-lg" />
+                        
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <label class="form-label" for="form3Example1n">Last name</label>
+                        <input type="text" id="form3Example1n" class="form-control form-control-lg" />
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example8">Address</label>
+                <input type="text" id="form3Example8" class="form-control form-control-lg" />
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <label class="form-label" for="form9Example3">City</label>
+                        <input type="text" id="form9Example3" class="form-control input-custom" />
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                        <label class="form-label" for="form11Example6">Phone</label>
+                        <input type="number" id="form11Example6" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Make Payment" class="btnpayment" asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">
+            
+        </form>
+    </div>
+   
+</div>

@@ -1,4 +1,6 @@
 ﻿using AlphaWebApp.Models.Entities;
+using AlphaWebApp.Models.SpotModels;
+using AlphaWebApp.Models.ViewModels;
 
 namespace AlphaWebApp.Services
 {
@@ -18,6 +20,13 @@ namespace AlphaWebApp.Services
 
 
         void UpdateEntity(string rowKey);
+
+
+        List<NewsApiDataVM> GetLatestEnglishNewsApiArticles();
+
+        List<NewsApiDataVM> GetLatestSwedishNewsApiArticles();
+
+
 
     }
 }

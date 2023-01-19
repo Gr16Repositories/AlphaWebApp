@@ -9,54 +9,38 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-
         @if (User.IsInRole("Admin"))
         {
-            <li style="font-size:18px;">
-                <a class="text-white" asp-area="" asp-controller="Admin" asp-action="Index">| Admin Page &nbsp;</a>
+            <li style="font-size:18px;" class="my-auto mx-auto">
+                <a class="text-white my-auto" asp-area="" asp-controller="Admin" asp-action="Index">| Admin Page</a>
             </li>
         }
         @if (User.IsInRole("Manager"))
         {
-            <li style="font-size:18px;">
-                <a class="text-white" asp-area="" asp-controller="Manager" asp-action="Index">| Manager Page &nbsp;</a>
+            <li style="font-size:18px;" class="my-auto mx-auto">
+                <a class="text-white" asp-area="" asp-controller="Manager" asp-action="Index">| Manager Page</a>
             </li>
         }
         @if (User.IsInRole("Editor"))
         {
-            <li style="font-size:18px;" class="text-">
-                <a class="text-white" asp-area="" asp-controller="Articles" asp-action="Index">| Editor Page &nbsp;</a>
+            <li style="font-size:18px;" class="my-auto mx-auto">
+                <a class="nav-link text-white" asp-area="" asp-controller="Articles" asp-action="Index">| Editor Page</a>
             </li>
         }
         @if (subscriptionsService.HasSubscription(User))
         {
-            <li style="font-size:18px;">
-                <a class="text-white" asp-area="" asp-controller="User" asp-action="MyPage">| My Page &nbsp;</a>
+            <li style="font-size:18px;" class="my-auto mx-auto">
+                <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="MyPage">| My Page</a>
             </li>
         }
-        @if (!subscriptionsService.HasSubscription(User))
-        {
-          @*  <li>
-                <a class="nav-link text-white" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList"> Subscribe</a>
-            </li>*@
-        }
-
-        <li style="font-size:18px;">
-            <a class="text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">| Hello @User.Identity?.Name &nbsp;</a>
-        </li>
-        @*<li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-white">Logout</button>
-            </form>
-        </li>*@
     }
-    else
+    @*else
     {
-       @* <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
         <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>*@
-    }
+    <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+    }*@
 </ul>

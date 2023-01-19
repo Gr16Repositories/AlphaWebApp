@@ -1,4 +1,5 @@
 ﻿// Alpha News
+
 $(document).ready(function () {
     $('#categories-news').owlCarousel({
 

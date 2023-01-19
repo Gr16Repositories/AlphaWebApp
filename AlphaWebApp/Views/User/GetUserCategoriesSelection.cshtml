@@ -1,43 +1,76 @@
 ﻿@model AlphaWebApp.Models.ViewModels.UserCategoriesSelectionVM
 
-@*<style>
-    #error {
-        border: 2px solid black;
+<style>
+    #catsInNewsletter {
+        border: 5px double dodgerblue;
+        border-radius: 25px;
+        padding: 5px;
     }
-</style>*@
-
-<h1>Personalized Newsletter</h1>
-
-
-<form method="post" id="newsletterForm" asp-action="GetUserCategoriesSelection">
-
-    @for (int i = 0; i < Model.Categories.Count; i++)
-    {
-        <input type="hidden" asp-for="@Model.Categories[i].Value" required/>
-        <input asp-for=Categories[i].Selected id="checkbox_@i"/> @*@Model.Categories[i].Text*@
-        <label for="checkbox_@i">@Model.Categories[i].Text</label>
-        <br />
-        <br />
+    #newsletterDiv1 {
+        border-right: 5px double dodgerblue;
     }
-    <input type="submit" value="Subscribe" class="btn btn-primary"/>
-    <p id="error" style="color:red"></p>
-</form>
-
-<br />
-
-@*My try to show form as unchecked but display previously saved newsletter categories*@
-
-@*<h4>Current categories in your weekly newsletter</h4>
-
-@for (int i = 0; i < Model.Categories.Count; i++)
-{
-    if (Model.Categories[i].Selected == true)
-    {
-        <p>@Model.Categories[i].Text</p>
+    #newsletterDiv2 {
+        border-left: 5px double dodgerblue;
     }
-}*@
+    .Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    #formCategory {
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6" id="newsletterDiv1">
+        <h1><span class="Title">Personalize Newsletter</span></h1><br />
+        <form method="post" id="newsletterForm" asp-action="GetUserCategoriesSelection">
+
+            @for (int i = 0; i < Model.Categories.Count; i++)
+            {
+                <input type="hidden" asp-for="@Model.Categories[i].Value" required/>
+                <input asp-for=Categories[i].Selected id="checkbox_@i"/> @*@Model.Categories[i].Text*@
+                <label for="checkbox_@i" id="formCategory">@Model.Categories[i].Text</label>
+                <br />
+                <br />
+            }
+            <p id="error" style="color:#ff0000"></p>
+            <input type="submit" value="Subscribe" class="btn btn-primary" />@*&nbsp &nbsp*@
+        </form>
+        <form asp-controller="User" asp-action="UnSubscribeToNewsletter">
+            <input type="submit" value="Unsubscribe" class="btn btn-primary" /> @*Style button to be placed better*@
+        </form>
+    </div>
+
+    <div class="col-md-6" id="newsletterDiv2">
+        <h1><span class="Title">Your Newsletter</span></h1><br />
+
+            @for (int i = 0; i < Model.Categories.Count; i++)
+            {
+                if (Model.Categories[i].Selected == true)
+                {
+                <p style="padding: 5px;"><span id="catsInNewsletter">@Model.Categories[i].Text</span></p>
+                }
+            }
+    </div>
+</div>
 
 <script>
+
+    window.addEventListener("load", resetForm)
+
+    function resetForm() {
+
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = false;
+        });
+    }
 
     // Implement code for restrictions of amount of categories selectable for basic, standard, premium newsletter
 
