@@ -6,11 +6,11 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   html {
     font-size: 16px;
   }
-}
+}*/
 
 html {
   position: relative;
@@ -20,7 +20,6 @@ html {
 body {
   margin-bottom: 60px;
 }
-
 
 
 /*Ali*/
@@ -50,7 +49,12 @@ body {
 
 .container-fluid {
     background: #004080;
-    /*border-bottom: solid 8px #fa292a;*/
+    border-bottom: solid 8px #fa292a;
+}
+
+#categories-navbar {
+    background: #004080;
+    border-bottom: solid 8px #fa292a;
 }
 
 #navbar_border {
@@ -187,15 +191,24 @@ body {
     }
 
 
-#date-time
- {
+#WeatherCity,
+#WeatherCount {
+    display: inline-block;
+    /*margin-left: 20px;
+    padding-left: 20px;*/
+    line-height: 60px;
+    color: #fff;
+    font-size: 18px;
+}
+
+#date-time {
     display: inline-block;
     margin-left: 20px;
-    padding-left: 20px;
-    line-height: 60px;
-    color: #003366;
-    font-size: 16px;
-}
+    /*padding-left: 20px;*/
+    /*line-height: 60px;*/
+    color: #fff;
+    font-size: 18px;}
+
 
 .section-title:before,
 .btn-primary,
@@ -312,3 +325,4 @@ thead {
     /*margin: 4px 2px;*/
     cursor: pointer;
 }
+

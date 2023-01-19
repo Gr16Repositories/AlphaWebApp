@@ -45,6 +45,10 @@
 
   <ItemGroup>
 
+    <Folder Include="Models\NewFolder1\" />
+
+    <Folder Include="Models\NewFolder\" />
+
     <Folder Include="wwwroot\images\articles\" />
 
     <Folder Include="wwwroot\WeatherIcons\" />

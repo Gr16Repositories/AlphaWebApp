@@ -17,13 +17,22 @@ ul {
     padding: 0;
 }
 
+
+#form-logIn ul li {
+    font-size: 30px;
+    color: red;
+
+}
+
+
 .navbar-nav li a:hover,
 .navbar-nav li a:focus {
     outline: none;
     outline-offset: 0;
     text-decoration: none;
-    background: transparent;
+    background: #FF0000;
 }
+
 
 a {
     color: #aeaeae;
@@ -154,12 +163,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*---------------------------- FORM -----------------------*/
+
+.form-control-search {
+    /*height: 35px;*/
+    padding: 6px 12px;
+    margin: 5px 5px;
+    color: #000;
+    border: 2px solid #ececec;
+    border-radius: 5px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    outline: none;
+    background-color: #fff;
+    font-weight: 500;
+}
+
 .form-control {
     /*height: 35px;*/
     padding: 6px 12px;
     color: #000;
     border: 2px solid #ececec;
-    border-radius: 2px;
+    border-radius: 5px;
     box-shadow: none;
     -webkit-box-shadow: none;
     outline: none;
@@ -258,9 +282,9 @@ label {
     top: 10px;
 }
 
-#navigation .sticky-nav .navbar-nav {
+/*#navigation .sticky-nav .navbar-nav {
     margin-left: 0px;
-}
+}*/
 
 #navigation .navbar {
     -webkit-transition: all 0.3s ease-in-out;
@@ -315,9 +339,9 @@ label {
         padding: 0;
     }
 
-    #navigation .navbar-nav li, .dropdown {
+   /* #navigation .navbar-nav li, .dropdown {
         position: relative;
-    }
+    }*/
 
 
     /*Navbar*/
@@ -340,10 +364,10 @@ label {
         min-width: 75px;
     }
 
-    #navigation .language-dropdown.open > .dropdown-menu,
+   /* #navigation .language-dropdown.open > .dropdown-menu,
     #navigation .navbar-nav > li.dropdown:hover > .dropdown-menu {
         display: block;
-    }
+    }*/
 
     #navigation .open > .dropdown-menu,
     #navigation-v1 .open > .dropdown-menu {
@@ -358,10 +382,10 @@ label {
 }
 
 
-#navigation .navbar-nav .mega-cat-dropdown,
+/*#navigation .navbar-nav .mega-cat-dropdown,
 #navigation .navbar-nav .mega-dropdown {
     position: inherit;
-}
+}*/
 
 
 #mainmenu .mega-cat-menu {
@@ -388,9 +412,8 @@ label {
     margin-top: -32px;
 }
 
-#mainmenu .sub-catagory ul li {
 
-}
+
 
 #mainmenu .sub-catagory ul li a {
     font-size: 12px;
@@ -450,11 +473,13 @@ label {
 ========= Top bar section=======
 ================================*/
 #navigation {
-    background-color: #fff;
+    /*background-color: #fff;*/
+    background-color: #ae22d0;
 }
 
 #navigation .navbar .topbar {
     border-bottom: 1px solid #eee;
+    background-color: #3ea6ff;
 }
 
 #topbar {
@@ -481,30 +506,28 @@ label {
 
 #date-time {
     /*border-left: 1px solid #ebecee;*/
-    margin-right: 25px;
-}
+/*    margin-right: 25px;
+*/}
 
 /*Date-Time*/
-#date-time {
-    display: inline-block;
-    margin-left: 20px;
+/*#date-time {*/
+    /*display: inline-block;*/
+    /*margin-left: 20px;
     padding-left: 20px;
     line-height: 60px;
     color: #fff;
     font-size: 18px;
-}
+}*/
 
 /*Weather*/
 #weather {
     display: inline-block;
-    margin-left: 20px;
-    padding-left: 20px;
+    /*margin-left: 20px;
+    padding-left: 20px;*/
     line-height: 18px;
     color: #000;
-    font-size: 10px;
+    font-size: 60px;
 }
-
-
 
 
 
@@ -512,24 +535,20 @@ label {
     max-width: 61px;
 }
 
+
+/*searchNlogin*/
 .searchNlogin {
     display: flex;
     float: right;
     position: relative;
-    margin-right: -15px;
+    /*margin-right: 100px;*/
 }
-
-/*.searchNlogin {
-    float: right;
-    position: relative;
-    margin-right: -15px;
-}*/
 
 .searchNlogin li{
     float: left;
-    padding: 15px 5px;
+    padding: 3px 3px;
     margin: 5px;
-    color: #FF0000;
+    color: #fff;
 }
 
 .searchNlogin:not(.expanded) li.search-input-wrapper {
@@ -539,6 +558,7 @@ label {
 
 .searchNlogin li:hover {
     color: #525b6e;
+    cursor:pointer;
 }
 
 .user-section {
@@ -557,7 +577,7 @@ label {
     /*position:inherit;*/
     top: 0;
     z-index: 10;
-    right: 110px;
+    right: 30px;
     width: 0;
     opacity: 0;
     -webkit-transition: all 0.5s ease-in-out;
@@ -600,16 +620,9 @@ label {
 }
 
 .expanded .search-icon {
-    background-color: #003366;
-    border-left-color: #f2f3f5;
+    /*background-color: #fff;*/
     color: #fff;
 }
-
-/*.expanded .search-icon {
-	background-color: #f2f3f5;
-	border-left-color: #f2f3f5;
-	color: #525b6e;
-}*/
 
 #navigation .dropdown-menu.top-user-section,
 .dropdown-menu.top-user-section {
@@ -1465,7 +1478,7 @@ label {
     .footer-menu .navbar-nav {
         display: inline-block;
         float: none !important;
-        padding: 25px 0 20px 0;
+        padding: 5px 0 5px 0;
     }
 
         .footer-menu .navbar-nav li a {
@@ -1731,7 +1744,8 @@ label {
 
 .homepage-two .language-dropdown,
 .homepage-two #date-time,
-.homepage-two #weather {
+.homepage-two #weather,
+#WeatherCity {
     line-height: 35px;
 }
 
@@ -1971,9 +1985,9 @@ label {
     margin-top: 0;
 }
 
-.homepage-two.fixed-nav #navigation .sticky-nav .navbar-nav {
+/*.homepage-two.fixed-nav #navigation .sticky-nav .navbar-nav {
     margin-left: 90px;
-}
+}*/
 
 .homepage-two.fixed-nav #navigation .sticky-nav {
     padding: 0 15px;
@@ -2576,3 +2590,5 @@ marquee p b {
         background-color: blanchedalmond;
     }
 /*=========================================:: END :: =============================================*/
+
+

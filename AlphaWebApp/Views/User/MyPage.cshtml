@@ -1,14 +1,35 @@
 ﻿
+<style>
+    .mypage {
+        /*text-align: center;*/
+        /*border-radius: 10px;*/
+    }
+    .mypageBody {
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        /*border-radius: 25px;*/
+        /*padding: 5px;*/
+        color: black;
+    }
 
-<h1>My Page</h1>
+    #Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>
+
+<h1><span id="Title">My Page</span></h1> @*Style title??*@
 
 
 
 <h3>
-<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="SubscriptionHistory">View your history of subscriptions!</a>
+    <br /><b class="mypage"><a class="mypageBody" asp-area="" asp-controller="User" asp-action="SubscriptionHistory">View your history of subscriptions</a></b><br />
 
-<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="GetUserCategoriesSelection">Create your own personal newsletter!</a>
+    <br /><b class="mypage"><a class="mypageBody" asp-area="" asp-controller="User" asp-action="GetUserCategoriesSelection">Create your own personal newsletter</a></b><br />
 
-<a class="nav-link   text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage your acount</a>
-@*<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="ChangePassword">Change your password!</a>*@
+    <br /><b class="mypage"><a class="mypageBody" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage your acount</a></b><br />
+
+    @*<a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="ChangePassword">Change your password!</a>*@
 </h3>
