@@ -17,7 +17,7 @@
                         <span id="StockHeaderText"><b>Stocks</b><i class="fa fa-angle-double-down"></i></span>
                         @await Component.InvokeAsync("Stock" , new {region = "uk"})
                     </div>
-                     <div id="SpotPrice" class="text-lg-center bg-white p-3">
+                    <div id="SpotPrice" class="text-lg-center bg-white p-3 mb-3">
                             <span style="background-color:red;color:white;" class="text-lg-center p-3 border border-3 border-danger fs-4"><b class="fw-3 text-lg-center">Electricity Prices</b></span>
                             @await Component.InvokeAsync("SpotPrice")
                         </div>
@@ -102,9 +102,8 @@
                                 </div>
                             </div>
                         </div>
-
-                    }
-                }               
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -142,7 +141,6 @@
                     }
                 });
             });
-
         });
     </script>
 }
