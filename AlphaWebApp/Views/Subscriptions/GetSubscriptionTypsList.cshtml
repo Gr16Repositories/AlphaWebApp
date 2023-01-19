@@ -21,7 +21,7 @@
                     <li class="list-group-item"><strong style="font-size:30px">@item.Price SEK</strong></li>
                 </ul>
                 <div class="card-body">
-                    <a asp-action="MakePayment" asp-route-id="@item.Id">Buy</a>
+                    <a  class="btn btn-danger" asp-action="MakePayment" asp-route-id="@item.Id">Buy</a>
                 </div>
             </div>
         }

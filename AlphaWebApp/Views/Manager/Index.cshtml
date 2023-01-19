@@ -27,6 +27,7 @@
             </th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a class="nav-link   text-dark" asp-action="Update" asp-route-id="@item.Id">Update</a>
                 </td>
                 <td>
                     <a class="nav-link   text-dark" asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>

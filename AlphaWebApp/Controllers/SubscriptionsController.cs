@@ -82,11 +82,6 @@ namespace AlphaWebApp.Controllers
             var paymentComplete = true;
             SubscriptionVM newSub = await Task.Run(() => _subscriptionService.AddSubscripton(id, paymentComplete));
             Subscription subscription = await _subscriptionService.SaveSubscripton(newSub);
-            //// Assagne USER Role to this user --- I make if first to assigen role to user then I make it using claims
-            //string userEmail = _userService.GetallUsers().Where(u => u.Id == _userService.GetUserId()).FirstOrDefault().Email;
-            //string roleId = _userService.GetAllRoles().Where(r => r.Name == "USER").FirstOrDefault().Id;
-            //await Task.Run(()=> _userService.AddRoleToUser(roleId, userEmail));
-
             return RedirectToAction("SendSubscriptionEmail", new {id = subscription.Id });
         }
 

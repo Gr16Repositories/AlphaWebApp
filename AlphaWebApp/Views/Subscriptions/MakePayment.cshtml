@@ -1,9 +1,9 @@
-﻿@*@model AlphaWebApp.Models.Subscription
+﻿@model AlphaWebApp.Models.Subscription
 
 @{
     ViewData["Title"] = "Payment";
 }
-
+@*
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body {
@@ -133,12 +133,12 @@ span.price {
 </div>
 <div><strong><a asp-controller="Subscriptions" asp-action="Create" asp-route-id="@Model.SubscriptionTypeId">Make Payment</a></strong></div>*@
 
-@*<style>
+<style>
     .form-outline{
          border: 2px solid;
     border-radius: 5px;
     }
-</style>*@
+</style>
 
 <div class="tophead col-1" style="background-color:#ffc0cb">
     Klarna
@@ -213,16 +213,12 @@ span.price {
                     <div class="form-outline">
                         <label class="form-label" for="form9Example3">City</label>
                         <input type="text" id="form9Example3" class="form-control input-custom" />
-                       
-
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="form-outline">
                         <label class="form-label" for="form11Example6">Phone</label>
                         <input type="number" id="form11Example6" class="form-control" />
-                        
-
                     </div>
                 </div>
             </div>
