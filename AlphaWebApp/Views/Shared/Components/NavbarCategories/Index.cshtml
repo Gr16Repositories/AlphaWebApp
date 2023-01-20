@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Category>
 
 <ul class="navbar-nav flex-grow-1">
-    <li class="nav-item m-1 my-auto">
+    <li class="nav-item m-1 my-auto mx-auto">
         <a class="text-light my-auto" asp-controller="Home" asp-action="Index">
             <b><img src="~/img/logo_home.png" style="height: 30px;" class="my-auto" />Home</b>
         </a>
@@ -9,7 +9,7 @@
 
     @foreach (var item in Model)
     {
-        <li class="nav-item m-1">
+        <li class="nav-item m-1 mx-auto">
             <a class="nav-link text-light" asp-area="" asp-controller="Articles" asp-route-id="@item.Id" asp-action="News"><i class="@item.icon"></i> @item.name</a>
         </li>
     }
