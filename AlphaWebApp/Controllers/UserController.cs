@@ -172,5 +172,10 @@ namespace AlphaWebApp.Controllers
                 return RedirectToAction("NewsletterUnSubConfirm");
             }
         }
+        public IActionResult ContactUs()
+        {
+            
+            return View();
+        }
     }
 }

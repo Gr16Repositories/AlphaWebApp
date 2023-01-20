@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\NewFolder1\**" />
+    <Compile Remove="Models\NewFolder\**" />
     <Compile Remove="Views\Stock\**" />
+    <Content Remove="Models\NewFolder1\**" />
+    <Content Remove="Models\NewFolder\**" />
     <Content Remove="Views\Stock\**" />
+    <EmbeddedResource Remove="Models\NewFolder1\**" />
+    <EmbeddedResource Remove="Models\NewFolder\**" />
     <EmbeddedResource Remove="Views\Stock\**" />
+    <None Remove="Models\NewFolder1\**" />
+    <None Remove="Models\NewFolder\**" />
     <None Remove="Views\Stock\**" />
   </ItemGroup>
 
@@ -43,10 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <Folder Include="Models\NewFolder1\" />
-
-    <Folder Include="Models\NewFolder\" />
 
     <Folder Include="wwwroot\images\articles\" />
 
