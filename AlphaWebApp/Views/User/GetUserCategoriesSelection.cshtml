@@ -12,32 +12,42 @@
     #newsletterDiv2 {
         border-left: 5px double dodgerblue;
     }
+    .Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    #formCategory {
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 </style>
 
 <div class="row">
     <div class="col-md-6" id="newsletterDiv1">
-        <h1>Personalize Newsletter</h1><br />
+        <h1><span class="Title">Personalize Newsletter</span></h1><br />
         <form method="post" id="newsletterForm" asp-action="GetUserCategoriesSelection">
 
             @for (int i = 0; i < Model.Categories.Count; i++)
             {
                 <input type="hidden" asp-for="@Model.Categories[i].Value" required/>
                 <input asp-for=Categories[i].Selected id="checkbox_@i"/> @*@Model.Categories[i].Text*@
-                <label for="checkbox_@i">@Model.Categories[i].Text</label>
+                <label for="checkbox_@i" id="formCategory">@Model.Categories[i].Text</label>
                 <br />
                 <br />
             }
             <p id="error" style="color:#ff0000"></p>
-            <input type="submit" value="Subscribe" class="btn btn-primary" />&nbsp &nbsp
-            @*<input type="button" value="Unsubscribe" class="btn btn-primary" asp-action="UnSubscribeToNewsletter"/>  Needs logic to work *@
+            <input type="submit" value="Subscribe" class="btn btn-primary" />@*&nbsp &nbsp*@
         </form>
         <form asp-controller="User" asp-action="UnSubscribeToNewsletter">
-            <input type="submit" value="Unsubscribe" class="btn btn-primary" /> @* Needs logic to work *@
+            <input type="submit" value="Unsubscribe" class="btn btn-primary" /> @*Style button to be placed better*@
         </form>
     </div>
 
     <div class="col-md-6" id="newsletterDiv2">
-        <h1>Your Newsletter</h1><br />
+        <h1><span class="Title">Your Newsletter</span></h1><br />
 
             @for (int i = 0; i < Model.Categories.Count; i++)
             {

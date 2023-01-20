@@ -1,14 +1,38 @@
 ﻿
+<style>
+    .editorPage {
+        /*text-align: center;*/
+        /*border-radius: 10px;*/
+    }
+
+    .editorPageBody {
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        /*border-radius: 25px;*/
+        /*padding: 5px;*/
+        color: black;
+    }
+
+    #Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+</style>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Editor page</h1>
+<h1><span id="Title">Editor page</span></h1>
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="Articles" asp-action="EditorPageIndex">Alpha News Articles</a></h3>
+<h3>
+    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="Articles" asp-action="EditorPageIndex">Alpha News Articles</a></b><br />
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="NewsApi" asp-action="SwedishNews">Latest Articles From Other resources In Swedish</a></h3>
+    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="NewsApi" asp-action="SwedishNews">Latest Articles From Other resources In Swedish</a></b><br />
 
-<h3><a class="nav-link   text-dark" asp-area="" asp-controller="NewsApi" asp-action="EnglishNews">Latest Articles From Other resources In English </a></h3>
+    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="NewsApi" asp-action="EnglishNews">Latest Articles From Other resources In English </a></b><br />
+</h3>
 

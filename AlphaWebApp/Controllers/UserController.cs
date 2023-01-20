@@ -141,20 +141,21 @@ namespace AlphaWebApp.Controllers
             return View();
         }
 
+        public IActionResult NoNewsletter()
+        {
+            return View();
+        }
+
         [Authorize]
         public IActionResult UnSubscribeToNewsletter()
         {
-            //var userId = _db.Users.Where(u => u.Email == User.Identity.Name).FirstOrDefault().Id;
-
-
             var userId = _userService.GetUserId();
 
             var listToDelete = _db.Subscriptions
-                        .Where(s => s.UserId == userId)
-                        .Include(c => c.Categories)
-                        .ToList();
-
-           
+                                .Include(c => c.Categories)
+                                .Where(s => s.UserId == userId)
+                                .SelectMany(c => c.Categories)
+                                .ToList();
 
             if (listToDelete.Count > 0)
             {
@@ -165,11 +166,10 @@ namespace AlphaWebApp.Controllers
                     _subscriptionService.UpdateSubscription(userSubscription);
                 }
                 return RedirectToAction("NewsletterUnSubConfirm");
-                
             }
             else
             {
-                return RedirectToAction("NewsletterUnSubConfirm");
+                return RedirectToAction("NoNewsletter");
             }
         }
     }

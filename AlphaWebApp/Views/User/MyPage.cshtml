@@ -1,25 +1,33 @@
 ﻿
 <style>
     .mypage {
-        text-align: center;
-        border-radius: 10px;
+        /*text-align: center;*/
+        /*border-radius: 10px;*/
     }
     .mypageBody {
-        border: 5px double dodgerblue;
-        border-radius: 25px;
-        padding: 5px;
+        border-bottom: 5px double dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        /*border-radius: 25px;*/
+        /*padding: 5px;*/
         color: black;
+    }
+
+    #Title {
+        border-bottom: 5px groove dodgerblue;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
     }
 </style>
 
-<h1>My Page</h1>
+<h1><span id="Title">My Page</span></h1> @*Style title??*@
 
 
 
 <h3>
-    <br /><b class="mypage"><a class="mypageBody" asp-area="" asp-controller="User" asp-action="SubscriptionHistory">View your history of subscriptions</a></b><br /><br />
+    <br /><b class="mypage"><a class="mypageBody" asp-area="" asp-controller="User" asp-action="SubscriptionHistory">View your history of subscriptions</a></b><br />
 
-    <br /><b class="mypage"><a class="mypageBody" asp-area="" asp-controller="User" asp-action="GetUserCategoriesSelection">Create your own personal newsletter</a></b><br /><br />
+    <br /><b class="mypage"><a class="mypageBody" asp-area="" asp-controller="User" asp-action="GetUserCategoriesSelection">Create your own personal newsletter</a></b><br />
 
     <br /><b class="mypage"><a class="mypageBody" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Manage your acount</a></b><br />
 
