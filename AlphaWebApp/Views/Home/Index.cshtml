@@ -136,10 +136,6 @@
         <div class="col-md-6">
             <div class="col-md-12">
                 <h1 class="section-title title">| Technology</h1>
-
-                @* <h3> <b>| Technology</b></h3>
-                <hr style="width:85%; height:3px; border-width:0; color:white; background-color:#3d85c6; opacity:1">*@
-
                 <div id="technology-news" class="owl-carousel owl-theme">
                     @await Component.InvokeAsync("Technology")
                 </div>
@@ -153,19 +149,6 @@
     <canvas style="margin-left: 0%;" id="viewport" width="628" height="628"></canvas>
 
 </div>
-
-<!-------------------------- Weather API -------------------------->
-<div class="col-md-4">
-    <h3> <b>| WeatherForecast</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
-
-    @await Component.InvokeAsync("WeatherForeCast" ,
-    new {
-    City = "Linköping",
-    Lang = "en"}
-    )
-</div>
-
 
 <!-------------------------- Stocks Details -------------------------->
 @*<div class="col-md-12">
@@ -184,8 +167,30 @@
     </div>
 </div>*@
 
+<!-------------------------- bubble-shooter game -------------------------->
+        <canvas id="viewport" width="628" height="628"></canvas>
 
 
+<!-------------------------- Weather API -------------------------->
+@* <div class="col-lg-4">
+    <h3> <b>| WeatherForecast</b></h3>
+    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
+
+    @await Component.InvokeAsync("WeatherForeCast" ,
+    new {
+    City = "Linköping",
+    Lang = "en"}
+    )
+    </div>*@
+
+<!-------------------------- Elecricity API - Swathi -------------------------->
+<div class="row bg-primary">
+    <h1 class="section-title title">| Today's Electricity Prices in Sweden</h1>
+
+    <h1> <i>Electricity API Content_ Swathi</i></h1>
+    
+
+</div>
 
 <footer id="footer">
     <div class="footer-top">
@@ -235,17 +240,17 @@
     <div class="footer-menu">
         <div class="container">
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Local</a></li>
-                <li><a href="#">World</a></li>
-                <li><a href="#">Economy</a></li>
-                <li><a href="#">Health</a></li>
-                <li><a href="#">Sport</a></li>
-                <li><a href="#">Weather</a></li>
-                <li><a href="#">Sweden</a></li>
-                <li><a href="#">Technology</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Privacy</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=19>Home</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=1>Local</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=3>World</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=5>Economy</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=6>Health</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=7>Sport</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=16>Weather</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=18>Sweden</a></li>
+                <li><a asp-controller="Articles" asp-action="News" asp-route-id=19>Technology</a></li>
+                <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>     
+                <li><a asp-controller="User" asp-action="ContactUs">Contact Us</a></li>
             </ul>
         </div>
     </div>
