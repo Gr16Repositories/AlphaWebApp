@@ -39,6 +39,13 @@ namespace AlphaWebApp.Services
             return _roleManager.Roles.ToList();
         }
 
+
+        public async Task<IdentityRole> GetRoleById(string id)
+        {
+            return await _roleManager.FindByIdAsync(id);
+        }
+
+
         public  async Task<IdentityResult> AddRole(IdentityRole role)
         {
            return await _roleManager.CreateAsync(role);

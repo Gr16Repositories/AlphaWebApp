@@ -111,28 +111,62 @@ namespace AlphaWebApp.Controllers
             else
                 return await Update(model.RoleId);
         }
-   
+
 
 
 
         public async Task<IActionResult> DeleteRole(string id)
         {
-
-            if (ModelState.IsValid)
+            var role = await Task.Run(() => _userService.GetRoleById(id));
+            if (id == null || role == null)
             {
-                IdentityResult result = await Task.Run(() => _userService.RemoveRole(id));
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-
-                foreach (IdentityError error in result.Errors)
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
+                return NotFound();
             }
-            return RedirectToAction("Index");
+            if (role == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(role);
+            }
+            //if (ModelState.IsValid)
+            //{
+            //    IdentityResult result = await Task.Run(() => _userService.RemoveRole(id));
+
+            //    if (result.Succeeded)
+            //    {
+            //        return RedirectToAction("Index");
+            //    }
+
+            //    foreach (IdentityError error in result.Errors)
+            //    {
+            //        ModelState.AddModelError("", error.Description);
+            //    }
+            //}
+            //return RedirectToAction("Index");
+        }
+
+
+        [HttpPost, ActionName("DeleteRole")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            if (id == null)
+            {
+                return Problem("Entity set 'ApplicationDbContext.roles'  is null.");
+            }
+            IdentityResult result = await Task.Run(() => _userService.RemoveRole(id));
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> AddRoleToUser(string id)
