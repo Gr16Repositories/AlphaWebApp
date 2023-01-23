@@ -19,5 +19,7 @@ namespace AlphaWebApp.Services
         public List<Subscription> GetUserSubscriptions(string UserId);
 
         List<User> GetallUsers();
+
+        Task<IdentityRole> GetRoleById(string id);
     }
 }

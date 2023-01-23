@@ -403,5 +403,10 @@ namespace AlphaWebApp.Controllers
         }
 
 
+        public IActionResult ArchiveArticles()
+        {
+            return View(_articleService.GetAllArchiveArticles().ToList());
+        }
+
     }
 }

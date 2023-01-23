@@ -30,9 +30,10 @@ namespace AlphaWebApp.Controllers
         }
 
 
-        public void GetAreaPrices()
+        public ActionResult GetAreaPrices(string area = "SE1")
         {
-            var areaPrices = _storageService.GetEntities("SE2");
+            var areaPrices = _storageService.GetEntities(area); 
+            return View(areaPrices);
         }
 
 
