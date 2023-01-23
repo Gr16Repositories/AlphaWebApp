@@ -25,15 +25,15 @@ namespace AlphaWebApp.Services
         }
 
 
-        public async Task<string> ContuctUsEmail(SubscriptionSummaryVM newSummary)
+        public async Task<string> SendContuctUsEmail(ContactUsVM contactusMessage)
         {
             var test = _configuration["AzureKeyRequestAddress"];
-            var responseMessage = await _httpClient.PostAsJsonAsync(test, newSummary);
+            var responseMessage = await _httpClient.PostAsJsonAsync(test, contactusMessage);
             if (!responseMessage.IsSuccessStatusCode)
             {
                 return "Sorry! Some error ocurred";
             }
-            return "Subscription submitted Successfully";
+            return "Thank you for contacting us, your message submitted Successfully";
         }
 
 
