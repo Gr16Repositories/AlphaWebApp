@@ -1,0 +1,49 @@
+﻿@model IEnumerable<AlphaWebApp.Models.Entities.SpotPriceEntity>
+
+@{
+    ViewData["Title"] = "GetAreaPrices";
+
+}
+
+<div style="height:50px;background-color:Red;color:white" class="text-center p-2 fs-3">
+<h2>@Context.Request.Query["area"] History</h2>
+</div>
+<br />
+<div class="text-center fs-5">
+<table class="table border border-danger border-3 rounded-3">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpotPriceHigh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpotPriceLow)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>                    
+                    @item.DateAndTime.ToShortDateString()
+                </td>
+                <td>                   
+                    @item.SpotPriceHigh.ToString("0.00")
+                </td>
+                <td>                    
+                    @item.SpotPriceLow.ToString("0.00")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ <div>
+     <a class="btn btn-primary" onclick="history.back()">Back</a>
+ </div>
+
+</div>

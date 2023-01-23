@@ -26,6 +26,7 @@
         </div>
         <br />
 
+        <div class="border border-danger border-3 rounded-3">
         <p style="background-color:red;color:white" class="p-2" id="electricityHeader"><strong class="fw-bold fs-5"></strong></p>
         <div class="table-responsive p-3">
             <table class="table" id="table">
@@ -64,6 +65,13 @@
                 </tbody>
             </table>
         </div>
+        </div>
+        <br />
+        <div>
+            <p class="fs-5 fw-bold">Click here to view to the Historical Spot Prices(High & Low)</p>
+            <a id="btnhistory" class="btn btn-primary" data-base-url="@Url.Action("GetAreaPrices","SpotPrice")" ></a>
+        </div>
+
     </div>
 </div>
 
@@ -130,6 +138,7 @@
         tbRows.innerHTML = tbRowsHtml;
     }
 
+    
 
     function LoadSE1Data(initialize) {
         let se1Data = @Html.Raw(Json.Serialize(ViewBag.SE1));
@@ -156,6 +165,9 @@
         $("#highValue").html(@(((double)ViewBag.SE1High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE1Low).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#electricityHeader").html("Luleå Area Electricity Prices(Kilowatt/Hour)");
+        const btn = $("#btnhistory");
+        btn.html("SE1 History");
+        btn.attr("href", `${btn.data("base-url")}?area=SE1`);
         generateTable(datapoints.map((item) => item.y.replace(' ', '')));
     }
 
@@ -181,6 +193,9 @@
         $("#highValue").html(@(((double)ViewBag.SE2High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE2Low).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#electricityHeader").html("Sundsvall Area Electricity Prices(Kilowatt/Hour)");
+        const btn = $("#btnhistory");
+        btn.html("SE2 History");
+        btn.attr("href", `${btn.data("base-url")}?area=SE2`);
         generateTable(datapoints2.map((item) => item.y.replace(' ', '')));
 
     }
@@ -207,6 +222,9 @@
         $("#highValue").html(@(((double)ViewBag.SE3High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE3Low).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#electricityHeader").html("Stockholm Area Electricity Prices(Kilowatt/Hour)");
+         const btn = $("#btnhistory");
+        btn.html("SE3 History");
+        btn.attr("href", `${btn.data("base-url")}?area=SE3`);
         generateTable(datapoints3.map((item) => item.y.replace(' ', '')));
     }
 
@@ -232,6 +250,9 @@
         $("#highValue").html(@(((double)ViewBag.SE4High).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#lowValue").html(@(((double)ViewBag.SE4Low).ToString("0.00", CultureInfo.InvariantCulture)));
         $("#electricityHeader").html("Malmö Area Electricity Prices(Kilowatt/Hour)");
+         const btn = $("#btnhistory");
+        btn.html("SE4 History");
+        btn.attr("href", `${btn.data("base-url")}?area=SE4`);
         generateTable(datapoints4.map((item) => item.y.replace(' ', '')));
     }
 </script>
