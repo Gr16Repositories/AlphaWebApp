@@ -70,17 +70,14 @@ jQuery(function ($) {
 		$("#sticky").stick_in_parent();
 	}());
 
+
 	/*==============================================================*/
 	// Search Slide
 	/*==============================================================*/
 	
 	$('.search-icon').on('click', function() {
 		$('.searchNlogin').toggleClass("expanded");
-	});
-	
-	
-
-	
+	});	
 
 	
 });

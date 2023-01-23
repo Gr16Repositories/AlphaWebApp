@@ -44,18 +44,18 @@
         <div class="row" style="background-color:red">
 
             <!-------- Date-Time -------->
-            <div class="col-lg-2 my-auto mx-auto">
+            <div class="col-lg-2 my-auto mx-auto text-center">
                 <div id="date-time"></div>
             </div>
 
             <!-------- Weather API -------->
-            <div class="col-lg-4 my-auto mx-auto justify-content-start p-0">
+            <div class="col-lg-2 my-auto mx-auto d-flex flex-column d-lg-block">
                 <img class="my-auto mx-auto" id="weatherImage" style="width:60px;" />
                 <span class="my-auto mx-auto" id="WeatherCount"></span>
                 <span class="my-auto mx-auto" id="WeatherCity"></span>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <nav class="navbar navbar-expand-sm bg-opacity-10 navbar-toggleable-sm navbar-light bg-white box-shadow my-auto">
                     <ul class="navbar-nav flex-grow-1 justify-content-end d-flex">
 
@@ -71,7 +71,7 @@
                         <!-------- Login Form -------->
                         <li class="nav-item m-3 my-auto">
                             <div class="dropdown user-panel">
-                                <a href="javascript:void(0);" class="dropdown-toggle text-white" data-toggle="dropdown"><i class="fa fa-user text-white"></i></a>
+                                <a href="javascript:void(0);" class="dropdown-toggle text-white d-flex justify-content-center" data-toggle="dropdown"><i class="fa fa-user text-white"></i></a>
                                 <div class="dropdown-menu top-user-section">
                                     <div class="top-user-form">
                                         <form id="top-login" role="form" method="post" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@currentUrl">
@@ -94,8 +94,10 @@
                         </li>
 
                         <!-- SearchBar Expand -->
-                        <li class="searchNlogin">
-                            <ul><li class="search-icon my-auto"><i class="fa fa-search"></i></li></ul>
+                        <li class="searchNlogin justify-content-center">
+                            <ul>
+                                <li class="search-icon my-auto"><i class="fa fa-search"></i></li>
+                            </ul>
                             <div class="search my-auto">
                                 <form role="form" asp-controller="Home" asp-action="Search" asp-route-query="value">
                                     <input class="search-form" type="text" name="query" placeholder="Search...">
@@ -138,12 +140,16 @@
     </div>
 
     <!--footer-->
+  
     <footer class="footer text-center">
         <a asp-area="" asp-controller="Home" asp-action="Privacy">
             <h5 style="color:black">
                 AlphaWebApp<sup>&copy;</sup> 2023
             </h5>
+           
         </a>
+    
+         
     </footer>
 
     <!--#scripts-->
