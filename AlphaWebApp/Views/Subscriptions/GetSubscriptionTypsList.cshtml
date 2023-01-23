@@ -7,11 +7,11 @@
 <div style ="justify-content:center">
     <h1 style ="justify-content:center">Please Choose your subscription</h1>
 
-    <div class="row" >
+    <div class="row">
 
         @foreach (var item in Model)
         {
-            <div class="card col-sm-3" style="width: 18rem; margin:20px; justify-content:center">
+            <div class="card col-sm-4" style="width: 18rem; margin:20px; justify-content:center">
                 <img src="/img/subscription.webp" class="card-img-top" alt="...">
                 <div class="card-body" >
                     <h5 class="card-title"><strong style="font-size:30px">@item.TypeName</strong></h5>
@@ -27,6 +27,28 @@
         }
     </div>
 </div>
+
+
+@*<div class="row">
+    <h1 class="d-flex justify-content-center">Please Choose your subscription</h1>
+
+    @foreach (var item in Model)
+    {
+        <div class="card col-md-4 p-1 m-1">
+            <img src="/img/subscription.webp" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><strong style="font-size:30px">@item.TypeName</strong></h5>
+                <p class="card-text">@item.Description</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong style="font-size:30px">@item.Price SEK</strong></li>
+            </ul>
+            <div class="card-body">
+                <a asp-action="MakePayment" asp-route-id="@item.Id">Buy</a>
+            </div>
+        </div>
+    }   
+</div>*@
 
 
 
