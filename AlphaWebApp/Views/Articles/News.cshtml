@@ -40,14 +40,16 @@
                             Context.Request.Query.TryGetValue("city", out city);
                         }
                         @await Component.InvokeAsync("WeatherForeCast" ,
-                    new
-                    {
-                    City = city.ToString(),
-                    Lang = "en"
-                    }
-                    )
+                            new 
+                            {
+                                City = city.ToString(),
+                                Lang = "en"
+                            }
+                        )
+                        
 
-                        <h1>Padmini test</h1>
+                        
+
                     </div>
                 }
                 @foreach (var item in Model)

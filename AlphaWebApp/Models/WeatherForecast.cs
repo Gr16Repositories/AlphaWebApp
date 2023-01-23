@@ -7,6 +7,7 @@ namespace AlphaWebApp.Models
 {
     public class WeatherForecast
     {
+        
         [JsonPropertyName("summary")]
         public string Summary { get; set; }
 
@@ -25,6 +26,7 @@ namespace AlphaWebApp.Models
 
         [JsonPropertyName("date")]
         public DateTime Date { get; set; }
+       
 
         [JsonPropertyName("city")]
         public string  City { get; set; }
