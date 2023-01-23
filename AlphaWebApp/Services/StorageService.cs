@@ -117,6 +117,7 @@ namespace AlphaWebApp.Services
             TableClient tableClient = _tableServerClient.GetTableClient
                 (tableName: "spotprice");
             var list = tableClient.Query<SpotPriceEntity>(r => r.PartitionKey == partitionKey).ToList();
+            list = list.GroupBy(x => x.DateAndTime).Select(d => d.First()).OrderByDescending(x => x.DateAndTime).ToList();
             return list;
         }
 

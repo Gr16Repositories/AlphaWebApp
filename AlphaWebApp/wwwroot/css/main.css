@@ -304,7 +304,7 @@ label {
         margin-top: 0;
         position: static;
         box-shadow: none;
-        background-color: #fff;
+        background-color: #004080;
     }
 
 
@@ -578,7 +578,7 @@ label {
 .search {
     position: absolute;
     /*position:inherit;*/
-    top: 0;
+    top: 5px;
     z-index: 10;
     right: 30px;
     width: 0;
@@ -610,7 +610,7 @@ label {
     font-weight: 300;
     padding-left: 0;
     border-right: 0;
-    height: 30px;
+    height: 40px;
     font-size: 16px;
     outline: none;
     width: 100%;
@@ -736,7 +736,6 @@ label {
 
 .navbar {
     border-radius: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 /*==============================
@@ -1636,25 +1635,7 @@ label {
     margin-bottom: 10px;
 }
 
-.comments-wrapper {
-    margin-top: 65px;
-    font-size: 14px;
-    color: #888888;
-}
 
-    .comments-wrapper .media-list {
-        margin-bottom: 70px;
-    }
-
-    .comments-wrapper .media {
-        background-color: #fff;
-        padding: 15px 30px 30px;
-        border-radius: 4px;
-    }
-
-.media {
-    margin-top: 30px;
-}
 
 .comments-wrapper .media .media-object {
     height: 35px;

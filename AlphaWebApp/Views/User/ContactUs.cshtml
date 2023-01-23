@@ -8,7 +8,14 @@
     .big-font {
         font-size: 500%;
     }
+
+    label::after {
+        content: " *";
+        color: red;
+    }
+   
 </style>
+
 <div class="container">
     <div class="row">
         <div class="col-6">
@@ -19,7 +26,10 @@
                 questions !</h1>
         </div>
         <div class="col-6" style="background-color:lightgray">
+
             <form asp-action="ContactUs">
+                <h2>Contact Alpha News</h2>
+                <h7 class="con" style="margin-bottom:2px;">Contact Alpha News Today !</h7>
                 <div class="form-group">
                     <label Asp-for="Name">Name:</label>
                     <input Asp-for="Name" type="text" class="form-control" id="name" name="Name">

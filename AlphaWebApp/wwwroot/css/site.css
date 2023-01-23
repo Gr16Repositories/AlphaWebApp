@@ -63,8 +63,6 @@ body {
     background: #004080 !important;   
 }
 
-
-
 /*Card*/
 /* Category Ads */
 #ads {
@@ -86,7 +84,7 @@ body {
 .card-category-badge {
     position: absolute;
     right: 35px;
-    top: 40px;
+    top: 25px;
     background: #003366;
     text-align: center;
     color: #fff;
@@ -321,12 +319,3 @@ thead {
     cursor: pointer;
 }
 
-/*Fadi Game*/
-#viewport {
-    height: 320px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom:20px;
-    /*transform: scale(0.4);*/ /* Equal to scaleX(0.7) scaleY(0.7) */
-}

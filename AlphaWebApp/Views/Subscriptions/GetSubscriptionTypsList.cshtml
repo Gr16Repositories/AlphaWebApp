@@ -4,25 +4,29 @@
     ViewData["Title"] = "GetSubscriptionTypsList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div style ="justify-content:center">
-    <h1 style ="justify-content:center">Please Choose your subscription</h1>
+<div>
+    <h1 class="text-center">Please Choose your subscription</h1>
 
-    <div class="row" >
+    <div class="container">
 
         @foreach (var item in Model)
         {
-            <div class="card col-sm-3" style="width: 18rem; margin:20px; justify-content:center">
-                <img src="/img/subscription.webp" class="card-img-top" alt="...">
-                <div class="card-body" >
-                    <h5 class="card-title"><strong style="font-size:30px">@item.TypeName</strong></h5>
-                    <p class="card-text">@item.Description</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong style="font-size:30px">@item.Price SEK</strong></li>
-                </ul>
-                <div class="card-body">
-                    <a  class="btn btn-danger" asp-action="MakePayment" asp-route-id="@item.Id">Buy</a>
-                </div>
+            <div class="card col-sm-3" style="width: 25rem; margin:25px;">
+
+                <img src="~/img/subscriptioncard.jpg" style="margin-top:15px; margin-bottom:15px" class=" card-img-top rounded-5" alt="...">
+                
+                <h1 class="mx-auto"><b>@item.TypeName</b></h1>
+                <p class="text-left"><b><span style="color:green; font-size:24px"> ✔</span> @item.Description</b></p>
+
+                <p class="text-left"><b> <span style="color:green; font-size:24px"> ✔</span> Get weekly news letter Email with<br />&nbsp; &nbsp; &nbsp; Categories of your choice</b></p>
+                <p class="text-left"><b><span style="color:green; font-size:24px"> ✔</span> Search Archived Articles</b></p>
+
+                <h1 class="mx-auto list-group list-group-flush"><b>@item.Price SEK</b></h1>
+
+
+
+                <a class="btn text-light p-3 m-3" style=" background-color:#5bace3; font-size:24px" asp-action="MakePayment" asp-route-id="@item.Id"><b>Buy</b></a>
+               
             </div>
         }
     </div>
