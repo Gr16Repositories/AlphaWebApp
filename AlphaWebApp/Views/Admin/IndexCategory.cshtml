@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Category>
 
 @{
-    ViewData["Title"] = "IndexCategory";
+    ViewData["Title"] = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index Category</h1>
+<h1><span class="TitleLine">Category Administration</span></h1><br />
 
 <p>
-    <a asp-action="CreateCategory">Create New</a>
+    <a asp-action="CreateCategory" class="LinkLine" >Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -26,10 +26,15 @@
                 @Html.DisplayFor(modelItem => item.name)
             </td>
             <td>
-                    <a asp-action="EditCategory" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="DeleteCategory" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="EditCategory" asp-route-id="@item.Id" style="color:black">Edit</a> |
+                    <a asp-action="DeleteCategory" asp-route-id="@item.Id" style="color:black">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+<h3>
+    <br /><a class="LinkLine" asp-area="" asp-controller="Admin" asp-action="Index">Go back to Admin Page</a>
+</h3>

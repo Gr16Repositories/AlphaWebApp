@@ -4,7 +4,7 @@
     ViewData["Title"] = "Latest Swedish Articles";
 }
 
-<h1>Latest Swedish Articles</h1>
+<h1><span class="TitleLine">Latest Swedish Articles</span></h1>
 
 
 @foreach (var item in Model) {
@@ -20,3 +20,8 @@
             <br />
             <h3><strong>Content : </strong> @item.Content</h3>
 }
+
+<br />
+<h3>
+    <br /><a class="LinkLine" asp-area="" asp-controller="Articles" asp-action="Index">Go back to Editor Page</a>
+</h3>

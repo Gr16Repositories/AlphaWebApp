@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.SubscriptionType>
 
 @{
-    ViewData["Title"] = "IndexSubscriptionType";
+    ViewData["Title"] = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index Subscription Type</h1>
+<h1><span class="TitleLine">SubscriptionType Administration</span></h1><br />
 
 <p>
-    <a asp-action="CreateSubscriptionType">Create New</a>
+    <a asp-action="CreateSubscriptionType" style="color:black">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -52,3 +52,8 @@
         }
     </tbody>
 </table>
+
+
+<h3>
+    <br /><a class="LinkLine" asp-area="" asp-controller="Admin" asp-action="Index">Go back to Admin Page</a>
+</h3>

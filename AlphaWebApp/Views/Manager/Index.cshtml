@@ -1,22 +1,15 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
-    <style>
-    #Title {
-        border-bottom: 5px groove dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-    </style>
 
 @{
     ViewData["Title"] = "IndexRole";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1><span id="Title">Index Roles</span></h1>
+<h1><span class="TitleLine">Index Roles</span></h1><br />
 
 <p>
-    <a class ="nav-link   text-dark" asp-action="Create">Create New</a>
+    <a class ="LinkLine" asp-action="Create">Create New</a>
 </p>
 
 <table class="table">

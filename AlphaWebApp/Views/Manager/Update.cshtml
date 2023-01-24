@@ -3,15 +3,14 @@
     ViewData["Title"] = "UPDATE ROLE";
 }
 
-<h1 class="bg-info text-white">Update Role</h1>
-<a asp-action="Index" class="btn btn-secondary">Back</a>
+<h1><span class="TitleLine">Update Role</span></h1><br />
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form method="post">
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
     <input type="hidden" name="roleId" value="@Model.Role.Id" />
 
-    <h2 class="bg-info p-1 text-white">Add To @Model.Role.Name</h2>
+    <h2><span class="TitleLine">Add To @Model.Role.Name</span></h2>
     <table class="table table-bordered table-sm">
         @if (Model.NonMembers.Count() == 0)
         {
@@ -31,7 +30,7 @@
         }
     </table>
 
-    <h2 class="bg-info p-1 text-white">Remove From @Model.Role.Name</h2>
+    <h2><span class="TitleLine">Remove From @Model.Role.Name</span></h2>
     <table class="table table-bordered table-sm">
         @if (Model.Members.Count() == 0)
         {
@@ -52,3 +51,6 @@
     </table>
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+
+<br />
+<a asp-action="Index" class="LinkLine">Back to List</a>

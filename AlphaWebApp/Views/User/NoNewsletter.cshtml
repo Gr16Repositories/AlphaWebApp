@@ -1,30 +1,20 @@
 ﻿
-<style>
-    .noNewsletterBody {
-        border-bottom: 5px double dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        color: black;
-    }
-    .Title {
-        border-bottom: 5px groove dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-</style>
 
+@{
+    ViewData["Title"] = "My Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+<h1><span class="TitleLine">Sorry</span></h1><br />
 
-<h1><span class="Title">Sorry</span></h1><br />
+<h2><span class="TitleLine">It seems you haven't subscribed to our newsletter</span></h2>
 
-<h2><span class="Title">It seems you haven't subscribed to our newsletter</span></h2>
-
-<h2><span class="Title">To do so follow the link below or go back to My Page</span></h2><br />
+<h2><span class="TitleLine">To do so follow the link below or go back to My Page</span></h2><br />
 
 
 
 <h3>
-    <br /><b class="noNewsletter"><a class="noNewsletterBody" asp-area="" asp-controller="User" asp-action="GetUserCategoriesSelection">Create your own personal newsletter</a></b><br />
+    <br /><a class="LinkLine" asp-area="" asp-controller="User" asp-action="GetUserCategoriesSelection">Create your own personal newsletter</a><br />
 
-    <br /><b class="noNewsletter"><a class="noNewsletterBody" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a></b>
+    <br /><a class="LinkLine" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a>
 </h3>
