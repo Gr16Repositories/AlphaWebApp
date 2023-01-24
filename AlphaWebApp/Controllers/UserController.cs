@@ -172,5 +172,21 @@ namespace AlphaWebApp.Controllers
                 return RedirectToAction("NoNewsletter");
             }
         }
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ContactUs(ContactUsVM contactUs)
+        {
+            var result = _emailService.SendContuctUsEmail(contactUs).Result;
+            
+            return RedirectToAction("ContactUsResult", new { res = result});
+        }
+
+        public IActionResult ContactUsResult(string res) { var resultTuple = new Tuple<string>(res); return View(resultTuple); }
+
+
     }
 }

@@ -6,11 +6,6 @@ html {
   font-size: 14px;
 }
 
-/*@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}*/
 
 html {
   position: relative;
@@ -55,6 +50,7 @@ body {
 #categories-navbar {
     background: #004080;
     border-bottom: solid 8px #fa292a;
+    z-index: 10;
 }
 
 #navbar_border {
@@ -67,8 +63,6 @@ body {
     /*background: #f2d900 !important;*/
     background: #004080 !important;   
 }
-
-
 
 /*Card*/
 /* Category Ads */
@@ -91,7 +85,7 @@ body {
 .card-category-badge {
     position: absolute;
     right: 35px;
-    top: 40px;
+    top: 25px;
     background: #003366;
     text-align: center;
     color: #fff;
@@ -324,6 +318,7 @@ thead {
     font-size: 16px;
     /*margin: 4px 2px;*/
     cursor: pointer;
+
 }
 
 .TitleLine {

@@ -16,6 +16,7 @@ namespace AlphaWebApp.Controllers
             _httpClient = httpClient;
         }
 
+        [HttpGet]
         public IActionResult Index(string city, string lang)
         {
             if (string.IsNullOrEmpty(city))

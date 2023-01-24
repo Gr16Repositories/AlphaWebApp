@@ -4,9 +4,9 @@
 
 }
 <form>
-    
-   Enter the city name <input name="city" placeholder="City" type="search" aria-label="Search" />
-    <button>Submit</button>
+
+    Enter the city name <input name="city" id="city-search-bar" placeholder="City" type="search" aria-label="Search" />
+    <button type="submit" class="btn btn-primary" id="search-button">Submit</button>
 </form>
 <br />
 
@@ -23,24 +23,34 @@
                 <p class="time-font mb-0 ml-4 mt-auto">@Model.Date</p>
                 <p class="ml-4 mb-4"> WindSpeed  @Model.WindSpeed </p>
                 <p class="ml-4 mb-4"> Humidity @Model.Humidity </p>
+               
             </div>
         </div>
     </div>
 
-
-
-   @* <p><b>City=</b>@Model.City</p>
-
-    <p><b>Summary=</b>@Model.Summary</p>
-
-    <p><b>TemperatureC=</b>@Model.TemperatureC</p>
-    <p><b>TemperatureF=</b>@Model.TemperatureF</p>
-    <p><b>Humidity=</b>@Model.Humidity</p>
-    <p><b>WindSpeed=</b>@Model.WindSpeed</p>
-    <p><b>Date=</b>@Model.Date</p>*@
+  
 }
-else{
-    <p>Loading........</p>
-}
+<script>
+$(document).ready(function(){
+        $("#search-button").click(function(){
+           
+
+        var city = $("#city-search-bar").val();
+            alert(city);
+            var link = "/WeatherForecast/GetForecast/"
+            
+            $.ajax({
+                type: "GET",
+                url: link,
+                data: { city: city },
+                dataType : "jsonp",
+                success: function (result) 
+                {
+                    console.log(result);
+                }
+        });
+});
+});
+</script>
 
 

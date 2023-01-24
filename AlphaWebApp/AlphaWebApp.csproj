@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\NewFolder1\**" />
     <Compile Remove="Views\Stock\**" />
+    <Content Remove="Models\NewFolder1\**" />
     <Content Remove="Views\Stock\**" />
+    <EmbeddedResource Remove="Models\NewFolder1\**" />
     <EmbeddedResource Remove="Views\Stock\**" />
+    <None Remove="Models\NewFolder1\**" />
     <None Remove="Views\Stock\**" />
   </ItemGroup>
 
@@ -19,6 +23,8 @@
     <PackageReference Include="Azure.Data.Tables" Version="12.7.1" />
     <PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
     <PackageReference Include="Azure.Storage.Queues" Version="12.12.0" />
+    <PackageReference Include="MailKit" Version="3.4.3" />
+    <PackageReference Include="ChartJS" Version="22.2.3" />
     <PackageReference Include="MatplotlibCS" Version="1.0.63" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.13" />
@@ -44,10 +50,6 @@
   </ItemGroup>
 
   <ItemGroup>
-
-    <Folder Include="Models\NewFolder1\" />
-
-    <Folder Include="Models\NewFolder\" />
 
     <Folder Include="wwwroot\images\articles\" />
 

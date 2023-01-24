@@ -304,7 +304,7 @@ label {
         margin-top: 0;
         position: static;
         box-shadow: none;
-        background-color: #fff;
+        background-color: #004080;
     }
 
 
@@ -505,19 +505,12 @@ label {
 
 
 #date-time {
-    /*border-left: 1px solid #ebecee;*/
-/*    margin-right: 25px;
-*/}
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-/*Date-Time*/
-/*#date-time {*/
-    /*display: inline-block;*/
-    /*margin-left: 20px;
-    padding-left: 20px;
-    line-height: 60px;
-    color: #fff;
-    font-size: 18px;
-}*/
+
 
 /*Weather*/
 #weather {
@@ -528,6 +521,16 @@ label {
     color: #000;
     font-size: 60px;
 }
+
+/*Date-Time*/
+/*#date-time {*/
+    /*display: inline-block;*/
+    /*margin-left: 20px;
+    padding-left: 20px;
+    line-height: 60px;
+    color: #fff;
+    font-size: 18px;
+}*/
 
 
 
@@ -575,7 +578,7 @@ label {
 .search {
     position: absolute;
     /*position:inherit;*/
-    top: 0;
+    top: 5px;
     z-index: 10;
     right: 30px;
     width: 0;
@@ -607,7 +610,7 @@ label {
     font-weight: 300;
     padding-left: 0;
     border-right: 0;
-    height: 30px;
+    height: 40px;
     font-size: 16px;
     outline: none;
     width: 100%;
@@ -641,6 +644,8 @@ label {
 
 .dropdown-menu.top-user-section {
     right: 0;
+    margin-top: 0 !important;
+    z-index: 50;
 }
 
 .top-user-form:before {
@@ -690,6 +695,7 @@ label {
     -moz-transition: all 0.3s ease-in-out;
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
 }
 
 .top-user-form .reset-user {
@@ -717,10 +723,13 @@ label {
     border: 0;
 }
 
-.user-panel:hover .dropdown-menu.top-user-section {
+/*.user-panel:hover .dropdown-menu.top-user-section {
     color: #eee;
     display: block;
-}
+    margin-top: -35px !important;
+}*/
+
+
 
 /*==============================
 ========= Navigation ===========
@@ -728,7 +737,6 @@ label {
 
 .navbar {
     border-radius: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.10);
 }
 
 /*==============================
@@ -1628,25 +1636,7 @@ label {
     margin-bottom: 10px;
 }
 
-.comments-wrapper {
-    margin-top: 65px;
-    font-size: 14px;
-    color: #888888;
-}
 
-    .comments-wrapper .media-list {
-        margin-bottom: 70px;
-    }
-
-    .comments-wrapper .media {
-        background-color: #fff;
-        padding: 15px 30px 30px;
-        border-radius: 4px;
-    }
-
-.media {
-    margin-top: 30px;
-}
 
 .comments-wrapper .media .media-object {
     height: 35px;

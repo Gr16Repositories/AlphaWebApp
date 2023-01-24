@@ -38,5 +38,7 @@ namespace AlphaWebApp.Services
         public Article GetSpecificArticleByCategoryId(int id);
 
         public List<Article> GetAllArticlesForSearch();
+
+        public List<Article> GetAllArchiveArticles();
     }
 }

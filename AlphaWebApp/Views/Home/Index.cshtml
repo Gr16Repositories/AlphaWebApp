@@ -12,6 +12,15 @@
     @await Component.InvokeAsync("Stock" , new {region = "uk"})
 </div>
 
+
+<!-------------------------- Alpha News -------------------------->
+<div class="col-md-12">
+    <h3> <b> <i class="fa-solid fa-globe"></i> ALPHA NEWS</b></h3>
+    <hr style="height:5px; color:red; opacity:1">
+    <div id="categories-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("CategoriesNews")
+    </div>
+</div>
 <!-------------------------- Latest News -------------------------->
 <div class="col-md-12">
     <div id="breaking-news">
@@ -23,16 +32,6 @@
         </div>
     </div>
 </div>
-
-<!-------------------------- Alpha News -------------------------->
-<div class="col-md-12">
-    <h3> <b> <i class="fa-solid fa-globe"></i> ALPHA NEWS</b></h3>
-    <hr style="height:5px; color:red; opacity:1">
-    <div id="categories-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("CategoriesNews")
-    </div>
-</div>
-
 
 <div class="row">
     <!-------------------------- Local News -------------------------->
@@ -85,104 +84,103 @@
     </div>
 </div>
 
+
 <div class="row">
-    <div class="row">
-        <!-------------------------- Sports -------------------------->
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <h1 class="section-title title">| Sport</h1>
-                <div id="sports" class="owl-carousel owl-theme">
-                    @await Component.InvokeAsync("Sport")
-                </div>
+    <!-------------------------- Sports -------------------------->
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <h1 class="section-title title">| Sport</h1>
+            <div id="sports" class="owl-carousel owl-theme">
+                @await Component.InvokeAsync("Sport")
             </div>
         </div>
+    </div>
 
-        <!-------------------------- Most Popular -------------------------->
-        <div class="col-md-6">
-            <div class="col-md-12">
+    <!-------------------------- Most Popular -------------------------->
+    <div class="col-md-6">
+        <div class="col-md-12">
 
-                <h1 class="section-title title">| Most Popular</h1>
-                @await Component.InvokeAsync("MostPopular")
-            </div>
+            <h1 class="section-title title">| Most Popular</h1>
+            @await Component.InvokeAsync("MostPopular")
+        </div>
+        <hr style="height:5px; color:red; opacity:1">
+
+        <!-------------------------- Lexicon -------------------------->
+        <div class="col-sm-12">
             <hr style="height:5px; color:red; opacity:1">
-
-            <!-------------------------- Lexicon -------------------------->
-            <div class="col-sm-12">
+            <h4 style="color:black;"><i>"On behalf of Arbetsförmedlingen, Lexicon trains new professionals IT for organizations and companies within the IT industry."</i></h4>
+            <div class="text-center pt-2">
+                <img style="  margin: auto; display: block;" class="img-responsive " src="~/img/lexicon_logo.gif" height="100px;" width="300px;" />
+                <h4 style="color:black;">Expression of interest IT extension</h4>
+                <h4><i>Lexicon-Linköping.se</i></h4>
                 <hr style="height:5px; color:red; opacity:1">
-                <h4 style="color:black;"><i>"On behalf of Arbetsförmedlingen, Lexicon trains new professionals IT for organizations and companies within the IT industry."</i></h4>
-                <div class="text-center pt-2">
-                    <img style="  margin: auto; display: block;" class="img-responsive " src="~/img/lexicon_logo.gif" height="100px;" width="300px;" />
-                    <h4 style="color:black;">Expression of interest IT extension</h4>
-                    <h4><i>Lexicon-Linköping.se</i></h4>
-                    <hr style="height:5px; color:red; opacity:1">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <!-------------------------- Health News -------------------------->
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <h1 class="section-title title">| Health</h1>
-
-                <div id="health-news" class="owl-carousel owl-theme">
-                    @await Component.InvokeAsync("Health")
-                </div>
-            </div>
-        </div>
-
-        <!-------------------------- Technology News -------------------------->
-        <div class="col-md-6">
-            <div class="col-md-12">
-                <h1 class="section-title title">| Technology</h1>
-
-                @* <h3> <b>| Technology</b></h3>
-                <hr style="width:85%; height:3px; border-width:0; color:white; background-color:#3d85c6; opacity:1">*@
-
-                <div id="technology-news" class="owl-carousel owl-theme">
-                    @await Component.InvokeAsync("Technology")
-                </div>
             </div>
         </div>
     </div>
 </div>
-<!-------------------------- bubble-shooter game -------------------------->
-<div class="col-md-6">
-    @*<canvas style="margin-left: 0%;" id="viewport" width="628" height="628"></canvas>*@
-    <canvas style="margin-left: 0%;" id="viewport" width="628" height="628"></canvas>
 
+<div class="row">
+    <!-------------------------- Health News -------------------------->
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <h1 class="section-title title">| Health</h1>
+
+            <div id="health-news" class="owl-carousel owl-theme">
+                @await Component.InvokeAsync("Health")
+            </div>
+        </div>
+    </div>
+
+
+    <!-------------------------- Technology News -------------------------->
+    <div class="col-md-6">
+        <div class="col-md-12">
+            <h1 class="section-title title">| Technology</h1>
+            <div id="technology-news" class="owl-carousel owl-theme">
+                @await Component.InvokeAsync("Technology")
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-------------------------- Weather API -------------------------->
+
+<div class="row">
+    <!-------------------------- bubble-shooter game -------------------------->
+
+    <div class="col-md-6">
+        <h3> <b>| Enjoy with Alpha</b></h3>
+        <hr style="height:5px; color:red; opacity:1">
+        <div>
+            <canvas class="mx-auto" style="margin-left:3%; width:100%; height:auto" id="BubbleShooterviewport" width="628" height="628">Your browser does not support the HTML canvas tag.</canvas>
+        </div>
+    </div>
+
+    <!-------------------------- Weather API -------------------------->
+    <div class="col-md-6">
+        <h3> <b>| WeatherForecast</b></h3>
+        <hr style="height:5px; color:red; opacity:1">
+
+        @await Component.InvokeAsync("WeatherForeCast" ,
+        new {
+        City = "Linköping",
+        Lang = "en"}
+        )
+    </div>
+
+
+
+</div>
 <div class="col-md-4">
-    <h3> <b>| WeatherForecast</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
-
-    @await Component.InvokeAsync("WeatherForeCast" ,
-    new {
-    City = "Linköping",
-    Lang = "en"}
-    )
+   
+        <span>
+            Currency Convertor
+        </span>
+        <div >
+            @await Component.InvokeAsync("CurrencyExchange")
+        </div>
+  
 </div>
 
-
-<!-------------------------- Stocks Details -------------------------->
-@*<div class="col-md-12">
-    <h3> <b>| Stocks Details</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:blue; opacity:1">
-
-    <div class="col-md-6">
-        <div class="text-dark" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
-        @await Component.InvokeAsync("Stock" , new {region = "uk"})
-    </div>
-
-    <div class="col-md-6">
-    <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-    @await Component.InvokeAsync("Stock" , new {region = "us"})
-
-    </div>
-</div>*@
 
 
 
@@ -229,24 +227,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <div class="footer-menu">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Local</a></li>
-                <li><a href="#">World</a></li>
-                <li><a href="#">Economy</a></li>
-                <li><a href="#">Health</a></li>
-                <li><a href="#">Sport</a></li>
-                <li><a href="#">Weather</a></li>
-                <li><a href="#">Sweden</a></li>
-                <li><a href="#">Technology</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Privacy</a></li>
-            </ul>
         </div>
     </div>
 </footer>
