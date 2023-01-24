@@ -46,10 +46,6 @@ namespace AlphaWebApp.Services
         }
     }
 
-       
-
-
-
 
         //public async Task SendEmailAsync(string toEmail, string subject, string message)
         //{

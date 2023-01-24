@@ -144,9 +144,9 @@ namespace AlphaWebApp.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", code = code, userId = userId},
                         protocol: Request.Scheme);
-                    callbackUrl.Replace("&amp", "&");
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //callbackUrl.Replace("&amp", "&");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
