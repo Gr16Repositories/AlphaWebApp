@@ -3,7 +3,24 @@
 @{
 
 }
-<form>
+<style>
+#weather-form {
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
+        
+}
+
+    .container{
+        width: 500px;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+
+
+<form id="weather-form">
 
     Enter the city name <input name="city" id="city-search-bar" placeholder="City" type="search" aria-label="Search" />
     <button type="submit" class="btn btn-primary" id="search-button">Submit</button>
@@ -32,24 +49,24 @@
 }
 <script>
 $(document).ready(function(){
-        $("#search-button").click(function(){
-           
+        $("#weather-form").submit(function (e) {
+            e.preventDefault();
 
-        var city = $("#city-search-bar").val();
+            var city = $("#city-search-bar").val();
             alert(city);
-            var link = "/WeatherForecast/GetForecast/"
+            var link = "/WeatherForecast/GetForecast"
             
             $.ajax({
                 type: "GET",
                 url: link,
-                data: { city: city },
-                dataType : "jsonp",
+                data: { city },
+                dataType : "json",
                 success: function (result) 
                 {
-                    console.log(result);
+                   const{ forcast}:result
                 }
-        });
-});
+            });
+    });
 });
 </script>
 
