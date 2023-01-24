@@ -1,0 +1,36 @@
+﻿<div>
+<form id="currencyForm" >
+  <div class="form-group">
+    <label for="from">From</label>
+    <input type="text" class="form-control" id="from" placeholder="From Currency ex:INR">    
+  </div>
+  <div class="form-group">
+    <label for="to">To</label>
+    <input type="text" class="form-control" id="to" placeholder="To Currency ex: USD">
+  </div>
+  <div class="form-check">
+    <span id="result">Exchange Rate:</span> &nbsp; &nbsp;<span id="resultValue"></span>
+  </div>
+  <button type="submit" class="btn btn-primary" >Submit</button>
+</form>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function (){
+    
+        $('#currencyForm').submit(function(e){
+            e.preventDefault();
+            var from = $('#from').val();
+            var to = $('#to').val();
+            $.ajax({
+                type: "GET",
+                url: "@Url.Action("Index","CurrencyExchange")",
+                data: { from, to },
+                datatype: 'json',
+                success: function (result) {
+                    $('#resultValue').html(result.result);
+                }
+            });
+        });
+    });
+</script>
