@@ -9,14 +9,14 @@ $(document).ready(function () {
         loop: true,
         autoplay: true,
         autoplayHoverPause: true,
-        autoplayTimeout: 4000,       
+        autoplayTimeout: 4000,
 
         responsive: {
             0: {
                 items: 1
             },
             600: {
-                items: 2
+                items: 1
             },
             1000: {
                 items: 2
@@ -29,7 +29,7 @@ $(document).ready(function () {
 // editor-choice
 $(document).ready(function () {
     $('#editor-choice').owlCarousel({
-        
+
         margin: 20,
         dots: true,
         nav: false,
@@ -147,7 +147,7 @@ $(document).ready(function () {
                 items: 1
             },
             600: {
-                items: 2
+                items: 1
             },
             1000: {
                 items: 2
@@ -173,7 +173,7 @@ $(document).ready(function () {
                 items: 1
             },
             600: {
-                items: 2
+                items: 1
             },
             1000: {
                 items: 2
@@ -200,7 +200,7 @@ $(document).ready(function () {
                 items: 1
             },
             600: {
-                items: 2
+                items: 1
             },
             1000: {
                 items: 2
@@ -226,7 +226,7 @@ $(document).ready(function () {
                 items: 1
             },
             600: {
-                items: 2
+                items: 1
             },
             1000: {
                 items: 2

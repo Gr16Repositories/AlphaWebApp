@@ -39,9 +39,7 @@
 </head>
 
 <body>
-    <div class="row">
         <div class="row" style="background-color:red">
-
             <!-------- Date-Time -------->
             <div class="col-lg-2 my-auto mx-auto text-center">
                 <div id="date-time"></div>
@@ -116,10 +114,9 @@
             </div>
         </header>
 
-
-        <div id="categories-navbar" class="row mb-3">
+        <div id="categories-navbar" class="row mb-3 sticky-top">
             <div class="col-lg-9">
-                <nav class="navbar navbar-expand-md navbar-toggleable-sm my-auto m-3">
+                <nav class="navbar sticky-top navbar-expand-md navbar-toggleable-sm my-auto m-3">
                     <vc:navbar-categories></vc:navbar-categories>
                 </nav>
             </div>            
@@ -129,7 +126,6 @@
                 </nav>
             </div>
         </div>
-    </div>
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -139,17 +135,40 @@
         </main>
     </div>
 
-    <!--footer-->
-  
+    <!--footer-->  
     <footer class="footer text-center">
         <a asp-area="" asp-controller="Home" asp-action="Privacy">
             <h5 style="color:black">
                 AlphaWebApp<sup>&copy;</sup> 2023
-            </h5>
-           
-        </a>
-    
-         
+            </h5>           
+        </a>        
+    </footer>
+
+
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container text-center p-2">
+                <img src="~/img/logo_color.png" style="height: 70px;" />
+            </div>
+        </div>
+
+        <div class="footer-menu">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=1>Local</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=3>World</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=5>Economy</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=6>Health</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=7>Sport</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=16>Weather</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=18>Sweden</a></li>
+                    <li><a asp-controller="Articles" asp-action="News" asp-route-id=19>Technology</a></li>
+                    <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>
+                    <li><a asp-controller="User" asp-action="ContactUs">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
     </footer>
 
     <!--#scripts-->

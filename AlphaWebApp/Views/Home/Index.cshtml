@@ -12,6 +12,15 @@
     @await Component.InvokeAsync("Stock" , new {region = "uk"})
 </div>
 
+
+<!-------------------------- Alpha News -------------------------->
+<div class="col-md-12">
+    <h3> <b> <i class="fa-solid fa-globe"></i> ALPHA NEWS</b></h3>
+    <hr style="height:5px; color:red; opacity:1">
+    <div id="categories-news" class="owl-carousel owl-theme">
+        @await Component.InvokeAsync("CategoriesNews")
+    </div>
+</div>
 <!-------------------------- Latest News -------------------------->
 <div class="col-md-12">
     <div id="breaking-news">
@@ -21,15 +30,6 @@
         <div id="latest-news">
             @await Component.InvokeAsync("LatestArticles")
         </div>
-    </div>
-</div>
-
-<!-------------------------- Alpha News -------------------------->
-<div class="col-md-12">
-    <h3> <b> <i class="fa-solid fa-globe"></i> ALPHA NEWS</b></h3>
-    <hr style="height:5px; color:red; opacity:1">
-    <div id="categories-news" class="owl-carousel owl-theme">
-        @await Component.InvokeAsync("CategoriesNews")
     </div>
 </div>
 
@@ -141,18 +141,24 @@
             </div>
         </div>
     </div>
+</div>
 
+
+<div class="row">
     <!-------------------------- bubble-shooter game -------------------------->
+
     <div class="col-md-6">
+        <h3> <b>| Enjoy with Alpha</b></h3>
+        <hr style="height:5px; color:red; opacity:1">
         <div>
-            <canvas style="margin-left:3%; width:100%; height:auto" id="BubbleShooterviewport" width="628" height="628">Your browser does not support the HTML canvas tag.</canvas>
+            <canvas class="mx-auto" style="margin-left:3%; width:100%; height:auto" id="BubbleShooterviewport" width="628" height="628">Your browser does not support the HTML canvas tag.</canvas>
         </div>
     </div>
 
     <!-------------------------- Weather API -------------------------->
-    <div class="col-md-4">
+    <div class="col-md-6">
         <h3> <b>| WeatherForecast</b></h3>
-        <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
+        <hr style="height:5px; color:red; opacity:1">
 
         @await Component.InvokeAsync("WeatherForeCast" ,
         new {
@@ -162,48 +168,6 @@
     </div>
 </div>
 
-
-<!-------------------------- Stocks Details -------------------------->
-@*<div class="col-md-12">
-    <h3> <b>| Stocks Details</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:blue; opacity:1">
-
-    <div class="col-md-6">
-        <div class="text-dark" style="background-color:cadetblue"><h3><b>UK Stock Details</b></h3></div>
-        @await Component.InvokeAsync("Stock" , new {region = "uk"})
-    </div>
-
-    <div class="col-md-6">
-    <div class="text-dark" style="background-color:coral"><h3><b>US Stock Details</b></h3></div>
-    @await Component.InvokeAsync("Stock" , new {region = "us"})
-
-    </div>
-</div>*@
-
-<!-------------------------- bubble-shooter game -------------------------->
-        <canvas id="viewport" width="628" height="628"></canvas>
-
-
-<!-------------------------- Weather API -------------------------->
-@* <div class="col-lg-4">
-    <h3> <b>| WeatherForecast</b></h3>
-    <hr style="height:3px; border-width:0; color:white; background-color:orangered; opacity:1">
-
-    @await Component.InvokeAsync("WeatherForeCast" ,
-    new {
-    City = "Linköping",
-    Lang = "en"}
-    )
-    </div>*@
-
-<!-------------------------- Elecricity API - Swathi -------------------------->
-<div class="row bg-primary">
-    <h1 class="section-title title">| Today's Electricity Prices in Sweden</h1>
-
-    <h1> <i>Electricity API Content_ Swathi</i></h1>
-    
-
-</div>
 
 <footer id="footer">
     <div class="footer-top">
@@ -247,24 +211,6 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-    <div class="footer-menu">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=19>Home</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=1>Local</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=3>World</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=5>Economy</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=6>Health</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=7>Sport</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=16>Weather</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=18>Sweden</a></li>
-                <li><a asp-controller="Articles" asp-action="News" asp-route-id=19>Technology</a></li>
-                <li><a asp-controller="Home" asp-action="Privacy">Privacy</a></li>     
-                <li><a asp-controller="User" asp-action="ContactUs">Contact Us</a></li>
-            </ul>
         </div>
     </div>
 </footer>
