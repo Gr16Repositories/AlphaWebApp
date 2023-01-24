@@ -57,9 +57,9 @@ namespace AlphaWebApp.Controllers
         public async Task<IActionResult> MakePayment(int id)
         {
             var userId = _userService.GetUserId();
-            if(_userService.GetUserSubscriptions(userId).Any(s => s.Active == true))
+            if (_userService.GetUserSubscriptions(userId).Any(s => s.Active == true))
             {
-                var userSub = await Task.Run(() =>_userService.GetUserSubscriptions(userId).Where(s => s.Active == true).FirstOrDefault());
+                var userSub = await Task.Run(() => _userService.GetUserSubscriptions(userId).Where(s => s.Active == true).FirstOrDefault());
                 //SubscriptionVM oldActiveSubVm = _mapper.Map<SubscriptionVM>(userSub);
                 return View(userSub);
             }
@@ -72,6 +72,9 @@ namespace AlphaWebApp.Controllers
                 return View(test);
             }
         }
+
+
+       
 
 
         [Authorize]

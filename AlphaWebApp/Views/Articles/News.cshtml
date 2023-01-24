@@ -7,6 +7,7 @@
 @inject ISubscriptionService subscriptionsService
 
 
+
 <div class="container section">
     <div class="row">
         <div id="site-content" class="site-content">
@@ -26,19 +27,23 @@
 
                 @if (@Model.Any(x => x.CategoryId == 16))
                 {
-                    <div class="col-8" style="justify-content:left">
+                    
+                    <div class="col-8" style="justify-content:left;">
+                        <h1>Weather Forecast</h1>
 
                         <form>
-                            Enter the city name <input name="city" placeholder="City" type="search" aria-label="Search" />
-                            <button>Submit</button>
-                            @*Enter the city name  <input name="city" type="text" placeholder="City" />
-                        <button type="submit">Search</button>*@
+                            Enter the city name <input name="city" id="city" placeholder="City" type="search"  aria-label="Search" />
+                            <button style="background-color:red;color:whitesmoke" value="Get Forecast" id="submit">Submit</button>
+                            
                         </form>
-
+                        <br/>
+                        
                         @{
                             StringValues city;
+
                             Context.Request.Query.TryGetValue("city", out city);
                         }
+                                         
                         @await Component.InvokeAsync("WeatherForeCast" ,
                             new 
                             {
@@ -47,10 +52,10 @@
                             }
                         )
                         
-
-                        
-
                     </div>
+                    <br />
+                    <br />
+                    <h1>Wether News</h1>
                 }
                 @foreach (var item in Model)
                 {
@@ -145,6 +150,12 @@
                         a.html('<i class="bi bi-heart bi-lg text-danger"></i><span>Likes:' + result + '</span>').removeClass("unlike").addClass("like");
                     }
                 });
+            });
+
+            $(document).load(function(){
+                $('#city').val("Linkoping");
+                document.getElementById("submit").click();
+
             });
         });
     </script>
