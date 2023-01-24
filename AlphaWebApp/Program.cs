@@ -75,7 +75,10 @@ builder.Services.AddScoped<IStorageService, StorageService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ISubscriptionTypeService, SubscriptionTypeService>();
 //builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+
 builder.Services.AddScoped<IStockService, StockService>();
+builder.Services.AddScoped<ICurrencyExchangeService, CurrencyExchangeService>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IWeatherForcastService,WeatherForcastService>();
 builder.Services.AddScoped<ISubscriptionService,SubscriptionService>();
@@ -107,14 +110,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//else
-//{
-//    app.UseExceptionHandler("/Home/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
 
-//app.UseResponseCaching();
+
+app.UseResponseCaching();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -124,8 +122,6 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-
 
 app.MapControllerRoute(
     name: "default",
