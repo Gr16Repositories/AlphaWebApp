@@ -645,6 +645,7 @@ label {
 .dropdown-menu.top-user-section {
     right: 0;
     margin-top: 0 !important;
+    z-index: 50;
 }
 
 .top-user-form:before {
