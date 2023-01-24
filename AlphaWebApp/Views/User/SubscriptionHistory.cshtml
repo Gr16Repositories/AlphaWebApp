@@ -1,41 +1,12 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Subscription>
 
-    <style>
-        .subCard {
-        border: 5px double dodgerblue;
-        text-align: center;
-        border-radius: 100px;
-        font-size: 1.2em
-        }
 
-        .subCardBody {
-        border: 5px double dodgerblue;
-        border-radius: 60px;
-        padding: 5px;
-        color: black;
-        }
+@{
+    ViewData["Title"] = "My Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-        .mypageSubHistory {
-            /*text-align: center;*/
-            /*border-radius: 10px;*/
-        }
-
-        .mypageSubHistoryBody {
-        border-bottom: 5px double dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-            /*border-radius: 25px;*/
-            /*padding: 5px;*/
-            color: black;
-        }
-        #Title {
-        border-bottom: 5px groove dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        }
-    </style>
-
-<h1><span id="Title">Subscriptions</span></h1><br />
+<h1><span class="TitleLine">Your Subscriptions</span></h1><br />
 
 <div class="row">
     @foreach (var item in Model)
@@ -49,20 +20,19 @@
                     <p class="card-text">Price: @item.Price kr</p>
                     @if (item.Active == true)
                     {
-                        <p class="card-text">Status: <span class="status" style="color:#12b800"><b>Active</b></span></p>
+                        <p class="card-text">Status: <span style="color:#12b800"><b>Active</b></span></p>
                     }
                     else
                     {
-                        <p class="card-text">Status: <span class="status" style="color:#ff0000"><b>Expired</b></span></p>
+                        <p class="card-text">Status: <span style="color:#ff0000"><b>Expired</b></span></p>
                     }
-                    @*<a href="#" class="btn btn-primary">View Details</a>*@
                 </div>
             </div>
         </div>
     }
 </div>
 
-
+<br />
 <h3>
-    <br /><b class="mypageSubHistory"><a class="mypageSubHistoryBody" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a></b>
+    <br /><a class="LinkLine" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a>
 </h3>

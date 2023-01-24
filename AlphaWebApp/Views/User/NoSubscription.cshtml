@@ -1,28 +1,18 @@
 ﻿
-<style>
-    .mypageNoSub {
-        text-align: center;
-        border-radius: 10px;
-    }
-    .mypageNoSubBody {
-        border: 5px double dodgerblue;
-        border-radius: 25px;
-        padding: 5px;
-        color: black;
-    }
-</style>
 
-<h1>Sorry!</h1>
+@{
+    ViewData["Title"] = "My Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<h2>It seems that you don't have access to this part of our website.</h2>
 
-<h3>Make sure to have a subscription to access more content.</h3><br />
+<h1><span class="TitleLine">Sorry</span></h1><br />
 
+<h2><span class="TitleLine">It seems that you don't have access to this part of our website</span></h2>
+
+<h2><span class="TitleLine">Make sure to have a subscription to access more content</span></h2><br />
 <h3>
-    <b class="mypageNoSub"><a class="mypageNoSubBody" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Make a new subscription</a></b><br /><br />
+    <br /><a class="LinkLine" asp-area="" asp-controller="Subscriptions" asp-action="GetSubscriptionTypsList">Make a new subscription</a><br />
 
-    <br /><b class="mypageNoSub"><a class="mypageNoSubBody" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a></b>
+    <br /><a class="LinkLine" asp-area="" asp-controller="User" asp-action="MyPage">Go back to My Page</a>
 </h3>
-
-<br /><h3>Thank you!</h3>
-

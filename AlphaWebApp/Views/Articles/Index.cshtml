@@ -1,41 +1,24 @@
 ﻿
-<style>
-    .editorPage {
-        /*text-align: center;*/
-        /*border-radius: 10px;*/
-    }
-
-    .editorPageBody {
-        border-bottom: 5px double dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        /*border-radius: 25px;*/
-        /*padding: 5px;*/
-        color: black;
-    }
-
-    #Title {
-        border-bottom: 5px groove dodgerblue;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-</style>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Editor Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1><span id="Title">Editor page</span></h1>
+<h1><span class="TitleLine">Editor page</span></h1>
 
 <h3>
-    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="Articles" asp-action="EditorPageIndex">Alpha News Articles</a></b><br />
+    <br /><a class="LinkLine" asp-area="" asp-controller="Articles" asp-action="EditorPageIndex">Alpha News Articles</a><br />
 
-    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="NewsApi" asp-action="SwedishNews">Latest Articles From Other resources In Swedish</a></b><br />
+    <br /><a class="LinkLine" asp-area="" asp-controller="NewsApi" asp-action="SwedishNews">Latest Articles From Other resources In Swedish</a><br />
 
-    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="NewsApi" asp-action="EnglishNews">Latest Articles From Other resources In English </a></b><br />
 
-    <br /><b class="editorPage"><a class="editorPageBody" asp-area="" asp-controller="Articles" asp-action="ArchiveArticles">Archived Articles </a></b><br />
+    <br /><a class="LinkLine" asp-area="" asp-controller="NewsApi" asp-action="EnglishNews">Latest Articles From Other resources In English </a><br />
+
+    <br /><a class="LinkLine" asp-area="" asp-controller="NewsApi" asp-action="EnglishNews">Latest Articles From Other resources In English </a><br />
+
+    <br /><a class="LinkLine" asp-area="" asp-controller="Articles" asp-action="ArchiveArticles">Archived Articles </a><br />
+
 </h3>
 
 

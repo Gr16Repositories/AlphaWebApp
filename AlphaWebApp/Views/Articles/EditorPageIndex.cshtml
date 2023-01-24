@@ -8,9 +8,7 @@
 
 <hr />
 <div class="ListOfArticles">
-    <h2>
-        <b>List of Articles</b>
-    </h2>
+    <h1><span class="TitleLine">List of Articles</span></h1>
 
     <div class="text-end">
         <a asp-action="Create" class="btn" style="color:#fff; background-color:#003366">
@@ -90,6 +88,10 @@
         </div>
     }
 </div>
+
+<h3>
+    <br /><a class="LinkLine" asp-area="" asp-controller="Articles" asp-action="Index">Go back to Editor Page</a>
+</h3>
 
 @section scripts
     {
