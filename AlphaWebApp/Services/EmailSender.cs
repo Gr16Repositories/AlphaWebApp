@@ -19,7 +19,7 @@ namespace AlphaWebApp.Services
             _logger = logger;
         }
 
-
+        // this code work when it  is socket lab
         public async Task SendEmailAsync(string toEmail, string subject, string messagecontent)
         {
 
@@ -46,6 +46,8 @@ namespace AlphaWebApp.Services
         }
     }
 
+
+        // this code work on sendgrid 
 
         //public async Task SendEmailAsync(string toEmail, string subject, string message)
         //{
