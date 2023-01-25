@@ -8,9 +8,7 @@
 
 <hr />
 <div class="ListOfArticles">
-    <h2>
-        <b>List of Articles</b>
-    </h2>
+    <h1><span class="TitleLine">List of Articles</span></h1>
 
     <div class="text-end">
         <a asp-action="Create" class="btn" style="color:#fff; background-color:#003366">
@@ -91,6 +89,10 @@
     }
 </div>
 
+<h3>
+    <br /><a class="LinkLine" asp-area="" asp-controller="Articles" asp-action="Index">Go back to Editor Page</a>
+</h3>
+
 @section scripts
     {
     <script>
@@ -105,7 +107,7 @@
                     url: link,
                     data: { 'articleid': id },
                     success: function (result) {
-                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i> ' + result).removeClass("like").addClass("unlike");
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes: ' + result + '</span>').removeClass("like").addClass("unlike");
                     }
                 });
             });
@@ -119,7 +121,7 @@
                     url: link,
                     data: { 'articleid': id },
                     success: function (result) {
-                        a.html('<i class="bi bi-heart bi-lg text-danger"></i>' + result).removeClass("unlike").addClass("like");
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i><span>Likes: ' + result + '</span>').removeClass("unlike").addClass("like");
                     }
                 });
             });

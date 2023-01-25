@@ -141,7 +141,7 @@ namespace AlphaWebApp.Controllers
             return View();
         }
 
-        public IActionResult NoNewsletter()
+        public IActionResult NoNewsletter() // Used to render view if you have no subscription to newsletter but still try to unsubscribe to it
         {
             return View();
         }

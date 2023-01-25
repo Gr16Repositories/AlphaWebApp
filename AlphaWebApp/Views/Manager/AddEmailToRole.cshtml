@@ -1,6 +1,6 @@
 ﻿@model AlphaWebApp.Models.ViewModels.CreateRoleVM
 
-<h3>Please enter email address correspond to role you want to assign:</h3>
+<h3><span class="TitleLine">Please enter email address correspond to role you want to assign:</span></h3><br />
 <form action="addRoleToUser" method="post">
   <label for="email">Enter your email:</label>
   <input type="email" id="email" name="email">
@@ -8,3 +8,6 @@
   <input type="text" id="text" name="id" value="@Model.RoleId" hidden>
   <input type="submit">
 </form>
+
+<br />
+<a asp-action="Index" class="LinkLine">Back to List</a>

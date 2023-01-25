@@ -27,6 +27,14 @@ namespace AlphaWebApp.Controllers
             return View("Index",weather);
         }
 
-
+        public IActionResult GetForecast(string city, string lang)
+        {
+            if (string.IsNullOrEmpty(city))
+            {
+                return View();
+            }
+            var weather = _weatherForcastService.GetForecast(city, lang);
+            return Json(new { forecast = weather });
+        }
     }
 }
