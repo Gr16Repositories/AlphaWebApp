@@ -1,24 +1,29 @@
-﻿<div>
-<form id="currencyForm" >
-  <div class="form-group">
-    <label for="from">From</label>
-    <input type="text" class="form-control" id="from" placeholder="From Currency ex:INR">    
-  </div>
-  <div class="form-group">
-    <label for="to">To</label>
-    <input type="text" class="form-control" id="to" placeholder="To Currency ex: USD">
-  </div>
-  <div class="form-check">
-    <span id="result">Exchange Rate:</span> &nbsp; &nbsp;<span id="resultValue"></span>
-  </div>
-  <button type="submit" class="btn btn-primary" >Submit</button>
-</form>
+﻿<div class="border border-3 rounded-3" style="background-color:lightgray;">
+
+    <form id="currencyForm" class="p-2 m-2">
+        <div class="form-group">
+            <label for="from" class="fs-5">From</label>
+            <input type="text" class="form-control" id="from" placeholder="ex: USD, SEK, EUR, INR ...">
+        </div>
+        <div class="form-group">
+            <label for="to" class="fs-5">To</label>
+            <input type="text" class="form-control" id="to" placeholder="ex: USD, SEK, EUR, INR ...">
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Calculate !</button>
+        </div>
+        <div class="d-flex justify-content-center form-check">
+            <span id="result" class="fs-5 text-danger"><b>Exchange Rate:</b></span> &nbsp; &nbsp;
+            <span id="resultValue" class="fs-5 w-bold text-danger"></span>
+        </div>
+
+    </form>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function (){
-    
-        $('#currencyForm').submit(function(e){
+    $(document).ready(function () {
+
+        $('#currencyForm').submit(function (e) {
             e.preventDefault();
             var from = $('#from').val();
             var to = $('#to').val();

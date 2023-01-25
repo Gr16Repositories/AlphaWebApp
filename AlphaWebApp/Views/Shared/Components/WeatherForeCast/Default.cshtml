@@ -2,17 +2,11 @@
 
 
 
-<div class="container px-1 px-md-4 py-5 mx-auto" style="background-color:darkgray">
-    <div class="row d-flex justify-content-center px-3">
-        <div class="card" style="background-color:lightslategray; color:white">
-            <h2 class="ml-auto mr-4 mt-3 mb-0">@Model.City</h2>
-            <p class="ml-auto mr-4 mb-0 med-font">@Model.Summary</p>
-            <h1 class="ml-auto mr-4 large-font">
-                Weather = @Model.TemperatureC<span class="sm-font">C</span>
-            </h1>  <h1 class="ml-auto mr-4 large-font">@Model.TemperatureF<span class="sm-font">F</span> </h1>
-            <p class="time-font mb-0 ml-4 mt-auto">@Model.Date</p>
-            <p class="ml-4 mb-4"> WindSpeed  @Model.WindSpeed </p>
-            <p class="ml-4 mb-4"> Humidity @Model.Humidity </p>
-        </div>
-    </div>
+<div style="background-color:lightgray;">
+    <h3 class="p-1"><i class="fa-solid fa-map-pin"></i> City: @Model.City</h3>
+    <h4 class="p-1"><i class="fa-solid fa-umbrella"></i> Summary: @Model.Summary</h4>
+    <h4 class="p-1"><i class="fa-solid fa-temperature-half"></i> Temperature: @Model.TemperatureC C</h4>
+    <h4 class="p-1"><i class="fa-solid fa-wind"></i> WindSpeed: @Model.WindSpeed km/hr</h4>
+    <h4 class="p-1"><i class="fa-solid fa-droplet"></i> Humidity: @Model.Humidity %</h4>
+    <h4 class="p-1"><i>Last Update: @Model.Date</i></h4>
 </div>

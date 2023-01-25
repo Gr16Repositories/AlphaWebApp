@@ -1,6 +1,12 @@
 ﻿@model IEnumerable<AlphaWebApp.Models.Category>
 
-<ul class="navbar-nav flex-grow-1">
+<button style="color:white" class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon text-light"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+<ul class="navbar-nav">
     <li class="nav-item m-1 my-auto mx-auto">
         <a class="text-light my-auto" asp-controller="Home" asp-action="Index">
             <b><img src="~/img/logo_home.png" style="height: 30px;" class="my-auto" />Home</b>
@@ -14,3 +20,5 @@
         </li>
     }
 </ul>
+
+</div>
