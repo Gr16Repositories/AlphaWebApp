@@ -107,7 +107,7 @@
                     url: link,
                     data: { 'articleid': id },
                     success: function (result) {
-                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i> ' + result).removeClass("like").addClass("unlike");
+                        a.html('<i class="bi bi-heart-fill bi-lg text-danger"></i><span>Likes: ' + result + '</span>').removeClass("like").addClass("unlike");
                     }
                 });
             });
@@ -121,7 +121,7 @@
                     url: link,
                     data: { 'articleid': id },
                     success: function (result) {
-                        a.html('<i class="bi bi-heart bi-lg text-danger"></i>' + result).removeClass("unlike").addClass("like");
+                        a.html('<i class="bi bi-heart bi-lg text-danger"></i><span>Likes: ' + result + '</span>').removeClass("unlike").addClass("like");
                     }
                 });
             });
