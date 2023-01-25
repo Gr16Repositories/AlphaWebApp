@@ -157,32 +157,25 @@
 
     <!-------------------------- Weather API -------------------------->
     <div class="col-md-6">
-        <h3> <b>| WeatherForecast</b></h3>
-        <hr style="height:5px; color:red; opacity:1">
 
-        @await Component.InvokeAsync("WeatherForeCast" ,
-        new {
-        City = "Linköping",
-        Lang = "en"}
-        )
-    </div>
-
-
-
-</div>
-<div class="col-md-4">
-   
-        <span>
-            Currency Convertor
-        </span>
-        <div >
+        <div>
+            <h3> <b>| Currency Convertor</b></h3>
+            <hr style="height:5px; color:red; opacity:1">
             @await Component.InvokeAsync("CurrencyExchange")
         </div>
-  
+
+        <div class="pt-4">
+            <h3> <b>| WeatherForecast</b></h3>
+            <hr style="height:5px; color:red; opacity:1">
+
+            @await Component.InvokeAsync("WeatherForeCast" ,
+            new {
+            City = "Linköping",
+            Lang = "en"}
+            )
+        </div>
+    </div>
 </div>
-
-
-
 
 
 <footer id="footer">
